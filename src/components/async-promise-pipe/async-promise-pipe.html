@@ -1,0 +1,9 @@
+<!-- Generated template for the AsyncPromisePipeComponent component -->
+<h2>AsyncPromisePipeComponent</h2>
+<div>{{name}} {{host}}/{{endpoint}}
+  <code>promise|async</code>: 
+  <button ion-button (click)="clicked()">{{ arrived ? 'Reset' : 'Resolve' }}</button>
+  
+  <span>Wait for it... {{ greeting | async }}</span>
+</div>
+

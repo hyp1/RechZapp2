@@ -1,0 +1,42 @@
+<!-- Generated template for the Drupal7LoginComponent component -->
+<div>
+<h1>drupal7-login</h1>
+<div *ngIf="this.auth.loggedIn; then loggedin else notloggedin">
+</div>
+
+<ng-template #loggedin>
+        <ion-item><ion-label color="primary"> {{this.auth.user.name}} </ion-label> </ion-item>
+        <ion-buttons><button ion-button (click)="logout()">Abmelden</button></ion-buttons>
+</ng-template>
+    
+
+    <ng-template #notloggedin>
+            <ion-item><ion-label color="danger"> Sie sind nicht auf AWRI angemeldet </ion-label> </ion-item>
+            <form #loginForm="ngForm" (ngSubmit)="dologin()" autocomplete="off">
+                    <ion-row>
+                      <ion-col>
+                        <ion-list inset>
+                          <ion-item>
+                            <ion-input placeholder="Benutzername" name="username" id="userField"
+                                       type="text" required [(ngModel)]="username" #userField></ion-input>
+                          </ion-item>
+                          <ion-item>
+                            <ion-input placeholder="Password" name="password" id="passwordField"
+                                       type="password" required [(ngModel)]="password"></ion-input>
+                          </ion-item>
+                        </ion-list>
+                      </ion-col>
+                    </ion-row>
+                    <ion-row>
+                      <ion-col>
+                        <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+                        <button ion-button class="submit-btn" full round type="submit"
+                                [disabled]="!loginForm.form.valid">Anmelden
+                        </button> 
+                       </ion-col>
+                    </ion-row>    
+                      </form>  
+                      <button ion-button round  full  (click)="fblogin()"> <ion-icon name="logo-facebook"></ion-icon>Facebook</button>    
+                       
+    </ng-template>
+</div>  
