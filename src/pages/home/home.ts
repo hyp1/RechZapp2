@@ -13,7 +13,8 @@ const bannerConfig: AdMobFreeBannerConfig = {
   // add your config here
   // for the sake of this example we will just use the test config
   isTesting: true,
-  autoShow: true
+  autoShow: true,
+  //id:'ca-app-pub-7681642173883266~6820035049'
  };
 
 @Component({
@@ -35,7 +36,7 @@ auth:AuthProvider;
     alert("HOME"+data.name);
   });
   */
-/*
+
  this.admobFree.banner.config(bannerConfig);
 
  this.admobFree.banner.prepare()
@@ -45,7 +46,7 @@ auth:AuthProvider;
      console.log("BannerConfig");
    })
    .catch(e => console.log(e));    
-*/
+
 
  }
  

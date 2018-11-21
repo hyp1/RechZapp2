@@ -15,7 +15,7 @@ import { AuthProvider } from '../providers/auth/auth';
 import {AsyncPromisePipeComponent} from '../components/async-promise-pipe/async-promise-pipe'
 import {AsyncObservablePipeComponent} from '../components/async-observable-pipe/async-observable-pipe'
 import {Drupal7LoginComponent} from '../components/drupal7-login/drupal7-login'
-
+import { AdMobFree } from '@ionic-native/admob-free';
 
 @NgModule({
  declarations: [
@@ -47,7 +47,8 @@ import {Drupal7LoginComponent} from '../components/drupal7-login/drupal7-login'
    StatusBar,
    SplashScreen,
    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthProvider
+    AuthProvider,
+    AdMobFree
  ]
 })
 export class AppModule {}
