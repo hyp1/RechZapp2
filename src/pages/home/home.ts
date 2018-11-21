@@ -7,6 +7,15 @@ import "rxjs/add/operator/map";
 
 import { AuthProvider } from '../../providers/auth/auth';
 
+import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free';
+
+const bannerConfig: AdMobFreeBannerConfig = {
+  // add your config here
+  // for the sake of this example we will just use the test config
+  isTesting: true,
+  autoShow: true
+ };
+
 @Component({
  selector: 'page-home',
  templateUrl: 'home.html'
@@ -15,7 +24,7 @@ export class HomePage {
 
  users: Observable<any>;
 auth:AuthProvider;
- constructor(public navCtrl: NavController, private httpClient: HttpClient, private plt: Platform, private alertCtrl: AlertController, auth: AuthProvider) {
+ constructor(public navCtrl: NavController, private admobFree: AdMobFree,private httpClient: HttpClient, private plt: Platform, private alertCtrl: AlertController, auth: AuthProvider) {
    this.users = this.httpClient.get('https://randomuser.me/api/?results=20')
    .map(res => res['results']);
 
@@ -26,9 +35,21 @@ auth:AuthProvider;
     alert("HOME"+data.name);
   });
   */
+/*
+ this.admobFree.banner.config(bannerConfig);
+
+ this.admobFree.banner.prepare()
+   .then(() => {
+     // banner Ad is ready
+     // if we set autoShow to false, then we will need to call the show method here
+     console.log("BannerConfig");
+   })
+   .catch(e => console.log(e));    
+*/
+
  }
  
- 
+
  checkPlatform() {
   let alert = this.alertCtrl.create({
     title: 'Platform',
