@@ -242,4 +242,18 @@ this.connect.subscribe(data=>{
    //     console.log(this.token);
   });  
   }
+
+  isInRole(role){
+    let ret=false;
+    let obj=this.user.roles;
+      Object.keys(obj).forEach(function(key) {
+        if(obj[key]===role)ret=true;
+    });
+  return ret;
+  }
+
+
+  isBrowser(){
+  return true;
+  }
 }

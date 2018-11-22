@@ -8,6 +8,8 @@ import { ListPage } from '../pages/list/list';
 
 import { AuthProvider } from '../providers/auth/auth';
 
+
+
 @Component({
   templateUrl: 'app.html'
 })

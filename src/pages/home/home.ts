@@ -4,8 +4,10 @@ import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import "rxjs/add/operator/map";
 
+import { UploadComponent } from '../../components/upload/upload';
 
 import { AuthProvider } from '../../providers/auth/auth';
+
 
 import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free';
 
@@ -25,11 +27,13 @@ export class HomePage {
 
  users: Observable<any>;
 auth:AuthProvider;
- constructor(public navCtrl: NavController, private admobFree: AdMobFree,private httpClient: HttpClient, private plt: Platform, private alertCtrl: AlertController, auth: AuthProvider) {
+upload:UploadComponent;
+ constructor(public navCtrl: NavController, upload:UploadComponent,private admobFree: AdMobFree,private httpClient: HttpClient, private plt: Platform, private alertCtrl: AlertController, auth: AuthProvider) {
    this.users = this.httpClient.get('https://randomuser.me/api/?results=20')
    .map(res => res['results']);
-
+this.upload=upload;
    this.auth=auth;
+  
    /*
    console.log(auth);
    this.auth.connect.subscribe(data=>{

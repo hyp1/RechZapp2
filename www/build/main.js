@@ -40,12 +40,13 @@ webpackEmptyAsyncContext.id = 155;
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(102);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(277);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(279);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth__ = __webpack_require__(50);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_admob_free__ = __webpack_require__(200);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_upload_upload__ = __webpack_require__(200);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_auth_auth__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_admob_free__ = __webpack_require__(202);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -61,6 +62,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var bannerConfig = {
     // add your config here
     // for the sake of this example we will just use the test config
@@ -68,7 +70,7 @@ var bannerConfig = {
     autoShow: true,
 };
 var HomePage = /** @class */ (function () {
-    function HomePage(navCtrl, admobFree, httpClient, plt, alertCtrl, auth) {
+    function HomePage(navCtrl, upload, admobFree, httpClient, plt, alertCtrl, auth) {
         this.navCtrl = navCtrl;
         this.admobFree = admobFree;
         this.httpClient = httpClient;
@@ -76,6 +78,7 @@ var HomePage = /** @class */ (function () {
         this.alertCtrl = alertCtrl;
         this.users = this.httpClient.get('https://randomuser.me/api/?results=20')
             .map(function (res) { return res['results']; });
+        this.upload = upload;
         this.auth = auth;
         /*
         console.log(auth);
@@ -108,9 +111,9 @@ var HomePage = /** @class */ (function () {
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/home/home.html"*/'<ion-header>\n    <ion-navbar>\n      <button ion-button menuToggle>\n        <ion-icon name="menu"></ion-icon>\n      </button>\n      <ion-title>Home {{ auth.user?.name }}</ion-title>\n    </ion-navbar>\n   </ion-header>\n   \n   <ion-content>  \n     <h1>Loggedin?  {{this.auth.loggedIn}}</h1>\n     <drupal7-login></drupal7-login>\n    <hr>\n    <async-promise-pipe name=\'HALLO TEST\' host="http://localhost/druponic" endpoint="api"></async-promise-pipe>\n    <async-observable-pipe></async-observable-pipe>\n    <ion-grid>\n      <ion-row>\n        <ion-col *ngFor="let user of users | async" col-12 col-xl-2 col-lg-3 col-md-4>\n          <ion-card>\n            <ion-item>\n              <ion-avatar item-start>\n                <img [src]="user.picture.medium">\n              </ion-avatar>\n              <h2 text-capitalize>{{ user.name?.first }} {{ user.name?.last }}</h2>\n            </ion-item>\n            <ion-card-content>\n              Bacon ipsum dolor amet salami prosciutto ham hock, strip steak buffalo ribeye pork chop. Beef ribs tenderloin tail shoulder.\n              Spare ribs ham shoulder brisket rump hamburger. Pork belly kevin shoulder prosciutto ribeye pork chop chicken\n              strip steak pig.\n            </ion-card-content>\n          </ion-card>\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n\n    <ion-fab right bottom class="web-fab">\n        <button ion-fab icon-only color="primary" (click)="checkPlatform()">\n          <ion-icon name="help"></ion-icon>\n        </button>\n       </ion-fab>\n       \n       <ion-fab right top edge class="mobile-fab">\n        <button ion-fab icon-only color="primary" (click)="checkPlatform()">\n          <ion-icon name="help"></ion-icon>\n        </button>\n       </ion-fab>\n\n   </ion-content>'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/home/home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/home/home.html"*/'<ion-header>\n    <ion-navbar>\n      <button ion-button menuToggle>\n        <ion-icon name="menu"></ion-icon>\n      </button>\n      <ion-title>Home {{ auth.user?.name }}</ion-title>\n    </ion-navbar>\n   </ion-header>\n   \n   <ion-content>  \n     <h1>Loggedin?  {{this.auth.loggedIn}}</h1>\n     <upload></upload>\n     <drupal7-login></drupal7-login>\n    <hr>\n    <async-promise-pipe name=\'HALLO TEST\' host="http://localhost/druponic" endpoint="api"></async-promise-pipe>\n    <async-observable-pipe></async-observable-pipe>\n    <ion-grid>\n      <ion-row>\n        <ion-col *ngFor="let user of users | async" col-12 col-xl-2 col-lg-3 col-md-4>\n          <ion-card>\n            <ion-item>\n              <ion-avatar item-start>\n                <img [src]="user.picture.medium">\n              </ion-avatar>\n              <h2 text-capitalize>{{ user.name?.first }} {{ user.name?.last }}</h2>\n            </ion-item>\n            <ion-card-content>\n              Bacon ipsum dolor amet salami prosciutto ham hock, strip steak buffalo ribeye pork chop. Beef ribs tenderloin tail shoulder.\n              Spare ribs ham shoulder brisket rump hamburger. Pork belly kevin shoulder prosciutto ribeye pork chop chicken\n              strip steak pig.\n            </ion-card-content>\n          </ion-card>\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n\n    <ion-fab right bottom class="web-fab">\n        <button ion-fab icon-only color="primary" (click)="checkPlatform()">\n          <ion-icon name="help"></ion-icon>\n        </button>\n       </ion-fab>\n       \n       <ion-fab right top edge class="mobile-fab">\n        <button ion-fab icon-only color="primary" (click)="checkPlatform()">\n          <ion-icon name="help"></ion-icon>\n        </button>\n       </ion-fab>\n\n   </ion-content>'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/home/home.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_5__ionic_native_admob_free__["a" /* AdMobFree */], __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Platform */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth__["a" /* AuthProvider */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_4__components_upload_upload__["a" /* UploadComponent */], __WEBPACK_IMPORTED_MODULE_6__ionic_native_admob_free__["a" /* AdMobFree */], __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Platform */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_5__providers_auth_auth__["a" /* AuthProvider */]])
     ], HomePage);
     return HomePage;
 }());
@@ -119,13 +122,241 @@ var HomePage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 201:
+/***/ 200:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UploadComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_auth_auth__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_camera__ = __webpack_require__(201);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var UploadComponent = /** @class */ (function () {
+    function UploadComponent(awri, camera) {
+        this.camera = camera;
+        this.MAX_UPLOADS = 5;
+        this.hideUpl = false;
+        this.toggleVideo = false;
+        this.toggleFiles = false;
+        this.toggleCamera = false;
+        this.togglePhoto = false;
+        this.text = 'Sie können bis zu 5 Bilddateien anhängen.';
+        this.awri = awri;
+        this.files = [];
+        for (var i = 0; i < this.MAX_UPLOADS; i++)
+            this.files.push({ fid: -1, name: '', src: '' });
+    }
+    UploadComponent.prototype.nativeSelectFile = function () {
+        var _this = this;
+        var options = {
+            quality: 100,
+            sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+            destinationType: this.camera.DestinationType.DATA_URL,
+            encodingType: this.camera.EncodingType.JPEG,
+            mediaType: this.camera.MediaType.PICTURE
+        };
+        this.camera.getPicture(options).then(function (imageData) {
+            var base64Image = 'data:image/jpeg;base64,' + imageData;
+            var id = _this.getImageID();
+            _this.files[id].fid = -1;
+            _this.files[id].src = base64Image;
+            _this.files[id].name = _this.awri.user.uid + "-nativecam-" + Date.now() + ".jpg";
+            var input = document.getElementById('image' + id);
+            input.name = _this.files[id].name;
+            input.src = _this.files[id].src;
+            _this.hideUpload();
+        }, function (err) {
+            console.log(err);
+            // this.awri.showError(err);
+        });
+    };
+    UploadComponent.prototype.nativeCamera = function () {
+        var _this = this;
+        var options = {
+            quality: 100,
+            destinationType: this.camera.DestinationType.DATA_URL,
+            encodingType: this.camera.EncodingType.JPEG,
+            mediaType: this.camera.MediaType.PICTURE
+        };
+        this.camera.getPicture(options).then(function (imageData) {
+            // imageData is either a base64 encoded string or a file URI
+            // If it's base64 (DATA_URL):
+            var base64Image = 'data:image/jpeg;base64,' + imageData;
+            var id = _this.getImageID();
+            _this.files[id].fid = -1;
+            _this.files[id].src = base64Image;
+            _this.files[id].name = _this.awri.user.uid + "-nativecam-" + Date.now() + ".jpg";
+            var input = document.getElementById('image' + id);
+            input.src = _this.files[id].src;
+            input.name = _this.files[id].name;
+            _this.hideUpload();
+        }, function (err) {
+            console.log(err);
+            //  this.awri.showError(err);
+        });
+    };
+    UploadComponent.prototype.toggleVid = function () {
+        if (this.toggleVideo)
+            this.toggleVideo = false;
+        else
+            this.toggleVideo = true;
+        this.toggleFiles = false;
+    };
+    UploadComponent.prototype.toggleFil = function () {
+        if (this.toggleFiles)
+            this.toggleFiles = false;
+        else
+            this.toggleFiles = true;
+        this.toggleVideo = false;
+    };
+    UploadComponent.prototype.toggleCam = function (evt) {
+        if (this.toggleCamera) {
+            //webmedia.js
+            stopVideo();
+            this.togglePhoto = false;
+            this.toggleCamera = false;
+            this.toggleVideo = false;
+            evt.target.innerHTML = "Start Kamera";
+        }
+        else {
+            //webmedia.js 
+            startVideo('video1');
+            this.togglePhoto = true;
+            this.toggleCamera = true;
+            evt.target.innerHTML = "Stop Kamera";
+        }
+    };
+    UploadComponent.prototype.getFiles = function () {
+        var f = [];
+        for (var i = 0; i < this.MAX_UPLOADS; i++) {
+            var input = document.getElementById('image' + i);
+            if (input.fid != -1 && input.name != '')
+                f.push({ fid: input.fid });
+        }
+        return f;
+    };
+    UploadComponent.prototype.removeImage = function (index) {
+        var input = document.getElementById('image' + index);
+        input.src = '';
+        this.files[index].fid = -1;
+        this.files[index].name = '';
+        this.files[index].src = '';
+        this.hideUpl = false;
+    };
+    UploadComponent.prototype.selectWebFile = function (elem) {
+        var _this = this;
+        var i = this.getImageID();
+        //webmedia.js
+        webpreviewFile(elem.srcElement, 'img#image' + i).then(function (data) {
+            _this.files[i].fid = -1;
+            _this.files[i].src = data.src;
+            _this.files[i].name = data.name;
+            _this.hideUpload();
+        }).catch(function (err) {
+            console.log(err);
+            //   this.awri.showError(err);
+        });
+    };
+    UploadComponent.prototype.selectWebVideo = function (elem) {
+        var i = this.getImageID();
+        //webmedia.js
+        var data = snapShot('image' + i);
+        this.files[i].fid = -1;
+        this.files[i].src = data.src;
+        this.files[i].name = data.name;
+        this.hideUpload();
+    };
+    UploadComponent.prototype.getImageID = function () {
+        for (var i = 0; i < 5; i++)
+            if (this.files[i].src === '')
+                return i;
+    };
+    UploadComponent.prototype.hideUpload = function () {
+        for (var i = 0; i < this.files.length; i++) {
+            if (this.files[i].src === '')
+                return this.hideUpl = false;
+        }
+        this.hideUpl = true;
+    };
+    UploadComponent.prototype.uploadFile = function (imgid) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            var input = document.getElementById('image' + imgid);
+            var dataURI = _this.files[imgid].src;
+            dataURI = dataURI.substring(dataURI.indexOf(',') + 1, dataURI.length);
+            var ext = input.name.split('.').pop();
+            var filedata = {
+                "filesize": dataURI.length,
+                "filename": input.name,
+                "filemime": "image/" + ext,
+                "filepath": 'public://attachments/' + input.name,
+                "status": 0,
+                "file": dataURI
+            };
+            alert("OK");
+            /*
+            if(this.files[imgid].fid==-1&&this.files[imgid].name!==''){
+           //   this.awri.showLoading("Datei hochladen. Bitte warten...");
+              this.awri.uploadFile(filedata).then(data=>{
+                let dat:any=data;
+                input.fid=dat.fid;
+                this.files[imgid].name=input.name;
+                this.files[imgid].fid=dat.fid;
+                resolve(this.files[imgid]);
+           //     this.awri.hideLoading();
+             }).catch(err=>{
+                console.log(err);
+                reject(err);
+        
+           //     this.awri.hideLoading();
+            //    this.awri.showError(err);
+             });
+            }
+          */
+        });
+    };
+    UploadComponent.prototype.uploadAllFiles = function () {
+        for (var i = 0; i < this.MAX_UPLOADS; i++)
+            if (this.files[i].fid == -1 && this.files[i].name != '') {
+                this.uploadFile(i);
+                //      this.awri.loading.dismiss();
+            }
+    };
+    UploadComponent.prototype.resetFiles = function () {
+        for (var i = 0; i < this.MAX_UPLOADS; i++)
+            this.removeImage(i);
+    };
+    UploadComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'upload',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/components/upload/upload.html"*/'<!-- Generated template for the UploadComponent component -->\n    <ion-item>\n        <ion-label id="profile_image" color="primary" stacked><h2>{{text}}</h2></ion-label> \n      </ion-item>\n\n      \n<ng-template [ngIf]="awri.isInRole(\'authenticated user\')" [ngIfElse]="letupload">\n\n        <ng-template [ngIf]="awri.isBrowser()" [ngIfElse]="isApp">\n                <div showWhen="mobileweb"> \n                        <ion-label color="danger" text-wrap>Im Mobilen Browser können keine Dateien ausgewählt werden. </ion-label>\n                      </div>                      \n        <div hideWhen="mobileweb">\n                <button ion-button [(ngModel)]="toggleFiles" name="toggleFiles" ngDefaultControl (click)="toggleFil()">Dateien</button>\n            <div  *ngIf="toggleFiles">\n                <div *ngIf="!hideUpl">\n                    <ion-input  id="filefield0"  type="file" accept="image/*" (change)="this.selectWebFile($event);"></ion-input>\n                </div>\n                </div>\n        </div>\n                <hr>\n                      <button ion-button [(ngModel)]="toggleVideo" name="toggleVideo" ngDefaultControl (click)="toggleVid()">Kamera</button>\n                     <ion-card>\n                      <ion-item *ngIf="toggleVideo">\n                            <video id="video1" width="100%" height="100%" autoplay style="background-color:black;"></video>\n                            <button id="snap1" ion-button (click)="toggleCam($event)" block>Start Kamera</button>\n                            <canvas id="canvas1" width="640" height="480" style="display:none;"></canvas>\n                            <div *ngIf="!hideUpl">                        \n                            <button id="snap" [disabled]="!togglePhoto"  ion-button (click)="selectWebVideo(this)" block>Photo</button>\n                            </div>\n                      </ion-item>\n                    </ion-card>\n                </ng-template>\n                <ng-template #isApp>\n                        <div *ngIf="!hideUpl">\n                         \n                            <button ion-button full (click)="nativeCamera()">Kamera</button>\n                            <button ion-button full (click)="nativeSelectFile()">Dateien</button>            \n                        </div>\n                </ng-template>\n        \n        <div *ngFor="let image of files;index as i">\n                <ion-card><p>{{1+i}}</p>\n                    <img id="image{{i}}" src="" name=""> \n                    <ion-label>{{image.name}}</ion-label>\n                    <ion-row>\n                    <ion-buttons>\n                    <button ion-button left>\n                    <ion-icon name="trash" (click)="removeImage(i)"></ion-icon>\n                </button>\n                <button ion-button right>\n                <ion-icon name="cloud-upload" (click)="uploadFile(i)"></ion-icon>\n            </button>\n        </ion-buttons>    \n        </ion-row>\n            </ion-card>\n        </div>\n        <button ion-button right (click)="uploadAllFiles()">Alle Hochladen</button>\n\n      </ng-template>\n\n      <ng-template #letupload>\n        <ion-item>\n            <ion-label id="profile_image" color="danger" stacked><h2>Natürlich nur, wenn sie angemeldet angemeldet sind! ;-)\n            </h2></ion-label> \n          </ion-item>\n\n      </ng-template>\n\n\n<!--\n    <button ion-button full (click)="uploadFile(\'image0\')">Dateien hochladen</button>\n    <ion-card><img id="image0" src="assets/imgs/anonymous.png" name="test"> <ion-icon name="trash" (click)="removeImage(0)"></ion-icon></ion-card>\n    <ion-card><img id="image1" src="assets/imgs/anonymous.png" name="test"> <ion-icon name="trash" (click)="removeImage(1)"></ion-icon></ion-card>\n<ion-card><img id="image2" src="assets/imgs/anonymous.png" name="test"> <ion-icon name="trash" (click)="removeImage(2)"></ion-icon></ion-card>\n    <ion-card><img id="image3" src="assets/imgs/anonymous.png" name="test"> <ion-icon name="trash" (click)="removeImage(3)"></ion-icon></ion-card>\n        <ion-card><img id="image4" src="assets/imgs/anonymous.png" name="test"> <ion-icon name="trash" (click)="removeImage(4)"></ion-icon></ion-card>\n        <button ion-button class="submit-btn" full type="submit"\n        [disabled]="getImageID()==0">Dateien hochladen\n</button>\n-->\n\n\n<!--\n<ion-item *ngFor="let file of files;index as i">{{file.fid}} {{file.name}}\n    <ion-input  id="filefield{{i}}"  type="file" accept="image/*" (change)="this.test($event,i);"></ion-input>\n</ion-item>\n-->\n\n\n  \n\n\n'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/components/upload/upload.html"*/
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__providers_auth_auth__["a" /* AuthProvider */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_camera__["a" /* Camera */]])
+    ], UploadComponent);
+    return UploadComponent;
+}());
+
+//# sourceMappingURL=upload.js.map
+
+/***/ }),
+
+/***/ 203:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ListPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(41);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -176,13 +407,13 @@ var ListPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 202:
+/***/ 204:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(203);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(223);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(205);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(225);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -190,31 +421,35 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 223:
+/***/ 225:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(265);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(267);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(199);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_list_list__ = __webpack_require__(201);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_list_list__ = __webpack_require__(203);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_status_bar__ = __webpack_require__(195);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_splash_screen__ = __webpack_require__(198);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__angular_common_http__ = __webpack_require__(102);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__providers_auth_auth__ = __webpack_require__(50);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_async_promise_pipe_async_promise_pipe__ = __webpack_require__(278);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_async_observable_pipe_async_observable_pipe__ = __webpack_require__(279);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_drupal7_login_drupal7_login__ = __webpack_require__(280);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_admob_free__ = __webpack_require__(200);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__providers_auth_auth__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_async_promise_pipe_async_promise_pipe__ = __webpack_require__(280);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_async_observable_pipe_async_observable_pipe__ = __webpack_require__(281);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_drupal7_login_drupal7_login__ = __webpack_require__(282);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_admob_free__ = __webpack_require__(202);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__ionic_native_camera__ = __webpack_require__(201);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_upload_upload__ = __webpack_require__(200);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -240,7 +475,8 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_5__pages_list_list__["a" /* ListPage */],
                 __WEBPACK_IMPORTED_MODULE_10__components_async_promise_pipe_async_promise_pipe__["a" /* AsyncPromisePipeComponent */],
                 __WEBPACK_IMPORTED_MODULE_11__components_async_observable_pipe_async_observable_pipe__["a" /* AsyncObservablePipeComponent */],
-                __WEBPACK_IMPORTED_MODULE_12__components_drupal7_login_drupal7_login__["a" /* Drupal7LoginComponent */]
+                __WEBPACK_IMPORTED_MODULE_12__components_drupal7_login_drupal7_login__["a" /* Drupal7LoginComponent */],
+                __WEBPACK_IMPORTED_MODULE_15__components_upload_upload__["a" /* UploadComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -256,14 +492,16 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_5__pages_list_list__["a" /* ListPage */],
                 __WEBPACK_IMPORTED_MODULE_10__components_async_promise_pipe_async_promise_pipe__["a" /* AsyncPromisePipeComponent */],
                 __WEBPACK_IMPORTED_MODULE_11__components_async_observable_pipe_async_observable_pipe__["a" /* AsyncObservablePipeComponent */],
-                __WEBPACK_IMPORTED_MODULE_12__components_drupal7_login_drupal7_login__["a" /* Drupal7LoginComponent */]
+                __WEBPACK_IMPORTED_MODULE_12__components_drupal7_login_drupal7_login__["a" /* Drupal7LoginComponent */],
             ],
             providers: [
                 __WEBPACK_IMPORTED_MODULE_6__ionic_native_status_bar__["a" /* StatusBar */],
                 __WEBPACK_IMPORTED_MODULE_7__ionic_native_splash_screen__["a" /* SplashScreen */],
                 { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["u" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicErrorHandler */] },
                 __WEBPACK_IMPORTED_MODULE_9__providers_auth_auth__["a" /* AuthProvider */],
-                __WEBPACK_IMPORTED_MODULE_13__ionic_native_admob_free__["a" /* AdMobFree */]
+                __WEBPACK_IMPORTED_MODULE_13__ionic_native_admob_free__["a" /* AdMobFree */],
+                __WEBPACK_IMPORTED_MODULE_15__components_upload_upload__["a" /* UploadComponent */],
+                __WEBPACK_IMPORTED_MODULE_14__ionic_native_camera__["a" /* Camera */],
             ]
         })
     ], AppModule);
@@ -274,18 +512,18 @@ var AppModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 265:
+/***/ 267:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(195);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(198);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(199);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_list_list__ = __webpack_require__(201);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_auth_auth__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_list_list__ = __webpack_require__(203);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_auth_auth__ = __webpack_require__(40);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -346,7 +584,7 @@ var MyApp = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 278:
+/***/ 280:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -418,7 +656,7 @@ var AsyncPromisePipeComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 279:
+/***/ 281:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -459,13 +697,13 @@ var AsyncObservablePipeComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 280:
+/***/ 282:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Drupal7LoginComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_auth_auth__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_auth_auth__ = __webpack_require__(40);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -538,7 +776,7 @@ var Drupal7LoginComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 50:
+/***/ 40:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -757,6 +995,18 @@ var AuthProvider = /** @class */ (function () {
             //     console.log(this.token);
         });
     };
+    AuthProvider.prototype.isInRole = function (role) {
+        var ret = false;
+        var obj = this.user.roles;
+        Object.keys(obj).forEach(function (key) {
+            if (obj[key] === role)
+                ret = true;
+        });
+        return ret;
+    };
+    AuthProvider.prototype.isBrowser = function () {
+        return true;
+    };
     AuthProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */])(),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */]])
@@ -768,5 +1018,5 @@ var AuthProvider = /** @class */ (function () {
 
 /***/ })
 
-},[202]);
+},[204]);
 //# sourceMappingURL=main.js.map

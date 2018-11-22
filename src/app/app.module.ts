@@ -17,6 +17,9 @@ import {AsyncObservablePipeComponent} from '../components/async-observable-pipe/
 import {Drupal7LoginComponent} from '../components/drupal7-login/drupal7-login'
 import { AdMobFree } from '@ionic-native/admob-free';
 
+import { Camera } from '@ionic-native/camera';
+import { UploadComponent } from '../components/upload/upload';
+
 @NgModule({
  declarations: [
    MyApp,
@@ -24,7 +27,8 @@ import { AdMobFree } from '@ionic-native/admob-free';
    ListPage,
    AsyncPromisePipeComponent,
    AsyncObservablePipeComponent,
-   Drupal7LoginComponent
+   Drupal7LoginComponent,
+   UploadComponent  
  ],
 
  imports: [
@@ -40,7 +44,8 @@ import { AdMobFree } from '@ionic-native/admob-free';
    ListPage,
    AsyncPromisePipeComponent,
    AsyncObservablePipeComponent,
-   Drupal7LoginComponent
+   Drupal7LoginComponent,
+   
  ],
 
  providers: [
@@ -48,7 +53,9 @@ import { AdMobFree } from '@ionic-native/admob-free';
    SplashScreen,
    {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
-    AdMobFree
+    AdMobFree,
+    UploadComponent,
+    Camera,
  ]
 })
 export class AppModule {}
