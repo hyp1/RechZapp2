@@ -1,8 +1,8 @@
 import { HttpClient,HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable} from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
-
+import { Platform } from 'ionic-angular/platform/platform';
 
 declare var openFB;
 
@@ -85,7 +85,7 @@ export class AuthProvider {
   });
 
 
-constructor(public http: HttpClient) {
+constructor(public http: HttpClient,private plt:Platform) {
     console.log('Hello AuthProvider Provider2');
     this.user={
       uid:0,
@@ -252,8 +252,8 @@ this.connect.subscribe(data=>{
   return ret;
   }
 
-
   isBrowser(){
-  return true;
+    if(this.plt.is('core') || this.plt.is('mobileweb'))return true;
+    else return false; 
   }
 }
