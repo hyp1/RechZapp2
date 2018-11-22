@@ -785,6 +785,7 @@ var Drupal7LoginComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular_platform_platform__ = __webpack_require__(3);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -797,6 +798,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 /*
   Generated class for the AuthProvider provider.
 
@@ -804,9 +806,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
   and Angular DI.
 */
 var AuthProvider = /** @class */ (function () {
-    function AuthProvider(http) {
+    function AuthProvider(http, plt) {
         var _this = this;
         this.http = http;
+        this.plt = plt;
         // public  HOST='http://localhost/druponic';
         //  public  ENDPOINT='api';
         this.HOST = 'https://stage.awri.ch';
@@ -1005,11 +1008,14 @@ var AuthProvider = /** @class */ (function () {
         return ret;
     };
     AuthProvider.prototype.isBrowser = function () {
-        return true;
+        if (this.plt.is('core') || this.plt.is('mobileweb'))
+            return true;
+        else
+            return false;
     };
     AuthProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_3_ionic_angular_platform_platform__["a" /* Platform */]])
     ], AuthProvider);
     return AuthProvider;
 }());
