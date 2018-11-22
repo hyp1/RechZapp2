@@ -5,6 +5,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
+import { SettingsPage } from '../pages/settings/settings';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -19,12 +20,14 @@ import { AdMobFree } from '@ionic-native/admob-free';
 
 import { Camera } from '@ionic-native/camera';
 import { UploadComponent } from '../components/upload/upload';
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
  declarations: [
    MyApp,
    HomePage,
    ListPage,
+   SettingsPage,
    AsyncPromisePipeComponent,
    AsyncObservablePipeComponent,
    Drupal7LoginComponent,
@@ -34,6 +37,7 @@ import { UploadComponent } from '../components/upload/upload';
  imports: [
    BrowserModule,
    IonicModule.forRoot(MyApp),
+   IonicStorageModule.forRoot(),
    HttpClientModule
  ],
 
@@ -42,6 +46,7 @@ import { UploadComponent } from '../components/upload/upload';
    MyApp,
    HomePage,
    ListPage,
+   SettingsPage,
    AsyncPromisePipeComponent,
    AsyncObservablePipeComponent,
    Drupal7LoginComponent,

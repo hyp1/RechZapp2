@@ -3,7 +3,7 @@ import { Injectable} from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 import { Platform } from 'ionic-angular/platform/platform';
-
+import { Storage } from '@ionic/storage';
 declare var openFB;
 
 /*
@@ -85,7 +85,7 @@ export class AuthProvider {
   });
 
 
-constructor(public http: HttpClient,private plt:Platform) {
+constructor(public http: HttpClient,private plt:Platform,private storage:Storage) {
     console.log('Hello AuthProvider Provider2');
     this.user={
       uid:0,
@@ -102,6 +102,17 @@ this.connect.subscribe(data=>{
 
 }
   
+public set(settingName,value){
+  return this.storage.set('setting:${ settingName }',value);
+}
+public async get(settingName){
+  return await this.storage.get('setting:${ settingName }');
+}
+
+public async remove(settingName){
+  return await this.storage.remove('setting:${ settingName }');
+}
+
 
 
   login(username:string,password:string){
