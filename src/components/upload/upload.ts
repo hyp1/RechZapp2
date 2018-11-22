@@ -185,9 +185,7 @@ export class UploadComponent {
        "status": 0,
        "file": dataURI 
     };
-    alert("OK");
 
-    /*   
     if(this.files[imgid].fid==-1&&this.files[imgid].name!==''){
    //   this.awri.showLoading("Datei hochladen. Bitte warten...");
       this.awri.uploadFile(filedata).then(data=>{
@@ -200,12 +198,10 @@ export class UploadComponent {
      }).catch(err=>{
         console.log(err);
         reject(err);
-
    //     this.awri.hideLoading();
     //    this.awri.showError(err);
      });
-    }
-  */  
+    }    
   });
     
   }

@@ -111,7 +111,7 @@ var HomePage = /** @class */ (function () {
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/home/home.html"*/'<ion-header>\n    <ion-navbar>\n      <button ion-button menuToggle>\n        <ion-icon name="menu"></ion-icon>\n      </button>\n      <ion-title>Home {{ auth.user?.name }}</ion-title>\n    </ion-navbar>\n   </ion-header>\n   \n   <ion-content>  \n     <h1>Loggedin?  {{this.auth.loggedIn}}</h1>\n     <upload></upload>\n     <drupal7-login></drupal7-login>\n    <hr>\n    <async-promise-pipe name=\'HALLO TEST\' host="http://localhost/druponic" endpoint="api"></async-promise-pipe>\n    <async-observable-pipe></async-observable-pipe>\n    <ion-grid>\n      <ion-row>\n        <ion-col *ngFor="let user of users | async" col-12 col-xl-2 col-lg-3 col-md-4>\n          <ion-card>\n            <ion-item>\n              <ion-avatar item-start>\n                <img [src]="user.picture.medium">\n              </ion-avatar>\n              <h2 text-capitalize>{{ user.name?.first }} {{ user.name?.last }}</h2>\n            </ion-item>\n            <ion-card-content>\n              Bacon ipsum dolor amet salami prosciutto ham hock, strip steak buffalo ribeye pork chop. Beef ribs tenderloin tail shoulder.\n              Spare ribs ham shoulder brisket rump hamburger. Pork belly kevin shoulder prosciutto ribeye pork chop chicken\n              strip steak pig.\n            </ion-card-content>\n          </ion-card>\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n\n    <ion-fab right bottom class="web-fab">\n        <button ion-fab icon-only color="primary" (click)="checkPlatform()">\n          <ion-icon name="help"></ion-icon>\n        </button>\n       </ion-fab>\n       \n       <ion-fab right top edge class="mobile-fab">\n        <button ion-fab icon-only color="primary" (click)="checkPlatform()">\n          <ion-icon name="help"></ion-icon>\n        </button>\n       </ion-fab>\n\n   </ion-content>'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/home/home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/home/home.html"*/'<ion-header>\n    <ion-navbar>\n      <button ion-button menuToggle>\n        <ion-icon name="menu"></ion-icon>\n      </button>\n      <ion-title>Home {{ auth.user?.name }}</ion-title>\n    </ion-navbar>\n   </ion-header>\n   \n   <ion-content>  \n    <drupal7-login></drupal7-login>\n\n     <upload></upload>\n    <hr>\n    <async-promise-pipe name=\'HALLO TEST\' host="http://localhost/druponic" endpoint="api"></async-promise-pipe>\n    <async-observable-pipe></async-observable-pipe>\n    <ion-grid>\n      <ion-row>\n        <ion-col *ngFor="let user of users | async" col-12 col-xl-2 col-lg-3 col-md-4>\n          <ion-card>\n            <ion-item>\n              <ion-avatar item-start>\n                <img [src]="user.picture.medium">\n              </ion-avatar>\n              <h2 text-capitalize>{{ user.name?.first }} {{ user.name?.last }}</h2>\n            </ion-item>\n            <ion-card-content>\n              Bacon ipsum dolor amet salami prosciutto ham hock, strip steak buffalo ribeye pork chop. Beef ribs tenderloin tail shoulder.\n              Spare ribs ham shoulder brisket rump hamburger. Pork belly kevin shoulder prosciutto ribeye pork chop chicken\n              strip steak pig.\n            </ion-card-content>\n          </ion-card>\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n\n    <ion-fab right bottom class="web-fab">\n        <button ion-fab icon-only color="primary" (click)="checkPlatform()">\n          <ion-icon name="help"></ion-icon>\n        </button>\n       </ion-fab>\n       \n       <ion-fab right top edge class="mobile-fab">\n        <button ion-fab icon-only color="primary" (click)="checkPlatform()">\n          <ion-icon name="help"></ion-icon>\n        </button>\n       </ion-fab>\n\n   </ion-content>'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/home/home.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_4__components_upload_upload__["a" /* UploadComponent */], __WEBPACK_IMPORTED_MODULE_6__ionic_native_admob_free__["a" /* AdMobFree */], __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Platform */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_5__providers_auth_auth__["a" /* AuthProvider */]])
     ], HomePage);
@@ -304,26 +304,22 @@ var UploadComponent = /** @class */ (function () {
                 "status": 0,
                 "file": dataURI
             };
-            alert("OK");
-            /*
-            if(this.files[imgid].fid==-1&&this.files[imgid].name!==''){
-           //   this.awri.showLoading("Datei hochladen. Bitte warten...");
-              this.awri.uploadFile(filedata).then(data=>{
-                let dat:any=data;
-                input.fid=dat.fid;
-                this.files[imgid].name=input.name;
-                this.files[imgid].fid=dat.fid;
-                resolve(this.files[imgid]);
-           //     this.awri.hideLoading();
-             }).catch(err=>{
-                console.log(err);
-                reject(err);
-        
-           //     this.awri.hideLoading();
-            //    this.awri.showError(err);
-             });
+            if (_this.files[imgid].fid == -1 && _this.files[imgid].name !== '') {
+                //   this.awri.showLoading("Datei hochladen. Bitte warten...");
+                _this.awri.uploadFile(filedata).then(function (data) {
+                    var dat = data;
+                    input.fid = dat.fid;
+                    _this.files[imgid].name = input.name;
+                    _this.files[imgid].fid = dat.fid;
+                    resolve(_this.files[imgid]);
+                    //     this.awri.hideLoading();
+                }).catch(function (err) {
+                    console.log(err);
+                    reject(err);
+                    //     this.awri.hideLoading();
+                    //    this.awri.showError(err);
+                });
             }
-          */
         });
     };
     UploadComponent.prototype.uploadAllFiles = function () {
@@ -1012,6 +1008,23 @@ var AuthProvider = /** @class */ (function () {
             return true;
         else
             return false;
+    };
+    AuthProvider.prototype.uploadFile = function (filedata) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]()
+                .set('X-CSRF-TOKEN', _this.token).set('Content-Type', 'application/json');
+            var options = {
+                headers: headers,
+                withCredentials: true,
+            };
+            _this.http.post(_this.HOST + '/drupalgap/file.json', filedata, options).subscribe(function (data) {
+                console.log(data);
+                resolve(data);
+            }, function (err) {
+                reject(err);
+            });
+        });
     };
     AuthProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */])(),

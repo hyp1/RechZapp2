@@ -13,8 +13,8 @@ import { AuthProvider } from '../../providers/auth/auth';
 })
 
 
-export class Drupal7LoginComponent {
-  auth:AuthProvider;
+export class Drupal7LoginComponent {  
+auth:AuthProvider;
 username:string;
 password:string;
   constructor(auth:AuthProvider) {

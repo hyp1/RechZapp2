@@ -8,9 +8,9 @@
    </ion-header>
    
    <ion-content>  
-     <h1>Loggedin?  {{this.auth.loggedIn}}</h1>
+    <drupal7-login></drupal7-login>
+
      <upload></upload>
-     <drupal7-login></drupal7-login>
     <hr>
     <async-promise-pipe name='HALLO TEST' host="http://localhost/druponic" endpoint="api"></async-promise-pipe>
     <async-observable-pipe></async-observable-pipe>

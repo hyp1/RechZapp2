@@ -256,4 +256,23 @@ this.connect.subscribe(data=>{
     if(this.plt.is('core') || this.plt.is('mobileweb'))return true;
     else return false; 
   }
+
+  uploadFile(filedata){
+    return new Promise((resolve,reject) => {
+    const headers = new HttpHeaders()
+    .set('X-CSRF-TOKEN',<any>this.token).set('Content-Type', 'application/json')
+    const options = {
+    headers: headers,
+    withCredentials	: true,
+    };
+    this.http.post(this.HOST+'/drupalgap/file.json',filedata,options).subscribe(data => {
+      console.log(data);
+  
+      resolve(data);
+    }, err => {
+      reject(err);
+    });
+  });
+  }
+  
 }
