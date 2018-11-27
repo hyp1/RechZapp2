@@ -10,10 +10,9 @@ import { HomePage } from '../pages/home/home';
 
 import { SettingsPage } from '../pages/settings/settings';
 import { CreatePage } from '../pages/create/create';
-import { RegisterPage } from '../pages/register/register';
 import { HelpPage } from '../pages/help/help';
 import { SearchPage } from '../pages/search/search';
-import { ListPage } from '../pages/list/list';
+//import { ListPage } from '../pages/list/list';
 
 @Component({
   templateUrl: 'app.html'
@@ -33,10 +32,9 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'AWRI', component: HomePage },
-      { title: 'Search', component: SearchPage },
+      { title: 'Suchen', component: SearchPage },
       { title: 'Frage stellen', component: CreatePage },
       { title: 'Einstellungen', component: SettingsPage },
-      { title: 'Register', component: RegisterPage },
       { title: 'Help', component: HelpPage }
     ];
 
