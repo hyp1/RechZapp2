@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController,Platform,AlertController } from 'ionic-angular';
-import { Observable } from 'rxjs/Observable';
+//import { Observable } from 'rxjs/Observable';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import "rxjs/add/operator/map";
 
@@ -27,7 +27,7 @@ const bannerConfig: AdMobFreeBannerConfig = {
 })
 export class HomePage {
 
-  
+
 nodes: Array<any>;
 auth:AuthProvider;
 upload:UploadComponent;

@@ -19,10 +19,10 @@ export class AuthProvider {
 //  public  HOST='http://kimo2007.dnshome.de:8888/stage.awri.ch';
 //  public  ENDPOINT='drupalgap';
 
-  public  HOST='http://localhost/stage.awri.ch';
-  public  ENDPOINT='drupalgap';
-//  public  HOST='https://stage.awri.ch';
+//  public  HOST='http://localhost/stage.awri.ch';
 //  public  ENDPOINT='drupalgap';
+  public  HOST='https://stage.awri.ch';
+  public  ENDPOINT='drupalgap';
 
   public loggedIn:boolean=false;
   public help:boolean=true;
