@@ -3,22 +3,26 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
-import { SettingsPage } from '../pages/settings/settings';
 
 import { AuthProvider } from '../providers/auth/auth';
 
+import { HomePage } from '../pages/home/home';
 
+import { SettingsPage } from '../pages/settings/settings';
+import { CreatePage } from '../pages/create/create';
+import { RegisterPage } from '../pages/register/register';
+import { HelpPage } from '../pages/help/help';
+import { SearchPage } from '../pages/search/search';
+import { ListPage } from '../pages/list/list';
 
 @Component({
   templateUrl: 'app.html'
 })
+
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = HomePage;
-
 
   pages: Array<{title: string, component: any}>;
   auth:AuthProvider;
@@ -28,13 +32,15 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage },
-      { title: 'Einstellungen', component: SettingsPage }
+      { title: 'AWRI', component: HomePage },
+      { title: 'Search', component: SearchPage },
+      { title: 'Frage stellen', component: CreatePage },
+      { title: 'Einstellungen', component: SettingsPage },
+      { title: 'Register', component: RegisterPage },
+      { title: 'Help', component: HelpPage }
     ];
 
   }
-
   
   initializeApp() {
     this.platform.ready().then(() => {
@@ -46,6 +52,7 @@ export class MyApp {
       this.splashScreen.hide();
     });
   }
+
 
   openPage(page) {
     // Reset the content nav to have just this page

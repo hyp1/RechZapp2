@@ -42,3 +42,17 @@
     overflow-y: scroll;
  }
  
+
+ @font-face { /* http://emojione.com/developers/ */
+   font-family: Emojione;
+   src: local("EmojiOne BW"), local("EmojiOne"), local("Emoji One"), 
+   url("../assets/fonts/NotoColorEmoji.ttf") format("truetype");  //Web
+//   url("../assets/fonts/emojione-svg.woff") format("truetype");         //Device
+        
+}
+
+@font-face {
+   font-family: Emojione;
+   src: local("Arial");
+   unicode-range: U+0000-00FF;
+}

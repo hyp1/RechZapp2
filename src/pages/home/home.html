@@ -1,38 +1,52 @@
 <ion-header>
+
     <ion-navbar>
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-      <ion-title>Home {{ auth.user?.name }}</ion-title>
+        <ion-buttons start>
+            <button ion-button menuToggle>
+              <ion-icon name="menu"></ion-icon>
+            </button>
+            </ion-buttons>
+             
+            <ion-title>
+                AWRI
+              </ion-title>
+      <ion-buttons end>
+  <ng-template [ngIf]="this.auth.isInRole('authenticated user')" [ngIfElse]="headerOut">
+              <button ion-button (click)="this.gotoLogin()">
+                  <img class="avatar" src="{{this.auth.user.picture}}"> {{auth.user?.name}}        
+                </button>
+  </ng-template>      
+  <ng-template #headerOut>
+              <button ion-button (click)="this.gotoLogin()">
+              <ion-icon name="contact"></ion-icon>  {{auth.user?.name}}
+              </button>
+  </ng-template>
+      </ion-buttons>    
     </ion-navbar>
-   </ion-header>
+
+</ion-header>
    
    <ion-content padding>  
-    <drupal7-login></drupal7-login>
+     <div *ngIf="help">
+       <ion-card>
+         <ion-item>
+         <ion-label color="secondary">
+<h2>AWRI Rechtsfragen vom 23.2.2015 bis heute</h2>
+<p>Freigeschaltete Rechtsfragen aus dem Rechtsforum Schweiz</p>
+</ion-label>
+</ion-item>
+</ion-card>     
+</div>
 
-     <upload></upload>
-    <hr>
-    <async-promise-pipe name='HALLO TEST' host="http://localhost/druponic" endpoint="api"></async-promise-pipe>
-    <async-observable-pipe></async-observable-pipe>
-    <ion-grid>
-      <ion-row>
-        <ion-col *ngFor="let user of users | async" col-12 col-xl-2 col-lg-3 col-md-4>
-          <ion-card>
-            <ion-item>
-              <ion-avatar item-start>
-                <img [src]="user.picture.medium">
-              </ion-avatar>
-              <h2 text-capitalize>{{ user.name?.first }} {{ user.name?.last }}</h2>
-            </ion-item>
-            <ion-card-content>
-              Bacon ipsum dolor amet salami prosciutto ham hock, strip steak buffalo ribeye pork chop. Beef ribs tenderloin tail shoulder.
-              Spare ribs ham shoulder brisket rump hamburger. Pork belly kevin shoulder prosciutto ribeye pork chop chicken
-              strip steak pig.
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+    <ion-list *ngFor="let n of this.nodes">
+      <ion-card>  
+        <ion-item><p>{{n.created*1000 | date: 'dd.MM.yyyy H:mm' }} <ion-icon name="eye" (click)="this.frageSelected(n)" color="primary"></ion-icon></p></ion-item>
+        <ion-card-content text-wrap (click)="this.frageSelected(n)">{{n.title}}</ion-card-content>
+      </ion-card>
+      </ion-list>
+      <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+          <ion-infinite-scroll-content></ion-infinite-scroll-content>
+        </ion-infinite-scroll>
 
     <ion-fab right bottom class="web-fab">
         <button ion-fab icon-only color="primary" (click)="checkPlatform()">

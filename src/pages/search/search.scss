@@ -1,0 +1,27 @@
+page-search {
+    @media (max-width: 576px) {
+        ion-card-content {
+            font-size: 2rem !important;
+        }
+    }
+ 
+    @media (max-width: 820px) {
+        .mobile-fab {
+            display: none;
+        }
+    }
+ 
+    @media (min-width: 820px) {
+        .web-fab {
+            display: none;
+        }
+     //   ion-card-content {
+     //       font-size: 2rem !important;
+     //       background-color: lightcyan;
+     //   }
+    }
+ }
+ 
+ .card:hover{
+     cursor:pointer;
+ }

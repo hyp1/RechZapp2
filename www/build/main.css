@@ -3815,6 +3815,13 @@ ion-icon::before {
   src: local("Noto Sans Bold"), local("Noto-Sans-Bold"), url("../assets/fonts/noto-sans-bold.woff") format("woff"), url("../assets/fonts/noto-sans-bold.ttf") format("truetype");
 }
 
+.avatar {
+  border-radius: 50%;
+  vertical-align: middle;
+  max-width: 40px !important;
+  max-height: auto !important;
+}
+
 ion-action-sheet {
   left: 0;
   top: 0;
@@ -5523,19 +5530,19 @@ ion-footer {
 }
 
 ion-app.ios {
-  font-family: -apple-system, "Helvetica Neue", "Roboto", sans-serif;
+  font-family: "Emojione";
   font-size: 1.4rem;
   background-color: #fff;
 }
 
 ion-app.md {
-  font-family: "Roboto", "Helvetica Neue", sans-serif;
+  font-family: "Emojione";
   font-size: 1.4rem;
   background-color: #fff;
 }
 
 ion-app.wp {
-  font-family: "Segoe UI", "Noto Sans", sans-serif;
+  font-family: "Emojione";
   font-size: 1.4rem;
   background-color: #fff;
 }
@@ -25700,6 +25707,18 @@ ion-navbar.toolbar {
   overflow: hidden;
   margin-right: -17px;
   overflow-y: scroll;
+}
+
+@font-face {
+  /* http://emojione.com/developers/ */
+  font-family: Emojione;
+  src: local("EmojiOne BW"), local("EmojiOne"), local("Emoji One"), url("../assets/fonts/NotoColorEmoji.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: Emojione;
+  src: local("Arial");
+  unicode-range: U+0000-00FF;
 }
 
 @media (max-width: 576px) {

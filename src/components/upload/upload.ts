@@ -1,13 +1,15 @@
-import { Component } from '@angular/core';
+import { Component,Input } from '@angular/core';
 import { AuthProvider } from '../../providers/auth/auth';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import {LoadingController,Loading } from 'ionic-angular';
+
 /**
   webmedia.js WebRTC Video adapter.js
  https://github.com/webrtc/adapter
  */
  declare var webpreviewFile;  //Browser Datei Image select
  declare var startVideo;      //start Video 
- declare var stopVideo;       //stop
+ declare var stopVideo;       //stop Viedo
  declare var snapShot;        //Video Camera Snapshot  
 
  @Component({
@@ -16,23 +18,28 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 })
 
 export class UploadComponent {
-  MAX_UPLOADS:number=5;
+  @Input() MAX_UPLOADS: number;
+  @Input() fieldname: string;
+  //:number=5;
   text: string;
-  files: Array<{fid: number, name:string, src:string}>;
+  public files: Array<{fid: number, name:string, src:string,uploaded:boolean}>=[];
   hideUpl:boolean=false;
   toggleVideo:boolean=false;
   toggleFiles:boolean=false;
   toggleCamera:boolean=false;
   togglePhoto:boolean=false;
-  awri:AuthProvider;
 
-  constructor(awri:AuthProvider,private camera: Camera) {
-    this.text = 'Sie können bis zu 5 Bilddateien anhängen.';
-    this.awri=awri;
-    this.files = [];
-    for(var i=0;i<this.MAX_UPLOADS;i++)this.files.push({fid:-1,name:'',src:''});
+  loading:Loading;
+
+
+  constructor(public awri:AuthProvider,private camera: Camera, private loadingCtrl:LoadingController) {
+  this.MAX_UPLOADS=5;
+  this.fieldname="images";
+
+    this.text = 'Sie können bis zu '+this.MAX_UPLOADS+' Bilddateien anhängen.';
+    for(var i=0;i<this.MAX_UPLOADS;i++)this.files.push({fid:-1,name:'',src:'',uploaded:false});
   }
-  
+
   nativeSelectFile(){
     const options: CameraOptions = {
       quality: 100,
@@ -66,7 +73,6 @@ export class UploadComponent {
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
     }
-    
     this.camera.getPicture(options).then((imageData) => {
      // imageData is either a base64 encoded string or a file URI
      // If it's base64 (DATA_URL):
@@ -91,11 +97,13 @@ export class UploadComponent {
     this.toggleFiles=false;
   }
 
+  
   toggleFil(){
     if(this.toggleFiles)this.toggleFiles=false;
     else this.toggleFiles=true;
     this.toggleVideo=false;
  }
+
 
   toggleCam(evt){
     if(this.toggleCamera){
@@ -115,31 +123,39 @@ export class UploadComponent {
   }
 
   getFiles(){
-    let f=[]
+    let f=[];
+   // console.log(this.files);
+   // alert(this.files.length)
     for(var i=0;i<this.MAX_UPLOADS;i++){
-      let input:any=document.getElementById('image'+i);
-      if(input.fid!=-1&&input.name!='')f.push({fid:input.fid});
+      let input:any=document.getElementById(this.fieldname+''+i);
+      console.log(input);
+   // alert(this.files[i].fid);
+   // if(this.files[i].fid!=-1)f.push({fid:this.files[i].fid});
+    if(input)if(input.fid!=-1&&input.name!='')f.push({fid:input.fid});
     }
   return f;
   }
 
   removeImage(index){
-    let input:any = document.getElementById('image'+index);
+    let input:any = document.getElementById(this.fieldname+''+index);
     input.src='';
     this.files[index].fid=-1;
     this.files[index].name='';
     this.files[index].src='';
+    this.files[index].uploaded=false;
     this.hideUpl=false;
   }
 
   selectWebFile(elem){
     let i=this.getImageID();
       //webmedia.js
-    webpreviewFile(elem.srcElement,'img#image'+i).then(data=>{
+    webpreviewFile(elem.srcElement,'img#'+this.fieldname+i).then(data=>{
       this.files[i].fid=-1;
       this.files[i].src=data.src;
-      this.files[i].name=data.name;
+      this.files[i].name=this.awri.user.uid+'-'+data.name;
+    //  alert("ID"+i+' - '+data.name);      
       this.hideUpload();
+      console.log(this.files);
     }).catch(err=>{
       console.log(err);
    //   this.awri.showError(err);
@@ -149,16 +165,15 @@ export class UploadComponent {
   selectWebVideo(elem){
     var i=this.getImageID();
     //webmedia.js
-    var data=snapShot('image'+i);
+    var data=snapShot(this.fieldname+''+i);
     this.files[i].fid=-1;
     this.files[i].src=data.src;
     this.files[i].name=data.name;
     this.hideUpload();
   }
 
-
   getImageID(){
-    for(var i=0;i<5;i++)
+    for(var i=0;i<this.MAX_UPLOADS;i++)
       if(this.files[i].src==='')return i;      
   }
 
@@ -168,12 +183,10 @@ export class UploadComponent {
     }  
   this.hideUpl=true;
   }
-
   
   uploadFile(imgid){ 
     return new Promise((resolve,reject)=>{
-
-    let input:any = document.getElementById('image'+imgid);
+    let input:any = document.getElementById(this.fieldname+imgid);
     let dataURI=this.files[imgid].src;
     dataURI=dataURI.substring(dataURI.indexOf(',')+1,dataURI.length);     
     let ext=input.name.split('.').pop();
@@ -187,18 +200,23 @@ export class UploadComponent {
     };
 
     if(this.files[imgid].fid==-1&&this.files[imgid].name!==''){
-   //   this.awri.showLoading("Datei hochladen. Bitte warten...");
+      let l = this.loadingCtrl.create({
+        content: "Datei hochladen. Bitte warten..."
+      });
+      l.present();
+    
       this.awri.uploadFile(filedata).then(data=>{
         let dat:any=data;
         input.fid=dat.fid;
         this.files[imgid].name=input.name;
         this.files[imgid].fid=dat.fid;
+        this.files[imgid].uploaded=true;
+        l.dismiss();
         resolve(this.files[imgid]);
-   //     this.awri.hideLoading();
      }).catch(err=>{
-        console.log(err);
+       // console.log(err);       
+       l.dismiss();
         reject(err);
-   //     this.awri.hideLoading();
     //    this.awri.showError(err);
      });
     }    
@@ -206,12 +224,10 @@ export class UploadComponent {
     
   }
 
-
   uploadAllFiles(){
     for(var i=0;i<this.MAX_UPLOADS;i++)    
       if(this.files[i].fid==-1&&this.files[i].name!=''){
         this.uploadFile(i);     
-  //      this.awri.loading.dismiss();
   }
 }
 
@@ -219,6 +235,5 @@ resetFiles(){
   for(var i=0;i<this.MAX_UPLOADS;i++)    
       this.removeImage(i);     
 }
-
 
 }

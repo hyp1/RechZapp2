@@ -16,9 +16,10 @@ import { AuthProvider } from '../../providers/auth/auth';
 export class SettingsPage {
 help:boolean;
   constructor(public navCtrl: NavController, public navParams: NavParams,private awri:AuthProvider) {
-
- this.awri.get('help').then(data=>{
+  this.awri.get('help').then(data=>{
+//    console.log(data);
     this.help=data;
+//    console.log("HELP"+this.help);
   });
 
   }
@@ -26,8 +27,7 @@ help:boolean;
 ionViewDidLoad() {
     console.log('ionViewDidLoad SettingsPage');
   }
-
-  helpChanged(evt){
+helpChanged(evt){
   //console.log(evt.help);
   this.awri.set('help',evt.help);
 }

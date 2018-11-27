@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthProvider } from '../../providers/auth/auth';
+import { NavController } from 'ionic-angular';
+import { RegisterPage } from '../../pages/register/register';
 
 /**
  * Generated class for the Drupal7LoginComponent component.
@@ -14,13 +16,12 @@ import { AuthProvider } from '../../providers/auth/auth';
 
 
 export class Drupal7LoginComponent {  
-auth:AuthProvider;
+
 username:string;
 password:string;
-  constructor(auth:AuthProvider) {
+  constructor(public auth:AuthProvider,public navCtrl:NavController) {
     console.log('Hello Drupal7LoginComponent Component');    
 
-    this.auth=auth;
     
     /*
     this.auth.connect.subscribe(user=>{
@@ -61,4 +62,7 @@ password:string;
     })
   };
   
+  gotoRegister(){
+    this.navCtrl.push(RegisterPage);
+  }
 }

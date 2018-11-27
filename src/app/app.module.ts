@@ -2,10 +2,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
+
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { SettingsPage } from '../pages/settings/settings';
+import { CreatePage } from '../pages/create/create';
+import { RegisterPage } from '../pages/register/register';
+import { LoginPage } from '../pages/login/login';
+import { HelpPage } from '../pages/help/help';
+import { ViewPage } from '../pages/view/view';
+import { SearchPage } from '../pages/search/search';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -13,8 +20,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthProvider } from '../providers/auth/auth';
 
-import {AsyncPromisePipeComponent} from '../components/async-promise-pipe/async-promise-pipe'
-import {AsyncObservablePipeComponent} from '../components/async-observable-pipe/async-observable-pipe'
+
 import {Drupal7LoginComponent} from '../components/drupal7-login/drupal7-login'
 import { AdMobFree } from '@ionic-native/admob-free';
 
@@ -28,8 +34,12 @@ import { IonicStorageModule } from '@ionic/storage';
    HomePage,
    ListPage,
    SettingsPage,
-   AsyncPromisePipeComponent,
-   AsyncObservablePipeComponent,
+   CreatePage,
+   LoginPage,
+   RegisterPage,
+   HelpPage,
+   ViewPage,
+   SearchPage,
    Drupal7LoginComponent,
    UploadComponent  
  ],
@@ -47,8 +57,12 @@ import { IonicStorageModule } from '@ionic/storage';
    HomePage,
    ListPage,
    SettingsPage,
-   AsyncPromisePipeComponent,
-   AsyncObservablePipeComponent,
+   CreatePage,
+   LoginPage,
+   RegisterPage,
+   HelpPage,
+   ViewPage,
+   SearchPage,
    Drupal7LoginComponent,
    
  ],
@@ -63,4 +77,5 @@ import { IonicStorageModule } from '@ionic/storage';
     Camera,
  ]
 })
+
 export class AppModule {}

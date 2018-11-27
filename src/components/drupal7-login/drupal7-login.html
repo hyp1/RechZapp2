@@ -1,6 +1,6 @@
 <!-- Generated template for the Drupal7LoginComponent component -->
-<div>
-<h1>drupal7-login</h1>
+
+
 <div *ngIf="this.auth.loggedIn; then loggedin else notloggedin">
 </div>
 
@@ -37,6 +37,7 @@
                     </ion-row>    
                       </form>  
                       <button ion-button round  full  (click)="fblogin()"> <ion-icon name="logo-facebook"></ion-icon>Facebook</button>    
+                      <button ion-button round  full  (click)="gotoRegister()">Registrieren</button>    
                        
     </ng-template>
-</div>  
+  
