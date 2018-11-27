@@ -54,7 +54,7 @@ export class UploadComponent {
       this.files[id].fid=-1;
       this.files[id].src=base64Image;
       this.files[id].name=this.awri.user.uid+"-nativecam-"+Date.now()+".jpg";
-      let input:any = document.getElementById('image'+id); 
+      let input:any = document.getElementById(this.fieldname+''+id); 
       input.name = this.files[id].name;    
       input.src=this.files[id].src;
       this.hideUpload();
@@ -81,7 +81,7 @@ export class UploadComponent {
       this.files[id].fid=-1;
       this.files[id].src=base64Image;
       this.files[id].name=this.awri.user.uid+"-nativecam-"+Date.now()+".jpg";
-      let input:any = document.getElementById('image'+id);
+      let input:any = document.getElementById(this.fieldname+''+id);
       input.src=this.files[id].src;
       input.name = this.files[id].name;    
       this.hideUpload();
