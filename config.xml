@@ -4,6 +4,9 @@
 
     <description>Alles was Recht ist - Schweizer Datenbank für Rechtsfragen</description>
     <author email="rhfapp@outlook.com" href="https://awri.ch/">AWRI Team</author>
+
+    <icon src="resources/icon.png" />
+
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
@@ -21,9 +24,6 @@
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
     <platform name="android">
-
-        <icon src="resources/icon.png" />
-
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
         <icon density="mdpi" src="resources/android/icon/drawable-mdpi-icon.png" />
