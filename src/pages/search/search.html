@@ -27,6 +27,22 @@
 </ion-header>
 
 <ion-content padding>
+
+    <div *ngIf="help" class="help">   
+        <ion-item>
+            <ion-label text-wrap>
+               <h2>Rechtsfragen und Antworten suchen</h2>
+               <p>Suchen sie nach mit verknüften Schlüsselwörtern nach Rechtsfragen und Antworten</p>
+               <p>Sie können ihre Suche Näher eingrenzen in dem sie Ihre Schlüsselwörter mit AND oder OR (Grossgeschrieben) verknüpfen. Z.B. Haus OR Garage</p>
+               <p>Oder in dem sie Ihre Schlüsselwörter mit + oder - verknüpfen. z.B: Hund -Katze</p>
+               <p>Die Suchergebnise werden nach <ion-icon name="pulse"></ion-icon> Relevanz soriert angezeigt. Die Relevanz ergibt sich aus:
+                </p>
+                <ol><li>Anzahl Schlüsselwörtern</li> <li>Aktualität</li> <li>Bewertung</li></ol>
+         
+              </ion-label>
+         </ion-item>
+        <br>
+        </div>
   <ion-list>
     <ion-item>
       <ion-label> <ion-icon name="search"></ion-icon></ion-label>
@@ -43,7 +59,7 @@
        <ion-card  (click)="this.itemSelected(item)">
          <ion-item>        
           <ng-template [ngIf]="awri.isInRole('authenticated user')" [ngIfElse]="loggedOut">
-           <ion-avatar item-start>
+           <ion-avatar item-start *ngIf="item.node.field_fbid?.und?.length>0">
               <img class="avatar" src="https://graph.facebook.com/{{(item.node.field_fbid.und[0]?item.node.field_fbid.und[0].value:0)}}/picture"> 
               <h2 text-capitalize>{{item.node?.field_fbname.und[0].value}}</h2>
               <p>{{item.node.created*1000 | date: 'dd.MM.yyyy H:mm' }}</p>
@@ -58,11 +74,18 @@
             </ng-template>
          </ion-item>
          <ion-card-content>
+                  <h2 innerHTML={{item.snippet}}></h2>                  
 
-                  <h2 innerHTML={{item.snippet}}></h2> 
-                  <p> {{item.extra?.comment}}</p> 
-                  <p>Suchrelevanz {{item.score}}<p>      
          </ion-card-content>
+         <ion-item>
+            <ion-icon name="chatboxes" item-start></ion-icon>
+    
+            <ion-badge item-end>{{item.node?.comment_count}}</ion-badge>
+          </ion-item>
+         <ion-item>
+            <ion-icon name="pulse" item-start></ion-icon>
+            <ion-badge item-end>{{item.score}}</ion-badge>
+          </ion-item>
        </ion-card>
      </ion-col>
    </ion-row>

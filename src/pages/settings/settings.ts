@@ -25,6 +25,7 @@ help:boolean;
 
   }
 
+  
 ionViewDidLoad() {
     console.log('ionViewDidLoad SettingsPage');
   }

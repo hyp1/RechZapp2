@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 import { Platform } from 'ionic-angular/platform/platform';
 import { Storage } from '@ionic/storage';
-import { Loading } from 'ionic-angular';
+//import { Loading } from 'ionic-angular';
 
 /*
   Generated class for the AuthProvider provider.
@@ -13,7 +13,6 @@ import { Loading } from 'ionic-angular';
   and Angular DI.
 */
 declare var openFB;
-
 
 @Injectable()
 export class AuthProvider {
@@ -101,7 +100,8 @@ export class AuthProvider {
   });
 
 constructor(public http: HttpClient,private plt:Platform,private storage:Storage) {
-    console.log('Hello AuthProvider Provider2');
+    this.help=true;
+
     this.user={
       uid:0,
       name:'Unbekannt',
@@ -114,6 +114,12 @@ constructor(public http: HttpClient,private plt:Platform,private storage:Storage
     
 this.connect.subscribe(data=>{
   console.log("auth.connect:"+data.name);
+});
+
+this.get('help').then(col=>{
+  this.help=col;
+}).catch(err=>{
+  console.log(err);
 });
 
 }

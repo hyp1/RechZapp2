@@ -27,21 +27,44 @@
 </ion-header>
    
    <ion-content padding>  
-     <div *ngIf="help">
-       <ion-card>
-         <ion-item>
-         <ion-label color="secondary">
-<h2>AWRI Rechtsfragen vom 23.2.2015 bis heute</h2>
-<p>Freigeschaltete Rechtsfragen aus dem Rechtsforum Schweiz</p>
-</ion-label>
-</ion-item>
-</ion-card>     
+     <div *ngIf="help" class="help">   
+      <a href="https://www.facebook.com/groups/RechtsberatungSchweiz/" target="_BLANK">  
+      <ion-item>
+            <ion-icon name="logo-facebook" item-start></ion-icon>
+            <ion-label text-wrap>
+               <h2>Rechtsforum Schweiz</h2>
+               <p>Facebookgruppe mit über 8000 Mitgliedern</p>
+               <p>Alle Fragen wurden durch die Mitglieder dieser Gruppe beantwortet</p>
+              </ion-label>
+         </ion-item>
+        </a>
+        <br>
+        <a href="{{auth.HOST}}" target="_BLANK">  
+        <ion-item>
+            <ion-icon name="rechzapp-awri" item-start></ion-icon>
+            <ion-label text-wrap>
+               <h2>AWRI (Alles was Recht ist)</h2>
+               <p>Datenbank für Rechtsfragen</p>
+               <p>In dieser Datenbank werden Rechtsfragen und Antworten ausgewertet und freigeschalten.</p>
+              </ion-label>
+         </ion-item>
+         </a>
+        <br>        
+        <a href="https://www.facebook.com/Rechtshilfeforum/" target="_BLANK">  
+        <ion-item>
+            <ion-icon name="logo-facebook" item-start></ion-icon>
+            <ion-label text-wrap>
+               <h2>AWRI Ratgeber</h2>
+               <p>Facebook Seite, auf der von Zeit zu Zeit die interessantesten und meist gefragten Beiträge aus dem Rechtsforum Schweiz veröffentlicht werden.</p>
+              </ion-label>
+         </ion-item>  
+         </a>
 </div>
 
     <ion-list *ngFor="let n of this.nodes">
       <ion-card>  
-        <ion-item><p>{{n.created*1000 | date: 'dd.MM.yyyy H:mm' }} <ion-icon name="eye" (click)="this.frageSelected(n)" color="primary"></ion-icon></p></ion-item>
-        <ion-card-content text-wrap (click)="this.frageSelected(n)">{{n.title}}</ion-card-content>
+        <ion-item><p>{{n.created*1000 | date: 'dd.MM.yyyy H:mm' }} </p></ion-item>
+        <ion-card-content text-wrap (click)="this.frageSelected(n)"><h2>{{n.title}}</h2></ion-card-content>
       </ion-card>
       </ion-list>
       <ion-infinite-scroll (ionInfinite)="doInfinite($event)">

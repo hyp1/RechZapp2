@@ -28,6 +28,7 @@ const bannerConfig: AdMobFreeBannerConfig = {
 export class HomePage {
 
 
+  
 nodes: Array<any>;
 auth:AuthProvider;
 upload:UploadComponent;

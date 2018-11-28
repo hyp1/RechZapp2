@@ -29,8 +29,7 @@ import { UploadComponent } from '../components/upload/upload';
 import { IonicStorageModule } from '@ionic/storage';
 import { CommentComponent } from '../components/comment/comment';
 
-
-
+  
 @NgModule({
  declarations: [
    MyApp,

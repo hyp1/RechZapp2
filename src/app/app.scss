@@ -56,3 +56,28 @@
    src: local("Arial");
    unicode-range: U+0000-00FF;
 }
+
+div.help ion-item{
+   background-color:color($colors, secondary);
+   color: white;
+   border-radius: 5px;
+}
+div.help a{
+   text-decoration: none;
+}
+ion-icon {
+   &[class*="rechzapp-"] {
+       // Instead of using the font-based icons
+       // We're applying SVG masks
+       mask-size: contain;
+       mask-position: 50% 50%;
+       mask-repeat: no-repeat;
+       background: currentColor;
+       width: 1em;
+       height: 1em;
+   }
+   // custom icons
+   &[class*="rechzapp-awri"] {
+       mask-image: url("../assets/icon/awri.svg");
+   }
+}

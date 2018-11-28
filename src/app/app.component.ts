@@ -18,6 +18,7 @@ import { SearchPage } from '../pages/search/search';
   templateUrl: 'app.html'
 })
 
+
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
@@ -35,11 +36,11 @@ export class MyApp {
       { title: 'Suchen', component: SearchPage },
       { title: 'Frage stellen', component: CreatePage },
       { title: 'Einstellungen', component: SettingsPage },
-      { title: 'Help', component: HelpPage }
+      { title: 'Hilfe', component: HelpPage }
     ];
-
   }
   
+
   initializeApp() {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
