@@ -40,6 +40,7 @@ export class UploadComponent {
     for(var i=0;i<this.MAX_UPLOADS;i++)this.files.push({fid:-1,name:'',src:'',uploaded:false});
   }
 
+  
   nativeSelectFile(){
     const options: CameraOptions = {
       quality: 100,

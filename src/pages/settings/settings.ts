@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
+import { LoginPage } from '../../pages/login/login';
 /**
  * Generated class for the SettingsPage page.
  *
@@ -31,4 +32,10 @@ helpChanged(evt){
   //console.log(evt.help);
   this.awri.set('help',evt.help);
 }
+
+
+gotoLogin(){
+  this.navCtrl.push(LoginPage);
+}
+
 }

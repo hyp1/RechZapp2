@@ -27,6 +27,9 @@ import { AdMobFree } from '@ionic-native/admob-free';
 import { Camera } from '@ionic-native/camera';
 import { UploadComponent } from '../components/upload/upload';
 import { IonicStorageModule } from '@ionic/storage';
+import { CommentComponent } from '../components/comment/comment';
+
+
 
 @NgModule({
  declarations: [
@@ -41,7 +44,8 @@ import { IonicStorageModule } from '@ionic/storage';
    ViewPage,
    SearchPage,
    Drupal7LoginComponent,
-   UploadComponent  
+   UploadComponent,
+   CommentComponent  
  ],
 
  imports: [
@@ -75,6 +79,7 @@ import { IonicStorageModule } from '@ionic/storage';
     AdMobFree,
     UploadComponent,
     Camera,
+    CommentComponent
  ]
 })
 

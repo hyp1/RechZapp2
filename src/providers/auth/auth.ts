@@ -14,15 +14,16 @@ import { Loading } from 'ionic-angular';
 */
 declare var openFB;
 
+
 @Injectable()
 export class AuthProvider {
 //  public  HOST='http://kimo2007.dnshome.de:8888/stage.awri.ch';
 //  public  ENDPOINT='drupalgap';
 
-//  public  HOST='http://localhost/stage.awri.ch';
-//  public  ENDPOINT='drupalgap';
-  public  HOST='https://stage.awri.ch';
+  public  HOST='http://localhost/stage.awri.ch';
   public  ENDPOINT='drupalgap';
+ // public  HOST='https://stage.awri.ch';
+ // public  ENDPOINT='drupalgap';
 
   public loggedIn:boolean=false;
   public help:boolean=true;
@@ -47,6 +48,7 @@ export class AuthProvider {
   });
 */
 
+
   connect = new Observable<any>((observer: Observer<any>) => {
     this.http.get(this.HOST+'/?q=services/session/token', { responseType: 'text', withCredentials:true }).subscribe(token=>{
    this.token=token;
@@ -65,7 +67,7 @@ export class AuthProvider {
      // this.set('sessid',dat.sessid);      
      // this.session=dat.session_name+'='+dat.sessid;
 
-     this.loadUser(this.user.uid).then(u=>{
+   if(this.user.uid>0)  this.loadUser(this.user.uid).then(u=>{
       let vars:any=u;  
       this.user.name=vars.name;
       this.user.uid=vars.uid;
@@ -97,8 +99,6 @@ export class AuthProvider {
     //openFB.init({appId:'126766317359254',scope:'email'});
     //console.log(openFB);
   });
-
-
 
 constructor(public http: HttpClient,private plt:Platform,private storage:Storage) {
     console.log('Hello AuthProvider Provider2');
@@ -139,6 +139,23 @@ setHelp(help){
 });
 }
 
+addComment(comment){
+  return new Promise((resolve,reject) => {
+  const headers = new HttpHeaders()
+  .set('X-CSRF-TOKEN',<any>this.token);    
+const options = {
+  headers: headers,
+  withCredentials: true
+};
+  this.http.post(this.HOST+'/'+this.ENDPOINT+'/comment.json',comment,options).map(res=>res).subscribe(data => {     
+    resolve(data);
+  },err=>{
+    reject(err);
+   console.log(err);
+  })
+});
+}
+
 search(text:String) {
   return new Promise((resolve,reject) => {
  //   this.showLoading("Suche, Bitte warten...");
@@ -148,7 +165,7 @@ search(text:String) {
     headers: headers,
     withCredentials: true
   };
-    this.http.get(this.HOST+'/drupalgap/search_node/retrieve.json?keys='+text,options).subscribe(data => {
+    this.http.get(this.HOST+'/'+this.ENDPOINT+'/search_node/retrieve.json?keys='+text,options).subscribe(data => {
     //  this.items=<Array<any>>data;
    //   var view=this.data.view;      
     //  this.page=view.page;
@@ -175,7 +192,7 @@ let options:any = {
   withCredentials	: true,
 };
 
-  this.http.get(this.HOST+'/?q=drupalgap/user/'+uid+'.json', options).subscribe(data => {
+  this.http.get(this.HOST+'/'+this.ENDPOINT+'/user/'+uid+'.json', options).subscribe(data => {
 
     resolve(data);
    },err=>{
@@ -201,7 +218,7 @@ let options:any = {
       password:password
     }
 
-    this.http.post(this.HOST+'/?q=drupalgap/user/login',user,options).map(res=>res).subscribe(data => {         
+    this.http.post(this.HOST+'/'+this.ENDPOINT+'/user/login',user,options).map(res=>res).subscribe(data => {         
 
           let vars=<any>data;
          this.token=vars.token;
@@ -249,7 +266,7 @@ let options:any = {
   withCredentials	: true,
   };
   
-  this.http.post(this.HOST+'/drupalgap/user/logout.json',null,options).subscribe(data => {
+  this.http.post(this.HOST+'/'+this.ENDPOINT+'/user/logout.json',null,options).subscribe(data => {
         console.log(data);
        // let res:any=data;
        this.user={
@@ -289,7 +306,7 @@ let options:any = {
         pass:password
       }
     
-          this.http.post(this.HOST+'/?q=drupalgap/user/register',user,options).map(res=>res).subscribe(data => {         
+          this.http.post(this.HOST+'/'+this.ENDPOINT+'/user/register',user,options).map(res=>res).subscribe(data => {         
             console.log(data);
             let vars=<any>data;
             this.user.uid=vars.uid;
@@ -332,7 +349,7 @@ let options:any = {
     }
   
       //console.log(headers);
-        this.http.post(this.HOST+'/?q=drupalgap/fboauth/connect.json',params,options).map(res=>res).subscribe(data => {         
+        this.http.post(this.HOST+'/'+this.ENDPOINT+'/fboauth/connect.json',params,options).map(res=>res).subscribe(data => {         
           console.log(data);
           let vars=<any>data;
           this.token=vars.token;
@@ -364,7 +381,7 @@ let options:any = {
         headers: headers,
         withCredentials: true
       };
-        this.http.get(this.HOST+'/drupalgap/taxonomy_term?page=0&fields=vid,name&&parameters[vid]=3&pagesize=27&options[orderby][weight]=asc',options).subscribe(data=> {
+        this.http.get(this.HOST+'/'+this.ENDPOINT+'/taxonomy_term?page=0&fields=vid,name&&parameters[vid]=3&pagesize=27&options[orderby][weight]=asc',options).subscribe(data=> {
           resolve(data);     
         },err=>{
           reject(err);
@@ -413,7 +430,7 @@ let options:any = {
     headers: headers,
     withCredentials	: true,
     };
-    this.http.post(this.HOST+'/drupalgap/file.json',filedata,options).subscribe(data => {
+    this.http.post(this.HOST+'/'+this.ENDPOINT+'/file.json',filedata,options).subscribe(data => {
       console.log(data);
   
       resolve(data);

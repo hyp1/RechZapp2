@@ -1,0 +1,12 @@
+<!-- Generated template for the CommentComponent component -->
+<div>
+
+
+      <ion-title>{{text}}</ion-title>
+      <ion-item text-wrap>
+        <ion-textarea [(ngModel)]="comment"  name="comment" id="commentField" [disabled]="auth.isInRole('anonymous user')"></ion-textarea>
+        </ion-item>      
+   
+    <button ion-button round full (click)="addcomment()"  [disabled]="auth.isInRole('anonymous user')"> Antwort senden</button>
+ 
+</div>

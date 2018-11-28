@@ -36,7 +36,7 @@
                     <ion-label color="danger" text-wrap>Im Mobilen Browser können keine Dateien ausgewählt werden. </ion-label>
                   </div>                      
     <div hideWhen="mobileweb">
-            <button ion-button [(ngModel)]="toggleFiles" name="toggleFiles" ngDefaultControl (click)="toggleFil()">Dateien</button>
+            <button ion-button [(ngModel)]="toggleFiles" name="toggleFiles" ngDefaultControl (click)="toggleFil()" [disabled]="awri.isInRole('anonymous user')">Dateien</button>
         <div  *ngIf="toggleFiles">
             <div *ngIf="!hideUpl">
                 <ion-input  id="filefield0"  type="file" accept="image/*" (change)="this.selectWebFile($event);"></ion-input>
@@ -44,7 +44,7 @@
             </div>
     </div>
     
-     <button ion-button [(ngModel)]="toggleVideo" name="toggleVideo" ngDefaultControl (click)="toggleVid()">Kamera</button>
+     <button ion-button [(ngModel)]="toggleVideo" name="toggleVideo" ngDefaultControl (click)="toggleVid()" [disabled]="awri.isInRole('anonymous user')">Kamera</button>
                  <ion-card>
                   <ion-item *ngIf="toggleVideo">
                         <video id="video1" width="100%" height="100%" autoplay style="background-color:black;"></video>
@@ -59,12 +59,12 @@
             <ng-template #isApp>
                     <div *ngIf="!hideUpl">
                      
-                        <button ion-button full (click)="nativeCamera()">Kamera</button>
-                        <button ion-button full (click)="nativeSelectFile()">Dateien</button>            
+                        <button ion-button full (click)="nativeCamera()" [disabled]="awri.isInRole('anonymous user')">Kamera</button>
+                        <button ion-button full (click)="nativeSelectFile()" [disabled]="awri.isInRole('anonymous user')">Dateien</button>            
                     </div>
             </ng-template>
 
-            <button ion-button right (click)="uploadAllFiles()">Alle Hochladen</button>
+            <button ion-button right (click)="uploadAllFiles()" [disabled]="awri.isInRole('anonymous user')">Alle Hochladen</button>
             
       <ng-template #letupload>
         <ion-item>

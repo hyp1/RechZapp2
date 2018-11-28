@@ -9,7 +9,7 @@ webpackJsonp([6],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_upload_upload__ = __webpack_require__(85);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_login_login__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_login_login__ = __webpack_require__(30);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -212,6 +212,7 @@ var HelpPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_login_login__ = __webpack_require__(30);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -221,6 +222,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -249,9 +251,12 @@ var SettingsPage = /** @class */ (function () {
         //console.log(evt.help);
         this.awri.set('help', evt.help);
     };
+    SettingsPage.prototype.gotoLogin = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__pages_login_login__["a" /* LoginPage */]);
+    };
     SettingsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-settings',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/settings/settings.html"*/'<!--\n  Generated template for the SettingsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Einstellungen</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <ion-item>\n    <ion-label color="secondary">{{awri.HOST}}</ion-label>\n  </ion-item>\n  <ion-item>\n    <ion-label>Hilfe</ion-label>\n    <ion-toggle [(ngModel)]="help" (ionChange)="helpChanged(this);"></ion-toggle>\n  </ion-item>\n\n  <drupal7-login></drupal7-login>\n\n</ion-content>\n'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/settings/settings.html"*/,
+            selector: 'page-settings',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/settings/settings.html"*/'<ion-header>\n\n    <ion-navbar>\n        <ion-buttons start>\n            <button ion-button menuToggle>\n              <ion-icon name="menu"></ion-icon>\n            </button>\n            </ion-buttons>\n             \n            <ion-title>\n                Einstellungen\n              </ion-title>\n      <ion-buttons end>\n  <ng-template [ngIf]="this.awri.isInRole(\'authenticated user\')" [ngIfElse]="headerOut">\n              <button ion-button (click)="this.gotoLogin()">\n                  <img class="avatar" src="{{this.awri.user.picture}}"> {{awri.user?.name}}        \n                </button>\n  </ng-template>      \n  <ng-template #headerOut>\n              <button ion-button (click)="this.gotoLogin()">\n              <ion-icon name="contact"></ion-icon>  {{this.awri.user?.name}}\n              </button>\n  </ng-template>\n      </ion-buttons>    \n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <ion-item>\n    <ion-label color="secondary">{{awri.HOST}}</ion-label>\n  </ion-item>\n  <ion-item>\n    <ion-label>Hilfe</ion-label>\n    <ion-toggle [(ngModel)]="help" (ionChange)="helpChanged(this);"></ion-toggle>\n  </ion-item>\n\n  <drupal7-login></drupal7-login>\n\n</ion-content>\n'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/settings/settings.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__["a" /* AuthProvider */]])
     ], SettingsPage);
@@ -347,10 +352,10 @@ var AuthProvider = /** @class */ (function () {
         this.storage = storage;
         //  public  HOST='http://kimo2007.dnshome.de:8888/stage.awri.ch';
         //  public  ENDPOINT='drupalgap';
-        //  public  HOST='http://localhost/stage.awri.ch';
-        //  public  ENDPOINT='drupalgap';
-        this.HOST = 'https://stage.awri.ch';
+        this.HOST = 'http://localhost/stage.awri.ch';
         this.ENDPOINT = 'drupalgap';
+        // public  HOST='https://stage.awri.ch';
+        // public  ENDPOINT='drupalgap';
         this.loggedIn = false;
         this.help = true;
         /*
@@ -379,25 +384,26 @@ var AuthProvider = /** @class */ (function () {
                     // this.set('session_name',dat.session_name);
                     // this.set('sessid',dat.sessid);      
                     // this.session=dat.session_name+'='+dat.sessid;
-                    _this.loadUser(_this.user.uid).then(function (u) {
-                        var vars = u;
-                        _this.user.name = vars.name;
-                        _this.user.uid = vars.uid;
-                        _this.user.roles = vars.roles;
-                        if (_this.user.uid > 0) {
-                            _this.user.email = vars.mail;
-                            _this.user.created = vars.created;
-                            _this.loggedIn = true;
-                            if (vars.field_fbid['und'])
-                                _this.user.fbid = vars.field_fbid['und'][0].value;
-                            if (_this.user.fbid)
-                                _this.user.picture = "https://graph.facebook.com/" + _this.user.fbid + "/picture";
-                            if (vars.picture)
-                                _this.user.picture = vars.picture.url;
-                        }
-                    }, function (err) {
-                        console.log(err);
-                    });
+                    if (_this.user.uid > 0)
+                        _this.loadUser(_this.user.uid).then(function (u) {
+                            var vars = u;
+                            _this.user.name = vars.name;
+                            _this.user.uid = vars.uid;
+                            _this.user.roles = vars.roles;
+                            if (_this.user.uid > 0) {
+                                _this.user.email = vars.mail;
+                                _this.user.created = vars.created;
+                                _this.loggedIn = true;
+                                if (vars.field_fbid['und'])
+                                    _this.user.fbid = vars.field_fbid['und'][0].value;
+                                if (_this.user.fbid)
+                                    _this.user.picture = "https://graph.facebook.com/" + _this.user.fbid + "/picture";
+                                if (vars.picture)
+                                    _this.user.picture = vars.picture.url;
+                            }
+                        }, function (err) {
+                            console.log(err);
+                        });
                     console.log(_this.user);
                     return observer.next(_this.user);
                 }, function (err) {
@@ -456,6 +462,23 @@ var AuthProvider = /** @class */ (function () {
             console.log(err);
         });
     };
+    AuthProvider.prototype.addComment = function (comment) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]()
+                .set('X-CSRF-TOKEN', _this.token);
+            var options = {
+                headers: headers,
+                withCredentials: true
+            };
+            _this.http.post(_this.HOST + '/' + _this.ENDPOINT + '/comment.json', comment, options).map(function (res) { return res; }).subscribe(function (data) {
+                resolve(data);
+            }, function (err) {
+                reject(err);
+                console.log(err);
+            });
+        });
+    };
     AuthProvider.prototype.search = function (text) {
         var _this = this;
         return new Promise(function (resolve, reject) {
@@ -466,7 +489,7 @@ var AuthProvider = /** @class */ (function () {
                 headers: headers,
                 withCredentials: true
             };
-            _this.http.get(_this.HOST + '/drupalgap/search_node/retrieve.json?keys=' + text, options).subscribe(function (data) {
+            _this.http.get(_this.HOST + '/' + _this.ENDPOINT + '/search_node/retrieve.json?keys=' + text, options).subscribe(function (data) {
                 //  this.items=<Array<any>>data;
                 //   var view=this.data.view;      
                 //  this.page=view.page;
@@ -489,7 +512,7 @@ var AuthProvider = /** @class */ (function () {
                 headers: headers,
                 withCredentials: true,
             };
-            _this.http.get(_this.HOST + '/?q=drupalgap/user/' + uid + '.json', options).subscribe(function (data) {
+            _this.http.get(_this.HOST + '/' + _this.ENDPOINT + '/user/' + uid + '.json', options).subscribe(function (data) {
                 resolve(data);
             }, function (err) {
                 reject(err);
@@ -510,7 +533,7 @@ var AuthProvider = /** @class */ (function () {
                 username: username,
                 password: password
             };
-            _this.http.post(_this.HOST + '/?q=drupalgap/user/login', user, options).map(function (res) { return res; }).subscribe(function (data) {
+            _this.http.post(_this.HOST + '/' + _this.ENDPOINT + '/user/login', user, options).map(function (res) { return res; }).subscribe(function (data) {
                 var vars = data;
                 _this.token = vars.token;
                 //  this.session=vars.session_name+'='+vars.sessid;
@@ -555,7 +578,7 @@ var AuthProvider = /** @class */ (function () {
                 headers: headers,
                 withCredentials: true,
             };
-            _this.http.post(_this.HOST + '/drupalgap/user/logout.json', null, options).subscribe(function (data) {
+            _this.http.post(_this.HOST + '/' + _this.ENDPOINT + '/user/logout.json', null, options).subscribe(function (data) {
                 console.log(data);
                 // let res:any=data;
                 _this.user = {
@@ -592,7 +615,7 @@ var AuthProvider = /** @class */ (function () {
                 name: username,
                 pass: password
             };
-            _this.http.post(_this.HOST + '/?q=drupalgap/user/register', user, options).map(function (res) { return res; }).subscribe(function (data) {
+            _this.http.post(_this.HOST + '/' + _this.ENDPOINT + '/user/register', user, options).map(function (res) { return res; }).subscribe(function (data) {
                 console.log(data);
                 var vars = data;
                 _this.user.uid = vars.uid;
@@ -630,7 +653,7 @@ var AuthProvider = /** @class */ (function () {
                 access_token: token,
             };
             //console.log(headers);
-            _this.http.post(_this.HOST + '/?q=drupalgap/fboauth/connect.json', params, options).map(function (res) { return res; }).subscribe(function (data) {
+            _this.http.post(_this.HOST + '/' + _this.ENDPOINT + '/fboauth/connect.json', params, options).map(function (res) { return res; }).subscribe(function (data) {
                 console.log(data);
                 var vars = data;
                 _this.token = vars.token;
@@ -663,7 +686,7 @@ var AuthProvider = /** @class */ (function () {
                 headers: headers,
                 withCredentials: true
             };
-            _this.http.get(_this.HOST + '/drupalgap/taxonomy_term?page=0&fields=vid,name&&parameters[vid]=3&pagesize=27&options[orderby][weight]=asc', options).subscribe(function (data) {
+            _this.http.get(_this.HOST + '/' + _this.ENDPOINT + '/taxonomy_term?page=0&fields=vid,name&&parameters[vid]=3&pagesize=27&options[orderby][weight]=asc', options).subscribe(function (data) {
                 resolve(data);
             }, function (err) {
                 reject(err);
@@ -711,7 +734,7 @@ var AuthProvider = /** @class */ (function () {
                 headers: headers,
                 withCredentials: true,
             };
-            _this.http.post(_this.HOST + '/drupalgap/file.json', filedata, options).subscribe(function (data) {
+            _this.http.post(_this.HOST + '/' + _this.ENDPOINT + '/file.json', filedata, options).subscribe(function (data) {
                 console.log(data);
                 resolve(data);
             }, function (err) {
@@ -725,9 +748,10 @@ var AuthProvider = /** @class */ (function () {
     ;
     AuthProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_3_ionic_angular_platform_platform__["a" /* Platform */], __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3_ionic_angular_platform_platform__["a" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_ionic_angular_platform_platform__["a" /* Platform */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */]) === "function" && _c || Object])
     ], AuthProvider);
     return AuthProvider;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=auth.js.map
@@ -739,27 +763,27 @@ var AuthProvider = /** @class */ (function () {
 
 var map = {
 	"../pages/create/create.module": [
-		291,
+		292,
 		5
 	],
 	"../pages/help/help.module": [
-		292,
+		293,
 		4
 	],
 	"../pages/login/login.module": [
-		293,
+		294,
 		3
 	],
 	"../pages/register/register.module": [
-		294,
+		295,
 		2
 	],
 	"../pages/settings/settings.module": [
-		295,
+		296,
 		1
 	],
 	"../pages/view/view.module": [
-		296,
+		297,
 		0
 	]
 };
@@ -792,7 +816,7 @@ module.exports = webpackAsyncContext;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_upload_upload__ = __webpack_require__(85);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_auth_auth__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_view_view__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_login_login__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_login_login__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_admob_free__ = __webpack_require__(211);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -935,7 +959,7 @@ var HomePage = /** @class */ (function () {
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/home/home.html"*/'<ion-header>\n\n    <ion-navbar>\n        <ion-buttons start>\n            <button ion-button menuToggle>\n              <ion-icon name="menu"></ion-icon>\n            </button>\n            </ion-buttons>\n             \n            <ion-title>\n                AWRI\n              </ion-title>\n      <ion-buttons end>\n  <ng-template [ngIf]="this.auth.isInRole(\'authenticated user\')" [ngIfElse]="headerOut">\n              <button ion-button (click)="this.gotoLogin()">\n                  <img class="avatar" src="{{this.auth.user.picture}}"> {{auth.user?.name}}        \n                </button>\n  </ng-template>      \n  <ng-template #headerOut>\n              <button ion-button (click)="this.gotoLogin()">\n              <ion-icon name="contact"></ion-icon>  {{auth.user?.name}}\n              </button>\n  </ng-template>\n      </ion-buttons>    \n    </ion-navbar>\n\n</ion-header>\n   \n   <ion-content padding>  \n     <div *ngIf="help">\n       <ion-card>\n         <ion-item>\n         <ion-label color="secondary">\n<h2>AWRI Rechtsfragen vom 23.2.2015 bis heute</h2>\n<p>Freigeschaltete Rechtsfragen aus dem Rechtsforum Schweiz</p>\n</ion-label>\n</ion-item>\n</ion-card>     \n</div>\n\n    <ion-list *ngFor="let n of this.nodes">\n      <ion-card>  \n        <ion-item><p>{{n.created*1000 | date: \'dd.MM.yyyy H:mm\' }} <ion-icon name="eye" (click)="this.frageSelected(n)" color="primary"></ion-icon></p></ion-item>\n        <ion-card-content text-wrap (click)="this.frageSelected(n)">{{n.title}}</ion-card-content>\n      </ion-card>\n      </ion-list>\n      <ion-infinite-scroll (ionInfinite)="doInfinite($event)">\n          <ion-infinite-scroll-content></ion-infinite-scroll-content>\n        </ion-infinite-scroll>\n\n    <ion-fab right bottom class="web-fab">\n        <button ion-fab icon-only color="primary" (click)="checkPlatform()">\n          <ion-icon name="help"></ion-icon>\n        </button>\n       </ion-fab>\n       \n       <ion-fab right top edge class="mobile-fab">\n        <button ion-fab icon-only color="primary" (click)="checkPlatform()">\n          <ion-icon name="help"></ion-icon>\n        </button>\n       </ion-fab>\n\n   </ion-content>'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/home/home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/home/home.html"*/'<ion-header>\n\n    <ion-navbar>\n        <ion-buttons end>\n            <button ion-button menuToggle>\n              <ion-icon name="menu"></ion-icon>\n            </button>\n            </ion-buttons>\n             \n            <ion-title>\n                AWRI\n              </ion-title>\n      <ion-buttons start>\n  <ng-template [ngIf]="this.auth.isInRole(\'authenticated user\')" [ngIfElse]="headerOut">\n              <button ion-button (click)="this.gotoLogin()">\n                  <img class="avatar" src="{{this.auth.user.picture}}"> {{auth.user?.name}}        \n                </button>\n  </ng-template>      \n  <ng-template #headerOut>\n              <button ion-button (click)="this.gotoLogin()">\n              <ion-icon name="contact"></ion-icon>  {{auth.user?.name}}\n              </button>\n  </ng-template>\n      </ion-buttons>    \n    </ion-navbar>\n\n</ion-header>\n   \n   <ion-content padding>  \n     <div *ngIf="help">\n       <ion-card>\n         <ion-item>\n         <ion-label color="secondary">\n<h2>AWRI Rechtsfragen vom 23.2.2015 bis heute</h2>\n<p>Freigeschaltete Rechtsfragen aus dem Rechtsforum Schweiz</p>\n</ion-label>\n</ion-item>\n</ion-card>     \n</div>\n\n    <ion-list *ngFor="let n of this.nodes">\n      <ion-card>  \n        <ion-item><p>{{n.created*1000 | date: \'dd.MM.yyyy H:mm\' }} <ion-icon name="eye" (click)="this.frageSelected(n)" color="primary"></ion-icon></p></ion-item>\n        <ion-card-content text-wrap (click)="this.frageSelected(n)">{{n.title}}</ion-card-content>\n      </ion-card>\n      </ion-list>\n      <ion-infinite-scroll (ionInfinite)="doInfinite($event)">\n          <ion-infinite-scroll-content></ion-infinite-scroll-content>\n        </ion-infinite-scroll>\n\n    <ion-fab right bottom class="web-fab">\n        <button ion-fab icon-only color="primary" (click)="checkPlatform()">\n          <ion-icon name="help"></ion-icon>\n        </button>\n       </ion-fab>\n       \n       <ion-fab right top edge class="mobile-fab">\n        <button ion-fab icon-only color="primary" (click)="checkPlatform()">\n          <ion-icon name="help"></ion-icon>\n        </button>\n       </ion-fab>\n\n   </ion-content>'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/home/home.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_4__components_upload_upload__["a" /* UploadComponent */], __WEBPACK_IMPORTED_MODULE_8__ionic_native_admob_free__["a" /* AdMobFree */],
             __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_5__providers_auth_auth__["a" /* AuthProvider */]])
@@ -957,7 +981,7 @@ var HomePage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(87);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_view_view__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_login_login__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_login_login__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_auth_auth__ = __webpack_require__(14);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1035,9 +1059,84 @@ var SearchPage = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CommentComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_auth_auth__ = __webpack_require__(14);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+/**
+ * Generated class for the CommentComponent component.
+ *
+ * See https://angular.io/api/core/Component for more info on Angular
+ * Components.
+ */
+var CommentComponent = /** @class */ (function () {
+    function CommentComponent(auth) {
+        this.auth = auth;
+        console.log('Hello CommentComponent Component');
+        this.text = 'Ihre Antwort:';
+        this.comment = '';
+    }
+    CommentComponent.prototype.addcomment = function () {
+        var _this = this;
+        if (this.comment.length < 10)
+            return alert("Ihr Kommentar ist zu kurz!");
+        var c = {
+            "nid": this.nid,
+            //  "status":0,
+            "subject": this.auth.user.name,
+            "comment_body": {
+                "und": [{
+                        "value": this.comment
+                    }]
+            }
+        };
+        this.auth.addComment(c).then(function (data) {
+            alert("Ihr Kommentar wurde gesendet");
+            _this.comment = "";
+            console.log(data);
+        }).catch(function (err) {
+            alert("Anonyme Benutzer können keine Kommentare posten");
+            _this.comment = "";
+            console.log(err);
+        });
+        //   console.log(c);
+        //alert(this.nid+this.comment);
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        __metadata("design:type", String)
+    ], CommentComponent.prototype, "nid", void 0);
+    CommentComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'comment',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/components/comment/comment.html"*/'<!-- Generated template for the CommentComponent component -->\n<div>\n\n\n      <ion-title>{{text}}</ion-title>\n      <ion-item text-wrap>\n        <ion-textarea [(ngModel)]="comment"  name="comment" id="commentField" [disabled]="auth.isInRole(\'anonymous user\')"></ion-textarea>\n        </ion-item>      \n   \n    <button ion-button round full (click)="addcomment()"  [disabled]="auth.isInRole(\'anonymous user\')"> Antwort senden</button>\n \n</div>\n'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/components/comment/comment.html"*/
+        }),
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__providers_auth_auth__["a" /* AuthProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__providers_auth_auth__["a" /* AuthProvider */]) === "function" && _a || Object])
+    ], CommentComponent);
+    return CommentComponent;
+    var _a;
+}());
+
+//# sourceMappingURL=comment.js.map
+
+/***/ }),
+
+/***/ 214:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(214);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(234);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(215);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(235);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -1045,21 +1144,21 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 234:
+/***/ 235:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(288);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(289);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(210);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_list_list__ = __webpack_require__(289);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_list_list__ = __webpack_require__(290);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_settings_settings__ = __webpack_require__(111);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_create_create__ = __webpack_require__(109);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_register_register__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_login_login__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_login_login__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_help_help__ = __webpack_require__(110);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_view_view__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_search_search__ = __webpack_require__(212);
@@ -1067,17 +1166,19 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__ionic_native_splash_screen__ = __webpack_require__(209);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__angular_common_http__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__providers_auth_auth__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_drupal7_login_drupal7_login__ = __webpack_require__(290);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_drupal7_login_drupal7_login__ = __webpack_require__(291);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ionic_native_admob_free__ = __webpack_require__(211);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__ionic_native_camera__ = __webpack_require__(166);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_upload_upload__ = __webpack_require__(85);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__ionic_storage__ = __webpack_require__(164);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_comment_comment__ = __webpack_require__(213);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -1117,7 +1218,8 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_11__pages_view_view__["a" /* ViewPage */],
                 __WEBPACK_IMPORTED_MODULE_12__pages_search_search__["a" /* SearchPage */],
                 __WEBPACK_IMPORTED_MODULE_17__components_drupal7_login_drupal7_login__["a" /* Drupal7LoginComponent */],
-                __WEBPACK_IMPORTED_MODULE_20__components_upload_upload__["a" /* UploadComponent */]
+                __WEBPACK_IMPORTED_MODULE_20__components_upload_upload__["a" /* UploadComponent */],
+                __WEBPACK_IMPORTED_MODULE_22__components_comment_comment__["a" /* CommentComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -1156,6 +1258,7 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_18__ionic_native_admob_free__["a" /* AdMobFree */],
                 __WEBPACK_IMPORTED_MODULE_20__components_upload_upload__["a" /* UploadComponent */],
                 __WEBPACK_IMPORTED_MODULE_19__ionic_native_camera__["a" /* Camera */],
+                __WEBPACK_IMPORTED_MODULE_22__components_comment_comment__["a" /* CommentComponent */]
             ]
         })
     ], AppModule);
@@ -1166,7 +1269,7 @@ var AppModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 288:
+/***/ 289:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1248,7 +1351,7 @@ var MyApp = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 289:
+/***/ 290:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1305,7 +1408,7 @@ var ListPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 290:
+/***/ 291:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1392,7 +1495,7 @@ var Drupal7LoginComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 34:
+/***/ 30:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1565,7 +1668,7 @@ var RegisterPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(87);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__login_login__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__login_login__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_auth_auth__ = __webpack_require__(14);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1582,12 +1685,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-/**
- * Generated class for the ViewPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 var ViewPage = /** @class */ (function () {
     function ViewPage(httpClient, navCtrl, navParams, awri) {
         this.httpClient = httpClient;
@@ -1596,6 +1693,7 @@ var ViewPage = /** @class */ (function () {
         this.awri = awri;
         //this.awri=awri;
         this.item = navParams.get('item');
+        this.nid = this.item.node.nid;
         this.getComments(this.item.node.nid);
         this.images = this.item.node.field_image['und'];
     }
@@ -1615,11 +1713,12 @@ var ViewPage = /** @class */ (function () {
     };
     ViewPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-view',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/view/view.html"*/'<ion-header>\n\n  <ion-navbar>\n      <ion-buttons start>\n          <button ion-button menuToggle>\n            <ion-icon name="menu"></ion-icon>\n          </button>\n          </ion-buttons>\n           \n          <ion-title>\n              Details \n            </ion-title>\n    <ion-buttons end>\n<ng-template [ngIf]="this.awri.isInRole(\'authenticated user\')" [ngIfElse]="headerOut">\n            <button ion-button (click)="this.gotoLogin()">\n                <img class="avatar" src="{{this.awri.user.picture}}"> {{awri.user.name}}        \n              </button>\n</ng-template>      \n<ng-template #headerOut>\n            <button ion-button (click)="this.gotoLogin()">\n            <ion-icon name="contact"></ion-icon>  {{awri.user.name}}\n            </button>\n</ng-template>\n    </ion-buttons>    \n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n    <ion-card>\n        <ion-list>\n        <ion-item>\n            <ng-template [ngIf]="awri.isInRole(\'authenticated user\')" [ngIfElse]="loggedOut">\n                <ion-avatar item-start>\n                   <img class="avatar" src="https://graph.facebook.com/{{item.node?.field_fbid.und[0].value}}/picture"> \n                 </ion-avatar>\n                 <h2 *ngIf="item.node?.field_fbname.und" text-capitalize>{{item.node?.field_fbname.und[0].value}}</h2> \n                \n                 <p>{{item.node.created*1000 | date: \'dd.MM.yyyy H:mm\' }}</p> \n                 <ng-template [ngIf]="awri.isInRole(\'administrator\')">\n                      <a href="https://facebook.com/{{item.node?.field_fbid.und[0].value}}" target="new"><ion-icon name="contact"></ion-icon></a>\n                    </ng-template>\n                 <a *ngIf="item.node.field_fbmid.und" href="https://facebook.com/{{item.node.field_fbmid.und[0].value}}" target="new"><ion-icon name="logo-facebook"></ion-icon></a>\n                 <a href="{{this.awri.HOST}}/node/{{item.node.nid}}" target="new"> <ion-icon name="link"></ion-icon></a>     \n                </ng-template>\n               <ng-template #loggedOut>\n                   <ion-avatar item-start>\n                       <img class="avatar" src="assets/imgs/anonymous.png"> \n                     </ion-avatar>\n                     <h2 text-capitalize>Nicht angezeigt</h2>\n                 </ng-template>\n          </ion-item>\n\n            <ion-item text-wrap>\n             <h2 >{{item.node.body[\'und\'][0].value}}</h2>\n            </ion-item>\n        </ion-list>\n        </ion-card>\n        <p *ngFor="let image of images">        \n       <img src="{{this.awri.getImagePath(image.uri)}}">\n        </p>\n<p *ngFor="let comment of comments | async">\n  <ion-card>\n    <ion-item text-wrap>\n        <p><strong>{{comment.subject}}</strong></p>  <span innerHTML="{{comment.comment_body[\'und\'][0].safe_value}}"></span> \n      </ion-item>      \n  </ion-card>\n</p>\n<button ion-button icon-only (click)="this.goBack()">\n    <ion-icon name="arrow-back"></ion-icon>\n</button>\n\n</ion-content>\n'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/view/view.html"*/,
+            selector: 'page-view',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/view/view.html"*/'<ion-header>\n\n  <ion-navbar>\n      <ion-buttons start>\n          <button ion-button menuToggle>\n            <ion-icon name="menu"></ion-icon>\n          </button>\n          </ion-buttons>\n           \n          <ion-title>\n              Details \n            </ion-title>\n    <ion-buttons end>\n<ng-template [ngIf]="this.awri.isInRole(\'authenticated user\')" [ngIfElse]="headerOut">\n            <button ion-button (click)="this.gotoLogin()">\n                <img class="avatar" src="{{this.awri.user.picture}}"> {{awri.user.name}}        \n              </button>\n</ng-template>      \n<ng-template #headerOut>\n            <button ion-button (click)="this.gotoLogin()">\n            <ion-icon name="contact"></ion-icon>  {{awri.user.name}}\n            </button>\n</ng-template>\n    </ion-buttons>    \n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n    <ion-card>\n        <ion-list>\n        <ion-item>\n            <ng-template [ngIf]="awri.isInRole(\'authenticated user\')" [ngIfElse]="loggedOut">\n                <ion-avatar item-start>\n                   <img class="avatar" src="https://graph.facebook.com/{{item.node?.field_fbid.und[0].value}}/picture"> \n                 </ion-avatar>\n                 <h2 *ngIf="item.node?.field_fbname.und" text-capitalize>{{item.node?.field_fbname.und[0].value}}</h2> \n                \n                 <p>{{item.node.created*1000 | date: \'dd.MM.yyyy H:mm\' }}</p> \n                 <ng-template [ngIf]="awri.isInRole(\'administrator\')">\n                      <a href="https://facebook.com/{{item.node?.field_fbid.und[0].value}}" target="new"><ion-icon name="contact"></ion-icon></a>\n                    </ng-template>\n                 <a *ngIf="item.node.field_fbmid.und" href="https://facebook.com/{{item.node.field_fbmid.und[0].value}}" target="new"><ion-icon name="logo-facebook"></ion-icon></a>\n                 <a href="{{this.awri.HOST}}/node/{{item.node.nid}}" target="new"> <ion-icon name="link"></ion-icon></a>     \n                </ng-template>\n               <ng-template #loggedOut>\n                   <ion-avatar item-start>\n                       <img class="avatar" src="assets/imgs/anonymous.png"> \n                     </ion-avatar>\n                     <h2 text-capitalize>Nicht angezeigt</h2>\n                 </ng-template>\n          </ion-item>\n\n            <ion-item text-wrap>\n             <h2 >{{item.node.body[\'und\'][0].value}}</h2>\n            </ion-item>\n        </ion-list>\n        </ion-card>\n        <p *ngFor="let image of images">        \n       <img src="{{this.awri.getImagePath(image.uri)}}">\n        </p>\n<p *ngFor="let comment of comments | async">\n  <ion-card>\n    <ion-item text-wrap>\n        <p><strong>{{comment.subject}}</strong></p>  <span innerHTML="{{comment.comment_body[\'und\'][0].safe_value}}"></span> \n      </ion-item>      \n  </ion-card>\n</p>\n\n\n<comment nid="{{this.nid}}"></comment>\n\n<button ion-button icon-only (click)="this.goBack()">\n    <ion-icon name="arrow-back"></ion-icon>\n</button>\n\n</ion-content>\n'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/view/view.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_5__providers_auth_auth__["a" /* AuthProvider */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_5__providers_auth_auth__["a" /* AuthProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__providers_auth_auth__["a" /* AuthProvider */]) === "function" && _d || Object])
     ], ViewPage);
     return ViewPage;
+    var _a, _b, _c, _d;
 }());
 
 //# sourceMappingURL=view.js.map
@@ -1863,7 +1962,7 @@ var UploadComponent = /** @class */ (function () {
     ], UploadComponent.prototype, "fieldname", void 0);
     UploadComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'upload',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/components/upload/upload.html"*/'<ion-item>\n        <ion-label id="profile_image" color="primary"><h2>{{text}}</h2></ion-label> \n</ion-item>\n\n      \n<ng-template [ngIf]="awri.isInRole(\'authenticated user\')" [ngIfElse]="letupload">\n\n\n        <div *ngFor="let image of files;index as i">\n                <ion-card><p>{{1+i}}.</p>         \n            \n                    <img fid="-1" id="{{this.fieldname+i}}" src="" name=""> \n                    <ion-label>{{image.name}}</ion-label>\n                    <ion-row>\n                            <span *ngIf="files[i].name!=\'\'">\n                    <ion-buttons>\n                    <button ion-button left [disabled]="files[i].name==\'\'">\n                    <ion-icon name="trash" (click)="removeImage(i)"></ion-icon>\n                </button>\n         \n                <button ion-button right  [disabled]="files[i].uploaded">\n                <ion-icon name="cloud-upload" (click)="uploadFile(i)"></ion-icon>            \n            </button>\n  \n        </ion-buttons>    \n    </span>\n        </ion-row>\n            </ion-card>\n        </div>\n\n\n      </ng-template>\n\n      <ng-template [ngIf]="awri.isBrowser()" [ngIfElse]="isApp">\n            <div showWhen="mobileweb"> \n                    <ion-label color="danger" text-wrap>Im Mobilen Browser können keine Dateien ausgewählt werden. </ion-label>\n                  </div>                      \n    <div hideWhen="mobileweb">\n            <button ion-button [(ngModel)]="toggleFiles" name="toggleFiles" ngDefaultControl (click)="toggleFil()">Dateien</button>\n        <div  *ngIf="toggleFiles">\n            <div *ngIf="!hideUpl">\n                <ion-input  id="filefield0"  type="file" accept="image/*" (change)="this.selectWebFile($event);"></ion-input>\n            </div>\n            </div>\n    </div>\n    \n     <button ion-button [(ngModel)]="toggleVideo" name="toggleVideo" ngDefaultControl (click)="toggleVid()">Kamera</button>\n                 <ion-card>\n                  <ion-item *ngIf="toggleVideo">\n                        <video id="video1" width="100%" height="100%" autoplay style="background-color:black;"></video>\n                        <button id="snap1" ion-button (click)="toggleCam($event)" block>Start Kamera</button>\n                        <canvas id="canvas1" width="640" height="480" style="display:none;"></canvas>\n                        <div *ngIf="!hideUpl">                        \n                        <button id="snap" [disabled]="!togglePhoto"  ion-button (click)="selectWebVideo(this)" block>Photo</button>\n                        </div>\n                  </ion-item>\n                </ion-card>\n            </ng-template>\n            <ng-template #isApp>\n                    <div *ngIf="!hideUpl">\n                     \n                        <button ion-button full (click)="nativeCamera()">Kamera</button>\n                        <button ion-button full (click)="nativeSelectFile()">Dateien</button>            \n                    </div>\n            </ng-template>\n\n            <button ion-button right (click)="uploadAllFiles()">Alle Hochladen</button>\n            \n      <ng-template #letupload>\n        <ion-item>\n            <ion-label id="profile_image" color="danger" stacked><h2>Natürlich nur, wenn sie angemeldet angemeldet sind! ;-)\n            </h2></ion-label> \n          </ion-item>\n      </ng-template>\n<!--\n    <button ion-button full (click)="uploadFile(\'image0\')">Dateien hochladen</button>\n    <ion-card><img id="image0" src="assets/imgs/anonymous.png" name="test"> <ion-icon name="trash" (click)="removeImage(0)"></ion-icon></ion-card>\n    <ion-card><img id="image1" src="assets/imgs/anonymous.png" name="test"> <ion-icon name="trash" (click)="removeImage(1)"></ion-icon></ion-card>\n<ion-card><img id="image2" src="assets/imgs/anonymous.png" name="test"> <ion-icon name="trash" (click)="removeImage(2)"></ion-icon></ion-card>\n    <ion-card><img id="image3" src="assets/imgs/anonymous.png" name="test"> <ion-icon name="trash" (click)="removeImage(3)"></ion-icon></ion-card>\n        <ion-card><img id="image4" src="assets/imgs/anonymous.png" name="test"> <ion-icon name="trash" (click)="removeImage(4)"></ion-icon></ion-card>\n        <button ion-button class="submit-btn" full type="submit"\n        [disabled]="getImageID()==0">Dateien hochladen\n</button>\n-->\n\n\n<!--\n<ion-item *ngFor="let file of files;index as i">{{file.fid}} {{file.name}}\n    <ion-input  id="filefield{{i}}"  type="file" accept="image/*" (change)="this.test($event,i);"></ion-input>\n</ion-item>\n-->\n\n\n  \n\n\n'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/components/upload/upload.html"*/
+            selector: 'upload',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/components/upload/upload.html"*/'<ion-item>\n        <ion-label id="profile_image" color="primary"><h2>{{text}}</h2></ion-label> \n</ion-item>\n\n      \n<ng-template [ngIf]="awri.isInRole(\'authenticated user\')" [ngIfElse]="letupload">\n\n\n        <div *ngFor="let image of files;index as i">\n                <ion-card><p>{{1+i}}.</p>         \n            \n                    <img fid="-1" id="{{this.fieldname+i}}" src="" name=""> \n                    <ion-label>{{image.name}}</ion-label>\n                    <ion-row>\n                            <span *ngIf="files[i].name!=\'\'">\n                    <ion-buttons>\n                    <button ion-button left [disabled]="files[i].name==\'\'">\n                    <ion-icon name="trash" (click)="removeImage(i)"></ion-icon>\n                </button>\n         \n                <button ion-button right  [disabled]="files[i].uploaded">\n                <ion-icon name="cloud-upload" (click)="uploadFile(i)"></ion-icon>            \n            </button>\n  \n        </ion-buttons>    \n    </span>\n        </ion-row>\n            </ion-card>\n        </div>\n\n\n      </ng-template>\n\n      <ng-template [ngIf]="awri.isBrowser()" [ngIfElse]="isApp">\n            <div showWhen="mobileweb"> \n                    <ion-label color="danger" text-wrap>Im Mobilen Browser können keine Dateien ausgewählt werden. </ion-label>\n                  </div>                      \n    <div hideWhen="mobileweb">\n            <button ion-button [(ngModel)]="toggleFiles" name="toggleFiles" ngDefaultControl (click)="toggleFil()" [disabled]="awri.isInRole(\'anonymous user\')">Dateien</button>\n        <div  *ngIf="toggleFiles">\n            <div *ngIf="!hideUpl">\n                <ion-input  id="filefield0"  type="file" accept="image/*" (change)="this.selectWebFile($event);"></ion-input>\n            </div>\n            </div>\n    </div>\n    \n     <button ion-button [(ngModel)]="toggleVideo" name="toggleVideo" ngDefaultControl (click)="toggleVid()" [disabled]="awri.isInRole(\'anonymous user\')">Kamera</button>\n                 <ion-card>\n                  <ion-item *ngIf="toggleVideo">\n                        <video id="video1" width="100%" height="100%" autoplay style="background-color:black;"></video>\n                        <button id="snap1" ion-button (click)="toggleCam($event)" block>Start Kamera</button>\n                        <canvas id="canvas1" width="640" height="480" style="display:none;"></canvas>\n                        <div *ngIf="!hideUpl">                        \n                        <button id="snap" [disabled]="!togglePhoto"  ion-button (click)="selectWebVideo(this)" block>Photo</button>\n                        </div>\n                  </ion-item>\n                </ion-card>\n            </ng-template>\n            <ng-template #isApp>\n                    <div *ngIf="!hideUpl">\n                     \n                        <button ion-button full (click)="nativeCamera()" [disabled]="awri.isInRole(\'anonymous user\')">Kamera</button>\n                        <button ion-button full (click)="nativeSelectFile()" [disabled]="awri.isInRole(\'anonymous user\')">Dateien</button>            \n                    </div>\n            </ng-template>\n\n            <button ion-button right (click)="uploadAllFiles()" [disabled]="awri.isInRole(\'anonymous user\')">Alle Hochladen</button>\n            \n      <ng-template #letupload>\n        <ion-item>\n            <ion-label id="profile_image" color="danger" stacked><h2>Natürlich nur, wenn sie angemeldet angemeldet sind! ;-)\n            </h2></ion-label> \n          </ion-item>\n      </ng-template>\n<!--\n    <button ion-button full (click)="uploadFile(\'image0\')">Dateien hochladen</button>\n    <ion-card><img id="image0" src="assets/imgs/anonymous.png" name="test"> <ion-icon name="trash" (click)="removeImage(0)"></ion-icon></ion-card>\n    <ion-card><img id="image1" src="assets/imgs/anonymous.png" name="test"> <ion-icon name="trash" (click)="removeImage(1)"></ion-icon></ion-card>\n<ion-card><img id="image2" src="assets/imgs/anonymous.png" name="test"> <ion-icon name="trash" (click)="removeImage(2)"></ion-icon></ion-card>\n    <ion-card><img id="image3" src="assets/imgs/anonymous.png" name="test"> <ion-icon name="trash" (click)="removeImage(3)"></ion-icon></ion-card>\n        <ion-card><img id="image4" src="assets/imgs/anonymous.png" name="test"> <ion-icon name="trash" (click)="removeImage(4)"></ion-icon></ion-card>\n        <button ion-button class="submit-btn" full type="submit"\n        [disabled]="getImageID()==0">Dateien hochladen\n</button>\n-->\n\n\n<!--\n<ion-item *ngFor="let file of files;index as i">{{file.fid}} {{file.name}}\n    <ion-input  id="filefield{{i}}"  type="file" accept="image/*" (change)="this.test($event,i);"></ion-input>\n</ion-item>\n-->\n\n\n  \n\n\n'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/components/upload/upload.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__providers_auth_auth__["a" /* AuthProvider */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_camera__["a" /* Camera */], __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["f" /* LoadingController */]])
     ], UploadComponent);
@@ -1874,5 +1973,5 @@ var UploadComponent = /** @class */ (function () {
 
 /***/ })
 
-},[213]);
+},[214]);
 //# sourceMappingURL=main.js.map
