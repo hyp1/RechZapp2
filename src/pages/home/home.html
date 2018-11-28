@@ -27,6 +27,12 @@
 </ion-header>
    
    <ion-content padding>  
+
+        <div *ngIf="auth.isInRole('anonymous user')">
+                <ion-label color="danger"><h2>Sie sind nicht angemeldet!</h2>
+                <p>Klicken sie oben Rechts auf <ion-icon name="contact"></ion-icon> um sich auf AWRI zu registrieren oder anzumelden.</p>
+                </ion-label>
+        </div>        
      <div *ngIf="help" class="help">   
       <a href="https://www.facebook.com/groups/RechtsberatungSchweiz/" target="_BLANK">  
       <ion-item>

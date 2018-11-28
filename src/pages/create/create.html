@@ -28,11 +28,6 @@
 
 <ion-content padding>
 
-  <ng-template [ngIf]="this.awri.isInRole('authenticated user')" [ngIfElse]="loggedOut">
-      <h2>Ihre Rechtsfrage wird anonym gestellt!</h2> 
-      <p>Bitte beschreiben Sie den Sachverhalt möglichst genau und wählen sie den betreffenden Kanton aus.</p>
-
-
     <div *ngIf="help" class="help">   
         <ion-item>
             <ion-label text-wrap>
@@ -47,6 +42,10 @@
               </ion-label>
          </ion-item>
 </div>
+
+  <ng-template [ngIf]="this.awri.isInRole('authenticated user')" [ngIfElse]="loggedOut">
+      <h2>Ihre Rechtsfrage wird anonym gestellt!</h2> 
+      <p>Bitte beschreiben Sie den Sachverhalt möglichst genau und wählen sie den betreffenden Kanton aus.</p>
 
     <form #createForm="ngForm" (ngSubmit)="sendFrage()">
 
