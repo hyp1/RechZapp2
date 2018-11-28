@@ -4,6 +4,63 @@ webpackJsonp([6],{
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HelpPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_login_login__ = __webpack_require__(27);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+/**
+ * Generated class for the HelpPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var HelpPage = /** @class */ (function () {
+    function HelpPage(navCtrl, navParams, auth) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.auth = auth;
+    }
+    HelpPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad HelpPage');
+    };
+    HelpPage.prototype.test = function () {
+        alert(this.pet);
+    };
+    HelpPage.prototype.gotoLogin = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__pages_login_login__["a" /* LoginPage */]);
+    };
+    ;
+    HelpPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-help',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/help/help.html"*/'<ion-header>\n\n    <ion-navbar>\n        <ion-buttons start>\n            <button ion-button menuToggle>\n              <ion-icon name="menu"></ion-icon>\n            </button>\n            </ion-buttons>\n             \n            <ion-title>\n                Hilfe \n              </ion-title>\n      <ion-buttons end>\n  <ng-template [ngIf]="this.auth.isInRole(\'authenticated user\')" [ngIfElse]="headerOut">\n              <button ion-button (click)="this.gotoLogin()">\n                  <img class="avatar" src="{{this.auth.user.picture}}"> {{auth.user.name}}        \n                </button>\n  </ng-template>      \n  <ng-template #headerOut>\n              <button ion-button (click)="this.gotoLogin()">\n              <ion-icon name="contact"></ion-icon>  {{auth.user.name}}\n              </button>\n  </ng-template>\n      </ion-buttons>    \n    </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n\n    <div *ngIf="auth.isInRole(\'anonymous user\')">\n        <ion-label color="danger"><h2>Nur auf AWRI angemeldete Benutzer haben Zugriff auf erweiterte Funktionen!</h2></ion-label>\n        <ul>\n            <li>Anonyme Rechtsfragen stellen</li>\n            <li>Rechtsfragen kommentieren</li>\n            <li>Hilfe ein/aus</li>\n            <li>Rechtsfragen  bewerten(In Kürze)</li>\n            <li>Lesezeichen setzen(In Kürze)</li>\n        </ul>\n        </div>   \n\n\n    <ion-label color="danger" text-wrap><h3>Wir haben unser System erneuert, die gewohnte AWRI Seite finden Sie nun hier: <a href="https://stage.awri.ch" target="_new">https://stage.awri.ch</a></h3></ion-label>\n\n    <div class="mobile-fab"><ion-label color="primary" text-wrap>Bitte noch etwas Geduld, weitere Updates folgen in Kürze... </ion-label></div>\n  \n  <!--\n  <ion-card>\n      <ion-card-header class="cardheader">\n          CNC 10\n        </ion-card-header> \n    \n    <ion-card-content>\n      Content\n      </ion-card-content>\n      <ion-row>\n      <ion-segment [(ngModel)]="pet" (click)="test()">\n    <ion-segment-button value="profil">\n      Profil\n    </ion-segment-button>\n    <ion-segment-button value="facebook">\n      Facebook\n    </ion-segment-button>\n    <ion-segment-button value="awri">\n       AWRI\n      </ion-segment-button>\n  </ion-segment>\n</ion-row>\n\n</ion-card>\n-->\n</ion-content>\n'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/help/help.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__["a" /* AuthProvider */]])
+    ], HelpPage);
+    return HelpPage;
+}());
+
+//# sourceMappingURL=help.js.map
+
+/***/ }),
+
+/***/ 110:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CreatePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
@@ -161,63 +218,6 @@ var CreatePage = /** @class */ (function () {
 }());
 
 //# sourceMappingURL=create.js.map
-
-/***/ }),
-
-/***/ 110:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HelpPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_login_login__ = __webpack_require__(27);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-/**
- * Generated class for the HelpPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var HelpPage = /** @class */ (function () {
-    function HelpPage(navCtrl, navParams, auth) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.auth = auth;
-    }
-    HelpPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad HelpPage');
-    };
-    HelpPage.prototype.test = function () {
-        alert(this.pet);
-    };
-    HelpPage.prototype.gotoLogin = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__pages_login_login__["a" /* LoginPage */]);
-    };
-    ;
-    HelpPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-help',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/help/help.html"*/'<ion-header>\n\n    <ion-navbar>\n        <ion-buttons start>\n            <button ion-button menuToggle>\n              <ion-icon name="menu"></ion-icon>\n            </button>\n            </ion-buttons>\n             \n            <ion-title>\n                Hilfe \n              </ion-title>\n      <ion-buttons end>\n  <ng-template [ngIf]="this.auth.isInRole(\'authenticated user\')" [ngIfElse]="headerOut">\n              <button ion-button (click)="this.gotoLogin()">\n                  <img class="avatar" src="{{this.auth.user.picture}}"> {{auth.user.name}}        \n                </button>\n  </ng-template>      \n  <ng-template #headerOut>\n              <button ion-button (click)="this.gotoLogin()">\n              <ion-icon name="contact"></ion-icon>  {{auth.user.name}}\n              </button>\n  </ng-template>\n      </ion-buttons>    \n    </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n\n    <div *ngIf="auth.isInRole(\'anonymous user\')">\n        <ion-label color="danger"><h2>Nur auf AWRI angemeldete Benutzer haben Zugriff auf erweiterte Funktionen!</h2></ion-label>\n        <ul>\n            <li>Anonyme Rechtsfragen stellen</li>\n            <li>Rechtsfragen kommentieren</li>\n            <li>Hilfe ein/aus</li>\n            <li>Rechtsfragen  bewerten(In Kürze)</li>\n            <li>Lesezeichen setzen(In Kürze)</li>\n        </ul>\n        </div>   \n\n\n    <ion-label color="danger" text-wrap><h3>Wir haben unser System erneuert, die gewohnte AWRI Seite finden Sie nun hier: <a href="https://stage.awri.ch" target="_new">https://stage.awri.ch</a></h3></ion-label>\n\n    <div class="mobile-fab"><ion-label color="primary" text-wrap>Bitte noch etwas Geduld, weitere Updates folgen in Kürze... </ion-label></div>\n  \n  <!--\n  <ion-card>\n      <ion-card-header class="cardheader">\n          CNC 10\n        </ion-card-header> \n    \n    <ion-card-content>\n      Content\n      </ion-card-content>\n      <ion-row>\n      <ion-segment [(ngModel)]="pet" (click)="test()">\n    <ion-segment-button value="profil">\n      Profil\n    </ion-segment-button>\n    <ion-segment-button value="facebook">\n      Facebook\n    </ion-segment-button>\n    <ion-segment-button value="awri">\n       AWRI\n      </ion-segment-button>\n  </ion-segment>\n</ion-row>\n\n</ion-card>\n-->\n</ion-content>\n'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/help/help.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__["a" /* AuthProvider */]])
-    ], HelpPage);
-    return HelpPage;
-}());
-
-//# sourceMappingURL=help.js.map
 
 /***/ }),
 
@@ -449,6 +449,7 @@ var AuthProvider = /** @class */ (function () {
         this.get('help').then(function (col) {
             _this.help = col;
         }).catch(function (err) {
+            _this.set('help', true);
             console.log(err);
         });
     }
@@ -784,11 +785,11 @@ var AuthProvider = /** @class */ (function () {
 
 var map = {
 	"../pages/create/create.module": [
-		292,
+		293,
 		5
 	],
 	"../pages/help/help.module": [
-		293,
+		292,
 		4
 	],
 	"../pages/login/login.module": [
@@ -1184,10 +1185,10 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(210);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_list_list__ = __webpack_require__(290);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_settings_settings__ = __webpack_require__(111);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_create_create__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_create_create__ = __webpack_require__(110);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_register_register__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_login_login__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_help_help__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_help_help__ = __webpack_require__(109);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_view_view__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_search_search__ = __webpack_require__(212);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_status_bar__ = __webpack_require__(208);
@@ -1253,8 +1254,8 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* MyApp */], {}, {
                     links: [
-                        { loadChildren: '../pages/create/create.module#CreatePageModule', name: 'CreatePage', segment: 'create', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/help/help.module#HelpPageModule', name: 'HelpPage', segment: 'help', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/create/create.module#CreatePageModule', name: 'CreatePage', segment: 'create', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/register/register.module#RegisterPageModule', name: 'RegisterPage', segment: 'register', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/settings/settings.module#SettingsPageModule', name: 'SettingsPage', segment: 'settings', priority: 'low', defaultHistory: [] },
@@ -1387,8 +1388,8 @@ var LoginPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_home_home__ = __webpack_require__(210);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_settings_settings__ = __webpack_require__(111);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_create_create__ = __webpack_require__(109);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_help_help__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_create_create__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_help_help__ = __webpack_require__(109);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_search_search__ = __webpack_require__(212);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;

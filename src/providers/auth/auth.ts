@@ -119,6 +119,7 @@ this.connect.subscribe(data=>{
 this.get('help').then(col=>{
   this.help=col;
 }).catch(err=>{
+  this.set('help',true);
   console.log(err);
 });
 
