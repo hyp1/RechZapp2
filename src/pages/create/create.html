@@ -28,9 +28,25 @@
 
 <ion-content padding>
 
+    <div *ngIf="help" class="help">   
+        <ion-item>
+            <ion-label text-wrap>
+                <h2>Rechtsfrage stellen.</h2>
+                <p>Wenn sie Ihre Rechtsfrage nicht anonym stellen wollen, können sie ihre Frage einfach in unserer Facebookgruppe Rechtsforum Schweiz stellen. </p>
+              
+               <h2>Anonyme Rechtsfrage stellen.</h2>
+               <p>Sie können je nach Gerät über Browser oder Handy via Dateisystem,Webcam,Kamera bis zu 5 Dateien zu ihrer Frage hochladen. Klicken sie auf den upload Button um die ausgewählten Dateien einzeln hochzuladen oder "Alle Hochladen" um alle ausgewählten Dateien zur Frage anzuhängen.</p>
+               <p>Sie können ihre Suche Näher eingrenzen in dem sie Ihre Schlüsselwörter mit AND oder OR (Grossgeschrieben) verknüpfen. Z.B. Haus OR Garage</p>
+               <p>Nachdem Sie Ihre Frage gestellt haben, wird sie auf AWRI als "nicht veröffentlicht" gespeichert. Sobald ein Admin ihre Frage freigeschalten hat wird sie anonym auf AWRI sowie in der Facebookgruppe Rechtsforum Schweiz veröffentlicht. </p>
+
+              </ion-label>
+         </ion-item>
+</div>
+
   <ng-template [ngIf]="this.awri.isInRole('authenticated user')" [ngIfElse]="loggedOut">
       <h2>Ihre Rechtsfrage wird anonym gestellt!</h2> 
       <p>Bitte beschreiben Sie den Sachverhalt möglichst genau und wählen sie den betreffenden Kanton aus.</p>
+
     <form #createForm="ngForm" (ngSubmit)="sendFrage()">
 
         <ion-input type="hidden" value="{{this.awri.user.name}}" name="username" disabled></ion-input>

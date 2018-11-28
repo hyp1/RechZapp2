@@ -28,6 +28,7 @@ const bannerConfig: AdMobFreeBannerConfig = {
 export class HomePage {
 
 
+  
 nodes: Array<any>;
 auth:AuthProvider;
 upload:UploadComponent;
@@ -145,8 +146,8 @@ gotoLogin(){
 
  checkPlatform() {
   let alert = this.alertCtrl.create({
-    title: 'Platform',
-    message: 'You are running on: ' + this.plt.platforms(),
+    title: 'Powered by',
+    message: 'AWRI & Rechtsforum Schweiz',
     buttons: ['OK']
   });
   alert.present();

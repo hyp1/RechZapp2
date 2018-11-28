@@ -30,12 +30,13 @@ images:Array<any>;
   this.images=this.item.node.field_image['und'];
   }
  
+  
+
 getComments(nid){
   
   this.comments =<any> this.httpClient.get(this.awri.HOST+'/drupalgap/comment.json?parameters[nid]='+nid+'&parameters[status]=1&pagesize=150')
       .map(res => res);
 }
-
 
 replaceString(str){
   return str.replace('<strong>','<br><strong>')
@@ -45,7 +46,6 @@ goBack(){
   //this.navCtrl.push(SearchPage);
   this.navCtrl.pop();
 }
-
 
 gotoLogin(){
   this.navCtrl.push(LoginPage);

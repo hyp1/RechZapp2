@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController,AlertController } from 'ionic-angular';
+import { NavController,AlertController,LoadingController,Loading } from 'ionic-angular';
 import "rxjs/add/operator/map";
 import { ViewPage } from '../../pages/view/view';
 import { LoginPage } from '../../pages/login/login';
@@ -16,34 +16,40 @@ export class SearchPage {
   //awri: AwriConnectProvider;
   rootPage:SearchPage;
   error:String;
-  constructor(public navCtrl: NavController,public awri:AuthProvider,public alertCtrl:AlertController) {    
+  loader:Loading;
+  help:boolean;
+  constructor(public navCtrl: NavController,public awri:AuthProvider,public alertCtrl:AlertController,public loadingCtrl: LoadingController) {    
     this.error="",
     this.text="",
     this.rootPage = <any>SearchPage; 
   //  this.items=<Array<any>>awri.getItems();
-  }
+  this.awri.get('help').then(col=>{
+    this.help=col;
+ // console.log(this.help,'LOADED');
+  }).catch(err=>{
+    console.log(err);
+  }); 
+
+}
 
   dosearch(): void {
-    this.error="",
- //   console.log("SEARCH:"+this.text);    
-   this.awri.search(this.text).then(data=>{
-     this.items=<Array<any>>data;
-    // console.log(this.items);
-   },err=>{
-    if(err.status==404)this.error="Die Suche nach '"+this.text+"' brachte leider keine Ergebnisse.";
-//    this.awri.showError("Die Suche nach '"+this.text+"' brachte keine Ergebnisse...");
-   });
-  }
+    this.search(this.text);
+    }
 
+    
   search(text): void {
+    this.presentLoading("Suche nach '"+text+"', Bitte warten...");
     this.error="",
     this.text=text;
       this.awri.search(this.text).then(data=>{
         this.items=<any>data;
        // console.log(this.items);
+       this.loader.dismiss();
       },err=>{
         if(err.status==404)this.error="Die Suche nach '"+this.text+"' brachte leider keine Ergebnisse.";
        //this.awri.showError());
+       this.loader.dismiss();
+
       });
      }
 
@@ -58,4 +64,11 @@ export class SearchPage {
     this.navCtrl.push(LoginPage);
   }
   
+  presentLoading(txt) {
+    this.loader = this.loadingCtrl.create({
+      content: txt,
+      duration: 3000
+    });
+    this.loader.present();
+  }
 }

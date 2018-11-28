@@ -23,6 +23,8 @@ export class CreatePage {
 
   awri:AuthProvider;
   upload:UploadComponent;
+
+  help:boolean;
   constructor(public navCtrl: NavController,public alertCtrl: AlertController, 
               public navParams: NavParams,awri:AuthProvider,upload:UploadComponent) {
   this.awri=awri;
@@ -30,6 +32,12 @@ export class CreatePage {
   this.kanton="Keine Angabe";
   this.files=[];
   
+  this.awri.get('help').then(col=>{
+    this.help=col;
+  }).catch(err=>{
+    console.log(err);
+  }); 
+
   awri.getKantons().then(data=>{
     this.kantone=<any>data;
     
@@ -46,7 +54,6 @@ export class CreatePage {
 
   }
 
-  
   sendFrage() {
     let tid=66;
     this.kantone.map(k => {

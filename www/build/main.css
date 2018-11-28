@@ -25721,6 +25721,33 @@ ion-navbar.toolbar {
   unicode-range: U+0000-00FF;
 }
 
+div.help ion-item {
+  background-color: #32db64;
+  color: white;
+  border-radius: 5px;
+}
+
+div.help a {
+  text-decoration: none;
+}
+
+ion-icon[class*="rechzapp-"] {
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-position: 50% 50%;
+  mask-position: 50% 50%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  background: currentColor;
+  width: 1em;
+  height: 1em;
+}
+
+ion-icon[class*="rechzapp-awri"] {
+  -webkit-mask-image: url("../assets/icon/awri.svg");
+  mask-image: url("../assets/icon/awri.svg");
+}
+
 @media (max-width: 576px) {
   page-home ion-card-content {
     font-size: 2rem !important;
