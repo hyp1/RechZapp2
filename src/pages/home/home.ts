@@ -147,7 +147,7 @@ gotoLogin(){
  checkPlatform() {
   let alert = this.alertCtrl.create({
     title: 'Powered by',
-    message: 'https://awri.ch',
+    message: 'AWRI & Rechtsforum Schweiz',
     buttons: ['OK']
   });
   alert.present();
