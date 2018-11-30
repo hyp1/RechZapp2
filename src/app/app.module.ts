@@ -28,6 +28,7 @@ import { Camera } from '@ionic-native/camera';
 import { UploadComponent } from '../components/upload/upload';
 import { IonicStorageModule } from '@ionic/storage';
 import { CommentComponent } from '../components/comment/comment';
+import { StatsProvider } from '../providers/stats/stats';
 
   
 @NgModule({
@@ -78,7 +79,8 @@ import { CommentComponent } from '../components/comment/comment';
     AdMobFree,
     UploadComponent,
     Camera,
-    CommentComponent
+    CommentComponent,
+    StatsProvider
  ]
 })
 

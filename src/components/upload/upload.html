@@ -1,7 +1,18 @@
+<ion-content padding>
 <ion-item>
-        <ion-label id="profile_image" color="primary"><h2>{{text}}</h2></ion-label> 
+        <ion-label color="primary">{{text}}
+        </ion-label>           
 </ion-item>
+<ng-template #letupload>
+    <ion-item>
+        <ion-label color="danger" stacked><h2>Natürlich nur, wenn sie angemeldet angemeldet sind.
+        </h2></ion-label> 
+      </ion-item>
+  </ng-template>
 
+<ion-item>
+        <ion-label color="danger" text-wrap>Bitte verdecken Sie persönliche Daten wie Namen, Adressen, Telefonnummern, etc.</ion-label>
+</ion-item>
       
 <ng-template [ngIf]="awri.isInRole('authenticated user')" [ngIfElse]="letupload">
 
@@ -66,12 +77,7 @@
 
             <button ion-button right (click)="uploadAllFiles()" [disabled]="awri.isInRole('anonymous user')">Alle Hochladen</button>
             
-      <ng-template #letupload>
-        <ion-item>
-            <ion-label id="profile_image" color="danger" stacked><h2>Natürlich nur, wenn sie angemeldet angemeldet sind! ;-)
-            </h2></ion-label> 
-          </ion-item>
-      </ng-template>
+        </ion-content>
 <!--
     <button ion-button full (click)="uploadFile('image0')">Dateien hochladen</button>
     <ion-card><img id="image0" src="assets/imgs/anonymous.png" name="test"> <ion-icon name="trash" (click)="removeImage(0)"></ion-icon></ion-card>

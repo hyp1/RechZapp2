@@ -23,7 +23,6 @@ pet:string;
     console.log('ionViewDidLoad HelpPage');
   }
   
-
 test(){
   alert(this.pet);
 }

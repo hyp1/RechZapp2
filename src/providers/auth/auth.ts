@@ -37,6 +37,9 @@ export class AuthProvider {
     roles: Array<any>;
     created: number;
   };
+
+  stats:Array<any>;
+
   /*
   token = new Observable<string>((observer: Observer<string>) => {
     this.http.get(this.HOST+'/?q=services/session/token', { responseType: 'text', withCredentials:true }).subscribe(token=>{
@@ -122,6 +125,8 @@ this.get('help').then(col=>{
   this.set('help',true);
   console.log(err);
 });
+
+this.getStats();
 
 }
   
@@ -452,5 +457,24 @@ let options:any = {
     return uri.replace('public://attachments/',this.HOST+'/sites/default/files/attachments/');
 };
 
-  
+ 
+
+getStats(){
+  return new Promise(resolve=>{
+//    let headers = new HttpHeaders()
+//      .set('Access-Control-Allow-Origin','*').set('Content-Type', 'application/json')
+//    let options = {
+//      headers: headers,
+
+//      };
+      this.http.get(this.HOST+'/stats.txt',{ responseType: 'text'})
+     // .map(res=>res)
+      .subscribe(data=>{
+        this.stats=<any>JSON.parse(data);
+        console.log(this.stats,"getStatus");
+      resolve(data);
+      });
+  })   
+}
+
 }

@@ -1,7 +1,7 @@
 <ion-header>
 
     <ion-navbar>
-        <ion-buttons start>
+        <ion-buttons end>
             <button ion-button menuToggle>
               <ion-icon name="menu"></ion-icon>
             </button>
@@ -10,7 +10,7 @@
             <ion-title>
                 Frage stellen 
               </ion-title>
-      <ion-buttons end>
+      <ion-buttons start>
   <ng-template [ngIf]="this.awri.isInRole('authenticated user')" [ngIfElse]="headerOut">
               <button ion-button (click)="this.gotoLogin()">
                   <img class="avatar" src="{{this.awri.user.picture}}"> {{awri.user.name}}        
@@ -36,17 +36,20 @@
               
                <h2>Anonyme Rechtsfrage stellen.</h2>
                <p>Sie können je nach Gerät über Browser oder Handy via Dateisystem,Webcam,Kamera bis zu 5 Dateien zu ihrer Frage hochladen. Klicken sie auf den upload Button um die ausgewählten Dateien einzeln hochzuladen oder "Alle Hochladen" um alle ausgewählten Dateien zur Frage anzuhängen.</p>
-               <p>Sie können ihre Suche Näher eingrenzen in dem sie Ihre Schlüsselwörter mit AND oder OR (Grossgeschrieben) verknüpfen. Z.B. Haus OR Garage</p>
-               <p>Nachdem Sie Ihre Frage gestellt haben, wird sie auf AWRI als "nicht veröffentlicht" gespeichert. Sobald ein Admin ihre Frage freigeschalten hat wird sie anonym auf AWRI sowie in der Facebookgruppe Rechtsforum Schweiz veröffentlicht. </p>
+                <p>Nachdem Sie Ihre Frage gestellt haben, wird sie auf AWRI als "nicht veröffentlicht" gespeichert.</p>
+                <p>Sobald ein Admin ihre Frage freigeschalten hat wird sie anonym auf AWRI sowie in der Facebookgruppe Rechtsforum Schweiz veröffentlicht und diskutiert. </p>
 
               </ion-label>
          </ion-item>
 </div>
 
   <ng-template [ngIf]="this.awri.isInRole('authenticated user')" [ngIfElse]="loggedOut">
-      <h2>Ihre Rechtsfrage wird anonym gestellt!</h2> 
-      <p>Bitte beschreiben Sie den Sachverhalt möglichst genau und wählen sie den betreffenden Kanton aus.</p>
-
+    <ion-title>Ihre Rechtsfrage wird anonym gestellt</ion-title>
+    
+      <ion-label text-wrap>Bitte beschreiben Sie den Sachverhalt möglichst genau und wählen Sie den betreffenden Kanton aus.</ion-label>
+      <ion-label text-wrap color="danger">Erwähnen Sie keine persönlichen Daten wie Namen Adressen,Telefonnummern, etc.</ion-label>
+      <ion-label text-wrap color="danger">Ihre Frage wird durch einen Admin geprüft und freigeschalten.</ion-label>
+    
     <form #createForm="ngForm" (ngSubmit)="sendFrage()">
 
         <ion-input type="hidden" value="{{this.awri.user.name}}" name="username" disabled></ion-input>

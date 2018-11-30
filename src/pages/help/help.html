@@ -1,7 +1,7 @@
 <ion-header>
 
     <ion-navbar>
-        <ion-buttons start>
+        <ion-buttons end>
             <button ion-button menuToggle>
               <ion-icon name="menu"></ion-icon>
             </button>
@@ -10,7 +10,7 @@
             <ion-title>
                 Hilfe 
               </ion-title>
-      <ion-buttons end>
+      <ion-buttons start>
   <ng-template [ngIf]="this.auth.isInRole('authenticated user')" [ngIfElse]="headerOut">
               <button ion-button (click)="this.gotoLogin()">
                   <img class="avatar" src="{{this.auth.user.picture}}"> {{auth.user.name}}        
@@ -28,22 +28,76 @@
 
 <ion-content padding>
 
+    
     <div *ngIf="auth.isInRole('anonymous user')">
+    
         <ion-label color="danger"><h2>Nur auf AWRI angemeldete Benutzer haben Zugriff auf erweiterte Funktionen!</h2></ion-label>
-        <ul>
-            <li>Anonyme Rechtsfragen stellen</li>
-            <li>Rechtsfragen kommentieren</li>
-            <li>Hilfe ein/aus</li>
-            <li>Rechtsfragen  bewerten(In Kürze)</li>
-            <li>Lesezeichen setzen(In Kürze)</li>
-        </ul>
+         <ion-label>Anonyme Rechtsfragen stellen</ion-label>
+            <ion-label>Rechtsfragen kommentieren</ion-label>
+            <ion-label>Hilfe ein/ausschalten</ion-label>
+            <ion-label>Rechtsfragen  bewerten(In Kürze)</ion-label>
+            <ion-label>Lesezeichen setzen(In Kürze)</ion-label>
+   
         </div>   
 
+        <div class="help">   
+            <ion-item>
+                  <ion-label text-wrap>Sie können die angezeigte Hilfe in den Einstellungen ausschalten.</ion-label>
+            </ion-item>         
+        </div>
+    <br>
 
-    <ion-label color="danger" text-wrap><h3>Wir haben unser System erneuert, die gewohnte AWRI Seite finden Sie nun hier: <a href="https://stage.awri.ch" target="_new">https://stage.awri.ch</a></h3></ion-label>
+        <div class="help">   
+                <a href="https://www.facebook.com/groups/RechtsberatungSchweiz/" target="_BLANK">  
+                <ion-item>
+                      <ion-icon name="logo-facebook" item-start></ion-icon>
+                      <ion-label text-wrap>
+                         <h2>Rechtsforum Schweiz</h2>
+                         <p>Die Facebookgruppe wurde 2015 gegründet um Personen die sich keinen Anwalt leisten können bei juristischen Fragen zu unterstützen.</p>
+                         <p>Alle AWRI Fragen wurden durch die Mitglieder dieser Gruppe gestellt und beantwortet.</p>
+                         <h3>Wir danken allen Mitgliedern des Rechtsforum Schweiz ❤️lich für Ihre Unterstützung!</h3>
+                        </ion-label>
+                   </ion-item>
+                  </a>
+                  <br>
+                  <a href="{{auth.HOST}}" target="_BLANK">  
+                  <ion-item>
+                      <ion-icon name="rechzapp-awri" item-start></ion-icon>
+                      <ion-label text-wrap>
+                         <h2>AWRI (Alles was Recht ist)</h2>
+                         <p>Die AWRI Datenbank für Rechtsfragen wurde 2015 erstellt um die Verwaltung und Administration der gestellten Fragen zu erleichtern.</p>
+                         <p>In dieser Datenbank werden alle Rechtsfragen und Antworten des Rechtsforum Schweiz ausgewertet und freigeschalten.</p>
+                        </ion-label>
+                   </ion-item>
+                   </a>
+                  <br>        
+                  <a href="https://www.facebook.com/Rechtshilfeforum/" target="_BLANK">  
+                  <ion-item>
+                      <ion-icon name="logo-facebook" item-start></ion-icon>
+                      <ion-label text-wrap>
+                         <h2>AWRI Ratgeber</h2>
+                         <p>Facebook Seite, auf der von Zeit zu Zeit die interessantesten und meist gefragten Beiträge aus dem Rechtsforum Schweiz veröffentlicht werden.</p>
+                        </ion-label>
+                   </ion-item>  
+                   </a>
+          </div>
 
-    <div class="mobile-fab"><ion-label color="primary" text-wrap>Bitte noch etwas Geduld, weitere Updates folgen in Kürze... </ion-label></div>
-  
+    <ion-card>
+        <ion-card-header><h2>AWRI Statistik ({{this.auth.stats?.updated}})</h2></ion-card-header>
+        <ion-card-content>
+            <ion-label>AWRI Benutzer {{this.auth.stats?.users}}</ion-label>
+            <ion-label>Rechtsfragen {{this.auth.stats?.nodesc}}/{{this.auth.stats?.nodes}}</ion-label>
+            <ion-label>Antworten {{this.auth.stats?.commentsc}}/{{this.auth.stats?.comments}}</ion-label>
+            <ion-label>Hinweise auf  Art. OR {{this.auth.stats?.ors}}</ion-label>
+            <ion-label>Hinweise auf ZGB {{this.auth.stats?.zgbs}}</ion-label>
+             <ion-label>Hinweise auf BGE {{this.auth.stats?.bges}}</ion-label>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-label color="danger" text-wrap><h3>Wir haben unser System erneuert, die gewohnte AWRI Seite finden Sie nun hier: <a href="https://stage.awri.ch" target="_new">https://stage.awri.ch</a></h3></ion-label>
+
+      <div class="mobile-fab"><ion-label color="primary" text-wrap>Bitte noch etwas Geduld, weitere Updates folgen in Kürze... </ion-label></div>
+    
   <!--
   <ion-card>
       <ion-card-header class="cardheader">

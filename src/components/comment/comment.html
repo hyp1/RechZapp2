@@ -3,6 +3,7 @@
 
 
       <ion-title>{{text}}</ion-title>
+      <ion-label text-wrap color="danger">{{sent}}</ion-label>
       <ion-item text-wrap>
         <ion-textarea [(ngModel)]="comment"  name="comment" id="commentField" [disabled]="auth.isInRole('anonymous user')"></ion-textarea>
         </ion-item>      

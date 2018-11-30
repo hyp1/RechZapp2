@@ -32,10 +32,10 @@ export class SearchPage {
 
 }
 
+
   dosearch(): void {
     this.search(this.text);
     }
-
     
   search(text): void {
     this.presentLoading("Suche nach '"+text+"', Bitte warten...");
@@ -71,4 +71,5 @@ export class SearchPage {
     });
     this.loader.present();
   }
+  
 }

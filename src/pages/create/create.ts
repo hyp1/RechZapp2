@@ -53,7 +53,6 @@ export class CreatePage {
   });
 
   }
-
   sendFrage() {
     let tid=66;
     this.kantone.map(k => {

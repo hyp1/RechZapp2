@@ -1,7 +1,7 @@
 <ion-header>
 
     <ion-navbar>
-        <ion-buttons start>
+        <ion-buttons end>
             <button ion-button menuToggle>
               <ion-icon name="menu"></ion-icon>
             </button>
@@ -10,7 +10,7 @@
             <ion-title>
                 Suchen 
               </ion-title>
-      <ion-buttons end>
+      <ion-buttons start>
   <ng-template [ngIf]="this.awri.isInRole('authenticated user')" [ngIfElse]="headerOut">
     <button ion-button (click)="gotoLogin()">
       <img class="avatar" src="{{this.awri.user.picture}}"> {{awri.user.name}}        
@@ -28,7 +28,7 @@
 
 <ion-content padding>
 
-    <div *ngIf="help" class="help">   
+    <div *ngIf="this.awri.help" class="help">   
         <ion-item>
             <ion-label text-wrap>
                <h2>Rechtsfragen und Antworten suchen</h2>
@@ -49,7 +49,6 @@
       <ion-input  [(ngModel)]="text" placeholder="Rechtsfrage suchen..." clearInput></ion-input>
     </ion-item>
     </ion-list>    
-    <ng-template [ngIf]="this.awri.help"><ion-label color="secondary">Suche per Schlüsselwörtern</ion-label></ng-template>
 
     <button ion-button round full (click)="dosearch()" icon-start><ion-icon name="search"  item-left></ion-icon> Suchen</button>
     <ion-label color="danger" text-wrap><h3>{{error}}</h3></ion-label>

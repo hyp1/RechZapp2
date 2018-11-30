@@ -17,6 +17,7 @@ import {LoadingController,Loading } from 'ionic-angular';
   templateUrl: 'upload.html'
 })
 
+
 export class UploadComponent {
   @Input() MAX_UPLOADS: number;
   @Input() fieldname: string;

@@ -1,4 +1,6 @@
-import { Component,Input } from '@angular/core';
+import { Component,Input} from '@angular/core';
+import { AlertController,LoadingController,Loading } from 'ionic-angular';
+
 import { AuthProvider } from '../../providers/auth/auth';
 /**
  * Generated class for the CommentComponent component.
@@ -15,14 +17,15 @@ export class CommentComponent {
  
   text: string;
   comment:string;
+  sent: string;
 
-  constructor(public auth:AuthProvider) {
-    console.log('Hello CommentComponent Component');
+  constructor(public auth:AuthProvider,public alertCtrl:AlertController) {
     this.text = 'Ihre Antwort:';
     this.comment ='';
+    this.sent="Ihre Antwort wird erst erscheinen, wenn sie durch einen Admin freigeschalten wurde.";
   }
   addcomment(){
-    if(this.comment.length<10)return alert("Ihr Kommentar ist zu kurz!");
+    if(this.comment.length<10)return this.presentMessage("Ihre Antwort ist zu kurz!");
     let c={
       "nid":this.nid,
     //  "status":0,
@@ -34,18 +37,28 @@ export class CommentComponent {
       }
     }    
  this.auth.addComment(c).then(data=>{
-  alert("Ihr Kommentar wurde gesendet") 
+  this.presentMessage("Ihr Kommentar wurde gesendet") 
   this.comment="";
 
    console.log(data);
  }).catch(err=>{
-   alert("Anonyme Benutzer können keine Kommentare posten");
+   this.presentMessage("Anonyme Benutzer können nicht auf Rechtesfragen antworten.");
    this.comment="";
    console.log(err);
  })
     //   console.log(c);
 //alert(this.nid+this.comment);
 
+  }
+
+    
+  presentMessage(txt) {
+    let alert = this.alertCtrl.create({
+      title: 'Antwort senden',
+      subTitle: txt,
+      buttons: ['OK']
+    });
+    alert.present();
   }
 
 }
