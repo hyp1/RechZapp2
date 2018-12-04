@@ -1,0 +1,40 @@
+<!--
+  Generated template for the BookmarksPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Ihre Lesezeichen</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+<h1>Seite {{1+this.page}}/{{this.pages}}</h1>
+    <ion-row>
+        <ion-col *ngFor="let node of nodes" col-12 col-md-4>
+          <ion-item text-wrap (click)="itemSelected(node.node)">
+            <ion-avatar><img src="https://graph.facebook.com/{{node.node.fbid}}/picture"><ion-title>{{node.node.fbname}}</ion-title>
+            </ion-avatar>
+            <p>{{node.node.created}}</p>
+            <h2>{{node.node.title}}</h2>
+        </ion-item>  
+        <ion-item>
+            <ion-icon name="chatboxes" item-start></ion-icon>
+    
+            <ion-badge item-end>{{node.node?.comment_count}}</ion-badge>
+          </ion-item>
+        </ion-col>
+          </ion-row>
+<span *ngIf="this.page>0">
+<button ion-button (click)="gotoPage(this.page-1)">Zurück</button>
+</span>
+{{this.page+1}}/{{this.pages}}
+<span *ngIf="this.page<this.pages-1">
+<button ion-button (click)="gotoPage(this.page+1)">Weiter</button>
+</span>
+</ion-content>

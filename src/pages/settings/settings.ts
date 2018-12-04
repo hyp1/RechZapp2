@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
 import { LoginPage } from '../../pages/login/login';
+import { BookmarksPage } from '../../pages/bookmarks/bookmarks';
 /**
  * Generated class for the SettingsPage page.
  *
@@ -37,6 +38,11 @@ helpChanged(evt){
 
 gotoLogin(){
   this.navCtrl.push(LoginPage);
+}
+
+
+gotoBookmarks(){
+  this.navCtrl.push(BookmarksPage);
 }
 
 }

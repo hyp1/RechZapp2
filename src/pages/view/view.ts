@@ -8,6 +8,7 @@ import { LoginPage } from '../login/login';
 import { AuthProvider } from '../../providers/auth/auth';
 
 
+
 @IonicPage()
 @Component({
   selector: 'page-view',
@@ -29,9 +30,7 @@ images:Array<any>;
   this.getComments(this.item.node.nid);
   this.images=this.item.node.field_image['und'];
   }
- 
   
-
 getComments(nid){
   
   this.comments =<any> this.httpClient.get(this.awri.HOST+'/drupalgap/comment.json?parameters[nid]='+nid+'&parameters[status]=1&pagesize=150')

@@ -36,6 +36,11 @@
     <ion-toggle [(ngModel)]="help" (ionChange)="helpChanged(this);" [disabled]="this.awri.isInRole('anonymous user')"></ion-toggle>
   </ion-item>
 
+<ion-item>
+    <ion-label item-start>Ihre Lesezeichen</ion-label>
+  <button ion-button (click)="this.gotoBookmarks()" item-end>Ansehen</button>
+</ion-item>
+
   <drupal7-login></drupal7-login>
 
 </ion-content>

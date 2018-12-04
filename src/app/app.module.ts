@@ -13,6 +13,7 @@ import { LoginPage } from '../pages/login/login';
 import { HelpPage } from '../pages/help/help';
 import { ViewPage } from '../pages/view/view';
 import { SearchPage } from '../pages/search/search';
+import { BookmarksPage } from '../pages/bookmarks/bookmarks';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -28,9 +29,12 @@ import { Camera } from '@ionic-native/camera';
 import { UploadComponent } from '../components/upload/upload';
 import { IonicStorageModule } from '@ionic/storage';
 import { CommentComponent } from '../components/comment/comment';
+
 import { StatsProvider } from '../providers/stats/stats';
 
-  
+import { BookmarkComponent } from '../components/bookmark/bookmark';
+
+
 @NgModule({
  declarations: [
    MyApp,
@@ -43,9 +47,11 @@ import { StatsProvider } from '../providers/stats/stats';
    HelpPage,
    ViewPage,
    SearchPage,
+   BookmarksPage,
    Drupal7LoginComponent,
    UploadComponent,
-   CommentComponent  
+   CommentComponent,
+   BookmarkComponent 
  ],
 
  imports: [
@@ -67,6 +73,7 @@ import { StatsProvider } from '../providers/stats/stats';
    HelpPage,
    ViewPage,
    SearchPage,
+   BookmarksPage,
    Drupal7LoginComponent,
    
  ],
@@ -80,6 +87,7 @@ import { StatsProvider } from '../providers/stats/stats';
     UploadComponent,
     Camera,
     CommentComponent,
+    BookmarkComponent,
     StatsProvider
  ]
 })

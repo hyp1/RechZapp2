@@ -19,7 +19,7 @@ export class AuthProvider {
 //  public  HOST='http://kimo2007.dnshome.de:8888/stage.awri.ch';
 //  public  ENDPOINT='drupalgap';
 
- // public  HOST='http://localhost/stage.awri.ch';
+//  public  HOST='http://localhost/stage.awri.ch';
 //  public  ENDPOINT='drupalgap';
   public  HOST='https://stage.awri.ch';
   public  ENDPOINT='drupalgap';
@@ -168,6 +168,96 @@ const options = {
 });
 }
 
+isFlagged(nid,flag){
+  return new Promise((resolve,reject) => {
+  const headers = new HttpHeaders()
+  .set('X-CSRF-TOKEN',<any>this.token);    
+const options = {
+  headers: headers,
+  withCredentials: true
+};
+var is_flagged = {
+  "flag_name" : flag,
+  "entity_id" : nid, 
+  "uid" : this.user.uid,
+};
+  this.http.post(this.HOST+'/'+this.ENDPOINT+'/flag/is_flagged.json',is_flagged,options).subscribe(data => {
+    let arr=<any>data;
+    console.log(arr[0]);
+    resolve(arr[0]);
+  },err=>{
+    reject(false);
+  });
+});
+}
+
+getFlagCount(nid,flag_name){
+  return new Promise((resolve,reject) => {
+  const headers = new HttpHeaders()
+  .set('X-CSRF-TOKEN',<any>this.token);    
+const options = {
+  headers: headers,
+  withCredentials: true
+};
+var is_flagged = {
+  "flag_name" : flag_name,
+  "entity_id" : nid,
+};
+  this.http.post(this.HOST+'/'+this.ENDPOINT+'/flag/countall.json',is_flagged,options).subscribe(data => {
+    let arr=<any>data;
+    resolve(arr.count);
+  },err=>{
+    reject(0);
+  });
+});
+}
+
+setFlag(nid,flag_name,flag){
+  return new Promise((resolve,reject) => {
+  const headers = new HttpHeaders()
+  .set('X-CSRF-TOKEN',<any>this.token);    
+const options = {
+  headers: headers,
+  withCredentials: true
+};
+var is_flagged = {
+  "flag_name" : flag_name,
+  "entity_id" : nid,
+  "action":flag, //flag/unflag
+//  "skip_permission_check":1, 
+  "uid" : this.user.uid,
+};
+  this.http.post(this.HOST+'/'+this.ENDPOINT+'/flag/flag.json',is_flagged,options).subscribe(data => {
+    let arr=<any>data;
+    console.log("SETFLAG");
+  
+    console.log(arr[0]);
+    resolve(flag=="flag"?true:false);
+  },err=>{
+    reject(false);
+  });
+});
+}
+
+getBookmarks(page:number) {
+  return new Promise((resolve,reject) => {
+ //   this.showLoading("Suche, Bitte warten...");
+    const headers = new HttpHeaders()
+    .set('X-CSRF-TOKEN',<any>this.token);    
+  const options = {
+    headers: headers,
+    withCredentials: true
+  };
+    this.http.get(this.HOST+'/user/bookmarks?page='+page,options).subscribe(data => {
+     resolve(data);
+
+    }, err => {
+      reject(err);
+    });
+  });
+}
+
+
 search(text:String) {
   return new Promise((resolve,reject) => {
  //   this.showLoading("Suche, Bitte warten...");
@@ -191,6 +281,24 @@ search(text:String) {
     });
   });
 }
+
+loadNode(nid){
+  return new Promise((resolve,reject) => {
+  let headers = new HttpHeaders()
+  .set('X-CSRF-TOKEN',<string>this.token).set('Content-Type', 'application/json');
+  //.set('Authentication', <string>this.session);
+
+let options:any = {
+  headers: headers,
+  withCredentials	: true,
+};
+  this.http.get(this.HOST+'/'+this.ENDPOINT+'/node/'+nid+'.json', options).subscribe(data => {
+    resolve(data);
+   },err=>{
+     reject(err);
+   })
+  })
+  }
 
 
 loadUser(uid){

@@ -27,6 +27,7 @@
 </ion-header>
 
 <ion-content padding>
+    
     <ion-card>
         <ion-card-content>
         <ion-item>
@@ -62,16 +63,20 @@
                     <ion-segment [(ngModel)]="pet">
                             <ng-template [ngIf]="awri.isInRole('administrator')">
                   <ion-segment-button value="profil" *ngIf="item.node.field_fbid?.und?.length>0">
-                        <a href="https://facebook.com/{{item.node?.field_fbid.und[0].value}}" target="new"><ion-icon name="contact"></ion-icon></a>
+                        <a href="https://facebook.com/{{item.node?.field_fbid.und[0].value}}" target="new" title="Facebook Benutzerprofil ansehen"><ion-icon name="contact"></ion-icon></a>
                   </ion-segment-button>
                   </ng-template>
                   <ion-segment-button value="facebook">
-                        <a *ngIf="item.node.field_fbmid.und" href="https://facebook.com/{{item.node.field_fbmid.und[0].value}}" target="new"><ion-icon name="logo-facebook"></ion-icon></a>
+                        <a *ngIf="item.node.field_fbmid.und" title="Originalbeitrag auf Facebook ansehen" href="https://facebook.com/{{item.node.field_fbmid.und[0].value}}" target="new"><ion-icon name="logo-facebook"></ion-icon></a>
                   </ion-segment-button>
                   <ion-segment-button value="awri">
-                        <a href="{{this.awri.HOST}}/node/{{item.node.nid}}" target="new"> <ion-icon name="link"></ion-icon></a>     
+                        <a href="{{this.awri.HOST}}/node/{{item.node.nid}}" title="Beitrag auf AWRI ansehen" target="new"> <ion-icon name="link"></ion-icon></a>     
+                    </ion-segment-button>
+                    <ion-segment-button value="bookmark">
+                    <bookmark [nid]="item.node.nid"></bookmark>
                     </ion-segment-button>
                 </ion-segment>
+            
               </ion-row>
               
         </ion-card-content>

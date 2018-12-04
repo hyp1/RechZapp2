@@ -22,10 +22,9 @@ export class SearchPage {
     this.error="",
     this.text="",
     this.rootPage = <any>SearchPage; 
-  //  this.items=<Array<any>>awri.getItems();
   this.awri.get('help').then(col=>{
     this.help=col;
- // console.log(this.help,'LOADED');
+
   }).catch(err=>{
     console.log(err);
   }); 

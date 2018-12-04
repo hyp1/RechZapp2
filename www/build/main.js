@@ -1,70 +1,13 @@
-webpackJsonp([6],{
+webpackJsonp([7],{
 
 /***/ 109:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HelpPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_login_login__ = __webpack_require__(27);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-/**
- * Generated class for the HelpPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var HelpPage = /** @class */ (function () {
-    function HelpPage(navCtrl, navParams, auth) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.auth = auth;
-    }
-    HelpPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad HelpPage');
-    };
-    HelpPage.prototype.test = function () {
-        alert(this.pet);
-    };
-    HelpPage.prototype.gotoLogin = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__pages_login_login__["a" /* LoginPage */]);
-    };
-    ;
-    HelpPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-help',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/help/help.html"*/'<ion-header>\n\n    <ion-navbar>\n        <ion-buttons end>\n            <button ion-button menuToggle>\n              <ion-icon name="menu"></ion-icon>\n            </button>\n            </ion-buttons>\n             \n            <ion-title>\n                Hilfe \n              </ion-title>\n      <ion-buttons start>\n  <ng-template [ngIf]="this.auth.isInRole(\'authenticated user\')" [ngIfElse]="headerOut">\n              <button ion-button (click)="this.gotoLogin()">\n                  <img class="avatar" src="{{this.auth.user.picture}}"> {{auth.user.name}}        \n                </button>\n  </ng-template>      \n  <ng-template #headerOut>\n              <button ion-button (click)="this.gotoLogin()">\n              <ion-icon name="contact"></ion-icon>  {{auth.user.name}}\n              </button>\n  </ng-template>\n      </ion-buttons>    \n    </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n\n    \n    <div *ngIf="auth.isInRole(\'anonymous user\')">\n    \n        <ion-label color="danger"><h2>Nur auf AWRI angemeldete Benutzer haben Zugriff auf erweiterte Funktionen!</h2></ion-label>\n         <ion-label>Anonyme Rechtsfragen stellen</ion-label>\n            <ion-label>Rechtsfragen kommentieren</ion-label>\n            <ion-label>Hilfe ein/ausschalten</ion-label>\n            <ion-label>Rechtsfragen  bewerten(In Kürze)</ion-label>\n            <ion-label>Lesezeichen setzen(In Kürze)</ion-label>\n   \n        </div>   \n\n        <div class="help">   \n            <ion-item>\n                  <ion-label text-wrap>Sie können die angezeigte Hilfe in den Einstellungen ausschalten.</ion-label>\n            </ion-item>         \n        </div>\n    <br>\n\n        <div class="help">   \n                <a href="https://www.facebook.com/groups/RechtsberatungSchweiz/" target="_BLANK">  \n                <ion-item>\n                      <ion-icon name="logo-facebook" item-start></ion-icon>\n                      <ion-label text-wrap>\n                         <h2>Rechtsforum Schweiz</h2>\n                         <p>Die Facebookgruppe wurde 2015 gegründet um Personen die sich keinen Anwalt leisten können bei juristischen Fragen zu unterstützen.</p>\n                         <p>Alle AWRI Fragen wurden durch die Mitglieder dieser Gruppe gestellt und beantwortet.</p>\n                         <h3>Wir danken allen Mitgliedern des Rechtsforum Schweiz ❤️lich für Ihre Unterstützung!</h3>\n                        </ion-label>\n                   </ion-item>\n                  </a>\n                  <br>\n                  <a href="{{auth.HOST}}" target="_BLANK">  \n                  <ion-item>\n                      <ion-icon name="rechzapp-awri" item-start></ion-icon>\n                      <ion-label text-wrap>\n                         <h2>AWRI (Alles was Recht ist)</h2>\n                         <p>Die AWRI Datenbank für Rechtsfragen wurde 2015 erstellt um die Verwaltung und Administration der gestellten Fragen zu erleichtern.</p>\n                         <p>In dieser Datenbank werden alle Rechtsfragen und Antworten des Rechtsforum Schweiz ausgewertet und freigeschalten.</p>\n                        </ion-label>\n                   </ion-item>\n                   </a>\n                  <br>        \n                  <a href="https://www.facebook.com/Rechtshilfeforum/" target="_BLANK">  \n                  <ion-item>\n                      <ion-icon name="logo-facebook" item-start></ion-icon>\n                      <ion-label text-wrap>\n                         <h2>AWRI Ratgeber</h2>\n                         <p>Facebook Seite, auf der von Zeit zu Zeit die interessantesten und meist gefragten Beiträge aus dem Rechtsforum Schweiz veröffentlicht werden.</p>\n                        </ion-label>\n                   </ion-item>  \n                   </a>\n          </div>\n\n    <ion-card>\n        <ion-card-header><h2>AWRI Statistik ({{this.auth.stats?.updated}})</h2></ion-card-header>\n        <ion-card-content>\n            <ion-label>AWRI Benutzer {{this.auth.stats?.users}}</ion-label>\n            <ion-label>Rechtsfragen {{this.auth.stats?.nodesc}}/{{this.auth.stats?.nodes}}</ion-label>\n            <ion-label>Antworten {{this.auth.stats?.commentsc}}/{{this.auth.stats?.comments}}</ion-label>\n            <ion-label>Hinweise auf  Art. OR {{this.auth.stats?.ors}}</ion-label>\n            <ion-label>Hinweise auf ZGB {{this.auth.stats?.zgbs}}</ion-label>\n             <ion-label>Hinweise auf BGE {{this.auth.stats?.bges}}</ion-label>\n        </ion-card-content>\n      </ion-card>\n\n      <ion-label color="danger" text-wrap><h3>Wir haben unser System erneuert, die gewohnte AWRI Seite finden Sie nun hier: <a href="https://stage.awri.ch" target="_new">https://stage.awri.ch</a></h3></ion-label>\n\n      <div class="mobile-fab"><ion-label color="primary" text-wrap>Bitte noch etwas Geduld, weitere Updates folgen in Kürze... </ion-label></div>\n    \n  <!--\n  <ion-card>\n      <ion-card-header class="cardheader">\n          CNC 10\n        </ion-card-header> \n    \n    <ion-card-content>\n      Content\n      </ion-card-content>\n      <ion-row>\n      <ion-segment [(ngModel)]="pet" (click)="test()">\n    <ion-segment-button value="profil">\n      Profil\n    </ion-segment-button>\n    <ion-segment-button value="facebook">\n      Facebook\n    </ion-segment-button>\n    <ion-segment-button value="awri">\n       AWRI\n      </ion-segment-button>\n  </ion-segment>\n</ion-row>\n\n</ion-card>\n-->\n</ion-content>\n'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/help/help.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__["a" /* AuthProvider */]])
-    ], HelpPage);
-    return HelpPage;
-}());
-
-//# sourceMappingURL=help.js.map
-
-/***/ }),
-
-/***/ 110:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CreatePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_upload_upload__ = __webpack_require__(85);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_login_login__ = __webpack_require__(27);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -221,14 +164,88 @@ var CreatePage = /** @class */ (function () {
 
 /***/ }),
 
+/***/ 110:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BookmarksPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_auth_auth__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_view_view__ = __webpack_require__(44);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+/**
+ * Generated class for the BookmarksPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var BookmarksPage = /** @class */ (function () {
+    function BookmarksPage(navCtrl, navParams, http, auth) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.http = http;
+        this.auth = auth;
+        this.page = navParams.get('page') || 0;
+        //  console.log(this.page);
+    }
+    BookmarksPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad BookmarksPage');
+        this.gotoPage(this.page);
+    };
+    BookmarksPage.prototype.gotoPage = function (nr) {
+        var _this = this;
+        this.page = nr;
+        this.auth.getBookmarks(this.page).then(function (data) {
+            var arr = data;
+            _this.pages = arr.view.pages;
+            _this.nodes = arr.nodes;
+            console.log(_this.nodes);
+        });
+    };
+    BookmarksPage.prototype.itemSelected = function (item) {
+        var _this = this;
+        console.log(item);
+        this.auth.loadNode(item.nid).then(function (data) {
+            _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__pages_view_view__["a" /* ViewPage */], { item: { node: data } });
+        });
+    };
+    BookmarksPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-bookmarks',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/bookmarks/bookmarks.html"*/'<!--\n  Generated template for the BookmarksPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Ihre Lesezeichen</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n<h1>Seite {{1+this.page}}/{{this.pages}}</h1>\n    <ion-row>\n        <ion-col *ngFor="let node of nodes" col-12 col-md-4>\n          <ion-item text-wrap (click)="itemSelected(node.node)">\n            <ion-avatar><img src="https://graph.facebook.com/{{node.node.fbid}}/picture"><ion-title>{{node.node.fbname}}</ion-title>\n            </ion-avatar>\n            <p>{{node.node.created}}</p>\n            <h2>{{node.node.title}}</h2>\n        </ion-item>  \n        <ion-item>\n            <ion-icon name="chatboxes" item-start></ion-icon>\n    \n            <ion-badge item-end>{{node.node?.comment_count}}</ion-badge>\n          </ion-item>\n        </ion-col>\n          </ion-row>\n<span *ngIf="this.page>0">\n<button ion-button (click)="gotoPage(this.page-1)">Zurück</button>\n</span>\n{{this.page+1}}/{{this.pages}}\n<span *ngIf="this.page<this.pages-1">\n<button ion-button (click)="gotoPage(this.page+1)">Weiter</button>\n</span>\n</ion-content>\n'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/bookmarks/bookmarks.html"*/,
+        }),
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__providers_auth_auth__["a" /* AuthProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_auth_auth__["a" /* AuthProvider */]) === "function" && _d || Object])
+    ], BookmarksPage);
+    return BookmarksPage;
+    var _a, _b, _c, _d;
+}());
+
+//# sourceMappingURL=bookmarks.js.map
+
+/***/ }),
+
 /***/ 111:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SettingsPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HelpPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_login_login__ = __webpack_require__(27);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -239,6 +256,65 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
+
+
+
+/**
+ * Generated class for the HelpPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var HelpPage = /** @class */ (function () {
+    function HelpPage(navCtrl, navParams, auth) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.auth = auth;
+    }
+    HelpPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad HelpPage');
+    };
+    HelpPage.prototype.test = function () {
+        alert(this.pet);
+    };
+    HelpPage.prototype.gotoLogin = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__pages_login_login__["a" /* LoginPage */]);
+    };
+    ;
+    HelpPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-help',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/help/help.html"*/'<ion-header>\n\n    <ion-navbar>\n        <ion-buttons end>\n            <button ion-button menuToggle>\n              <ion-icon name="menu"></ion-icon>\n            </button>\n            </ion-buttons>\n             \n            <ion-title>\n                Hilfe \n              </ion-title>\n      <ion-buttons start>\n  <ng-template [ngIf]="this.auth.isInRole(\'authenticated user\')" [ngIfElse]="headerOut">\n              <button ion-button (click)="this.gotoLogin()">\n                  <img class="avatar" src="{{this.auth.user.picture}}"> {{auth.user.name}}        \n                </button>\n  </ng-template>      \n  <ng-template #headerOut>\n              <button ion-button (click)="this.gotoLogin()">\n              <ion-icon name="contact"></ion-icon>  {{auth.user.name}}\n              </button>\n  </ng-template>\n      </ion-buttons>    \n    </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n\n    \n    <div *ngIf="auth.isInRole(\'anonymous user\')">\n    \n        <ion-label color="danger"><h2>Nur auf AWRI angemeldete Benutzer haben Zugriff auf erweiterte Funktionen!</h2></ion-label>\n         <ion-label>Anonyme Rechtsfragen stellen</ion-label>\n            <ion-label>Rechtsfragen kommentieren</ion-label>\n            <ion-label>Hilfe ein/ausschalten</ion-label>\n            <ion-label>Rechtsfragen  bewerten(In Kürze)</ion-label>\n            <ion-label>Lesezeichen setzen(In Kürze)</ion-label>\n   \n        </div>   \n\n        <div class="help">   \n            <ion-item>\n                  <ion-label text-wrap>Sie können die angezeigte Hilfe in den Einstellungen ausschalten.</ion-label>\n            </ion-item>         \n        </div>\n    <br>\n\n        <div class="help">   \n                <a href="https://www.facebook.com/groups/RechtsberatungSchweiz/" target="_BLANK">  \n                <ion-item>\n                      <ion-icon name="logo-facebook" item-start></ion-icon>\n                      <ion-label text-wrap>\n                         <h2>Rechtsforum Schweiz</h2>\n                         <p>Die Facebookgruppe wurde 2015 gegründet um Personen die sich keinen Anwalt leisten können bei juristischen Fragen zu unterstützen.</p>\n                         <p>Alle AWRI Fragen wurden durch die Mitglieder dieser Gruppe gestellt und beantwortet.</p>\n                         <h3>Wir danken allen Mitgliedern des Rechtsforum Schweiz ❤️lich für Ihre Unterstützung!</h3>\n                        </ion-label>\n                   </ion-item>\n                  </a>\n                  <br>\n                  <a href="{{auth.HOST}}" target="_BLANK">  \n                  <ion-item>\n                      <ion-icon name="rechzapp-awri" item-start></ion-icon>\n                      <ion-label text-wrap>\n                         <h2>AWRI (Alles was Recht ist)</h2>\n                         <p>Die AWRI Datenbank für Rechtsfragen wurde 2015 erstellt um die Verwaltung und Administration der gestellten Fragen zu erleichtern.</p>\n                         <p>In dieser Datenbank werden alle Rechtsfragen und Antworten des Rechtsforum Schweiz ausgewertet und freigeschalten.</p>\n                        </ion-label>\n                   </ion-item>\n                   </a>\n                  <br>        \n                  <a href="https://www.facebook.com/Rechtshilfeforum/" target="_BLANK">  \n                  <ion-item>\n                      <ion-icon name="logo-facebook" item-start></ion-icon>\n                      <ion-label text-wrap>\n                         <h2>AWRI Ratgeber</h2>\n                         <p>Facebook Seite, auf der von Zeit zu Zeit die interessantesten und meist gefragten Beiträge aus dem Rechtsforum Schweiz veröffentlicht werden.</p>\n                        </ion-label>\n                   </ion-item>  \n                   </a>\n          </div>\n\n    <ion-card>\n        <ion-card-header><h2>AWRI Statistik ({{this.auth.stats?.updated}})</h2></ion-card-header>\n        <ion-card-content>\n            <ion-label>AWRI Benutzer {{this.auth.stats?.users}}</ion-label>\n            <ion-label>Rechtsfragen {{this.auth.stats?.nodesc}}/{{this.auth.stats?.nodes}}</ion-label>\n            <ion-label>Antworten {{this.auth.stats?.commentsc}}/{{this.auth.stats?.comments}}</ion-label>\n            <ion-label>Hinweise auf  Art. OR {{this.auth.stats?.ors}}</ion-label>\n            <ion-label>Hinweise auf ZGB {{this.auth.stats?.zgbs}}</ion-label>\n             <ion-label>Hinweise auf BGE {{this.auth.stats?.bges}}</ion-label>\n        </ion-card-content>\n      </ion-card>\n\n      <ion-label color="danger" text-wrap><h3>Wir haben unser System erneuert, die gewohnte AWRI Seite finden Sie nun hier: <a href="https://stage.awri.ch" target="_new">https://stage.awri.ch</a></h3></ion-label>\n\n      <div class="mobile-fab"><ion-label color="primary" text-wrap>Bitte noch etwas Geduld, weitere Updates folgen in Kürze... </ion-label></div>\n    \n  <!--\n  <ion-card>\n      <ion-card-header class="cardheader">\n          CNC 10\n        </ion-card-header> \n    \n    <ion-card-content>\n      Content\n      </ion-card-content>\n      <ion-row>\n      <ion-segment [(ngModel)]="pet" (click)="test()">\n    <ion-segment-button value="profil">\n      Profil\n    </ion-segment-button>\n    <ion-segment-button value="facebook">\n      Facebook\n    </ion-segment-button>\n    <ion-segment-button value="awri">\n       AWRI\n      </ion-segment-button>\n  </ion-segment>\n</ion-row>\n\n</ion-card>\n-->\n</ion-content>\n'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/help/help.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__["a" /* AuthProvider */]])
+    ], HelpPage);
+    return HelpPage;
+}());
+
+//# sourceMappingURL=help.js.map
+
+/***/ }),
+
+/***/ 112:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SettingsPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_login_login__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_bookmarks_bookmarks__ = __webpack_require__(110);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
 
 
 
@@ -271,47 +347,34 @@ var SettingsPage = /** @class */ (function () {
     SettingsPage.prototype.gotoLogin = function () {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__pages_login_login__["a" /* LoginPage */]);
     };
+    SettingsPage.prototype.gotoBookmarks = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__pages_bookmarks_bookmarks__["a" /* BookmarksPage */]);
+    };
     SettingsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-settings',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/settings/settings.html"*/'<ion-header>\n\n    <ion-navbar>\n        <ion-buttons end>\n            <button ion-button menuToggle>\n              <ion-icon name="menu"></ion-icon>\n            </button>\n            </ion-buttons>\n             \n            <ion-title>\n                Einstellungen\n              </ion-title>\n      <ion-buttons start>\n  <ng-template [ngIf]="this.awri.isInRole(\'authenticated user\')" [ngIfElse]="headerOut">\n              <button ion-button (click)="this.gotoLogin()">\n                  <img class="avatar" src="{{this.awri.user.picture}}"> {{awri.user?.name}}        \n                </button>\n  </ng-template>      \n  <ng-template #headerOut>\n              <button ion-button (click)="this.gotoLogin()">\n              <ion-icon name="contact"></ion-icon>  {{this.awri.user?.name}}\n              </button>\n  </ng-template>\n      </ion-buttons>    \n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <ion-item>\n    <ion-label>Verbunden mit: {{awri.HOST}}</ion-label>\n  </ion-item>\n  <ion-item>\n    <ion-label>Hilfe ein/aus</ion-label>\n    <ion-toggle [(ngModel)]="help" (ionChange)="helpChanged(this);" [disabled]="this.awri.isInRole(\'anonymous user\')"></ion-toggle>\n  </ion-item>\n\n  <drupal7-login></drupal7-login>\n\n</ion-content>\n'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/settings/settings.html"*/,
+            selector: 'page-settings',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/settings/settings.html"*/'<ion-header>\n\n    <ion-navbar>\n        <ion-buttons end>\n            <button ion-button menuToggle>\n              <ion-icon name="menu"></ion-icon>\n            </button>\n            </ion-buttons>\n             \n            <ion-title>\n                Einstellungen\n              </ion-title>\n      <ion-buttons start>\n  <ng-template [ngIf]="this.awri.isInRole(\'authenticated user\')" [ngIfElse]="headerOut">\n              <button ion-button (click)="this.gotoLogin()">\n                  <img class="avatar" src="{{this.awri.user.picture}}"> {{awri.user?.name}}        \n                </button>\n  </ng-template>      \n  <ng-template #headerOut>\n              <button ion-button (click)="this.gotoLogin()">\n              <ion-icon name="contact"></ion-icon>  {{this.awri.user?.name}}\n              </button>\n  </ng-template>\n      </ion-buttons>    \n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <ion-item>\n    <ion-label>Verbunden mit: {{awri.HOST}}</ion-label>\n  </ion-item>\n  <ion-item>\n    <ion-label>Hilfe ein/aus</ion-label>\n    <ion-toggle [(ngModel)]="help" (ionChange)="helpChanged(this);" [disabled]="this.awri.isInRole(\'anonymous user\')"></ion-toggle>\n  </ion-item>\n\n<ion-item>\n    <ion-label item-start>Ihre Lesezeichen</ion-label>\n  <button ion-button (click)="this.gotoBookmarks()" item-end>Ansehen</button>\n</ion-item>\n\n  <drupal7-login></drupal7-login>\n\n</ion-content>\n'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/settings/settings.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__["a" /* AuthProvider */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__["a" /* AuthProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__["a" /* AuthProvider */]) === "function" && _c || Object])
     ], SettingsPage);
     return SettingsPage;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=settings.js.map
 
 /***/ }),
 
-/***/ 122:
-/***/ (function(module, exports) {
-
-function webpackEmptyAsyncContext(req) {
-	// Here Promise.resolve().then() is used instead of new Promise() to prevent
-	// uncatched exception popping up in devtools
-	return Promise.resolve().then(function() {
-		throw new Error("Cannot find module '" + req + "'.");
-	});
-}
-webpackEmptyAsyncContext.keys = function() { return []; };
-webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
-module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 122;
-
-/***/ }),
-
-/***/ 13:
+/***/ 12:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthProvider; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular_platform_platform__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(164);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(165);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -369,7 +432,7 @@ var AuthProvider = /** @class */ (function () {
         this.storage = storage;
         //  public  HOST='http://kimo2007.dnshome.de:8888/stage.awri.ch';
         //  public  ENDPOINT='drupalgap';
-        // public  HOST='http://localhost/stage.awri.ch';
+        //  public  HOST='http://localhost/stage.awri.ch';
         //  public  ENDPOINT='drupalgap';
         this.HOST = 'https://stage.awri.ch';
         this.ENDPOINT = 'drupalgap';
@@ -503,6 +566,93 @@ var AuthProvider = /** @class */ (function () {
             });
         });
     };
+    AuthProvider.prototype.isFlagged = function (nid, flag) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]()
+                .set('X-CSRF-TOKEN', _this.token);
+            var options = {
+                headers: headers,
+                withCredentials: true
+            };
+            var is_flagged = {
+                "flag_name": flag,
+                "entity_id": nid,
+                "uid": _this.user.uid,
+            };
+            _this.http.post(_this.HOST + '/' + _this.ENDPOINT + '/flag/is_flagged.json', is_flagged, options).subscribe(function (data) {
+                var arr = data;
+                console.log(arr[0]);
+                resolve(arr[0]);
+            }, function (err) {
+                reject(false);
+            });
+        });
+    };
+    AuthProvider.prototype.getFlagCount = function (nid, flag_name) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]()
+                .set('X-CSRF-TOKEN', _this.token);
+            var options = {
+                headers: headers,
+                withCredentials: true
+            };
+            var is_flagged = {
+                "flag_name": flag_name,
+                "entity_id": nid,
+            };
+            _this.http.post(_this.HOST + '/' + _this.ENDPOINT + '/flag/countall.json', is_flagged, options).subscribe(function (data) {
+                var arr = data;
+                resolve(arr.count);
+            }, function (err) {
+                reject(0);
+            });
+        });
+    };
+    AuthProvider.prototype.setFlag = function (nid, flag_name, flag) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]()
+                .set('X-CSRF-TOKEN', _this.token);
+            var options = {
+                headers: headers,
+                withCredentials: true
+            };
+            var is_flagged = {
+                "flag_name": flag_name,
+                "entity_id": nid,
+                "action": flag,
+                //  "skip_permission_check":1, 
+                "uid": _this.user.uid,
+            };
+            _this.http.post(_this.HOST + '/' + _this.ENDPOINT + '/flag/flag.json', is_flagged, options).subscribe(function (data) {
+                var arr = data;
+                console.log("SETFLAG");
+                console.log(arr[0]);
+                resolve(flag == "flag" ? true : false);
+            }, function (err) {
+                reject(false);
+            });
+        });
+    };
+    AuthProvider.prototype.getBookmarks = function (page) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            //   this.showLoading("Suche, Bitte warten...");
+            var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]()
+                .set('X-CSRF-TOKEN', _this.token);
+            var options = {
+                headers: headers,
+                withCredentials: true
+            };
+            _this.http.get(_this.HOST + '/user/bookmarks?page=' + page, options).subscribe(function (data) {
+                resolve(data);
+            }, function (err) {
+                reject(err);
+            });
+        });
+    };
     AuthProvider.prototype.search = function (text) {
         var _this = this;
         return new Promise(function (resolve, reject) {
@@ -522,6 +672,23 @@ var AuthProvider = /** @class */ (function () {
                 resolve(data);
             }, function (err) {
                 //    this.hideLoading(); 
+                reject(err);
+            });
+        });
+    };
+    AuthProvider.prototype.loadNode = function (nid) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]()
+                .set('X-CSRF-TOKEN', _this.token).set('Content-Type', 'application/json');
+            //.set('Authentication', <string>this.session);
+            var options = {
+                headers: headers,
+                withCredentials: true,
+            };
+            _this.http.get(_this.HOST + '/' + _this.ENDPOINT + '/node/' + nid + '.json', options).subscribe(function (data) {
+                resolve(data);
+            }, function (err) {
                 reject(err);
             });
         });
@@ -797,32 +964,53 @@ var AuthProvider = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 163:
+/***/ 123:
+/***/ (function(module, exports) {
+
+function webpackEmptyAsyncContext(req) {
+	// Here Promise.resolve().then() is used instead of new Promise() to prevent
+	// uncatched exception popping up in devtools
+	return Promise.resolve().then(function() {
+		throw new Error("Cannot find module '" + req + "'.");
+	});
+}
+webpackEmptyAsyncContext.keys = function() { return []; };
+webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
+module.exports = webpackEmptyAsyncContext;
+webpackEmptyAsyncContext.id = 123;
+
+/***/ }),
+
+/***/ 164:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
+	"../pages/bookmarks/bookmarks.module": [
+		296,
+		6
+	],
 	"../pages/create/create.module": [
-		294,
+		295,
 		5
 	],
 	"../pages/help/help.module": [
-		293,
+		297,
 		4
 	],
 	"../pages/login/login.module": [
-		295,
+		298,
 		3
 	],
 	"../pages/register/register.module": [
-		297,
+		299,
 		2
 	],
 	"../pages/settings/settings.module": [
-		296,
+		300,
 		1
 	],
 	"../pages/view/view.module": [
-		298,
+		301,
 		0
 	]
 };
@@ -837,26 +1025,26 @@ function webpackAsyncContext(req) {
 webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 	return Object.keys(map);
 };
-webpackAsyncContext.id = 163;
+webpackAsyncContext.id = 164;
 module.exports = webpackAsyncContext;
 
 /***/ }),
 
-/***/ 210:
+/***/ 211:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(87);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_upload_upload__ = __webpack_require__(85);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_auth_auth__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_view_view__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_auth_auth__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_view_view__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_login_login__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_admob_free__ = __webpack_require__(211);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_admob_free__ = __webpack_require__(212);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -923,6 +1111,7 @@ var HomePage = /** @class */ (function () {
             var d = dat;
             for (var i = 0; i < d.length; i++) {
                 _this.nodes.push(d[i]);
+                _this.page++;
             }
         });
     };
@@ -1010,7 +1199,7 @@ var HomePage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 212:
+/***/ 213:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1019,9 +1208,9 @@ var HomePage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(87);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_view_view__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_view_view__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_login_login__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_auth_auth__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_auth_auth__ = __webpack_require__(12);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1047,10 +1236,8 @@ var SearchPage = /** @class */ (function () {
         this.error = "",
             this.text = "",
             this.rootPage = SearchPage_1;
-        //  this.items=<Array<any>>awri.getItems();
         this.awri.get('help').then(function (col) {
             _this.help = col;
-            // console.log(this.help,'LOADED');
         }).catch(function (err) {
             console.log(err);
         });
@@ -1090,7 +1277,7 @@ var SearchPage = /** @class */ (function () {
     };
     SearchPage = SearchPage_1 = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-search',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/search/search.html"*/'<ion-header>\n\n    <ion-navbar>\n        <ion-buttons end>\n            <button ion-button menuToggle>\n              <ion-icon name="menu"></ion-icon>\n            </button>\n            </ion-buttons>\n             \n            <ion-title>\n                Suchen \n              </ion-title>\n      <ion-buttons start>\n  <ng-template [ngIf]="this.awri.isInRole(\'authenticated user\')" [ngIfElse]="headerOut">\n    <button ion-button (click)="gotoLogin()">\n      <img class="avatar" src="{{this.awri.user.picture}}"> {{awri.user.name}}        \n    </button>\n  </ng-template>      \n  <ng-template #headerOut>\n              <button ion-button (click)="gotoLogin()">\n              <ion-icon name="contact"></ion-icon>  {{awri.user.name}}\n              </button>\n  </ng-template>\n      </ion-buttons>    \n    </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n\n    <div *ngIf="this.awri.help" class="help">   \n        <ion-item>\n            <ion-label text-wrap>\n               <h2>Rechtsfragen und Antworten suchen</h2>\n               <p>Suchen sie nach mit verknüften Schlüsselwörtern nach Rechtsfragen und Antworten</p>\n               <p>Sie können ihre Suche Näher eingrenzen in dem sie Ihre Schlüsselwörter mit AND oder OR (Grossgeschrieben) verknüpfen. Z.B. Haus OR Garage</p>\n               <p>Oder in dem sie Ihre Schlüsselwörter mit + oder - verknüpfen. z.B: Hund -Katze</p>\n               <p>Die Suchergebnise werden nach <ion-icon name="pulse"></ion-icon> Relevanz soriert angezeigt. Die Relevanz ergibt sich aus:\n                </p>\n                <ol><li>Anzahl Schlüsselwörtern</li> <li>Aktualität</li> <li>Bewertung</li></ol>\n         \n              </ion-label>\n         </ion-item>\n        <br>\n        </div>\n  <ion-list>\n    <ion-item>\n      <ion-label> <ion-icon name="search"></ion-icon></ion-label>\n      <ion-input  [(ngModel)]="text" placeholder="Rechtsfrage suchen..." clearInput></ion-input>\n    </ion-item>\n    </ion-list>    \n\n    <button ion-button round full (click)="dosearch()" icon-start><ion-icon name="search"  item-left></ion-icon> Suchen</button>\n    <ion-label color="danger" text-wrap><h3>{{error}}</h3></ion-label>\n  <ion-grid>\n   <ion-row>\n     <ion-col *ngFor="let item of items" col-12 col-md-4>\n       <ion-card  (click)="this.itemSelected(item)">\n         <ion-item>        \n          <ng-template [ngIf]="awri.isInRole(\'authenticated user\')" [ngIfElse]="loggedOut">\n           <ion-avatar item-start *ngIf="item.node.field_fbid?.und?.length>0">\n              <img class="avatar" src="https://graph.facebook.com/{{(item.node.field_fbid.und[0]?item.node.field_fbid.und[0].value:0)}}/picture"> \n              <h2 text-capitalize>{{item.node?.field_fbname.und[0].value}}</h2>\n              <p>{{item.node.created*1000 | date: \'dd.MM.yyyy H:mm\' }}</p>\n            </ion-avatar>\n            \n          </ng-template>\n          <ng-template #loggedOut>\n              <ion-avatar item-start>\n                  <img class="avatar" src="assets/imgs/anonymous.png"> \n                </ion-avatar>\n                <h2 text-capitalize>Nicht angezeigt</h2>\n            </ng-template>\n         </ion-item>\n         <ion-card-content>\n                  <h2 innerHTML={{item.snippet}}></h2>                  \n\n         </ion-card-content>\n         <ion-item>\n            <ion-icon name="chatboxes" item-start></ion-icon>\n    \n            <ion-badge item-end>{{item.node?.comment_count}}</ion-badge>\n          </ion-item>\n         <ion-item>\n            <ion-icon name="pulse" item-start></ion-icon>\n            <ion-badge item-end>{{item.score}}</ion-badge>\n          </ion-item>\n       </ion-card>\n     </ion-col>\n   </ion-row>\n </ion-grid>\n\n</ion-content>'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/search/search.html"*/
+            selector: 'page-search',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/search/search.html"*/'<ion-header>\n\n    <ion-navbar>\n        <ion-buttons end>\n            <button ion-button menuToggle>\n              <ion-icon name="menu"></ion-icon>\n            </button>\n            </ion-buttons>\n             \n            <ion-title>\n                Suchen \n              </ion-title>\n      <ion-buttons start>\n  <ng-template [ngIf]="this.awri.isInRole(\'authenticated user\')" [ngIfElse]="headerOut">\n    <button ion-button (click)="gotoLogin()">\n      <img class="avatar" src="{{this.awri.user.picture}}"> {{awri.user.name}}        \n    </button>\n  </ng-template>      \n  <ng-template #headerOut>\n              <button ion-button (click)="gotoLogin()">\n              <ion-icon name="contact"></ion-icon>  {{awri.user.name}}\n              </button>\n  </ng-template>\n      </ion-buttons>    \n    </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n\n    <div *ngIf="help" class="help">   \n        <ion-item>\n            <ion-label text-wrap>\n               <h2>Rechtsfragen und Antworten suchen</h2>\n               <p>Suchen sie nach mit verknüften Schlüsselwörtern nach Rechtsfragen und Antworten</p>\n               <p>Sie können ihre Suche Näher eingrenzen in dem sie Ihre Schlüsselwörter mit AND oder OR (Grossgeschrieben) verknüpfen. Z.B. Haus OR Garage</p>\n               <p>Oder in dem sie Ihre Schlüsselwörter mit + oder - verknüpfen. z.B: Hund -Katze</p>\n               <p>Die Suchergebnise werden nach <ion-icon name="pulse"></ion-icon> Relevanz soriert angezeigt. Die Relevanz ergibt sich aus:\n                </p>\n                <ol><li>Anzahl Schlüsselwörtern</li> <li>Aktualität</li> <li>Bewertung</li></ol>\n         \n              </ion-label>\n         </ion-item>\n        <br>\n        </div>\n  <ion-list>\n    <ion-item>\n      <ion-label> <ion-icon name="search"></ion-icon></ion-label>\n      <ion-input  [(ngModel)]="text" placeholder="Rechtsfrage suchen..." clearInput></ion-input>\n    </ion-item>\n    </ion-list>    \n\n    <button ion-button round full (click)="dosearch()" icon-start><ion-icon name="search"  item-left></ion-icon> Suchen</button>\n    <ion-label color="danger" text-wrap><h3>{{error}}</h3></ion-label>\n  <ion-grid>\n   <ion-row>\n     <ion-col *ngFor="let item of items" col-12 col-md-4>\n       <ion-card  (click)="this.itemSelected(item)">\n         <ion-item>        \n          <ng-template [ngIf]="awri.isInRole(\'authenticated user\')" [ngIfElse]="loggedOut">\n           <ion-avatar item-start *ngIf="item.node.field_fbid?.und?.length>0">\n              <img class="avatar" src="https://graph.facebook.com/{{(item.node.field_fbid.und[0]?item.node.field_fbid.und[0].value:0)}}/picture"> \n              <h2 text-capitalize>{{item.node?.field_fbname.und[0].value}}</h2>\n              <p>{{item.node.created*1000 | date: \'dd.MM.yyyy H:mm\' }}</p>\n            </ion-avatar>\n            \n          </ng-template>\n          <ng-template #loggedOut>\n              <ion-avatar item-start>\n                  <img class="avatar" src="assets/imgs/anonymous.png"> \n                </ion-avatar>\n                <h2 text-capitalize>Nicht angezeigt</h2>\n            </ng-template>\n         </ion-item>\n         <ion-card-content>\n                  <h2 innerHTML={{item.snippet}}></h2>                  \n\n         </ion-card-content>\n         <ion-item>\n            <ion-icon name="chatboxes" item-start></ion-icon>\n    \n            <ion-badge item-end>{{item.node?.comment_count}}</ion-badge>\n          </ion-item>\n         <ion-item>\n            <ion-icon name="pulse" item-start></ion-icon>\n            <ion-badge item-end>{{item.score}}</ion-badge>\n          </ion-item>\n       </ion-card>\n     </ion-col>\n   </ion-row>\n </ion-grid>\n\n</ion-content>'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/search/search.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_5__providers_auth_auth__["a" /* AuthProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]])
     ], SearchPage);
@@ -1102,14 +1289,14 @@ var SearchPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 213:
+/***/ 214:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CommentComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__ = __webpack_require__(12);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1187,13 +1374,105 @@ var CommentComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 214:
+/***/ 215:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BookmarkComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_auth_auth__ = __webpack_require__(12);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+/**
+ * Generated class for the BookmarkComponent component.
+ *
+ * See https://angular.io/api/core/Component for more info on Angular
+ * Components.
+ */
+var BookmarkComponent = /** @class */ (function () {
+    function BookmarkComponent(auth) {
+        this.auth = auth;
+        this.isBookMark = false;
+        this.color = "primary";
+        this.count = 0;
+        //  console.log('Hello BookmarkComponent Component'+this._nid);
+        //  this.text = 'Hello World'+this._nid;
+    }
+    Object.defineProperty(BookmarkComponent.prototype, "nid", {
+        get: function () { return this._nid; },
+        set: function (_nid) {
+            var _this = this;
+            this.auth.isFlagged(_nid, 'bookmarks').then(function (flag) {
+                _this.isBookMark = flag;
+                if (_this.isBookMark)
+                    _this.color = "danger";
+                else
+                    _this.color = "primary";
+                console.log(_this.color);
+            });
+            this.auth.getFlagCount(_nid, 'bookmarks').then(function (data) {
+                console.log(data);
+                _this.count = data;
+            }).catch(function (data) {
+                _this.count = data;
+                console.log(data);
+            });
+            this._nid = (_nid && _nid.trim()) || '<no nid set>';
+        },
+        enumerable: true,
+        configurable: true
+    });
+    BookmarkComponent.prototype.setBookmark = function () {
+        var _this = this;
+        if (this.auth.isInRole('anonymous user'))
+            return alert("Nur angemeldete Benutzer können Lesezeichen setzen");
+        var flag = this.isBookMark ? "unflag" : "flag";
+        this.auth.setFlag(this._nid, 'bookmarks', flag).then(function (data) {
+            _this.isBookMark = data;
+            if (_this.isBookMark)
+                _this.color = "danger";
+            else
+                _this.color = "primary";
+        });
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])('nid'),
+        __metadata("design:type", String)
+    ], BookmarkComponent.prototype, "_nid", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        __metadata("design:type", String),
+        __metadata("design:paramtypes", [String])
+    ], BookmarkComponent.prototype, "nid", null);
+    BookmarkComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'bookmark',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/components/bookmark/bookmark.html"*/'\n<ion-icon name="bookmark" (click)="setBookmark()" color="{{color}}" title="Lesezeichen setzten/entfernen"></ion-icon><ion-badge color="secondary">{{count}}</ion-badge>\n\n'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/components/bookmark/bookmark.html"*/
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__providers_auth_auth__["a" /* AuthProvider */]])
+    ], BookmarkComponent);
+    return BookmarkComponent;
+}());
+
+//# sourceMappingURL=bookmark.js.map
+
+/***/ }),
+
+/***/ 216:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(215);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(235);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(217);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(237);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -1201,7 +1480,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 235:
+/***/ 237:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1209,33 +1488,37 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(289);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(210);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_list_list__ = __webpack_require__(290);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_settings_settings__ = __webpack_require__(111);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_create_create__ = __webpack_require__(110);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_register_register__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(291);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(211);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_list_list__ = __webpack_require__(292);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_settings_settings__ = __webpack_require__(112);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_create_create__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_register_register__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_login_login__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_help_help__ = __webpack_require__(109);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_view_view__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_search_search__ = __webpack_require__(212);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_status_bar__ = __webpack_require__(208);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__ionic_native_splash_screen__ = __webpack_require__(209);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__angular_common_http__ = __webpack_require__(43);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__providers_auth_auth__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_drupal7_login_drupal7_login__ = __webpack_require__(291);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ionic_native_admob_free__ = __webpack_require__(211);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__ionic_native_camera__ = __webpack_require__(166);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_upload_upload__ = __webpack_require__(85);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__ionic_storage__ = __webpack_require__(164);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_comment_comment__ = __webpack_require__(213);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__providers_stats_stats__ = __webpack_require__(292);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_help_help__ = __webpack_require__(111);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_view_view__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_search_search__ = __webpack_require__(213);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_bookmarks_bookmarks__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__ionic_native_status_bar__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__ionic_native_splash_screen__ = __webpack_require__(210);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__angular_common_http__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__providers_auth_auth__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_drupal7_login_drupal7_login__ = __webpack_require__(293);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__ionic_native_admob_free__ = __webpack_require__(212);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__ionic_native_camera__ = __webpack_require__(167);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_upload_upload__ = __webpack_require__(85);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__ionic_storage__ = __webpack_require__(165);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__components_comment_comment__ = __webpack_require__(214);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__providers_stats_stats__ = __webpack_require__(294);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_bookmark_bookmark__ = __webpack_require__(215);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -1276,24 +1559,27 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_10__pages_help_help__["a" /* HelpPage */],
                 __WEBPACK_IMPORTED_MODULE_11__pages_view_view__["a" /* ViewPage */],
                 __WEBPACK_IMPORTED_MODULE_12__pages_search_search__["a" /* SearchPage */],
-                __WEBPACK_IMPORTED_MODULE_17__components_drupal7_login_drupal7_login__["a" /* Drupal7LoginComponent */],
-                __WEBPACK_IMPORTED_MODULE_20__components_upload_upload__["a" /* UploadComponent */],
-                __WEBPACK_IMPORTED_MODULE_22__components_comment_comment__["a" /* CommentComponent */]
+                __WEBPACK_IMPORTED_MODULE_13__pages_bookmarks_bookmarks__["a" /* BookmarksPage */],
+                __WEBPACK_IMPORTED_MODULE_18__components_drupal7_login_drupal7_login__["a" /* Drupal7LoginComponent */],
+                __WEBPACK_IMPORTED_MODULE_21__components_upload_upload__["a" /* UploadComponent */],
+                __WEBPACK_IMPORTED_MODULE_23__components_comment_comment__["a" /* CommentComponent */],
+                __WEBPACK_IMPORTED_MODULE_25__components_bookmark_bookmark__["a" /* BookmarkComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* MyApp */], {}, {
                     links: [
-                        { loadChildren: '../pages/help/help.module#HelpPageModule', name: 'HelpPage', segment: 'help', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/create/create.module#CreatePageModule', name: 'CreatePage', segment: 'create', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/bookmarks/bookmarks.module#BookmarksPageModule', name: 'BookmarksPage', segment: 'bookmarks', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/help/help.module#HelpPageModule', name: 'HelpPage', segment: 'help', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/settings/settings.module#SettingsPageModule', name: 'SettingsPage', segment: 'settings', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/register/register.module#RegisterPageModule', name: 'RegisterPage', segment: 'register', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/settings/settings.module#SettingsPageModule', name: 'SettingsPage', segment: 'settings', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/view/view.module#ViewPageModule', name: 'ViewPage', segment: 'view', priority: 'low', defaultHistory: [] }
                     ]
                 }),
-                __WEBPACK_IMPORTED_MODULE_21__ionic_storage__["a" /* IonicStorageModule */].forRoot(),
-                __WEBPACK_IMPORTED_MODULE_15__angular_common_http__["b" /* HttpClientModule */]
+                __WEBPACK_IMPORTED_MODULE_22__ionic_storage__["a" /* IonicStorageModule */].forRoot(),
+                __WEBPACK_IMPORTED_MODULE_16__angular_common_http__["b" /* HttpClientModule */]
             ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* IonicApp */]],
             entryComponents: [
@@ -1307,18 +1593,20 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_10__pages_help_help__["a" /* HelpPage */],
                 __WEBPACK_IMPORTED_MODULE_11__pages_view_view__["a" /* ViewPage */],
                 __WEBPACK_IMPORTED_MODULE_12__pages_search_search__["a" /* SearchPage */],
-                __WEBPACK_IMPORTED_MODULE_17__components_drupal7_login_drupal7_login__["a" /* Drupal7LoginComponent */],
+                __WEBPACK_IMPORTED_MODULE_13__pages_bookmarks_bookmarks__["a" /* BookmarksPage */],
+                __WEBPACK_IMPORTED_MODULE_18__components_drupal7_login_drupal7_login__["a" /* Drupal7LoginComponent */],
             ],
             providers: [
-                __WEBPACK_IMPORTED_MODULE_13__ionic_native_status_bar__["a" /* StatusBar */],
-                __WEBPACK_IMPORTED_MODULE_14__ionic_native_splash_screen__["a" /* SplashScreen */],
+                __WEBPACK_IMPORTED_MODULE_14__ionic_native_status_bar__["a" /* StatusBar */],
+                __WEBPACK_IMPORTED_MODULE_15__ionic_native_splash_screen__["a" /* SplashScreen */],
                 { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["u" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicErrorHandler */] },
-                __WEBPACK_IMPORTED_MODULE_16__providers_auth_auth__["a" /* AuthProvider */],
-                __WEBPACK_IMPORTED_MODULE_18__ionic_native_admob_free__["a" /* AdMobFree */],
-                __WEBPACK_IMPORTED_MODULE_20__components_upload_upload__["a" /* UploadComponent */],
-                __WEBPACK_IMPORTED_MODULE_19__ionic_native_camera__["a" /* Camera */],
-                __WEBPACK_IMPORTED_MODULE_22__components_comment_comment__["a" /* CommentComponent */],
-                __WEBPACK_IMPORTED_MODULE_23__providers_stats_stats__["a" /* StatsProvider */]
+                __WEBPACK_IMPORTED_MODULE_17__providers_auth_auth__["a" /* AuthProvider */],
+                __WEBPACK_IMPORTED_MODULE_19__ionic_native_admob_free__["a" /* AdMobFree */],
+                __WEBPACK_IMPORTED_MODULE_21__components_upload_upload__["a" /* UploadComponent */],
+                __WEBPACK_IMPORTED_MODULE_20__ionic_native_camera__["a" /* Camera */],
+                __WEBPACK_IMPORTED_MODULE_23__components_comment_comment__["a" /* CommentComponent */],
+                __WEBPACK_IMPORTED_MODULE_25__components_bookmark_bookmark__["a" /* BookmarkComponent */],
+                __WEBPACK_IMPORTED_MODULE_24__providers_stats_stats__["a" /* StatsProvider */]
             ]
         })
     ], AppModule);
@@ -1336,8 +1624,8 @@ var AppModule = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_register_register__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_register_register__ = __webpack_require__(55);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1407,21 +1695,21 @@ var LoginPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 289:
+/***/ 291:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(208);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(209);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_home_home__ = __webpack_require__(210);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_settings_settings__ = __webpack_require__(111);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_create_create__ = __webpack_require__(110);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_help_help__ = __webpack_require__(109);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_search_search__ = __webpack_require__(212);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(210);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_home_home__ = __webpack_require__(211);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_settings_settings__ = __webpack_require__(112);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_create_create__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_help_help__ = __webpack_require__(111);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_search_search__ = __webpack_require__(213);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1441,7 +1729,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-//import { ListPage } from '../pages/list/list';
 var MyApp = /** @class */ (function () {
     function MyApp(platform, statusBar, splashScreen, auth) {
         this.platform = platform;
@@ -1456,7 +1743,7 @@ var MyApp = /** @class */ (function () {
             { title: 'Suchen', component: __WEBPACK_IMPORTED_MODULE_9__pages_search_search__["a" /* SearchPage */] },
             { title: 'Frage stellen', component: __WEBPACK_IMPORTED_MODULE_7__pages_create_create__["a" /* CreatePage */] },
             { title: 'Einstellungen', component: __WEBPACK_IMPORTED_MODULE_6__pages_settings_settings__["a" /* SettingsPage */] },
-            { title: 'Hilfe', component: __WEBPACK_IMPORTED_MODULE_8__pages_help_help__["a" /* HelpPage */] }
+            { title: 'Hilfe', component: __WEBPACK_IMPORTED_MODULE_8__pages_help_help__["a" /* HelpPage */] },
         ];
     }
     MyApp.prototype.initializeApp = function () {
@@ -1475,21 +1762,22 @@ var MyApp = /** @class */ (function () {
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Nav */]),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Nav */])
+        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Nav */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Nav */]) === "function" && _a || Object)
     ], MyApp.prototype, "nav", void 0);
     MyApp = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/app/app.html"*/'<ion-split-pane when="sm">\n\n    <ion-menu [content]="content" side="right">\n      <ion-header>\n        <ion-toolbar color="secondary">\n          <ion-title>Menu</ion-title>\n        </ion-toolbar>\n      </ion-header>\n   \n      <ion-content class="menu-container">\n        <ion-list no-lines>\n          <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)" class="transparent list-item">\n            {{p.title}} \n\n          </button>\n        </ion-list>\n      </ion-content>\n   \n    </ion-menu>\n    <!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n    <ion-nav [root]="rootPage" #content main swipeBackEnabled="false"></ion-nav>\n    </ion-split-pane>'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/app/app.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */], __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth__["a" /* AuthProvider */]])
+        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth__["a" /* AuthProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth__["a" /* AuthProvider */]) === "function" && _e || Object])
     ], MyApp);
     return MyApp;
+    var _a, _b, _c, _d, _e;
 }());
 
 //# sourceMappingURL=app.component.js.map
 
 /***/ }),
 
-/***/ 290:
+/***/ 292:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1546,15 +1834,15 @@ var ListPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 291:
+/***/ 293:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Drupal7LoginComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_auth_auth__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_auth_auth__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_register_register__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_register_register__ = __webpack_require__(55);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1633,12 +1921,12 @@ var Drupal7LoginComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 292:
+/***/ 294:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StatsProvider; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1673,14 +1961,80 @@ var StatsProvider = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 54:
+/***/ 44:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ViewPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(87);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__login_login__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_auth_auth__ = __webpack_require__(12);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+var ViewPage = /** @class */ (function () {
+    function ViewPage(httpClient, navCtrl, navParams, awri) {
+        this.httpClient = httpClient;
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.awri = awri;
+        //this.awri=awri;
+        this.item = navParams.get('item');
+        this.nid = this.item.node.nid;
+        this.getComments(this.item.node.nid);
+        this.images = this.item.node.field_image['und'];
+    }
+    ViewPage.prototype.getComments = function (nid) {
+        this.comments = this.httpClient.get(this.awri.HOST + '/drupalgap/comment.json?parameters[nid]=' + nid + '&parameters[status]=1&pagesize=150')
+            .map(function (res) { return res; });
+    };
+    ViewPage.prototype.replaceString = function (str) {
+        return str.replace('<strong>', '<br><strong>');
+    };
+    ViewPage.prototype.goBack = function () {
+        //this.navCtrl.push(SearchPage);
+        this.navCtrl.pop();
+    };
+    ViewPage.prototype.gotoLogin = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__login_login__["a" /* LoginPage */]);
+    };
+    ViewPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-view',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/view/view.html"*/'<ion-header>\n\n  <ion-navbar>\n      <ion-buttons end>\n          <button ion-button menuToggle>\n            <ion-icon name="menu"></ion-icon>\n          </button>\n          </ion-buttons>\n           \n          <ion-title>\n              Details \n            </ion-title>\n    <ion-buttons start>\n<ng-template [ngIf]="this.awri.isInRole(\'authenticated user\')" [ngIfElse]="headerOut">\n            <button ion-button (click)="this.gotoLogin()">\n                <img class="avatar" src="{{this.awri.user.picture}}"> {{awri.user.name}}        \n              </button>\n</ng-template>      \n<ng-template #headerOut>\n            <button ion-button (click)="this.gotoLogin()">\n            <ion-icon name="contact"></ion-icon>  {{awri.user.name}}\n            </button>\n</ng-template>\n    </ion-buttons>    \n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n    \n    <ion-card>\n        <ion-card-content>\n        <ion-item>\n            <ng-template [ngIf]="awri.isInRole(\'authenticated user\')" [ngIfElse]="loggedOut">\n                <ion-avatar item-start *ngIf="item.node.field_fbid?.und?.length>0">\n                   <img class="avatar" src="https://graph.facebook.com/{{item.node?.field_fbid.und[0].value}}/picture"> \n                 </ion-avatar>\n                 <h2 *ngIf="item.node?.field_fbname.und" text-capitalize>{{item.node?.field_fbname.und[0].value}}</h2> \n                \n                 <p>{{item.node.created*1000 | date: \'dd.MM.yyyy H:mm\' }}</p> \n                 <!--\n                                      <ng-template [ngIf]="awri.isInRole(\'administrator\')">\n                          <a href="https://facebook.com/{{item.node?.field_fbid.und[0].value}}" target="new"><ion-icon name="contact"></ion-icon></a>\n                 </ng-template>\n                 <a *ngIf="item.node.field_fbmid.und" href="https://facebook.com/{{item.node.field_fbmid.und[0].value}}" target="new"><ion-icon name="logo-facebook"></ion-icon></a>\n                 <a href="{{this.awri.HOST}}/node/{{item.node.nid}}" target="new"> <ion-icon name="link"></ion-icon></a>     \n                </ng-template>\n               <ng-template #loggedOut>\n                   <ion-avatar item-start>\n                       <img class="avatar" src="assets/imgs/anonymous.png"> \n                     </ion-avatar>\n                     <h2 text-capitalize>Nicht angezeigt</h2>\n                 -->\n\n                    </ng-template>\n          </ion-item>\n\n            <ion-item text-wrap>\n             <h2 >{{item.node.body[\'und\'][0].value}}</h2>\n            </ion-item>\n\n            <ion-row>\n                    <ion-segment [(ngModel)]="pet">\n                            <ng-template [ngIf]="awri.isInRole(\'administrator\')">\n                  <ion-segment-button value="profil" *ngIf="item.node.field_fbid?.und?.length>0">\n                        <a href="https://facebook.com/{{item.node?.field_fbid.und[0].value}}" target="new" title="Facebook Benutzerprofil ansehen"><ion-icon name="contact"></ion-icon></a>\n                  </ion-segment-button>\n                  </ng-template>\n                  <ion-segment-button value="facebook">\n                        <a *ngIf="item.node.field_fbmid.und" title="Originalbeitrag auf Facebook ansehen" href="https://facebook.com/{{item.node.field_fbmid.und[0].value}}" target="new"><ion-icon name="logo-facebook"></ion-icon></a>\n                  </ion-segment-button>\n                  <ion-segment-button value="awri">\n                        <a href="{{this.awri.HOST}}/node/{{item.node.nid}}" title="Beitrag auf AWRI ansehen" target="new"> <ion-icon name="link"></ion-icon></a>     \n                    </ion-segment-button>\n                    <ion-segment-button value="bookmark">\n                    <bookmark [nid]="item.node.nid"></bookmark>\n                    </ion-segment-button>\n                </ion-segment>\n            \n              </ion-row>\n              \n        </ion-card-content>\n        </ion-card>\n        <p *ngFor="let image of images">        \n       <img src="{{this.awri.getImagePath(image.uri)}}">\n        </p>\n<p *ngFor="let comment of comments | async">\n  <ion-card>\n        <ion-card-content>\n    <ion-item text-wrap>\n        <h2><strong>{{comment.subject}}</strong></h2>  <h2 innerHTML="{{comment.comment_body[\'und\'][0].safe_value}}"></h2> \n      </ion-item>      \n    </ion-card-content>\n  </ion-card>\n</p>\n\n\n<comment nid="{{this.nid}}"></comment>\n\n<button ion-button icon-only (click)="this.goBack()">\n    <ion-icon name="arrow-back"></ion-icon>\n</button>\n\n</ion-content>\n'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/view/view.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_5__providers_auth_auth__["a" /* AuthProvider */]])
+    ], ViewPage);
+    return ViewPage;
+}());
+
+//# sourceMappingURL=view.js.map
+
+/***/ }),
+
+/***/ 55:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RegisterPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__ = __webpack_require__(12);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1758,80 +2112,14 @@ var RegisterPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 55:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ViewPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(43);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(87);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__login_login__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_auth_auth__ = __webpack_require__(13);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-var ViewPage = /** @class */ (function () {
-    function ViewPage(httpClient, navCtrl, navParams, awri) {
-        this.httpClient = httpClient;
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.awri = awri;
-        //this.awri=awri;
-        this.item = navParams.get('item');
-        this.nid = this.item.node.nid;
-        this.getComments(this.item.node.nid);
-        this.images = this.item.node.field_image['und'];
-    }
-    ViewPage.prototype.getComments = function (nid) {
-        this.comments = this.httpClient.get(this.awri.HOST + '/drupalgap/comment.json?parameters[nid]=' + nid + '&parameters[status]=1&pagesize=150')
-            .map(function (res) { return res; });
-    };
-    ViewPage.prototype.replaceString = function (str) {
-        return str.replace('<strong>', '<br><strong>');
-    };
-    ViewPage.prototype.goBack = function () {
-        //this.navCtrl.push(SearchPage);
-        this.navCtrl.pop();
-    };
-    ViewPage.prototype.gotoLogin = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__login_login__["a" /* LoginPage */]);
-    };
-    ViewPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-view',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/view/view.html"*/'<ion-header>\n\n  <ion-navbar>\n      <ion-buttons end>\n          <button ion-button menuToggle>\n            <ion-icon name="menu"></ion-icon>\n          </button>\n          </ion-buttons>\n           \n          <ion-title>\n              Details \n            </ion-title>\n    <ion-buttons start>\n<ng-template [ngIf]="this.awri.isInRole(\'authenticated user\')" [ngIfElse]="headerOut">\n            <button ion-button (click)="this.gotoLogin()">\n                <img class="avatar" src="{{this.awri.user.picture}}"> {{awri.user.name}}        \n              </button>\n</ng-template>      \n<ng-template #headerOut>\n            <button ion-button (click)="this.gotoLogin()">\n            <ion-icon name="contact"></ion-icon>  {{awri.user.name}}\n            </button>\n</ng-template>\n    </ion-buttons>    \n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n    <ion-card>\n        <ion-card-content>\n        <ion-item>\n            <ng-template [ngIf]="awri.isInRole(\'authenticated user\')" [ngIfElse]="loggedOut">\n                <ion-avatar item-start *ngIf="item.node.field_fbid?.und?.length>0">\n                   <img class="avatar" src="https://graph.facebook.com/{{item.node?.field_fbid.und[0].value}}/picture"> \n                 </ion-avatar>\n                 <h2 *ngIf="item.node?.field_fbname.und" text-capitalize>{{item.node?.field_fbname.und[0].value}}</h2> \n                \n                 <p>{{item.node.created*1000 | date: \'dd.MM.yyyy H:mm\' }}</p> \n                 <!--\n                                      <ng-template [ngIf]="awri.isInRole(\'administrator\')">\n                          <a href="https://facebook.com/{{item.node?.field_fbid.und[0].value}}" target="new"><ion-icon name="contact"></ion-icon></a>\n                 </ng-template>\n                 <a *ngIf="item.node.field_fbmid.und" href="https://facebook.com/{{item.node.field_fbmid.und[0].value}}" target="new"><ion-icon name="logo-facebook"></ion-icon></a>\n                 <a href="{{this.awri.HOST}}/node/{{item.node.nid}}" target="new"> <ion-icon name="link"></ion-icon></a>     \n                </ng-template>\n               <ng-template #loggedOut>\n                   <ion-avatar item-start>\n                       <img class="avatar" src="assets/imgs/anonymous.png"> \n                     </ion-avatar>\n                     <h2 text-capitalize>Nicht angezeigt</h2>\n                 -->\n\n                    </ng-template>\n          </ion-item>\n\n            <ion-item text-wrap>\n             <h2 >{{item.node.body[\'und\'][0].value}}</h2>\n            </ion-item>\n\n            <ion-row>\n                    <ion-segment [(ngModel)]="pet">\n                            <ng-template [ngIf]="awri.isInRole(\'administrator\')">\n                  <ion-segment-button value="profil" *ngIf="item.node.field_fbid?.und?.length>0">\n                        <a href="https://facebook.com/{{item.node?.field_fbid.und[0].value}}" target="new"><ion-icon name="contact"></ion-icon></a>\n                  </ion-segment-button>\n                  </ng-template>\n                  <ion-segment-button value="facebook">\n                        <a *ngIf="item.node.field_fbmid.und" href="https://facebook.com/{{item.node.field_fbmid.und[0].value}}" target="new"><ion-icon name="logo-facebook"></ion-icon></a>\n                  </ion-segment-button>\n                  <ion-segment-button value="awri">\n                        <a href="{{this.awri.HOST}}/node/{{item.node.nid}}" target="new"> <ion-icon name="link"></ion-icon></a>     \n                    </ion-segment-button>\n                </ion-segment>\n              </ion-row>\n              \n        </ion-card-content>\n        </ion-card>\n        <p *ngFor="let image of images">        \n       <img src="{{this.awri.getImagePath(image.uri)}}">\n        </p>\n<p *ngFor="let comment of comments | async">\n  <ion-card>\n        <ion-card-content>\n    <ion-item text-wrap>\n        <h2><strong>{{comment.subject}}</strong></h2>  <h2 innerHTML="{{comment.comment_body[\'und\'][0].safe_value}}"></h2> \n      </ion-item>      \n    </ion-card-content>\n  </ion-card>\n</p>\n\n\n<comment nid="{{this.nid}}"></comment>\n\n<button ion-button icon-only (click)="this.goBack()">\n    <ion-icon name="arrow-back"></ion-icon>\n</button>\n\n</ion-content>\n'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/view/view.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_5__providers_auth_auth__["a" /* AuthProvider */]])
-    ], ViewPage);
-    return ViewPage;
-}());
-
-//# sourceMappingURL=view.js.map
-
-/***/ }),
-
 /***/ 85:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UploadComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_auth_auth__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_camera__ = __webpack_require__(166);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_auth_auth__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_camera__ = __webpack_require__(167);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(11);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2072,5 +2360,5 @@ var UploadComponent = /** @class */ (function () {
 
 /***/ })
 
-},[214]);
+},[216]);
 //# sourceMappingURL=main.js.map

@@ -71,11 +71,13 @@ help:boolean;
 
  }
 
+ 
  getFragen(){
   this.getFragenIndex(this.page,this.pages).then(dat=>{
     let d=<any>dat;
     for(let i=0;i<d.length;i++){
       this.nodes.push(d[i]);
+      this.page++;
     }
   });
 }
