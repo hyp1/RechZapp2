@@ -26,8 +26,6 @@ const bannerConfig: AdMobFreeBannerConfig = {
  templateUrl: 'home.html'
 })
 export class HomePage {
-
-
   
 nodes: Array<any>;
 auth:AuthProvider;

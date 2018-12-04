@@ -27,6 +27,7 @@ test(){
   alert(this.pet);
 }
 
+
 gotoLogin(){
 this.navCtrl.push(LoginPage);
 };

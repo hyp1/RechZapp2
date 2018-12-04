@@ -4,11 +4,84 @@ webpackJsonp([7],{
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BookmarksPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_auth_auth__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_view_view__ = __webpack_require__(44);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+/**
+ * Generated class for the BookmarksPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var BookmarksPage = /** @class */ (function () {
+    function BookmarksPage(navCtrl, navParams, http, auth) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.http = http;
+        this.auth = auth;
+        this.page = navParams.get('page') || 0;
+        //  console.log(this.page);
+    }
+    BookmarksPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad BookmarksPage');
+        this.gotoPage(this.page);
+    };
+    BookmarksPage.prototype.gotoPage = function (nr) {
+        var _this = this;
+        this.page = nr;
+        this.auth.getBookmarks(this.page).then(function (data) {
+            var arr = data;
+            _this.pages = arr.view.pages;
+            _this.nodes = arr.nodes;
+            console.log(_this.nodes);
+        });
+    };
+    BookmarksPage.prototype.itemSelected = function (item) {
+        var _this = this;
+        console.log(item);
+        this.auth.loadNode(item.nid).then(function (data) {
+            _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__pages_view_view__["a" /* ViewPage */], { item: { node: data } });
+        });
+    };
+    BookmarksPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-bookmarks',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/bookmarks/bookmarks.html"*/'<!--\n  Generated template for the BookmarksPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Ihre Lesezeichen</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n<h1>Seite {{1+this.page}}/{{this.pages}}</h1>\n    <ion-row>\n        <ion-col *ngFor="let node of nodes" col-12 col-md-4>\n          <ion-item text-wrap (click)="itemSelected(node.node)">\n            <ion-avatar><img src="https://graph.facebook.com/{{node.node.fbid}}/picture"><ion-title>{{node.node.fbname}}</ion-title>\n            </ion-avatar>\n            <p>{{node.node.created}}</p>\n            <h2>{{node.node.title}}</h2>\n        </ion-item>  \n        <ion-item>\n            <ion-icon name="chatboxes" item-start></ion-icon>\n    \n            <ion-badge item-end>{{node.node?.comment_count}}</ion-badge>\n          </ion-item>\n        </ion-col>\n          </ion-row>\n<span *ngIf="this.page>0">\n<button ion-button (click)="gotoPage(this.page-1)">Zurück</button>\n</span>\n{{this.page+1}}/{{this.pages}}\n<span *ngIf="this.page<this.pages-1">\n<button ion-button (click)="gotoPage(this.page+1)">Weiter</button>\n</span>\n</ion-content>\n'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/bookmarks/bookmarks.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_3__providers_auth_auth__["a" /* AuthProvider */]])
+    ], BookmarksPage);
+    return BookmarksPage;
+}());
+
+//# sourceMappingURL=bookmarks.js.map
+
+/***/ }),
+
+/***/ 110:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CreatePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_upload_upload__ = __webpack_require__(85);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_upload_upload__ = __webpack_require__(86);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_login_login__ = __webpack_require__(27);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -164,80 +237,6 @@ var CreatePage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 110:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BookmarksPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_auth_auth__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_view_view__ = __webpack_require__(44);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-/**
- * Generated class for the BookmarksPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var BookmarksPage = /** @class */ (function () {
-    function BookmarksPage(navCtrl, navParams, http, auth) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.http = http;
-        this.auth = auth;
-        this.page = navParams.get('page') || 0;
-        //  console.log(this.page);
-    }
-    BookmarksPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad BookmarksPage');
-        this.gotoPage(this.page);
-    };
-    BookmarksPage.prototype.gotoPage = function (nr) {
-        var _this = this;
-        this.page = nr;
-        this.auth.getBookmarks(this.page).then(function (data) {
-            var arr = data;
-            _this.pages = arr.view.pages;
-            _this.nodes = arr.nodes;
-            console.log(_this.nodes);
-        });
-    };
-    BookmarksPage.prototype.itemSelected = function (item) {
-        var _this = this;
-        console.log(item);
-        this.auth.loadNode(item.nid).then(function (data) {
-            _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__pages_view_view__["a" /* ViewPage */], { item: { node: data } });
-        });
-    };
-    BookmarksPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-bookmarks',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/bookmarks/bookmarks.html"*/'<!--\n  Generated template for the BookmarksPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Ihre Lesezeichen</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n<h1>Seite {{1+this.page}}/{{this.pages}}</h1>\n    <ion-row>\n        <ion-col *ngFor="let node of nodes" col-12 col-md-4>\n          <ion-item text-wrap (click)="itemSelected(node.node)">\n            <ion-avatar><img src="https://graph.facebook.com/{{node.node.fbid}}/picture"><ion-title>{{node.node.fbname}}</ion-title>\n            </ion-avatar>\n            <p>{{node.node.created}}</p>\n            <h2>{{node.node.title}}</h2>\n        </ion-item>  \n        <ion-item>\n            <ion-icon name="chatboxes" item-start></ion-icon>\n    \n            <ion-badge item-end>{{node.node?.comment_count}}</ion-badge>\n          </ion-item>\n        </ion-col>\n          </ion-row>\n<span *ngIf="this.page>0">\n<button ion-button (click)="gotoPage(this.page-1)">Zurück</button>\n</span>\n{{this.page+1}}/{{this.pages}}\n<span *ngIf="this.page<this.pages-1">\n<button ion-button (click)="gotoPage(this.page+1)">Weiter</button>\n</span>\n</ion-content>\n'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/bookmarks/bookmarks.html"*/,
-        }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__providers_auth_auth__["a" /* AuthProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_auth_auth__["a" /* AuthProvider */]) === "function" && _d || Object])
-    ], BookmarksPage);
-    return BookmarksPage;
-    var _a, _b, _c, _d;
-}());
-
-//# sourceMappingURL=bookmarks.js.map
-
-/***/ }),
-
 /***/ 111:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -286,9 +285,10 @@ var HelpPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-help',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/help/help.html"*/'<ion-header>\n\n    <ion-navbar>\n        <ion-buttons end>\n            <button ion-button menuToggle>\n              <ion-icon name="menu"></ion-icon>\n            </button>\n            </ion-buttons>\n             \n            <ion-title>\n                Hilfe \n              </ion-title>\n      <ion-buttons start>\n  <ng-template [ngIf]="this.auth.isInRole(\'authenticated user\')" [ngIfElse]="headerOut">\n              <button ion-button (click)="this.gotoLogin()">\n                  <img class="avatar" src="{{this.auth.user.picture}}"> {{auth.user.name}}        \n                </button>\n  </ng-template>      \n  <ng-template #headerOut>\n              <button ion-button (click)="this.gotoLogin()">\n              <ion-icon name="contact"></ion-icon>  {{auth.user.name}}\n              </button>\n  </ng-template>\n      </ion-buttons>    \n    </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n\n    \n    <div *ngIf="auth.isInRole(\'anonymous user\')">\n    \n        <ion-label color="danger"><h2>Nur auf AWRI angemeldete Benutzer haben Zugriff auf erweiterte Funktionen!</h2></ion-label>\n         <ion-label>Anonyme Rechtsfragen stellen</ion-label>\n            <ion-label>Rechtsfragen kommentieren</ion-label>\n            <ion-label>Hilfe ein/ausschalten</ion-label>\n            <ion-label>Rechtsfragen  bewerten(In Kürze)</ion-label>\n            <ion-label>Lesezeichen setzen(In Kürze)</ion-label>\n   \n        </div>   \n\n        <div class="help">   \n            <ion-item>\n                  <ion-label text-wrap>Sie können die angezeigte Hilfe in den Einstellungen ausschalten.</ion-label>\n            </ion-item>         \n        </div>\n    <br>\n\n        <div class="help">   \n                <a href="https://www.facebook.com/groups/RechtsberatungSchweiz/" target="_BLANK">  \n                <ion-item>\n                      <ion-icon name="logo-facebook" item-start></ion-icon>\n                      <ion-label text-wrap>\n                         <h2>Rechtsforum Schweiz</h2>\n                         <p>Die Facebookgruppe wurde 2015 gegründet um Personen die sich keinen Anwalt leisten können bei juristischen Fragen zu unterstützen.</p>\n                         <p>Alle AWRI Fragen wurden durch die Mitglieder dieser Gruppe gestellt und beantwortet.</p>\n                         <h3>Wir danken allen Mitgliedern des Rechtsforum Schweiz ❤️lich für Ihre Unterstützung!</h3>\n                        </ion-label>\n                   </ion-item>\n                  </a>\n                  <br>\n                  <a href="{{auth.HOST}}" target="_BLANK">  \n                  <ion-item>\n                      <ion-icon name="rechzapp-awri" item-start></ion-icon>\n                      <ion-label text-wrap>\n                         <h2>AWRI (Alles was Recht ist)</h2>\n                         <p>Die AWRI Datenbank für Rechtsfragen wurde 2015 erstellt um die Verwaltung und Administration der gestellten Fragen zu erleichtern.</p>\n                         <p>In dieser Datenbank werden alle Rechtsfragen und Antworten des Rechtsforum Schweiz ausgewertet und freigeschalten.</p>\n                        </ion-label>\n                   </ion-item>\n                   </a>\n                  <br>        \n                  <a href="https://www.facebook.com/Rechtshilfeforum/" target="_BLANK">  \n                  <ion-item>\n                      <ion-icon name="logo-facebook" item-start></ion-icon>\n                      <ion-label text-wrap>\n                         <h2>AWRI Ratgeber</h2>\n                         <p>Facebook Seite, auf der von Zeit zu Zeit die interessantesten und meist gefragten Beiträge aus dem Rechtsforum Schweiz veröffentlicht werden.</p>\n                        </ion-label>\n                   </ion-item>  \n                   </a>\n          </div>\n\n    <ion-card>\n        <ion-card-header><h2>AWRI Statistik ({{this.auth.stats?.updated}})</h2></ion-card-header>\n        <ion-card-content>\n            <ion-label>AWRI Benutzer {{this.auth.stats?.users}}</ion-label>\n            <ion-label>Rechtsfragen {{this.auth.stats?.nodesc}}/{{this.auth.stats?.nodes}}</ion-label>\n            <ion-label>Antworten {{this.auth.stats?.commentsc}}/{{this.auth.stats?.comments}}</ion-label>\n            <ion-label>Hinweise auf  Art. OR {{this.auth.stats?.ors}}</ion-label>\n            <ion-label>Hinweise auf ZGB {{this.auth.stats?.zgbs}}</ion-label>\n             <ion-label>Hinweise auf BGE {{this.auth.stats?.bges}}</ion-label>\n        </ion-card-content>\n      </ion-card>\n\n      <ion-label color="danger" text-wrap><h3>Wir haben unser System erneuert, die gewohnte AWRI Seite finden Sie nun hier: <a href="https://stage.awri.ch" target="_new">https://stage.awri.ch</a></h3></ion-label>\n\n      <div class="mobile-fab"><ion-label color="primary" text-wrap>Bitte noch etwas Geduld, weitere Updates folgen in Kürze... </ion-label></div>\n    \n  <!--\n  <ion-card>\n      <ion-card-header class="cardheader">\n          CNC 10\n        </ion-card-header> \n    \n    <ion-card-content>\n      Content\n      </ion-card-content>\n      <ion-row>\n      <ion-segment [(ngModel)]="pet" (click)="test()">\n    <ion-segment-button value="profil">\n      Profil\n    </ion-segment-button>\n    <ion-segment-button value="facebook">\n      Facebook\n    </ion-segment-button>\n    <ion-segment-button value="awri">\n       AWRI\n      </ion-segment-button>\n  </ion-segment>\n</ion-row>\n\n</ion-card>\n-->\n</ion-content>\n'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/help/help.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__["a" /* AuthProvider */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__["a" /* AuthProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__["a" /* AuthProvider */]) === "function" && _c || Object])
     ], HelpPage);
     return HelpPage;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=help.js.map
@@ -304,7 +304,7 @@ var HelpPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_login_login__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_bookmarks_bookmarks__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_bookmarks_bookmarks__ = __webpack_require__(109);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -354,10 +354,9 @@ var SettingsPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-settings',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/settings/settings.html"*/'<ion-header>\n\n    <ion-navbar>\n        <ion-buttons end>\n            <button ion-button menuToggle>\n              <ion-icon name="menu"></ion-icon>\n            </button>\n            </ion-buttons>\n             \n            <ion-title>\n                Einstellungen\n              </ion-title>\n      <ion-buttons start>\n  <ng-template [ngIf]="this.awri.isInRole(\'authenticated user\')" [ngIfElse]="headerOut">\n              <button ion-button (click)="this.gotoLogin()">\n                  <img class="avatar" src="{{this.awri.user.picture}}"> {{awri.user?.name}}        \n                </button>\n  </ng-template>      \n  <ng-template #headerOut>\n              <button ion-button (click)="this.gotoLogin()">\n              <ion-icon name="contact"></ion-icon>  {{this.awri.user?.name}}\n              </button>\n  </ng-template>\n      </ion-buttons>    \n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <ion-item>\n    <ion-label>Verbunden mit: {{awri.HOST}}</ion-label>\n  </ion-item>\n  <ion-item>\n    <ion-label>Hilfe ein/aus</ion-label>\n    <ion-toggle [(ngModel)]="help" (ionChange)="helpChanged(this);" [disabled]="this.awri.isInRole(\'anonymous user\')"></ion-toggle>\n  </ion-item>\n\n<ion-item>\n    <ion-label item-start>Ihre Lesezeichen</ion-label>\n  <button ion-button (click)="this.gotoBookmarks()" item-end>Ansehen</button>\n</ion-item>\n\n  <drupal7-login></drupal7-login>\n\n</ion-content>\n'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/settings/settings.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__["a" /* AuthProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__["a" /* AuthProvider */]) === "function" && _c || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__["a" /* AuthProvider */]])
     ], SettingsPage);
     return SettingsPage;
-    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=settings.js.map
@@ -986,11 +985,11 @@ webpackEmptyAsyncContext.id = 123;
 
 var map = {
 	"../pages/bookmarks/bookmarks.module": [
-		296,
+		295,
 		6
 	],
 	"../pages/create/create.module": [
-		295,
+		296,
 		5
 	],
 	"../pages/help/help.module": [
@@ -1038,9 +1037,9 @@ module.exports = webpackAsyncContext;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(87);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(85);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_upload_upload__ = __webpack_require__(85);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_upload_upload__ = __webpack_require__(86);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_auth_auth__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_view_view__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_login_login__ = __webpack_require__(27);
@@ -1187,7 +1186,7 @@ var HomePage = /** @class */ (function () {
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/home/home.html"*/'<ion-header>\n\n    <ion-navbar>\n        <ion-buttons end>\n            <button ion-button menuToggle>\n              <ion-icon name="menu"></ion-icon>\n            </button>\n            </ion-buttons>\n             \n            <ion-title>\n              <img src="assets/imgs/logo.png" class="avatar">  AWRI\n              </ion-title>\n      <ion-buttons start>\n  <ng-template [ngIf]="this.auth.isInRole(\'authenticated user\')" [ngIfElse]="headerOut">\n              <button ion-button (click)="this.gotoLogin()">\n                  <img class="avatar" src="{{this.auth.user.picture}}"> {{auth.user?.name}}        \n                </button>\n  </ng-template>      \n  <ng-template #headerOut>\n              <button ion-button (click)="this.gotoLogin()">\n              <ion-icon name="contact"></ion-icon>  {{auth.user?.name}}\n              </button>\n  </ng-template>\n      </ion-buttons>    \n    </ion-navbar>\n\n</ion-header>\n   \n   <ion-content padding>  \n\n        <div *ngIf="auth.isInRole(\'anonymous user\')">\n                <ion-item text-wrap>\n            <ion-label color="danger"><h2>Sie sind nicht angemeldet!</h2>\n                <p>Klicken sie oben Rechts auf <ion-icon name="contact"></ion-icon> um sich auf AWRI zu registrieren oder anzumelden.</p>\n                </ion-label>\n                </ion-item>\n        </div>  \n        \n      <div class="help">\n        <ion-item>\n            <ion-label text-wrap>\n                    <h2>Sie haben ein rechtliches Problem und benötigen Rat?</h2>\n                    <p>Das AWRI System wurde 2015 entwickelt um Personen, die juristischen Rat suchen bestmöglich zu unterstützen.</p>\n                    <p>Suchen sie in unserer Datenbank in rund {{auth.stats?.nodesc}} bereinigten Rechtsfragen mit {{auth.stats?.commentsc}} Antworten nach einer Lösung.</p>\n                    <h2>Sie haben keine passende Lösung gefunden?</h2>\n                    <p>Stellen sie eine neue Rechtsfrage in der Facebookgruppe  <a href="https://www.facebook.com/groups/RechtsberatungSchweiz/" target="_BLANK"> Rechtsforum Schweiz</a>.</p>\n                    <p>Die erfahrenen Mitglieder unserer Facebook Gruppe werden versuchen ihnen zu helfen und Ihnen unverbindliche Ratschläge geben.</p>        \n                    <h2>Sie möchten mitmachen?</h2>\n                    <p>Dann treten sie unserer Facebookgruppe  <a href="https://www.facebook.com/groups/RechtsberatungSchweiz/" target="_BLANK"> Rechtsforum Schweiz</a> bei.\n                    Wir freuen uns immer auf kompetente und erfahrene Mitstreiter. ❤️</p>\n            \n                </ion-label> \n        </ion-item>    \n      </div>\n<br>\n     <div *ngIf="help" class="help">   \n      <a href="https://www.facebook.com/groups/RechtsberatungSchweiz/" target="_BLANK">  \n      <ion-item>\n            <ion-icon name="logo-facebook" item-start></ion-icon>\n            <ion-label text-wrap>\n               <h2>Rechtsforum Schweiz</h2>\n               <p>Facebookgruppe mit über 8000 Mitgliedern</p>\n               <p>Alle Fragen wurden durch die Mitglieder dieser Gruppe beantwortet</p>\n              </ion-label>\n         </ion-item>\n        </a>\n        <br>\n        <a href="{{auth.HOST}}" target="_BLANK">  \n        <ion-item>\n            <ion-icon name="rechzapp-awri" item-start></ion-icon>\n            <ion-label text-wrap>\n               <h2>AWRI (Alles was Recht ist)</h2>\n               <p>Datenbank für Rechtsfragen</p>\n               <p>In dieser Datenbank werden Rechtsfragen und Antworten ausgewertet und freigeschalten.</p>\n              </ion-label>\n         </ion-item>\n         </a>\n        <br>        \n        <a href="https://www.facebook.com/Rechtshilfeforum/" target="_BLANK">  \n        <ion-item>\n            <ion-icon name="logo-facebook" item-start></ion-icon>\n            <ion-label text-wrap>\n               <h2>AWRI Ratgeber</h2>\n               <p>Facebook Seite, auf der von Zeit zu Zeit die interessantesten und meist gefragten Beiträge aus dem Rechtsforum Schweiz veröffentlicht werden.</p>\n              </ion-label>\n         </ion-item>  \n         </a>\n</div>\n\n    <ion-list *ngFor="let n of this.nodes">\n      <ion-card>  \n        <ion-item><p>{{n.created*1000 | date: \'dd.MM.yyyy H:mm\' }} </p></ion-item>\n        <ion-card-content text-wrap (click)="this.frageSelected(n)"><h2>{{n.title}}</h2></ion-card-content>\n      </ion-card>\n      </ion-list>\n      <ion-infinite-scroll (ionInfinite)="doInfinite($event)">\n          <ion-infinite-scroll-content></ion-infinite-scroll-content>\n        </ion-infinite-scroll>\n\n    <ion-fab right bottom class="web-fab">\n        <button ion-fab icon-only color="primary" (click)="checkPlatform()">\n          <ion-icon name="help"></ion-icon>\n        </button>\n       </ion-fab>\n       \n       <ion-fab right top edge class="mobile-fab">\n        <button ion-fab icon-only color="primary" (click)="checkPlatform()">\n          <ion-icon name="help"></ion-icon>\n        </button>\n       </ion-fab>\n\n   </ion-content>'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/home/home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/home/home.html"*/'<ion-header>\n\n    <ion-navbar>\n        <ion-buttons end>\n            <button ion-button menuToggle>\n              <ion-icon name="menu"></ion-icon>\n            </button>\n            </ion-buttons>\n             \n            <ion-title>\n              <img src="assets/imgs/logo.png" class="avatar">  AWRI\n              </ion-title>\n      <ion-buttons start>\n  <ng-template [ngIf]="this.auth.isInRole(\'authenticated user\')" [ngIfElse]="headerOut">\n              <button ion-button (click)="this.gotoLogin()">\n                  <img class="avatar" src="{{this.auth.user.picture}}"> {{auth.user?.name}}        \n                </button>\n  </ng-template>      \n  <ng-template #headerOut>\n              <button ion-button (click)="this.gotoLogin()">\n              <ion-icon name="contact"></ion-icon>  {{auth.user?.name}}\n              </button>\n  </ng-template>\n      </ion-buttons>    \n    </ion-navbar>\n\n</ion-header>\n   \n   <ion-content padding>  \n\n        <div *ngIf="auth.isInRole(\'anonymous user\')">\n                <ion-item text-wrap>\n            <ion-label color="danger"><h2>Sie sind nicht angemeldet!</h2>\n                <p>Klicken sie oben Rechts auf <ion-icon name="contact"></ion-icon> um sich auf AWRI zu registrieren oder anzumelden.</p>\n                </ion-label>\n                </ion-item>\n        </div>  \n        \n      <div class="help">\n        <ion-item>\n            <ion-label text-wrap>\n                    <h2>Sie haben ein rechtliches Problem und benötigen Rat?</h2>\n                    <p>Das AWRI System wurde 2015 entwickelt um Personen, die juristischen Rat suchen bestmöglich zu unterstützen.</p>\n                    <p>Suchen sie in unserer Datenbank in rund {{auth.stats?.nodesc}} bereinigten Rechtsfragen mit {{auth.stats?.commentsc}} Antworten nach einer Lösung.</p>\n                    <h2>Sie haben keine passende Lösung gefunden?</h2>\n                    <p>Stellen sie eine neue Rechtsfrage in der Facebookgruppe  <a href="https://www.facebook.com/groups/RechtsberatungSchweiz/" target="_BLANK"> Rechtsforum Schweiz</a>.</p>\n                    <p>Die erfahrenen Mitglieder unserer Facebook Gruppe werden versuchen ihnen zu helfen und Ihnen unverbindliche Ratschläge geben.</p>        \n                    <h2>Sie möchten mitmachen?</h2>\n                    <p>Dann treten sie unserer Facebookgruppe  <a href="https://www.facebook.com/groups/RechtsberatungSchweiz/" target="_BLANK"> Rechtsforum Schweiz</a> bei.\n                    Wir freuen uns immer auf kompetente und erfahrene Mitstreiter. ❤️</p>\n            \n                </ion-label> \n        </ion-item>    \n      </div>\n<br>\n     <div *ngIf="help" class="help">   \n      <a href="https://www.facebook.com/groups/RechtsberatungSchweiz/" target="_BLANK">  \n      <ion-item>\n            <ion-icon name="logo-facebook" item-start></ion-icon>\n            <ion-label text-wrap>\n               <h2>Rechtsforum Schweiz</h2>\n               <p>Facebookgruppe mit über 8000 Mitgliedern</p>\n               <p>Alle Fragen wurden durch die Mitglieder dieser Gruppe beantwortet</p>\n              </ion-label>\n         </ion-item>\n        </a>\n        <br>\n        <a href="{{auth.HOST}}" target="_BLANK">  \n        <ion-item>\n            <ion-icon name="rechzapp-awri" item-start></ion-icon>\n            <ion-label text-wrap>\n               <h2>AWRI (Alles was Recht ist)</h2>\n               <p>Datenbank für Rechtsfragen</p>\n               <p>In dieser Datenbank werden Rechtsfragen und Antworten ausgewertet und freigeschalten.</p>\n              </ion-label>\n         </ion-item>\n         </a>\n        <br>        \n        <a href="https://www.facebook.com/Rechtshilfeforum/" target="_BLANK">  \n        <ion-item>\n            <ion-icon name="logo-facebook" item-start></ion-icon>\n            <ion-label text-wrap>\n               <h2>AWRI Ratgeber</h2>\n               <p>Facebook Seite, auf der von Zeit zu Zeit die interessantesten und meist gefragten Beiträge aus dem Rechtsforum Schweiz veröffentlicht werden.</p>\n              </ion-label>\n         </ion-item>  \n         </a>\n</div>\n\n    <ion-list *ngFor="let n of this.nodes">\n      <ion-card>  \n        <ion-item><p>{{n.created*1000 | date: \'dd.MM.yyyy H:mm\' }} </p></ion-item>\n        <ion-card-content text-wrap (click)="this.frageSelected(n)"><h2>{{n.title}}</h2></ion-card-content>\n      </ion-card>\n      </ion-list>\n      <ion-infinite-scroll (ionInfinite)="doInfinite($event)">\n          <ion-infinite-scroll-content></ion-infinite-scroll-content>\n        </ion-infinite-scroll>\n\n    <ion-fab right bottom class="web-fab">\n        <button ion-fab icon-only color="primary" (click)="checkPlatform()">\n          <ion-icon name="help"></ion-icon>\n        </button>\n       </ion-fab>\n       \n       <ion-fab right top edge class="mobile-fab">\n        <button ion-fab icon-only color="primary" (click)="checkPlatform()">\n          <ion-icon name="help"></ion-icon>\n        </button>\n       </ion-fab>\n   </ion-content>\n   <ion-footer>\n        <ion-toolbar>             \n          <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://awri.ch" target="_BLANK"><button ion-button><ion-icon name="logo-linkedin"></ion-icon></button></a>\n          <a href="https://twitter.com/intent/tweet?status=Rechtliche Fragen lösen. Machen auch sie mit: https://awri.ch" target="_BLANK"><button ion-button><ion-icon name="logo-twitter"></ion-icon></button></a>\n          <a href="https://www.facebook.com/sharer/sharer.php?u=https://awri.ch" target="_BLANK"><button ion-button><ion-icon name="logo-facebook"></ion-icon></button></a>\n        </ion-toolbar>\n      </ion-footer>\n\n'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/home/home.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_4__components_upload_upload__["a" /* UploadComponent */], __WEBPACK_IMPORTED_MODULE_8__ionic_native_admob_free__["a" /* AdMobFree */],
             __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_5__providers_auth_auth__["a" /* AuthProvider */]])
@@ -1206,7 +1205,7 @@ var HomePage = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SearchPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(87);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(85);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_view_view__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_login_login__ = __webpack_require__(27);
@@ -1492,13 +1491,13 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(211);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_list_list__ = __webpack_require__(292);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_settings_settings__ = __webpack_require__(112);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_create_create__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_create_create__ = __webpack_require__(110);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_register_register__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_login_login__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_help_help__ = __webpack_require__(111);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_view_view__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_search_search__ = __webpack_require__(213);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_bookmarks_bookmarks__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_bookmarks_bookmarks__ = __webpack_require__(109);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__ionic_native_status_bar__ = __webpack_require__(209);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__ionic_native_splash_screen__ = __webpack_require__(210);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__angular_common_http__ = __webpack_require__(35);
@@ -1506,7 +1505,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_drupal7_login_drupal7_login__ = __webpack_require__(293);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__ionic_native_admob_free__ = __webpack_require__(212);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__ionic_native_camera__ = __webpack_require__(167);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_upload_upload__ = __webpack_require__(85);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_upload_upload__ = __webpack_require__(86);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__ionic_storage__ = __webpack_require__(165);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__components_comment_comment__ = __webpack_require__(214);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__providers_stats_stats__ = __webpack_require__(294);
@@ -1569,8 +1568,8 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* MyApp */], {}, {
                     links: [
-                        { loadChildren: '../pages/create/create.module#CreatePageModule', name: 'CreatePage', segment: 'create', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/bookmarks/bookmarks.module#BookmarksPageModule', name: 'BookmarksPage', segment: 'bookmarks', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/create/create.module#CreatePageModule', name: 'CreatePage', segment: 'create', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/help/help.module#HelpPageModule', name: 'HelpPage', segment: 'help', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/register/register.module#RegisterPageModule', name: 'RegisterPage', segment: 'register', priority: 'low', defaultHistory: [] },
@@ -1707,7 +1706,7 @@ var LoginPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_home_home__ = __webpack_require__(211);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_settings_settings__ = __webpack_require__(112);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_create_create__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_create_create__ = __webpack_require__(110);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_help_help__ = __webpack_require__(111);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_search_search__ = __webpack_require__(213);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1969,7 +1968,7 @@ var StatsProvider = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(87);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(85);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__login_login__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_auth_auth__ = __webpack_require__(12);
@@ -2112,7 +2111,7 @@ var RegisterPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 85:
+/***/ 86:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
