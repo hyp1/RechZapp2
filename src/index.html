@@ -91,6 +91,12 @@
 
   <script type="text/javascript" charset="utf-8">
     openFB.init({appId:'126766317359254',scope:'email'});  
+    
+    function onDeviceReady() {
+        // Now safe to use device APIs
+        // navigator.splashscreen.show();
+        navigator.splashscreen.hide();
+    }
     </script>
 </body>
 </html>
