@@ -32,7 +32,7 @@ import { CommentComponent } from '../components/comment/comment';
 
 import { StatsProvider } from '../providers/stats/stats';
 
-import { BookmarkComponent } from '../components/bookmark/bookmark';
+//import { BookmarkComponent } from '../components/bookmark/bookmark';
 
 
 @NgModule({
@@ -51,7 +51,7 @@ import { BookmarkComponent } from '../components/bookmark/bookmark';
    Drupal7LoginComponent,
    UploadComponent,
    CommentComponent,
-   BookmarkComponent 
+  // BookmarkComponent 
  ],
 
  imports: [
@@ -74,6 +74,7 @@ import { BookmarkComponent } from '../components/bookmark/bookmark';
    ViewPage,
    SearchPage,
    BookmarksPage,
+  // BookmarkComponent,
    Drupal7LoginComponent,
    
  ],
@@ -87,7 +88,7 @@ import { BookmarkComponent } from '../components/bookmark/bookmark';
     UploadComponent,
     Camera,
     CommentComponent,
-    BookmarkComponent,
+   // BookmarkComponent,
     StatsProvider
  ]
 })
