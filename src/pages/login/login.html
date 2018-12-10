@@ -42,6 +42,10 @@
       
         <ion-label>Sie sind als {{awri.user.name}} angemeldet</ion-label>        
       </ion-item>
+      <ion-item>
+          <ion-label item-start>Ihre Lesezeichen</ion-label>
+        <button ion-button (click)="this.gotoBookmarks()" item-end>Ansehen</button>
+      </ion-item>
         <button ion-button round lightgray full  (click)="this.awri.logout()">Abmelden</button>
 
 </ng-template>      

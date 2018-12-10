@@ -21,6 +21,7 @@ export class AuthProvider {
 
 //  public  HOST='http://localhost/stage.awri.ch';
 //  public  ENDPOINT='drupalgap';
+
   public  HOST='https://stage.awri.ch';
   public  ENDPOINT='drupalgap';
 
@@ -565,7 +566,6 @@ let options:any = {
     return uri.replace('public://attachments/',this.HOST+'/sites/default/files/attachments/');
 };
 
- 
 
 getStats(){
   return new Promise(resolve=>{

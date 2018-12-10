@@ -8,7 +8,6 @@ import { LoginPage } from '../login/login';
 import { AuthProvider } from '../../providers/auth/auth';
 
 
-
 @IonicPage()
 @Component({
   selector: 'page-view',

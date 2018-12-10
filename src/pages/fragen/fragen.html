@@ -1,0 +1,78 @@
+<ion-header>
+    <ion-navbar>
+        <ion-buttons end>
+            <button ion-button menuToggle>
+              <ion-icon name="menu"></ion-icon>
+            </button>
+            </ion-buttons>
+             
+            <ion-title>
+              <img src="assets/imgs/logo.png" class="avatar">  AWRI
+              </ion-title>
+      <ion-buttons start>
+  <ng-template [ngIf]="this.auth.isInRole('authenticated user')" [ngIfElse]="headerOut">
+              <button ion-button (click)="this.gotoLogin()">
+                  <img class="avatar" src="{{this.auth.user.picture}}"> {{auth.user?.name}}        
+                </button>
+  </ng-template>      
+  <ng-template #headerOut>
+              <button ion-button (click)="this.gotoLogin()">
+              <ion-icon name="contact"></ion-icon>  {{auth.user?.name}}
+              </button>
+  </ng-template>
+      </ion-buttons>    
+    </ion-navbar>
+</ion-header>
+   
+   <ion-content padding>  
+
+        <div *ngIf="auth.isInRole('anonymous user')">
+                <ion-item text-wrap>
+            <ion-label color="danger"><h2>Sie sind nicht angemeldet!</h2>
+                <p>Klicken sie oben Rechts auf <ion-icon name="contact"></ion-icon> um sich auf AWRI zu registrieren oder anzumelden.</p>
+                </ion-label>
+                </ion-item>
+        </div>  
+        
+      <div *ngIf="help" class="help">
+        <ion-item>
+     
+          <ion-label text-wrap>
+              <h2><strong>{{auth.stats?.nodesc}}</strong> Rechtsfragen</h2>
+                    <p>Scrollen sie durch chronologische Liste der Rechtsfragen.</p>
+                    <p>Rechtsfragen vom 23. Feb. 2015 bis  <strong>{{auth.stats?.updated}}</strong></p>
+                </ion-label> 
+        </ion-item>    
+      </div>
+<br>
+   
+    <ion-list *ngFor="let n of this.nodes">
+      <ion-card>  
+        <ion-item><p>{{n.created*1000 | date: 'dd.MM.yyyy H:mm' }} </p></ion-item>
+        <ion-card-content text-wrap (click)="this.frageSelected(n)"><h2>{{n.title}}</h2></ion-card-content>
+      </ion-card>
+      </ion-list>
+      <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+          <ion-infinite-scroll-content></ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+
+    <ion-fab right bottom class="web-fab">
+        <button ion-fab icon-only color="primary" (click)="checkPlatform()">
+          <ion-icon name="help"></ion-icon>
+        </button>
+       </ion-fab>
+       
+       <ion-fab right top edge class="mobile-fab">
+        <button ion-fab icon-only color="primary" (click)="checkPlatform()">
+          <ion-icon name="help"></ion-icon>
+        </button>
+       </ion-fab>
+   </ion-content>
+   <ion-footer>
+        <ion-toolbar>             
+          <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://awri.ch" target="_BLANK"><button ion-button><ion-icon name="logo-linkedin"></ion-icon></button></a>
+          <a href="https://twitter.com/intent/tweet?status=Rechtliche Fragen lösen. Machen auch sie mit: https://awri.ch" target="_BLANK"><button ion-button><ion-icon name="logo-twitter"></ion-icon></button></a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://awri.ch" target="_BLANK"><button ion-button><ion-icon name="logo-facebook"></ion-icon></button></a>
+        </ion-toolbar>
+      </ion-footer>
+

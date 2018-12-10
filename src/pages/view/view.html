@@ -72,11 +72,10 @@
                   <ion-segment-button value="awri">
                         <a href="{{this.awri.HOST}}/node/{{item.node.nid}}" title="Beitrag auf AWRI ansehen" target="new"> <ion-icon name="link"></ion-icon></a>     
                     </ion-segment-button>
-                    <!--
+                
                     <ion-segment-button value="bookmark">
                     <bookmark [nid]="item.node.nid"></bookmark>
                     </ion-segment-button>
-                    -->
                 </ion-segment>
             
               </ion-row>
@@ -87,7 +86,7 @@
        <img src="{{this.awri.getImagePath(image.uri)}}">
         </p>
 <p *ngFor="let comment of comments | async">
-  <ion-card>
+  <ion-card class="answers">
         <ion-card-content>
     <ion-item text-wrap>
         <h2><strong>{{comment.subject}}</strong></h2>  <h2 innerHTML="{{comment.comment_body['und'][0].safe_value}}"></h2> 

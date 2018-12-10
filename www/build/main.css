@@ -25722,8 +25722,7 @@ ion-navbar.toolbar {
 }
 
 div.help ion-item {
-  background-color: #89eaa6;
-  color: white;
+  background-color: #e1ecff;
   border-radius: 5px;
 }
 
@@ -25746,6 +25745,24 @@ ion-icon[class*="rechzapp-"] {
 ion-icon[class*="rechzapp-awri"] {
   -webkit-mask-image: url("../assets/icon/awri.svg");
   mask-image: url("../assets/icon/awri.svg");
+}
+
+@media (max-width: 576px) {
+  page-fragen ion-card-content {
+    font-size: 2rem !important;
+  }
+}
+
+@media (max-width: 820px) {
+  page-fragen .mobile-fab {
+    display: none;
+  }
+}
+
+@media (min-width: 820px) {
+  page-fragen .web-fab {
+    display: none;
+  }
 }
 
 @media (max-width: 576px) {
@@ -25786,4 +25803,8 @@ ion-icon[class*="rechzapp-awri"] {
 
 .card:hover {
   cursor: pointer;
+}
+
+page-view .answer, page-view strong {
+  color: #003fae;
 }

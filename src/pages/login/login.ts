@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
 import { RegisterPage } from '../../pages/register/register';
-
+import { BookmarksPage } from '../../pages/bookmarks/bookmarks';
 
 @IonicPage()
 @Component({
@@ -54,5 +54,10 @@ logout(){
       console.log(err);
   });   
 };
+
+
+gotoBookmarks(){
+  this.navCtrl.push(BookmarksPage);
+}
 
 }

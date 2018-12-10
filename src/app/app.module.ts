@@ -14,6 +14,7 @@ import { HelpPage } from '../pages/help/help';
 import { ViewPage } from '../pages/view/view';
 import { SearchPage } from '../pages/search/search';
 import { BookmarksPage } from '../pages/bookmarks/bookmarks';
+import { FragenPage } from '../pages/fragen/fragen';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -32,7 +33,8 @@ import { CommentComponent } from '../components/comment/comment';
 
 import { StatsProvider } from '../providers/stats/stats';
 
-//import { BookmarkComponent } from '../components/bookmark/bookmark';
+import { BookmarkComponent } from '../components/bookmark/bookmark';
+
 
 
 @NgModule({
@@ -48,10 +50,11 @@ import { StatsProvider } from '../providers/stats/stats';
    ViewPage,
    SearchPage,
    BookmarksPage,
+   FragenPage,
    Drupal7LoginComponent,
    UploadComponent,
    CommentComponent,
-  // BookmarkComponent 
+   BookmarkComponent 
  ],
 
  imports: [
@@ -74,7 +77,8 @@ import { StatsProvider } from '../providers/stats/stats';
    ViewPage,
    SearchPage,
    BookmarksPage,
-  // BookmarkComponent,
+   FragenPage,
+   BookmarkComponent,
    Drupal7LoginComponent,
    
  ],
@@ -88,7 +92,7 @@ import { StatsProvider } from '../providers/stats/stats';
     UploadComponent,
     Camera,
     CommentComponent,
-   // BookmarkComponent,
+    BookmarkComponent,
     StatsProvider
  ]
 })

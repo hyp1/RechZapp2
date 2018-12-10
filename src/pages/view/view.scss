@@ -1,3 +1,6 @@
 page-view {
 
+    .answer , strong{
+        color:darken(color($colors, primary),30)
+    }
 }

@@ -13,11 +13,12 @@ import { CreatePage } from '../pages/create/create';
 import { HelpPage } from '../pages/help/help';
 import { SearchPage } from '../pages/search/search';
 //import { ListPage } from '../pages/list/list';
-import { BookmarksPage } from '../pages/bookmarks/bookmarks';
+import { FragenPage } from '../pages/fragen/fragen';
 
 @Component({
   templateUrl: 'app.html'
 })
+
 
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
@@ -33,6 +34,7 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'AWRI', component: HomePage },
+      { title: 'Rechtsfragen', component: FragenPage },
       { title: 'Suchen', component: SearchPage },
       { title: 'Frage stellen', component: CreatePage },
       { title: 'Einstellungen', component: SettingsPage },

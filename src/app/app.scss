@@ -58,8 +58,8 @@
 }
 
 div.help ion-item{
-   background-color:lighten(color($colors, secondary),20);
-   color: white;
+   background-color:lighten(color($colors, primary),30);
+ //  color: white;
    border-radius: 5px;
 }
 div.help a{

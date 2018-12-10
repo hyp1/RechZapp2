@@ -4,6 +4,7 @@ import { ViewPage } from './view';
 import { AuthProvider } from '../../providers/auth/auth';
 import { CommentComponent } from '../../components/comment/comment';
 import { BookmarkComponent } from '../../components/bookmark/bookmark';
+
 @NgModule({
   declarations: [
     ViewPage,
