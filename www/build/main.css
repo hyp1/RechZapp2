@@ -25748,6 +25748,24 @@ ion-icon[class*="rechzapp-awri"] {
 }
 
 @media (max-width: 576px) {
+  page-admin ion-card-content {
+    font-size: 2rem !important;
+  }
+}
+
+@media (max-width: 820px) {
+  page-admin .mobile-fab {
+    display: none;
+  }
+}
+
+@media (min-width: 820px) {
+  page-admin .web-fab {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
   page-fragen ion-card-content {
     font-size: 2rem !important;
   }

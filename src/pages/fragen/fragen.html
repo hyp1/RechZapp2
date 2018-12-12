@@ -7,7 +7,7 @@
             </ion-buttons>
              
             <ion-title>
-              <img src="assets/imgs/logo.png" class="avatar">  AWRI
+              Rechtsfragen
               </ion-title>
       <ion-buttons start>
   <ng-template [ngIf]="this.auth.isInRole('authenticated user')" [ngIfElse]="headerOut">
@@ -40,7 +40,7 @@
           <ion-label text-wrap>
               <h2><strong>{{auth.stats?.nodesc}}</strong> Rechtsfragen</h2>
                     <p>Scrollen sie durch chronologische Liste der Rechtsfragen.</p>
-                    <p>Rechtsfragen vom 23. Feb. 2015 bis  <strong>{{auth.stats?.updated}}</strong></p>
+                    <p>Rechtsfragen vom <strong>23.Feb.15</strong> bis <strong>{{auth.stats?.updated}}</strong></p>
                 </ion-label> 
         </ion-item>    
       </div>
@@ -50,7 +50,6 @@
       <ion-card>  
         <ion-item><p>{{n.created*1000 | date: 'dd.MM.yyyy H:mm' }} </p></ion-item>
         <ion-card-content text-wrap (click)="this.frageSelected(n)"><h2>{{n.title}}</h2></ion-card-content>
-        <bereich nid="n.nid" tid="98"></bereich>
       </ion-card>
       </ion-list>
       <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
@@ -59,21 +58,15 @@
 
     <ion-fab right bottom class="web-fab">
         <button ion-fab icon-only color="primary" (click)="checkPlatform()">
-          <ion-icon name="help"></ion-icon>
+          <strong>{{this.page}}</strong>
         </button>
        </ion-fab>
        
        <ion-fab right top edge class="mobile-fab">
         <button ion-fab icon-only color="primary" (click)="checkPlatform()">
-          <ion-icon name="help"></ion-icon>
-        </button>
+          <strong>{{this.page}}</strong>
+          </button>
        </ion-fab>
    </ion-content>
-   <ion-footer>
-        <ion-toolbar>             
-          <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://awri.ch" target="_BLANK"><button ion-button><ion-icon name="logo-linkedin"></ion-icon></button></a>
-          <a href="https://twitter.com/intent/tweet?status=Rechtliche Fragen lösen. Machen auch sie mit: https://awri.ch" target="_BLANK"><button ion-button><ion-icon name="logo-twitter"></ion-icon></button></a>
-          <a href="https://www.facebook.com/sharer/sharer.php?u=https://awri.ch" target="_BLANK"><button ion-button><ion-icon name="logo-facebook"></ion-icon></button></a>
-        </ion-toolbar>
-      </ion-footer>
+
 

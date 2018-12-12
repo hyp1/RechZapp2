@@ -15,6 +15,8 @@ import { ViewPage } from '../pages/view/view';
 import { SearchPage } from '../pages/search/search';
 import { BookmarksPage } from '../pages/bookmarks/bookmarks';
 import { FragenPage } from '../pages/fragen/fragen';
+import { AdminPage } from '../pages/admin/admin';
+
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -51,6 +53,7 @@ import { BereichComponent } from '../components/bereich/bereich';
    SearchPage,
    BookmarksPage,
    FragenPage,
+   AdminPage,
    Drupal7LoginComponent,
    UploadComponent,
    CommentComponent,
@@ -58,7 +61,7 @@ import { BereichComponent } from '../components/bereich/bereich';
    BereichComponent 
  ],
 
- 
+
  imports: [
    BrowserModule,
    IonicModule.forRoot(MyApp),
@@ -66,6 +69,7 @@ import { BereichComponent } from '../components/bereich/bereich';
    HttpClientModule
  ],
 
+ 
  bootstrap: [IonicApp],
  entryComponents: [
    MyApp,
@@ -80,10 +84,10 @@ import { BereichComponent } from '../components/bereich/bereich';
    SearchPage,
    BookmarksPage,
    FragenPage,
+   AdminPage,
    BookmarkComponent,
    Drupal7LoginComponent,
-   BereichComponent
-   
+   BereichComponent   
  ],
 
  providers: [

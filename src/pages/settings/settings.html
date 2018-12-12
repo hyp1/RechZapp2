@@ -39,7 +39,12 @@
     <ion-label item-start>Ihre Lesezeichen</ion-label>
   <button ion-button (click)="this.gotoBookmarks()" item-end>Ansehen</button>
 </ion-item>
-
+<ng-template [ngIf]="this.awri.isInRole('administrator')">
+<ion-item>
+    <ion-label item-start>Admin</ion-label>
+  <button ion-button (click)="this.gotoAdmin()" item-end>Ansehen</button>
+</ion-item>
+</ng-template>
   <drupal7-login></drupal7-login>
 
 </ion-content>

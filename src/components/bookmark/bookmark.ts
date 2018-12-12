@@ -1,6 +1,6 @@
 import { Component,Input } from '@angular/core';
 import { AuthProvider } from '../../providers/auth/auth';
-
+import {AlertController } from 'ionic-angular';
 /**
  * Generated class for the BookmarkComponent component.
  *
@@ -18,7 +18,7 @@ export class BookmarkComponent {
 color:string;
 count:number;
 isBookMark:boolean;
-  constructor(public auth:AuthProvider) {
+  constructor(public auth:AuthProvider,private alertCtrl:AlertController) {
     this.isBookMark=false;
 this.color="primary";
 this.count=0;
@@ -51,9 +51,18 @@ this.auth.getFlagCount(_nid,'bookmarks').then(data=>{
   get nid(): string { return this._nid; }
 
 
+  
   setBookmark(){
-    if(this.auth.isInRole('anonymous user'))return alert("Nur angemeldete Benutzer können Lesezeichen setzen");
-let flag=this.isBookMark?"unflag":"flag";
+    if(this.auth.isInRole('anonymous user')){
+      let alert = this.alertCtrl.create({
+        title: 'Bitte melden sie sich an!',
+        subTitle: 'Nur auf AWRI angemeldete Benutzer können Lesezeichen setzen.',
+        buttons: ['Weiter']
+      });
+      alert.present();
+      return;
+    }
+      let flag=this.isBookMark?"unflag":"flag";
 this.auth.setFlag(this._nid,'bookmarks',flag).then(data=>{
   this.isBookMark=<boolean>data;
   if(this.isBookMark)this.color="danger";

@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
 import { LoginPage } from '../../pages/login/login';
 import { BookmarksPage } from '../../pages/bookmarks/bookmarks';
+import { AdminPage } from '../../pages/admin/admin';
+
 /**
  * Generated class for the SettingsPage page.
  *
@@ -10,6 +12,7 @@ import { BookmarksPage } from '../../pages/bookmarks/bookmarks';
  * Ionic pages and navigation.
  */
 
+ 
 @IonicPage()
 @Component({
   selector: 'page-settings',
@@ -25,12 +28,12 @@ help:boolean;
   });
 
   }
-
   
 ionViewDidLoad() {
     console.log('ionViewDidLoad SettingsPage');
   }
-helpChanged(evt){
+
+  helpChanged(evt){
   //console.log(evt.help);
   this.awri.set('help',evt.help);
 }
@@ -43,6 +46,10 @@ gotoLogin(){
 
 gotoBookmarks(){
   this.navCtrl.push(BookmarksPage);
+}
+
+gotoAdmin(){
+  this.navCtrl.push(AdminPage);
 }
 
 }

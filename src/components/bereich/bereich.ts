@@ -30,7 +30,7 @@ export class BereichComponent {
     })
   }
   
-  
+
   getBereiche(){
     return new Promise((resolve,reject) => {
       const headers = new HttpHeaders().set('X-CSRF-TOKEN',<any>this.auth.token);    

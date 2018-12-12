@@ -27,7 +27,6 @@
 </ion-header>
    
    <ion-content padding>  
-      <button (click)="this.share()">message only</button>
 
         <div *ngIf="auth.isInRole('anonymous user')">
                 <ion-item text-wrap>
@@ -42,13 +41,16 @@
             <ion-label text-wrap>
                     <h2>Sie haben ein rechtliches Problem und benötigen Rat?</h2>
                     <p>Das AWRI System wurde 2015 entwickelt um Personen, die juristischen Rat suchen bestmöglich zu unterstützen.</p>
-                    <p>Suchen sie in unserer Datenbank in rund {{auth.stats?.nodesc}} bereinigten Rechtsfragen mit {{auth.stats?.commentsc}} Antworten nach einer Lösung.</p>
+                    <p>Suchen sie gezielt mit verknüpften Schlüsselwörtern in unserer Datenbank mit <strong>{{auth.stats?.nodesc}}</strong> Rechtsfragen und <strong>{{auth.stats?.commentsc}}</strong> Antworten.</p>
+                   
                     <h2>Sie haben keine passende Lösung gefunden?</h2>
-                    <p>Stellen sie eine neue Rechtsfrage in der Facebookgruppe  <a href="https://www.facebook.com/groups/RechtsberatungSchweiz/" target="_BLANK"> Rechtsforum Schweiz</a>.</p>
+                    <p>Stellen sie eine neue Rechtsfrage in der Facebookgruppe  <a href="https://www.facebook.com/groups/RechtsberatungSchweiz/" target="_BLANK"><ion-icon name="logo-facebook"></ion-icon> Rechtsforum Schweiz</a>.</p>
                     <p>Die erfahrenen Mitglieder unserer Facebook Gruppe werden versuchen ihnen zu helfen und Ihnen unverbindliche Ratschläge geben.</p>        
-                    <h2>Sie möchten mitmachen?</h2>
-                    <p>Dann treten sie unserer Facebookgruppe  <a href="https://www.facebook.com/groups/RechtsberatungSchweiz/" target="_BLANK"> Rechtsforum Schweiz</a> bei.
+                   
+                    <h2>Sie möchten mitmachen und helfen?</h2>
+                    <p>Treten sie unserer Facebookgruppe  <a href="https://www.facebook.com/groups/RechtsberatungSchweiz/" target="_BLANK"><ion-icon name="logo-facebook"></ion-icon> Rechtsforum Schweiz</a> bei.
                     Wir freuen uns immer auf kompetente und erfahrene Mitstreiter. ❤️</p>
+                    <p>Oder teilen <ion-icon name="share" (click)="share()"></ion-icon> Sie die AWRI App einfach auf Ihrer Lieblingsplatform.</p>
             
                 </ion-label> 
         </ion-item>    

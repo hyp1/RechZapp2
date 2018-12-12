@@ -338,7 +338,7 @@ let options:any = {
       username:username,
       password:password
     }
-
+    
     this.http.post(this.HOST+'/'+this.ENDPOINT+'/user/login',user,options).map(res=>res).subscribe(data => {         
 
           let vars=<any>data;
@@ -388,7 +388,7 @@ let options:any = {
   };
   
   this.http.post(this.HOST+'/'+this.ENDPOINT+'/user/logout.json',null,options).subscribe(data => {
-        console.log(data);
+    //    console.log(data);
        // let res:any=data;
        this.user={
         uid:0,
@@ -410,7 +410,7 @@ let options:any = {
   }
 
   register(username:String,password:String,email:String){
-    console.log('USER REGISTER'+username);
+  //  console.log('USER REGISTER'+username);
     return new Promise((resolve,reject) => {
        
       let headers = new HttpHeaders()
@@ -428,11 +428,11 @@ let options:any = {
       }
     
           this.http.post(this.HOST+'/'+this.ENDPOINT+'/user/register',user,options).map(res=>res).subscribe(data => {         
-            console.log(data);
+        //    console.log(data);
             let vars=<any>data;
             this.user.uid=vars.uid;
-            console.log(vars.uri);
-            console.log(this.user.uid);      
+         //   console.log(vars.uri);
+        //    console.log(this.user.uid);      
             resolve(this.user)
           }, err => {
             reject(err);
@@ -441,8 +441,7 @@ let options:any = {
     }
 
   fblogin(){
-    return new Promise((resolve,reject) => {
-      console.log("awri.fblogin()");      
+    return new Promise((resolve,reject) => {    
       openFB.login(
         function(response) {
           if (response.status === 'connected') {
@@ -485,7 +484,7 @@ let options:any = {
          // if(this.user.fbid)this.user.picture="https://graph.facebook.com/"+this.user.fbid+"/picture"
         //  console.log(this.user.fbid,"FBID");
        //   console.log(data.session_name+''+data.sessid);
-          console.log(this);
+       //   console.log(this);
           resolve(data);
         }, err => {
     //      console.log(err);
@@ -552,8 +551,6 @@ let options:any = {
     withCredentials	: true,
     };
     this.http.post(this.HOST+'/'+this.ENDPOINT+'/file.json',filedata,options).subscribe(data => {
-      console.log(data);
-  
       resolve(data);
     }, err => {
       reject(err);
@@ -562,25 +559,19 @@ let options:any = {
   }
 
 
-  getImagePath(uri):String{
+getImagePath(uri):String{
     return uri.replace('public://attachments/',this.HOST+'/sites/default/files/attachments/');
 };
 
-
 getStats(){
-  return new Promise(resolve=>{
-//    let headers = new HttpHeaders()
-//      .set('Access-Control-Allow-Origin','*').set('Content-Type', 'application/json')
-//    let options = {
-//      headers: headers,
-
-//      };
-      this.http.get(this.HOST+'/stats.txt',{ responseType: 'text'})
-     // .map(res=>res)
+  return new Promise((resolve,reject)=>{
+      this.http.get(this.HOST+'/stats.txt?'+Date.now(),{ responseType: 'text'})
       .subscribe(data=>{
         this.stats=<any>JSON.parse(data);
         console.log(this.stats,"getStatus");
       resolve(data);
+      },err=>{
+        reject(err);
       });
   })   
 }
