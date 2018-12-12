@@ -9,6 +9,8 @@ import { LoginPage } from '../../pages/login/login';
  * Ionic pages and navigation.
  */
 
+
+
 @IonicPage()
 @Component({
   selector: 'page-help',
@@ -26,7 +28,6 @@ pet:string;
 test(){
   alert(this.pet);
 }
-
 
 gotoLogin(){
 this.navCtrl.push(LoginPage);

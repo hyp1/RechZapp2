@@ -35,10 +35,19 @@
                 <ion-avatar item-start *ngIf="item.node.field_fbid?.und?.length>0">
                    <img class="avatar" src="https://graph.facebook.com/{{item.node?.field_fbid.und[0].value}}/picture"> 
                  </ion-avatar>
-                 <h2 *ngIf="item.node?.field_fbname.und" text-capitalize>{{item.node?.field_fbname.und[0].value}}</h2> 
+                 <h2 *ngIf="item.node.field_fbname?.und?.length>0" text-capitalize>{{item.node?.field_fbname.und[0].value}}</h2> 
+                 <p>{{item.node.created*1000 | date: 'dd.MM.yyyy H:mm' }}</p>
+                  </ng-template>
+            <ng-template #loggedOut>
+                    <ion-avatar item-start>
+                        <img class="avatar" src="assets/imgs/anonymous.png"> 
+                      </ion-avatar>
+                      <h2 text-capitalize>Nicht angezeigt</h2>
                 
                  <p>{{item.node.created*1000 | date: 'dd.MM.yyyy H:mm' }}</p> 
-                 <!--
+              
+    
+            <!--
                                       <ng-template [ngIf]="awri.isInRole('administrator')">
                           <a href="https://facebook.com/{{item.node?.field_fbid.und[0].value}}" target="new"><ion-icon name="contact"></ion-icon></a>
                  </ng-template>
@@ -54,9 +63,9 @@
 
                     </ng-template>
           </ion-item>
-
+                  
             <ion-item text-wrap>
-             <h2 >{{item.node.body['und'][0].value}}</h2>
+             <h2 innerHTML="{{item.node.body['und'][0].value}}"></h2>
             </ion-item>
 
             <ion-row>
@@ -72,14 +81,19 @@
                   <ion-segment-button value="awri">
                         <a href="{{this.awri.HOST}}/node/{{item.node.nid}}" title="Beitrag auf AWRI ansehen" target="new"> <ion-icon name="link"></ion-icon></a>     
                     </ion-segment-button>
-                
+                    <ion-segment-button value="share">
+                            <ion-icon name="share" (click)="shareLink()" title="Diesen Beitrag teilen"></ion-icon>
+                            </ion-segment-button>
+                    
+
                     <ion-segment-button value="bookmark">
                     <bookmark [nid]="item.node.nid"></bookmark>
                     </ion-segment-button>
                 </ion-segment>
             
               </ion-row>
-              
+              <bereich nid="{{item.node.nid}}" tid="{{item.node.field_bereiche['und'] ? item.node.field_bereiche['und'][0].tid:0}}"></bereich>
+     
         </ion-card-content>
         </ion-card>
         <p *ngFor="let image of images">        

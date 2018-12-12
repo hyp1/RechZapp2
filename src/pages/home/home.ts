@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController,Platform,AlertController } from 'ionic-angular';
+import { NavController,Platform,AlertController,ActionSheetController } from 'ionic-angular';
 //import { Observable } from 'rxjs/Observable';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import "rxjs/add/operator/map";
@@ -20,6 +20,7 @@ const bannerConfig: AdMobFreeBannerConfig = {
   //id:'ca-app-pub-7681642173883266~6820035049'
  };
 
+ declare var socialShare;
 
 @Component({
  selector: 'page-home',
@@ -34,7 +35,8 @@ pages:number;
 page:number;
 help:boolean;
  constructor(public navCtrl: NavController, upload:UploadComponent,private admobFree: AdMobFree,
-          private httpClient: HttpClient, private plt: Platform, private alertCtrl: AlertController, auth: AuthProvider) {
+          private httpClient: HttpClient, private plt: Platform, private alertCtrl: AlertController,
+          private actionSheetCtrl: ActionSheetController, auth: AuthProvider) {
 
    this.upload=upload;
    this.auth=auth;
@@ -157,6 +159,84 @@ gotoLogin(){
   } else {
     // Do stuff inside the regular browser
   }
+}
+
+share(){
+  if (this.plt.is('cordova')) {
+//    socialShare();
+    window['plugins'].socialsharing.share('Alles was Recht ist! Die Schweizer Datenbank für Rechtsfragen.', null, null, 'https://awri.ch');
+ 
+  } else {
+    //alert("share Browser");
+    this.presentShareSheet();
+    // Do stuff inside the regular browser
+  }
+}
+
+
+presentShareSheet() {
+  let actionSheet = this.actionSheetCtrl.create({
+    title: 'AWRI Teilen',
+    buttons: [
+      {
+        text: 'Facebook',
+        role: 'facebook',
+        icon: 'logo-facebook',
+        handler: () => {
+          window.open('https://www.facebook.com/sharer/sharer.php?u=https://awri.ch', '_system');      
+        }
+      },
+      {
+        text: 'Whatsapp',
+        role: 'whatsapp',
+        icon: 'logo-whatsapp',
+        handler: () => {
+          window.open('https://api.whatsapp.com/send?text=Alles was Recht ist! Die Schweizer Datenbank für Rechtsfragen. https://awri.ch', '_system');
+        }
+      },
+      {
+        text: 'LinkedIn',
+        role: 'linkedin',
+        icon: 'logo-linkedin',
+        handler: () => {
+          window.open('https://www.linkedin.com/shareArticle?mini=true&url=https://awri.ch', '_system');
+        }
+      },
+      {
+        text: 'Twitter',
+        role: 'twitter',
+        icon: 'logo-twitter',
+        handler: () => {
+          window.open('https://twitter.com/intent/tweet?status=Alles was Recht ist! Die Schweizer Datenbank für Rechtsfragen. https://awri.ch', '_system');
+        }
+      },
+      {
+        text: 'Google+',
+        role: 'google',
+        icon: 'logo-google',
+        handler: () => {
+          window.open('https://plus.google.com/share?url=https://awri.ch', '_system');
+        }
+      },
+      {
+        text: 'Email',
+        role: 'email',
+        icon: 'mail',
+        handler: () => {
+          window.open('mailto:?subject=Alles was Recht ist!&body=Die Schweizer Datenbank für Rechtsfragen. https://awri.ch', '_system');
+    
+        }
+      },
+      {
+        text: 'Schliessen',
+        role: 'cancel',
+        handler: () => {
+          console.log('Schliessen');
+        }
+      }
+    ]
+  });
+  actionSheet.present();
 }
 
 }

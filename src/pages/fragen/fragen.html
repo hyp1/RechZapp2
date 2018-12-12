@@ -50,6 +50,7 @@
       <ion-card>  
         <ion-item><p>{{n.created*1000 | date: 'dd.MM.yyyy H:mm' }} </p></ion-item>
         <ion-card-content text-wrap (click)="this.frageSelected(n)"><h2>{{n.title}}</h2></ion-card-content>
+        <bereich nid="n.nid" tid="98"></bereich>
       </ion-card>
       </ion-list>
       <ion-infinite-scroll (ionInfinite)="doInfinite($event)">

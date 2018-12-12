@@ -4,6 +4,9 @@ function scriptTest(){
     alert("HALLO scriptTest")
 }
 
+function socialShare(){
+    window.plugins.socialsharing.share('Alles was Recht ist! Die Schweizer Datenbank für Rechtsfragen.', null, null, 'https://awri.ch');
+  }
 
 
 //Browser File Select

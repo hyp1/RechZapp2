@@ -1,0 +1,10 @@
+
+  <ion-item>
+    <ion-label>Bereich</ion-label>
+
+    <ion-select [(ngModel)]="tid" name="bereich" (ionChange)="selectBereich($event)" disabled="{{!this.auth.isInRole('administrator')}}">
+
+        <ion-option *ngFor="let item of bereiche" value="{{item.tid}}" id="{{item.tid}}">{{item.name}}</ion-option>
+
+    </ion-select>
+  </ion-item>    

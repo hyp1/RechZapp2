@@ -34,7 +34,7 @@ import { CommentComponent } from '../components/comment/comment';
 import { StatsProvider } from '../providers/stats/stats';
 
 import { BookmarkComponent } from '../components/bookmark/bookmark';
-
+import { BereichComponent } from '../components/bereich/bereich';
 
 
 @NgModule({
@@ -54,9 +54,11 @@ import { BookmarkComponent } from '../components/bookmark/bookmark';
    Drupal7LoginComponent,
    UploadComponent,
    CommentComponent,
-   BookmarkComponent 
+   BookmarkComponent,
+   BereichComponent 
  ],
 
+ 
  imports: [
    BrowserModule,
    IonicModule.forRoot(MyApp),
@@ -80,6 +82,7 @@ import { BookmarkComponent } from '../components/bookmark/bookmark';
    FragenPage,
    BookmarkComponent,
    Drupal7LoginComponent,
+   BereichComponent
    
  ],
 

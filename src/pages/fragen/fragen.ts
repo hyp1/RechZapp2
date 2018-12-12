@@ -9,7 +9,10 @@ import { AuthProvider } from '../../providers/auth/auth';
 import { ViewPage } from '../view/view';
 import { LoginPage } from '../login/login';
 
+
+
 import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free';
+import { createOfflineCompileUrlResolver } from '@angular/compiler';
 
 const bannerConfig: AdMobFreeBannerConfig = {
   // add your config here
@@ -69,6 +72,7 @@ help:boolean;
  getFragen(){
   this.getFragenIndex(this.page,this.pages).then(dat=>{
     let d=<any>dat;
+console.log(d);
     for(let i=0;i<d.length;i++){
       this.nodes.push(d[i]);
       this.page++;
@@ -84,6 +88,7 @@ help:boolean;
      });
     })
 }
+
 
 getFrage(nid){
   return new Promise((resolve,reject)=>{
@@ -101,6 +106,7 @@ getFrage(nid){
       });    
 })
  
+
 }
 
 
