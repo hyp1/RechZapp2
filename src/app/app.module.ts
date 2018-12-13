@@ -16,6 +16,7 @@ import { SearchPage } from '../pages/search/search';
 import { BookmarksPage } from '../pages/bookmarks/bookmarks';
 import { FragenPage } from '../pages/fragen/fragen';
 import { AdminPage } from '../pages/admin/admin';
+import { BereichPage } from '../pages/bereich/bereich';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -54,13 +55,13 @@ import { BereichComponent } from '../components/bereich/bereich';
    BookmarksPage,
    FragenPage,
    AdminPage,
+   BereichPage,
    Drupal7LoginComponent,
    UploadComponent,
    CommentComponent,
    BookmarkComponent,
    BereichComponent 
  ],
-
 
  imports: [
    BrowserModule,
@@ -85,6 +86,7 @@ import { BereichComponent } from '../components/bereich/bereich';
    BookmarksPage,
    FragenPage,
    AdminPage,
+   BereichPage,
    BookmarkComponent,
    Drupal7LoginComponent,
    BereichComponent   

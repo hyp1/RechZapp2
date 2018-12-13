@@ -9,6 +9,7 @@ import { UploadComponent } from '../../components/upload/upload';
 import { AuthProvider } from '../../providers/auth/auth';
 import { ViewPage } from '../../pages/view/view';
 import { LoginPage } from '../../pages/login/login';
+import { BereichPage } from '../../pages/bereich/bereich';
 
 import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free';
 
@@ -20,7 +21,6 @@ const bannerConfig: AdMobFreeBannerConfig = {
   //id:'ca-app-pub-7681642173883266~6820035049'
  };
 
- declare var socialShare;
 
 @Component({
  selector: 'page-home',
@@ -34,11 +34,58 @@ upload:UploadComponent;
 pages:number;
 page:number;
 help:boolean;
+
+bereiche:Array<any>;
  constructor(public navCtrl: NavController, upload:UploadComponent,private admobFree: AdMobFree,
           private httpClient: HttpClient, private plt: Platform, private alertCtrl: AlertController,
           private actionSheetCtrl: ActionSheetController, auth: AuthProvider) {
 
-   this.upload=upload;
+
+this.bereiche=[
+  {
+  name:"Arbeit",
+  tid:93,
+  icon:"construct",
+  image:"assets/imgs/front/arbeit.jpg"
+},
+{
+  name:"Behörden/Schulen",
+  tid:99,
+  icon:"briefcase",
+  image:"assets/imgs/front/schule.jpg"
+},
+{
+  name:"Familie",
+  tid:98,
+  icon:"contacts",
+  image:"assets/imgs/front/familie.jpg"
+},
+
+{
+  name:"Gesundheit",
+  tid:97,
+  icon:"medkit",
+  image:"assets/imgs/front/gesundheit.jpg"
+},
+{
+  name:"Internet/Konsum",
+  tid:96,
+  icon:"cart",
+  image:"assets/imgs/front/konsum.jpg"
+},
+{
+  name:"Reisen/Verkehr",
+  tid:95,
+  icon:"bus",
+  image:"assets/imgs/front/verkehr.jpg"
+},
+{
+  name:"Wohnen",
+  tid:94,
+  icon:"home",
+  image:"assets/imgs/front/wohnen.jpg"
+},
+]            
    this.auth=auth;
    this.auth.get('help').then(col=>{
     this.help=col;
@@ -54,6 +101,7 @@ help:boolean;
     alert("HOME"+data.name);
   });
   */
+
  this.page=0;
  this.pages=10;
 
@@ -71,7 +119,7 @@ help:boolean;
 
  }
 
- 
+
  getFragen(){
   this.getFragenIndex(this.page,this.pages).then(dat=>{
     let d=<any>dat;
@@ -109,7 +157,6 @@ getFrage(nid){
 })
  
 }
-
 
 getComments(nid){
 return new Promise((resolve,reject)=>{
@@ -237,6 +284,11 @@ presentShareSheet() {
     ]
   });
   actionSheet.present();
+}
+
+
+gotoBereich(bereich){
+  this.navCtrl.push(BereichPage, { bereich: bereich });
 }
 
 }
