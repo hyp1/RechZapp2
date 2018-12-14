@@ -19,23 +19,20 @@ export class BereichPage {
 
   tid:number;
   nodes:Array<any>;
-  
+  page:number;
+
 bereich:{tid:number,
 name:string,
 icon:string};
-  constructor(public navCtrl: NavController, public navParams: NavParams,public http:HttpClient,public auth:AuthProvider) {
-this.bereich=navParams.get("bereich");
-console.log(this.bereich);
-this.getNodesByTid();
 
-  }
+  constructor(public navCtrl: NavController, public navParams: NavParams,public http:HttpClient,public auth:AuthProvider) {
+this.page=0;
+this.bereich=navParams.get("bereich");
+}
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad BereichPage');
+    this.getNodesByTid();
   }
-
-
-  
   getNodesByTid(){
     return new Promise((resolve,reject)=>{
       let headers = new HttpHeaders()
@@ -44,11 +41,11 @@ this.getNodesByTid();
     let options = {
       headers: headers,
       withCredentials	: true,
-      pager	: false,
+      pager	: true,
       tid	: this.bereich.tid,
     };
 
-      this.http.post(this.auth.HOST+'/'+this.auth.ENDPOINT+'/taxonomy_term/selectNodes',options).subscribe(data=>{
+      this.http.post(this.auth.HOST+'/'+this.auth.ENDPOINT+'/taxonomy_term/selectNodes?page='+this.page,options).subscribe(data=>{
         console.log(data);
         this.nodes=<any>data;
          resolve(data);
@@ -59,8 +56,18 @@ this.getNodesByTid();
   }
 
   gotoDetails(node){
-    console.log(node);
     this.navCtrl.push(ViewPage, { item: {node:node} });
   }
+
+next(){
+this.page++;
+//alert(this.page);
+this.getNodesByTid();
+}
+
+prev(){
+  this.page--;
+  this.getNodesByTid();
+}
 
 }

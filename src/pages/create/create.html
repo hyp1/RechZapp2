@@ -32,13 +32,12 @@
         <ion-item>
             <ion-label text-wrap>
                 <h2>Rechtsfrage stellen.</h2>
-                <p>Wenn sie Ihre Rechtsfrage nicht anonym stellen wollen, können sie ihre Frage einfach in unserer Facebookgruppe Rechtsforum Schweiz stellen. </p>
+                <p>Wenn sie Ihre Rechtsfrage nicht anonym stellen wollen, können sie ihre Frage einfach in unserer Facebookgruppe <a href="https://www.facebook.com/groups/RechtsberatungSchweiz/" target="_BLANK"><ion-icon name="logo-facebook"></ion-icon> Rechtsforum Schweiz stellen.</a></p>
               
                <h2>Anonyme Rechtsfrage stellen.</h2>
-               <p>Sie können je nach Gerät über Browser oder Handy via Dateisystem,Webcam,Kamera bis zu 5 Dateien zu ihrer Frage hochladen. Klicken sie auf den upload Button um die ausgewählten Dateien einzeln hochzuladen oder "Alle Hochladen" um alle ausgewählten Dateien zur Frage anzuhängen.</p>
-                <p>Nachdem Sie Ihre Frage gestellt haben, wird sie auf AWRI als "nicht veröffentlicht" gespeichert.</p>
-                <p>Sobald ein Admin ihre Frage freigeschalten hat wird sie anonym auf AWRI sowie in der Facebookgruppe Rechtsforum Schweiz veröffentlicht und diskutiert. </p>
-
+               <p>Sie können je nach Gerät über Browser oder Handy via Dateisystem,Webcam,Kamera bis zu 5 Dateien zu ihrer Frage hochladen. Klicken sie auf den upload Button <ion-icon name="cloud"></ion-icon> um die ausgewählten Dateien einzeln hochzuladen oder "Alle Hochladen" um alle ausgewählten Dateien zur Frage anzuhängen.</p>          
+                <p>Sobald ein Admin ihre Frage freigeschalten hat, wird sie <strong>anonym</strong> auf AWRI sowie in der Facebookgruppe Rechtsforum Schweiz veröffentlicht und diskutiert. </p>
+                <p><strong>Sie können anonym ins Rechtsforum Schweiz rückantworten, indem Sie Ihre eigene Frage hier kommentieren.</strong></p>
               </ion-label>
          </ion-item>
 </div>
@@ -46,7 +45,7 @@
   <ng-template [ngIf]="this.awri.isInRole('authenticated user')" [ngIfElse]="loggedOut">
     <ion-title>Ihre Rechtsfrage wird anonym gestellt</ion-title>
     
-      <ion-label text-wrap>Bitte beschreiben Sie den Sachverhalt möglichst genau und wählen Sie den betreffenden Kanton aus.</ion-label>
+      <ion-label text-wrap>Bitte beschreiben Sie den Sachverhalt möglichst genau und wählen Sie falls es um kantonale Angelegenheiten handelt den entsprechenden Kanton aus.</ion-label>
       <ion-label text-wrap color="danger">Erwähnen Sie keine persönlichen Daten wie Namen Adressen,Telefonnummern, etc.</ion-label>
       <ion-label text-wrap color="danger">Ihre Frage wird durch einen Admin geprüft und freigeschalten.</ion-label>
     

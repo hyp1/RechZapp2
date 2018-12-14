@@ -51,6 +51,7 @@ help:boolean;
     alert("HOME"+data.name);
   });
   */
+
  this.page=0;
  this.pages=10;
 
@@ -65,23 +66,28 @@ help:boolean;
      console.log("BannerConfig");
    })
    .catch(e => console.log(e));    
-
  }
-
  
  getFragen(){
   this.getFragenIndex(this.page,this.pages).then(dat=>{
     let d=<any>dat;
-console.log(d);
+//console.log(d);
     for(let i=0;i<d.length;i++){
-      this.nodes.push(d[i]);
-      this.page++;
+    //  this.nodes.push(d[i]);
+    this.getFrage(d[i].nid).then(n=>{
+      this.nodes.push(JSON.parse(n[0]));
+      //console.log(this.nodes);
+
+    }); 
+   
+    this.page++;
     }
   });
 }
+
  getFragenIndex(page,pages){
    return new Promise((resolve,reject)=>{
-   this.httpClient.get(this.auth.HOST+'/'+this.auth.ENDPOINT+'/node.json?fields=nid,title,created,status&parameters[type]=rechtsfrage&parameters[status]=1&options[orderby][created]=desc&page='+page+'&pagesize='+pages).subscribe(data=>{
+   this.httpClient.get(this.auth.HOST+'/'+this.auth.ENDPOINT+'/node?fields=nid,title,created,status&parameters[type]=rechtsfrage&parameters[status]=1&options[orderby][created]=desc&page='+page+'&pagesize='+pages).subscribe(data=>{
       resolve(data);
      },err=>{
        reject(err);

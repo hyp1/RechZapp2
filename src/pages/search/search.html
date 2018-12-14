@@ -32,10 +32,11 @@
         <ion-item>
             <ion-label text-wrap>
                <h2>Rechtsfragen und Antworten suchen</h2>
-               <p>Suchen sie nach mit verknüften Schlüsselwörtern nach Rechtsfragen und Antworten</p>
-               <p>Sie können ihre Suche Näher eingrenzen in dem sie Ihre Schlüsselwörter mit AND oder OR (Grossgeschrieben) verknüpfen. Z.B. Haus OR Garage</p>
-               <p>Oder in dem sie Ihre Schlüsselwörter mit + oder - verknüpfen. z.B: Hund -Katze</p>
-               <p>Die Suchergebnise werden nach <ion-icon name="pulse"></ion-icon> Relevanz soriert angezeigt. Die Relevanz ergibt sich aus:
+               <p>Suchen sie nach mit verknüften Schlüsselwörtern nach Rechtsfragen und Antworten.</p>
+               <p>Es werden nur die 10 relevantesten Ergebnisse auf Ihre Suche angezeigt.</p>
+               <p>Sie können Ihre Suche näher eingrenzen, indem sie Ihre Schlüsselwörter mit AND oder OR (Grossgeschrieben) verknüpfen. Z.B. Haus OR Garage</p>
+               <p>Oder indem Sie Ihre Schlüsselwörter mit + oder - verknüpfen. z.B: Hund -Katze</p>
+               <p>Die besten 10 Suchergebnise werden nach <ion-icon name="pulse"></ion-icon> Relevanz soriert angezeigt. Die Relevanz ergibt sich aus:
                 </p>
                 <ol><li>Anzahl Schlüsselwörtern</li> <li>Aktualität</li> <li>Bewertung</li></ol>
          
@@ -46,7 +47,7 @@
   <ion-list>
     <ion-item>
       <ion-label> <ion-icon name="search"></ion-icon></ion-label>
-      <ion-input  [(ngModel)]="text" placeholder="Rechtsfrage suchen..." clearInput></ion-input>
+      <ion-input round [(ngModel)]="text" placeholder="Rechtsfrage suchen..." clearInput></ion-input>
     </ion-item>
     </ion-list>    
 

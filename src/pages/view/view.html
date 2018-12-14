@@ -36,14 +36,13 @@
                    <img class="avatar" src="https://graph.facebook.com/{{item.node?.field_fbid.und[0].value}}/picture"> 
                  </ion-avatar>
                  <h2 *ngIf="item.node.field_fbname?.und?.length>0" text-capitalize>{{item.node?.field_fbname.und[0].value}}</h2> 
-                 <p>{{item.node.created*1000 | date: 'dd.MM.yyyy H:mm' }}</p>
                   </ng-template>
             <ng-template #loggedOut>
                     <ion-avatar item-start>
                         <img class="avatar" src="assets/imgs/anonymous.png"> 
                       </ion-avatar>
                       <h2 text-capitalize>Nicht angezeigt</h2>
-                
+                    </ng-template>
                  <p>{{item.node.created*1000 | date: 'dd.MM.yyyy H:mm' }}</p> 
               
     
@@ -61,7 +60,7 @@
                      <h2 text-capitalize>Nicht angezeigt</h2>
                  -->
 
-                    </ng-template>
+                  
           </ion-item>
                   
             <ion-item text-wrap>

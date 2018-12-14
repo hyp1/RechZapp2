@@ -47,10 +47,16 @@
 <br>
    
     <ion-list *ngFor="let n of this.nodes">
-      <ion-card>  
-        <ion-item><p>{{n.created*1000 | date: 'dd.MM.yyyy H:mm' }} </p></ion-item>
+      <ion-card> 
+          <ion-item> 
+            <ion-avatar item-start *ngIf="n.field_fbid?.und?.length>0">
+                    <img class="avatar" src="https://graph.facebook.com/{{n?.field_fbid.und[0].value}}/picture"> 
+                  </ion-avatar>
+                  <h2 *ngIf="n.field_fbname?.und?.length>0" text-capitalize>{{n.field_fbname.und[0].value}}</h2> 
+                </ion-item>
+        <ion-item><p>{{n.created*1000 | date: 'dd.MM.yyyy H:mm' }}</p></ion-item>
         <ion-card-content text-wrap (click)="this.frageSelected(n)"><h2>{{n.title}}</h2></ion-card-content>
-        <bereich nid="n.nid" tid="98"></bereich>
+        <bereich nid="{{n.nid}}" tid="{{n.field_bereiche['und'] ? n.field_bereiche['und'][0].tid:''}}"></bereich>
       </ion-card>
       </ion-list>
       <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
@@ -59,13 +65,13 @@
 
     <ion-fab right bottom class="web-fab">
         <button ion-fab icon-only color="primary" (click)="checkPlatform()">
-          <ion-icon name="help"></ion-icon>
+         {{this.page}}
         </button>
        </ion-fab>
        
        <ion-fab right top edge class="mobile-fab">
         <button ion-fab icon-only color="primary" (click)="checkPlatform()">
-          <ion-icon name="help"></ion-icon>
+            {{this.page}}
         </button>
        </ion-fab>
    </ion-content>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController,AlertController,LoadingController,Loading } from 'ionic-angular';
+import { NavController,AlertController,LoadingController,Loading, NavParams } from 'ionic-angular';
 import "rxjs/add/operator/map";
 import { ViewPage } from '../../pages/view/view';
 import { LoginPage } from '../../pages/login/login';
@@ -11,16 +11,19 @@ import { AuthProvider } from '../../providers/auth/auth';
 })
 
 export class SearchPage {
-  text: any;
+  text: string;
   items: Array<any>;
   //awri: AwriConnectProvider;
   rootPage:SearchPage;
   error:String;
   loader:Loading;
   help:boolean;
-  constructor(public navCtrl: NavController,public awri:AuthProvider,public alertCtrl:AlertController,public loadingCtrl: LoadingController) {    
+  constructor(public navCtrl: NavController,public awri:AuthProvider,public alertCtrl:AlertController,public loadingCtrl: LoadingController,
+    public navParams: NavParams) {    
     this.error="",
-    this.text="",
+    this.text=navParams.get('text');
+    console.log(this.text);
+    if(this.text!==undefined)this.dosearch();
     this.rootPage = <any>SearchPage; 
   this.awri.get('help').then(col=>{
     this.help=col;
@@ -30,7 +33,6 @@ export class SearchPage {
   }); 
 
 }
-
 
   dosearch(): void {
     this.search(this.text);

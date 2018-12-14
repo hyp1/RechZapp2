@@ -69,7 +69,6 @@ import { BereichComponent } from '../components/bereich/bereich';
    IonicStorageModule.forRoot(),
    HttpClientModule
  ],
-
  
  bootstrap: [IonicApp],
  entryComponents: [

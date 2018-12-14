@@ -35,8 +35,10 @@
                 </ion-label>
                 </ion-item>
         </div>  
+        
         <ion-title>Alles was Recht ist!</ion-title>
-      <div class="help">
+        <p>Wir helfen bei der bei der Beantwortung von Rechtsfragen</p>
+      <div *ngIf="help" class="help">
         <ion-item>
             <ion-label text-wrap>
                     <h2>Sie haben ein rechtliches Problem und benötigen Rat?</h2>
@@ -44,27 +46,43 @@
                     <p>Suchen sie gezielt mit verknüpften Schlüsselwörtern in unserer Datenbank mit <strong>{{auth.stats?.nodesc}}</strong> Rechtsfragen und <strong>{{auth.stats?.commentsc}}</strong> Antworten.</p>
                    
                     <h2>Sie haben keine passende Lösung gefunden?</h2>
-                    <p>Stellen sie eine neue Rechtsfrage in der Facebookgruppe  <a href="https://www.facebook.com/groups/RechtsberatungSchweiz/" target="_BLANK"><ion-icon name="logo-facebook"></ion-icon> Rechtsforum Schweiz</a>.</p>
-                    <p>Die erfahrenen Mitglieder unserer Facebook Gruppe werden versuchen ihnen zu helfen und Ihnen unverbindliche Ratschläge geben.</p>        
+                    <p>Stellen sie eine neue Rechtsfrage, wir veröffentlichen Sie in der Facebookgruppe <a href="https://www.facebook.com/groups/RechtsberatungSchweiz/" target="_BLANK"><ion-icon name="logo-facebook"></ion-icon> Rechtsforum Schweiz</a>.</p>
+                    <p>Die erfahrenen Mitglieder unserer Facebook Gruppe diskutieren (manchmal auch kontrovers) und die besten Antworten werden hier wieder veröffentlicht.</p>        
                    
-                    <h2>Sie möchten mitmachen und helfen?</h2>
+                    <h2>Sie möchten auch mitmachen und Anderen helfen?</h2>
                     <p>Treten sie unserer Facebookgruppe  <a href="https://www.facebook.com/groups/RechtsberatungSchweiz/" target="_BLANK"><ion-icon name="logo-facebook"></ion-icon> Rechtsforum Schweiz</a> bei.
                     Wir freuen uns immer auf kompetente und erfahrene Mitstreiter. ❤️</p>
-                    <p>Oder teilen <ion-icon name="share" (click)="share()"></ion-icon> Sie die AWRI App einfach auf Ihrer Lieblingsplatform.</p>
+                    <p>Oder teilen <ion-icon name="share" (click)="share()"></ion-icon> Sie AWRI einfach auf Ihrer Lieblingsplatform. Vielen Dank!</p>
             
                 </ion-label> 
         </ion-item>    
       </div>
+
+<ion-item>
+        <ion-label> <ion-icon name="search"></ion-icon></ion-label>
+      <ion-input  placeholder="Rechtsfrage suchen..." clearInput
+      [(ngModel)]="search" (change)="doSearch()">
+    </ion-input>
+    <button ion-button item-end (click)="doSearch()" small><ion-icon name="search"></ion-icon></button>
+</ion-item>
+
+<ion-item>
       <ion-slides>
 <div *ngFor="let bereich of bereiche">
         <ion-slide (click)="gotoBereich(bereich)">
-    <h1><ion-icon name="{{bereich.icon}}"></ion-icon>
-    {{bereich.name}}
+    <h1><ion-icon name="{{bereich.icon}}"></ion-icon> {{bereich.name}}  <ion-badge>{{bereich.count}}</ion-badge>
     </h1>
     <img src="{{bereich.image}}">
     </ion-slide>
 </div>
       </ion-slides>
+    </ion-item>
+
+      <ion-item>
+            <ion-navbar  text-center>
+            <ion-title><ion-icon name="arrow-round-back"></ion-icon> Kategorien <ion-icon name="arrow-round-forward"></ion-icon></ion-title>
+            </ion-navbar>
+          </ion-item>
 <!--
       <ion-slides>
             <ion-slide (click)="gotoBereich(93)">
@@ -94,26 +112,28 @@
              
       </ion-slides>    
     -->
-<ion-title>Das AWRI besteht aus folgenden Systemen</ion-title>
-<ion-slides>
+
+  
+    <ion-slides>
         <ion-slide>
                 <a href="https://www.facebook.com/groups/RechtsberatungSchweiz/" target="_BLANK">  
                     <img src="assets/imgs/logo_rechtsforum.jpg">
                 </a>
-                    <ion-item>
+            
+                      <ion-item>                          
                           <ion-icon name="logo-facebook" item-start></ion-icon>
                           <ion-label text-wrap>
                              <h2>Rechtsforum Schweiz</h2>
                              <p>Facebookgruppe mit über 8000 Mitgliedern</p>
                              <p>Alle Fragen wurden durch die Mitglieder dieser Gruppe beantwortet</p>
-                            </ion-label>
+                            </ion-label>                                          
                        </ion-item>
                   
         </ion-slide>
-        <ion-slide>
+        <ion-slide>          
                 <a href="{{auth.HOST}}" target="_BLANK">  
-                        <img src="assets/imgs/logo_awri.png">
-                    </a>
+                        <img src="assets/imgs/logo_awri.png?43234">
+                    </a>  
                         <ion-item>
                             <ion-icon name="rechzapp-awri" item-start></ion-icon>
                             <ion-label text-wrap>
@@ -122,23 +142,30 @@
                                <p>In dieser Datenbank werden Rechtsfragen und Antworten ausgewertet und freigeschalten.</p>
                               </ion-label>
                          </ion-item>
-                   
+                           
         </ion-slide>
         <ion-slide>
                 <a href="https://www.facebook.com/Rechtshilfeforum/" target="_BLANK">  
                     <img src="assets/imgs/logo_ratgeber.jpg">
-                </a>
+                </a>        
                     <ion-item>
                         <ion-icon name="logo-facebook" item-start></ion-icon>
                         <ion-label text-wrap>
                            <h2>AWRI Ratgeber</h2>
                            <p>Facebook Seite, auf der von Zeit zu Zeit die interessantesten und meist gefragten Beiträge aus dem Rechtsforum Schweiz veröffentlicht werden.</p>
                           </ion-label>
-                     </ion-item>  
-
+                     </ion-item>          
         </ion-slide>        
       </ion-slides>
-      
+
+
+      <ion-item>
+            <ion-navbar text-center>
+        <ion-title><ion-icon name="arrow-round-back"></ion-icon> Systeme <ion-icon name="arrow-round-forward"></ion-icon></ion-title>
+        </ion-navbar>
+        </ion-item>
+        
+      <!--
     <ion-fab right bottom class="web-fab">
         <button ion-fab icon-only color="primary" (click)="checkPlatform()">
           <ion-icon name="help"></ion-icon>
@@ -150,10 +177,14 @@
           <ion-icon name="help"></ion-icon>
         </button>
        </ion-fab>
+-->
+
    </ion-content>
    <ion-footer>
-        <ion-toolbar>             
-           <button ion-fab icon-only (click)="this.share()"><ion-icon name="share"></ion-icon></button>
+        <ion-toolbar> 
+            <ion-item>            
+           <button ion-fab icon-only (click)="this.share()" item-start><ion-icon name="share"></ion-icon></button><ion-title>(c) 2015 Powered by AWRI </ion-title>
+        </ion-item>
         </ion-toolbar>
       </ion-footer>
 

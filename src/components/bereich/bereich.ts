@@ -21,8 +21,8 @@ export class BereichComponent {
 @Input() tid:number;
 
   constructor(public auth:AuthProvider,public http:HttpClient) {
-    console.log('Hello BereichComponent Component');
-    this.text = 'Hello World';
+    //console.log('Hello BereichComponent Component');
+    //this.text = 'Hello World';
     this.getBereiche().then(dat=>{
       this.bereiche=<any>dat;
    //   console.log(this.bereiche);
@@ -30,7 +30,6 @@ export class BereichComponent {
     })
   }
   
-
   getBereiche(){
     return new Promise((resolve,reject) => {
       const headers = new HttpHeaders().set('X-CSRF-TOKEN',<any>this.auth.token);    

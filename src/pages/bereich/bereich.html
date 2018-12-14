@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title><ion-icon name="{{bereich?.icon}}"></ion-icon>{{this.bereich?.name}}</ion-title>
+    <ion-title><ion-icon name="{{bereich?.icon}}"></ion-icon> {{this.bereich?.name}} Seite: {{1+page}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -16,8 +16,12 @@
 <ion-content padding>
 <h1><ion-icon name="bereich.icon"></ion-icon>{{this.bereich?.name}}</h1>
 <div *ngFor="let node of nodes">
+  <ion-card>
+    <ion-item><p>{{node.created*1000 | date: 'dd.MM.yyyy H:mm' }}</p></ion-item>
   <ion-item text-wrap (click)="gotoDetails(node)">
     <h1>{{node.title}}</h1>
   </ion-item>
+</ion-card>
 </div>
+<button *ngIf="page>0" ion-button small (click)="prev()">Zurück</button> {{1+page}} <button *ngIf="nodes?.length==10" ion-button small (click)="next()">Weiter</button>
 </ion-content>
