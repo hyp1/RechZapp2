@@ -4,21 +4,10 @@ import { NavController,Platform,AlertController } from 'ionic-angular';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import "rxjs/add/operator/map";
 
-
 import { AuthProvider } from '../../providers/auth/auth';
 import { ViewPage } from '../view/view';
 import { LoginPage } from '../login/login';
 
-import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free';
-
-
-const bannerConfig: AdMobFreeBannerConfig = {
-  // add your config here
-  // for the sake of this example we will just use the test config
-  isTesting: true,
-  autoShow: true,
-  //id:'ca-app-pub-7681642173883266~6820035049'
- };
 
 @Component({
  selector: 'page-admin',
@@ -33,7 +22,8 @@ auth:AuthProvider;
 pages:number;
 page:number;
 help:boolean;
- constructor(public navCtrl: NavController,private admobFree: AdMobFree,
+cnt:number;
+ constructor(public navCtrl: NavController,
           private httpClient: HttpClient, private plt: Platform, private alertCtrl: AlertController, auth: AuthProvider) {
 
    this.auth=auth;
@@ -45,27 +35,12 @@ help:boolean;
   });
 
    this.nodes=[];
-   /*
-   console.log(auth);
-   this.auth.connect.subscribe(data=>{
-    alert("HOME"+data.name);
-  });
-  */
-
+ 
+this.cnt=0;
  this.page=0;
- this.pages=10;
-
+ this.pages=30;
  this.getFragen();
-
- this.admobFree.banner.config(bannerConfig);
-
- this.admobFree.banner.prepare()
-   .then(() => {
-     // banner Ad is ready
-     // if we set autoShow to false, then we will need to call the show method here
-     console.log("BannerConfig");
-   })
-   .catch(e => console.log(e));    
+   
  }
  
  getFragen(){
@@ -77,24 +52,21 @@ help:boolean;
     this.getFrage(d[i].nid).then(n=>{
       this.nodes.push(JSON.parse(n[0]));
       //console.log(this.nodes);
-
     }); 
-   
-    this.page++;
     }
   });
 }
 
  getFragenIndex(page,pages){
    return new Promise((resolve,reject)=>{
-   this.httpClient.get(this.auth.HOST+'/'+this.auth.ENDPOINT+'/node?fields=nid,title,created,status&parameters[type]=rechtsfrage&parameters[status]=1&options[orderby][created]=desc&page='+page+'&pagesize='+pages).subscribe(data=>{
-      resolve(data);
+   this.httpClient.get(this.auth.HOST+'/'+this.auth.ENDPOINT+'/node?fields=nid,title,created,status&parameters[type]=rechtsfrage&parameters[status]=1&options[orderby][created]=asc&page='+page+'&pagesize='+pages).subscribe(data=>{
+    this.page++; 
+    resolve(data);
      },err=>{
        reject(err);
      });
     })
 }
-
 
 getFrage(nid){
   return new Promise((resolve,reject)=>{
@@ -106,7 +78,8 @@ getFrage(nid){
     withCredentials	: true,
   };
      this.httpClient.post(this.auth.HOST+'/'+this.auth.ENDPOINT+'/awri_services_resources/rechtsfrage',{nid:nid}, options).subscribe(data => {
-        resolve(data);    
+      this.cnt++; 
+      resolve(data);    
       },err=>{
         reject(err);
       });    

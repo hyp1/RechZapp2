@@ -70,6 +70,7 @@ import { BereichComponent } from '../components/bereich/bereich';
    HttpClientModule
  ],
  
+ 
  bootstrap: [IonicApp],
  entryComponents: [
    MyApp,

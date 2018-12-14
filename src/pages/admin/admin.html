@@ -7,7 +7,7 @@
             </ion-buttons>
              
             <ion-title>
-              <img src="assets/imgs/logo.png" class="avatar">  AWRI
+              <img src="assets/imgs/logo.png" class="avatar">  Admin - {{this.cnt}}
               </ion-title>
       <ion-buttons start>
   <ng-template [ngIf]="this.auth.isInRole('authenticated user')" [ngIfElse]="headerOut">
@@ -52,7 +52,7 @@
             <ion-avatar item-start *ngIf="n.field_fbid?.und?.length>0">
                     <img class="avatar" src="https://graph.facebook.com/{{n?.field_fbid.und[0].value}}/picture"> 
                   </ion-avatar>
-                  <h2 *ngIf="n.field_fbname?.und?.length>0" text-capitalize>{{n.field_fbname.und[0].value}}</h2> 
+                  <h2 *ngIf="n.field_fbname?.und?.length>0" text-capitalize> {{n.field_fbname.und[0].value}}</h2> 
                 </ion-item>
         <ion-item><p>{{n.created*1000 | date: 'dd.MM.yyyy H:mm' }}</p></ion-item>
         <ion-card-content text-wrap (click)="this.frageSelected(n)"><h2>{{n.title}}</h2></ion-card-content>
