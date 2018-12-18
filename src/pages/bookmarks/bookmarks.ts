@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { HttpClient,HttpHeaders } from '@angular/common/http';
+//import { HttpClient,HttpHeaders } from '@angular/common/http';
 
 import { AuthProvider } from '../../providers/auth/auth';
 import { ViewPage } from '../../pages/view/view';
@@ -22,7 +22,7 @@ page:number;
 pages:number;
 nodes:any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public http: HttpClient,public auth:AuthProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public auth:AuthProvider) {
   this.page=navParams.get('page')||0;
 //  console.log(this.page);
 

@@ -1,5 +1,5 @@
 import { Component,Input} from '@angular/core';
-import { AlertController,LoadingController,Loading } from 'ionic-angular';
+import { AlertController} from 'ionic-angular';
 
 import { AuthProvider } from '../../providers/auth/auth';
 /**
