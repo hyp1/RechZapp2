@@ -124,7 +124,7 @@ this.get('help').then(col=>{
   this.help=col;
 }).catch(err=>{
   this.set('help',true);
-  console.log(err);
+  //console.log(err);
 });
 
 this.getStats();

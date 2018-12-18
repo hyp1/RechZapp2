@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
 import { RegisterPage } from '../../pages/register/register';
 import { BookmarksPage } from '../../pages/bookmarks/bookmarks';
+import { AdminPage } from '../../pages/admin/admin';
 
 @IonicPage()
 @Component({
@@ -47,17 +48,26 @@ export class LoginPage {
     })
   };
 
+  
 logout(){
   this.awri.logout().then(data=>{      
     console.log(data);
   }).catch(err=>{
       console.log(err);
-  });   
+  });     
 };
-
 
 gotoBookmarks(){
   this.navCtrl.push(BookmarksPage);
+}
+
+gotoAdmin(){
+  this.navCtrl.push(AdminPage);
+}
+
+helpChanged(evt){
+  //console.log(evt.help);
+  this.awri.set('help',evt.help);
 }
 
 }

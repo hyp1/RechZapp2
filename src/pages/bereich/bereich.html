@@ -14,7 +14,6 @@
 
 
 <ion-content padding>
-<h1><ion-icon name="bereich.icon"></ion-icon>{{this.bereich?.name}}</h1>
 <div *ngFor="let node of nodes">
   <ion-card>
     <ion-item><p>{{node.created*1000 | date: 'dd.MM.yyyy H:mm' }}</p></ion-item>
@@ -23,5 +22,20 @@
   </ion-item>
 </ion-card>
 </div>
-<button *ngIf="page>0" ion-button small (click)="prev()">Zurück</button> {{1+page}} <button *ngIf="nodes?.length==10" ion-button small (click)="next()">Weiter</button>
+<!--
+<button *ngIf="page>0" ion-button small (click)="prev()">Zurück</button></ion-buttons> {{1+page}} <button *ngIf="nodes?.length==10" ion-button small (click)="next()">Weiter</button>
+-->
+
+<ion-navbar>
+    <ion-buttons left>
+      <button *ngIf="page>0"  ion-button (click)="prev()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>{{1+page}}</ion-title>
+    <ion-buttons right>
+        <button *ngIf="nodes?.length==10" ion-button  (click)="next()"><ion-icon name="arrow-forward"></ion-icon></button>
+      </ion-buttons>
+  </ion-navbar>
+
 </ion-content>

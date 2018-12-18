@@ -8,18 +8,16 @@ import { AuthProvider } from '../providers/auth/auth';
 
 import { HomePage } from '../pages/home/home';
 
-import { SettingsPage } from '../pages/settings/settings';
+// import { SettingsPage } from '../pages/settings/settings';
 import { CreatePage } from '../pages/create/create';
 import { HelpPage } from '../pages/help/help';
 import { SearchPage } from '../pages/search/search';
 //import { ListPage } from '../pages/list/list';
 import { FragenPage } from '../pages/fragen/fragen';
 
-
 @Component({
   templateUrl: 'app.html'
 })
-
 
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
@@ -38,12 +36,13 @@ export class MyApp {
       { title: 'Rechtsfragen', component: FragenPage },
       { title: 'Suchen', component: SearchPage },
       { title: 'Frage stellen', component: CreatePage },
-      { title: 'Einstellungen', component: SettingsPage },
+    //  { title: 'Einstellungen', component: SettingsPage },
       { title: 'Hilfe', component: HelpPage },
    //   { title: 'Lesezeichen', component: BookmarksPage }
     ];
   }
   
+
   initializeApp() {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.

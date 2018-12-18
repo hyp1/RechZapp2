@@ -38,7 +38,10 @@
             <ion-label>Rechtsfragen  bewerten</ion-label>
         </div>   
 
-        <div class="help">   
+        <div class="help">
+                <ion-item>
+                        <ion-label text-wrap>Klicken sie oben auf ihr <ion-icon name="contact"></ion-icon> Profilbild um die Einstellungen zu öffnen.</ion-label>
+                  </ion-item>           
             <ion-item>
                   <ion-label text-wrap>Sie können die angezeigte Hilfe in den Einstellungen ausschalten.</ion-label>
             </ion-item>         
@@ -89,7 +92,16 @@
             <ion-label>Hinweise auf  Art. OR {{this.auth.stats?.ors}}</ion-label>
             <ion-label>Hinweise auf ZGB {{this.auth.stats?.zgbs}}</ion-label>
              <ion-label>Hinweise auf BGE {{this.auth.stats?.bges}}</ion-label>
-        </ion-card-content>
+             <ion-label><strong>Bereiche</strong></ion-label>
+             <ion-label><ion-icon name="construct"></ion-icon> Arbeit {{this.auth.stats?.t_arbeit}}</ion-label>
+             <ion-label><ion-icon name="briefcase"></ion-icon> Behörden/Schulen {{this.auth.stats?.t_schule}}</ion-label>
+             <ion-label><ion-icon name="contacts"></ion-icon> Familie {{this.auth.stats?.t_familie}}</ion-label>
+             <ion-label><ion-icon name="medkit"></ion-icon> Gesundheit {{this.auth.stats?.t_gesundheit}}</ion-label>
+             <ion-label><ion-icon name="cart"></ion-icon> Internet/Konsum {{this.auth.stats?.t_konsum}}</ion-label>
+             <ion-label><ion-icon name="bus"></ion-icon> Reisen/Verkehr {{this.auth.stats?.t_verkehr}}</ion-label>
+             <ion-label><ion-icon name="home"></ion-icon> Wohnen {{this.auth.stats?.t_wohnen}}</ion-label>
+             <ion-label>Kategorisiert {{(this.auth.stats?.t_wohnen*1+this.auth.stats?.t_verkehr*1+this.auth.stats?.t_konsum*1+this.auth.stats?.t_gesundheit*1+this.auth.stats?.t_familie*1+this.auth.stats?.t_schule*1+this.auth.stats?.t_arbeit*1)}}</ion-label>
+            </ion-card-content>
       </ion-card>
 
       <ion-label color="danger" text-wrap><h3>Wir haben unser System erneuert, die gewohnte AWRI Seite finden Sie nun hier: <a href="https://stage.awri.ch" target="_new">https://stage.awri.ch</a></h3></ion-label>
