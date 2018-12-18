@@ -45,6 +45,7 @@ this.bereich=navParams.get("bereich");
       tid	: this.bereich.tid,
     };
 
+    
       this.http.post(this.auth.HOST+'/'+this.auth.ENDPOINT+'/taxonomy_term/selectNodes?page='+this.page,options).subscribe(data=>{
         console.log(data);
         this.nodes=<any>data;
@@ -54,6 +55,7 @@ this.bereich=navParams.get("bereich");
         });
        })
   }
+
 
   gotoDetails(node){
     this.navCtrl.push(ViewPage, { item: {node:node} });

@@ -108,10 +108,12 @@ let stats=JSON.parse(<any>s);
     console.log(err);
   }) //stats
 
+
     this.auth.get('help').then(col => {
       this.help = col;
       // console.log(this.help,'LOADED');
     }).catch(err => {
+      this.help = true;
       console.log(err);
     });
 

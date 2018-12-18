@@ -7,13 +7,25 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title><ion-icon name="{{bereich?.icon}}"></ion-icon> {{this.bereich?.name}} Seite: {{1+page}}</ion-title>
+    <ion-title><ion-icon name="{{bereich?.icon}}"></ion-icon> {{this.bereich?.name}} Seite: {{1+page}}/{{this.bereich?.count/10  | number: '1.0-0'}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+    <ion-navbar>
+        <ion-buttons left>
+          <button *ngIf="page>0"  ion-button (click)="prev()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title text-center>{{1+page}}/{{this.bereich?.count/10  | number: '1.0-0'}}</ion-title>
+        <ion-buttons right>
+            <button *ngIf="nodes?.length==10" ion-button  (click)="next()"><ion-icon name="arrow-forward"></ion-icon></button>
+          </ion-buttons>
+      </ion-navbar>
+      
 <div *ngFor="let node of nodes">
   <ion-card>
     <ion-item><p>{{node.created*1000 | date: 'dd.MM.yyyy H:mm' }}</p></ion-item>
@@ -32,7 +44,7 @@
         <ion-icon name="arrow-back"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title text-center>{{1+page}}</ion-title>
+    <ion-title text-center>{{1+page}}/{{this.bereich?.count/10  | number: '1.0-0'}}</ion-title>
     <ion-buttons right>
         <button *ngIf="nodes?.length==10" ion-button  (click)="next()"><ion-icon name="arrow-forward"></ion-icon></button>
       </ion-buttons>
