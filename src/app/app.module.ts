@@ -39,7 +39,6 @@ import { StatsProvider } from '../providers/stats/stats';
 import { BookmarkComponent } from '../components/bookmark/bookmark';
 import { BereichComponent } from '../components/bereich/bereich';
 
-
 @NgModule({
  declarations: [
    MyApp,
@@ -60,7 +59,7 @@ import { BereichComponent } from '../components/bereich/bereich';
    UploadComponent,
    CommentComponent,
    BookmarkComponent,
-   BereichComponent 
+   BereichComponent,
  ],
 
  imports: [
@@ -69,8 +68,7 @@ import { BereichComponent } from '../components/bereich/bereich';
    IonicStorageModule.forRoot(),
    HttpClientModule
  ],
- 
- 
+
  bootstrap: [IonicApp],
  entryComponents: [
    MyApp,
@@ -89,7 +87,7 @@ import { BereichComponent } from '../components/bereich/bereich';
    BereichPage,
    BookmarkComponent,
    Drupal7LoginComponent,
-   BereichComponent   
+   BereichComponent,
  ],
 
  providers: [

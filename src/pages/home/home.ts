@@ -22,7 +22,6 @@ const bannerConfig: AdMobFreeBannerConfig = {
   //id:'ca-app-pub-7681642173883266~6820035049'
 };
 
-
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -40,12 +39,13 @@ export class HomePage {
   stats:any;
   search:string;
 
+
   constructor(public navCtrl: NavController, upload: UploadComponent, private admobFree: AdMobFree,
     private httpClient: HttpClient, private plt: Platform, private alertCtrl: AlertController,
     private actionSheetCtrl: ActionSheetController, auth: AuthProvider) {
     this.auth = auth;
+    this.help = false;
     
-
     auth.getStats().then(s=>{
 let stats=JSON.parse(<any>s); 
     this.bereiche = [
@@ -242,7 +242,6 @@ let stats=JSON.parse(<any>s);
       // Do stuff inside the regular browser
     }
   }
-
 
   presentShareSheet() {
     let actionSheet = this.actionSheetCtrl.create({

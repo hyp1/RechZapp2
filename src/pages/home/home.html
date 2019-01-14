@@ -27,7 +27,6 @@
 </ion-header>
    
    <ion-content padding>  
-
         <div *ngIf="auth.isInRole('anonymous user')">
                 <ion-item text-wrap>
             <ion-label color="danger"><h2>Sie sind nicht angemeldet!</h2>
@@ -43,7 +42,13 @@
             <ion-label text-wrap>
                     <h2>Sie haben ein rechtliches Problem und benötigen Rat?</h2>
                     <p>Das AWRI System wurde 2015 entwickelt um Personen, die juristischen Rat suchen bestmöglich zu unterstützen.</p>
-                    <p>Suchen sie gezielt mit verknüpften Schlüsselwörtern in unserer Datenbank mit <strong>{{auth.stats?.nodesc}}</strong> Rechtsfragen und <strong>{{auth.stats?.commentsc}}</strong> Antworten.</p>
+                    <p>Schauen sie Antworten auf ähnliche Fragen in einem der folgenden Bereiche an:</p>
+                  <ul>
+                        <div *ngFor="let bereich of bereiche">                                
+                            <li><ion-icon (click)="gotoBereich(bereich)" name="{{bereich.icon}}"></ion-icon> {{bereich.name}}
+                        </div>
+                  </ul>
+                    <p>Suchen <ion-icon name="search"></ion-icon> sie gezielt mit verknüpften Schlüsselwörtern in unserer Datenbank mit <strong>{{auth.stats?.nodesc}}</strong> Rechtsfragen und <strong>{{auth.stats?.commentsc}}</strong> Antworten.</p>
                    
                     <h2>Sie haben keine passende Lösung gefunden?</h2>
                     <p>Stellen sie eine neue Rechtsfrage, wir veröffentlichen Sie in der Facebookgruppe <a href="https://www.facebook.com/groups/RechtsberatungSchweiz/" target="_BLANK"><ion-icon name="logo-facebook"></ion-icon> Rechtsforum Schweiz</a>.</p>

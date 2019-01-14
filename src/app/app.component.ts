@@ -19,6 +19,7 @@ import { FragenPage } from '../pages/fragen/fragen';
   templateUrl: 'app.html'
 })
 
+
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
