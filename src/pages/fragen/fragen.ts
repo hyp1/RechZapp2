@@ -72,11 +72,12 @@ help:boolean;
     let d=<any>dat;
     for(let i=0;i<d.length;i++){
       this.nodes.push(d[i]);
-      this.page++;
     }
+    this.page++;
   });
 }
- getFragenIndex(page,pages){
+
+ getFragenIndex(page:number,pages:number){
    return new Promise((resolve,reject)=>{
    this.httpClient.get(this.auth.HOST+'/'+this.auth.ENDPOINT+'/node.json?fields=nid,title,created,status&parameters[type]=rechtsfrage&parameters[status]=1&options[orderby][created]=desc&page='+page+'&pagesize='+pages).subscribe(data=>{
       resolve(data);
