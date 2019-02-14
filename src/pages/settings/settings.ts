@@ -19,23 +19,30 @@ import { AdminPage } from '../../pages/admin/admin';
   templateUrl: 'settings.html',
 })
 export class SettingsPage {
-help:boolean;
-  constructor(public navCtrl: NavController, public navParams: NavParams,private awri:AuthProvider) {
+public help:boolean;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams,public awri:AuthProvider) {
+    alert("Constr")
   this.awri.get('help').then(data=>{
-//    console.log(data);
+    console.log(data);
     this.help=data;
-//    console.log("HELP"+this.help);
+    console.log("HELP"+this.help);
   });
 
   }
   
+  /*
 ionViewDidLoad() {
     console.log('ionViewDidLoad SettingsPage');
   }
+  */
 
-  helpChanged(evt){
-  //console.log(evt.help);
-  this.awri.set('help',evt.help);
+  public helpChanged(evt:any){
+  console.log(evt);
+  this.awri.set('help',evt.help).then(h=>{
+    this.help=h;
+    alert(h)
+  });
 }
 
 

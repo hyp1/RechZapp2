@@ -28,27 +28,41 @@
 
 <ion-content padding>
     
-    <div *ngIf="auth.isInRole('anonymous user')">
-    
-        <ion-label color="danger" text-wrap><h2>Nur auf AWRI angemeldete Benutzer haben Zugriff auf erweiterte Funktionen!</h2></ion-label>
-         <ion-label>Anonyme Rechtsfragen stellen</ion-label>
-            <ion-label>Rechtsfragen kommentieren</ion-label>
-            <ion-label>Hilfe ein/ausschalten</ion-label>
-            <ion-label>Lesezeichen setzen</ion-label>
-            <ion-label>Rechtsfragen  bewerten</ion-label>
-        </div>   
+        <ion-title>Alles was Recht ist!</ion-title>
+        <p>Rechtsberatung mit System - 
+        Unsere Community hilft kostenlos und unverbindlich bei rechtlichen Fragen.</p>
+        <ion-title>Wie funktioniert dieses System?</ion-title>
+        <p>Sie stellen Ihre Rechtsfrage(anonym) hier auf AWRI. Wir posten Sie anonym in unserem Rechtsforum (Rechtsforum Schweiz)</p>
+        <p>Durch Erfahrungs- und Meinungsaustausch versuchen unsere Mitglieder Lösungen auf Ihre Frage zu finden.</p>
+        <ion-label>Wir werten die besten Antworten aus und in der Regel werden die treffendsten Antworten innert 48h hier wieder veröffentlicht..</ion-label>
+        <ion-label color="danger">Wir ersetzen keinen juristischen Beistand!</ion-label>
 
-        <div class="help">
+        <div class="help" *ngIf="help">
                 <ion-item>
-                        <ion-label text-wrap>Klicken sie oben auf ihr <ion-icon name="contact"></ion-icon> Profilbild um die Einstellungen zu öffnen.</ion-label>
-                  </ion-item>           
-            <ion-item>
-                  <ion-label text-wrap>Sie können die angezeigte Hilfe in den Einstellungen ausschalten.</ion-label>
+                        <ion-label text-wrap><ion-icon name="help"></ion-icon> Sie können die angezeigte Hilfe in den Einstellungen ausschalten. <br>
+                            Klicken sie oben auf ihr <ion-icon name="contact"></ion-icon>
+                             Profilbild um die Einstellungen zu öffnen.                            
+                            </ion-label>                                
             </ion-item>         
+
+            <div class="help" *ngIf="auth.isInRole('anonymous user')">
+    
+<ion-item>
+                    <ion-label color="danger" text-wrap><h2>Nur auf AWRI angemeldete Benutzer haben Zugriff auf folgende erweiterte Funktionen!</h2></ion-label>
+                </ion-item>
+                <ion-item>         <ion-label>Hilfe ein/ausschalten</ion-label>  </ion-item>
+
+                <ion-item>       <ion-label>Anonyme Rechtsfragen stellen</ion-label>  </ion-item>
+                <ion-item>          <ion-label>Rechtsfragen kommentieren</ion-label>  </ion-item>
+                <ion-item>         <ion-label>Lesezeichen setzen</ion-label>  </ion-item>
+                <ion-item>         <ion-label>Rechtsfragen  bewerten</ion-label>  </ion-item>
+               
+                </div>   
         </div>
     <br>
 
-        <div class="help">   
+        <div class="info">   
+
                 <a href="https://www.facebook.com/groups/RechtsberatungSchweiz/" target="_BLANK">  
                 <ion-item>
                       <ion-icon name="logo-facebook" item-start></ion-icon>
@@ -84,15 +98,8 @@
           </div>
 
     <ion-card>
-        <ion-card-header><h2>AWRI Statistik ({{this.auth.stats?.updated}})</h2></ion-card-header>
+        <ion-card-header><h2>Bereiche</h2></ion-card-header>
         <ion-card-content>
-            <ion-label>AWRI Benutzer {{this.auth.stats?.users}}</ion-label>
-            <ion-label>Rechtsfragen {{this.auth.stats?.nodesc}}/{{this.auth.stats?.nodes}}</ion-label>
-            <ion-label>Antworten {{this.auth.stats?.commentsc}}/{{this.auth.stats?.comments}}</ion-label>
-            <ion-label>Hinweise auf  Art. OR {{this.auth.stats?.ors}}</ion-label>
-            <ion-label>Hinweise auf ZGB {{this.auth.stats?.zgbs}}</ion-label>
-             <ion-label>Hinweise auf BGE {{this.auth.stats?.bges}}</ion-label>
-             <ion-label><strong>Bereiche</strong></ion-label>
              <ion-label><ion-icon name="construct"></ion-icon> Arbeit {{this.auth.stats?.t_arbeit}}</ion-label>
              <ion-label><ion-icon name="briefcase"></ion-icon> Behörden/Schulen {{this.auth.stats?.t_schule}}</ion-label>
              <ion-label><ion-icon name="contacts"></ion-icon> Familie {{this.auth.stats?.t_familie}}</ion-label>
@@ -100,11 +107,33 @@
              <ion-label><ion-icon name="cart"></ion-icon> Internet/Konsum {{this.auth.stats?.t_konsum}}</ion-label>
              <ion-label><ion-icon name="bus"></ion-icon> Reisen/Verkehr {{this.auth.stats?.t_verkehr}}</ion-label>
              <ion-label><ion-icon name="home"></ion-icon> Wohnen {{this.auth.stats?.t_wohnen}}</ion-label>
-             <ion-label>Kategorisiert {{(this.auth.stats?.t_wohnen*1+this.auth.stats?.t_verkehr*1+this.auth.stats?.t_konsum*1+this.auth.stats?.t_gesundheit*1+this.auth.stats?.t_familie*1+this.auth.stats?.t_schule*1+this.auth.stats?.t_arbeit*1)}}</ion-label>
             </ion-card-content>
-      </ion-card>
+            <ion-row class="cardfooter">
+                    <ion-col>
+                      <small>Kategorisiert {{(this.auth.stats?.t_wohnen*1+this.auth.stats?.t_verkehr*1+this.auth.stats?.t_konsum*1+this.auth.stats?.t_gesundheit*1+this.auth.stats?.t_familie*1+this.auth.stats?.t_schule*1+this.auth.stats?.t_arbeit*1)}}</small>
+                    </ion-col>
+                </ion-row>
+        </ion-card>
+
+      <ion-card>
+            <ion-card-header><h2><ion-icon name="pulse"></ion-icon>  Statistik</h2></ion-card-header>
+            <ion-card-content>
+                    <ion-label>Benutzer {{this.auth.stats?.users}}</ion-label>
+                    <ion-label>Rechtsfragen {{this.auth.stats?.nodesc}}/{{this.auth.stats?.nodes}}</ion-label>
+                    <ion-label>Antworten {{this.auth.stats?.commentsc}}/{{this.auth.stats?.comments}}</ion-label>
+                    <ion-label>Hinweise auf  Art. OR {{this.auth.stats?.ors}}</ion-label>
+                    <ion-label>Hinweise auf ZGB {{this.auth.stats?.zgbs}}</ion-label>
+                     <ion-label>Hinweise auf BGE {{this.auth.stats?.bges}}</ion-label>
+                </ion-card-content>
+            <ion-row class="cardfooter">
+                <ion-col>
+                  <small>Letztes update: {{this.auth.stats?.updated}}</small>
+                </ion-col>
+            </ion-row>
+        </ion-card>
 
       <ion-label color="danger" text-wrap><h3>Wir haben unser System erneuert, die gewohnte AWRI Seite finden Sie nun hier: <a href="https://stage.awri.ch" target="_new">https://stage.awri.ch</a></h3></ion-label>
+      <ion-label color="danger" text-wrap><h3>Hinweise zum Datenschutz: <a href="https://stage.awri.ch/agb" target="_new">https://stage.awri.ch/agb</a></h3></ion-label>
 
       <div class="mobile-fab"><ion-label color="primary" text-wrap>Bitte noch etwas Geduld, weitere Updates folgen in Kürze... </ion-label></div>
     

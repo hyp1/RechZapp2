@@ -18,16 +18,16 @@ import { LoginPage } from '../../pages/login/login';
 })
 export class HelpPage {
 pet:string;
-  constructor(public navCtrl: NavController, public navParams: NavParams,public auth:AuthProvider) {
-  }
+help:boolean;
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad HelpPage');
+
+  constructor(public navCtrl: NavController, public navParams: NavParams,public auth:AuthProvider) {
+    this.auth.get('help').then(col => {
+      this.help = col;
+    }).catch(err => {
+      this.help = true;
+    });
   }
-  
-test(){
-  alert(this.pet);
-}
 
 gotoLogin(){
 this.navCtrl.push(LoginPage);

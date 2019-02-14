@@ -13,8 +13,11 @@ import { AdminPage } from '../../pages/admin/admin';
 export class LoginPage {
   private username:string;
   private password:string;
-
+help:boolean;
   constructor(public navCtrl: NavController, public navParams: NavParams,public awri:AuthProvider) {
+    this.awri.get('help').then(data=>{   
+      this.help=data;
+    });
   }
   
   
@@ -25,7 +28,7 @@ export class LoginPage {
   login(){
     //alert('username: ' + this.username);
     this.awri.login(this.username,this.password).then(data=>{      
-      console.log(data);
+    //  console.log(data);
     }).catch(err=>{
       this.username="";
       this.password="";
@@ -40,10 +43,10 @@ export class LoginPage {
   fblogin(){
     this.awri.fblogin().then(data=>{
     let dat:any=data;
-    console.log(data);
+  //  console.log(data);
       this.awri.fboauth(dat.authResponse.accessToken).then(res=>{
 //        this.username=<String>this.awri.username;
-        console.log(res);   
+//        console.log(res);   
       });
     })
   };
@@ -66,8 +69,9 @@ gotoAdmin(){
 }
 
 helpChanged(evt){
-  //console.log(evt.help);
-  this.awri.set('help',evt.help);
+  this.awri.set('help',evt.help).then(h=>{
+    this.help=h;
+  });
 }
 
 }

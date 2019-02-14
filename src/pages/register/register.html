@@ -8,7 +8,7 @@
           </ion-buttons>
            
           <ion-title>
-              Anmelden 
+              Registrieren 
             </ion-title>
     <ion-buttons end>
 <ng-template [ngIf]="this.auth.isInRole('authenticated user')" [ngIfElse]="headerOut">
@@ -29,19 +29,19 @@
 
 <ion-content padding>
   <ion-card>
-  <ion-card-content>Registrieren sie sich auf AWRI um Zugriff auf erweiterte Funktionen zu erhalten.
-     </ion-card-content>
+  <ion-card-content text-wrap>Erstellen sie ein neues AWRI Profil um Zugriff auf erweiterte Funktionen zu erhalten.
+  </ion-card-content>
   </ion-card>
   <form #registerForm="ngForm" (ngSubmit)="registerUser()" autocomplete="off">
       <ion-row>
         <ion-col>
           <ion-list inset>
               <ion-item>
-                  <ion-input placeholder="Username" name="username" id="userField"
+                  <ion-input placeholder="Ihr Benutzername" name="username" id="userField"
                              type="text" required [(ngModel)]="username" #user></ion-input>
                 </ion-item>
             <ion-item>
-              <ion-input placeholder="Email" name="email" id="emailField"
+              <ion-input placeholder="Ihre Email Adresse" name="email" id="emailField"
                          type="email" required [(ngModel)]="email" #user></ion-input>
             </ion-item>
             <ion-item>
@@ -60,6 +60,7 @@
           </ion-col>
       </ion-row>        
     </form>
-    <button ion-button round full (click)="fblogin()"> <ion-icon name="logo-facebook"></ion-icon>Facebook</button>     
+    <ion-label text-wrap>Klicken sie hier um sich mit Ihrem Facebook Profil zu registrieren.</ion-label>
+    <button ion-button round full (click)="fblogin()"> <ion-icon name="logo-facebook"></ion-icon> &nbsp;&nbsp;&nbsp; über Facebook registrieren</button>     
 
 </ion-content>

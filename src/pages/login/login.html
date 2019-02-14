@@ -33,12 +33,13 @@
         <ion-label item-start>Server</ion-label>
         <ion-label color="secondary">{{awri.HOST}}</ion-label>        
       </ion-item>
+      <div class="help">
       <ion-item>
-        <ion-label><div class="help">Hilfe an/aus</div></ion-label>
+        <ion-label><ion-icon name="help"></ion-icon> Hilfe an/aus</ion-label>
         <ion-toggle [(ngModel)]="help" (ionChange)="helpChanged(this);" [disabled]="this.awri.isInRole('anonymous user')"></ion-toggle>
       </ion-item>
 
-     
+    </div>
       <ion-item>
           <ion-label item-start>Ihre Lesezeichen</ion-label>
         <button ion-button (click)="this.gotoBookmarks()" item-end>Ansehen</button>
@@ -69,11 +70,11 @@
         <ion-col>
           <ion-list inset>
             <ion-item>
-              <ion-input placeholder="Benutzername" name="username" id="userField"
+              <ion-input placeholder="Ihre Email" name="username" id="userField"
                          type="text" required [(ngModel)]="username" #userField></ion-input>
             </ion-item>
             <ion-item>
-              <ion-input placeholder="Password" name="password" id="passwordField"
+              <ion-input placeholder="Ihr Password" name="password" id="passwordField"
                          type="password" required [(ngModel)]="password"></ion-input>
             </ion-item>
           </ion-list>
@@ -89,8 +90,10 @@
       </ion-row>    
         </form>  
           
-        <button ion-button round  full  (click)="fblogin()"> <ion-icon name="logo-facebook"></ion-icon>Facebook</button>               
-        <button ion-button round  full  (click)="gotoRegister()">Registrieren</button>         
+        <ion-label>Klicken sie hier um sich über Facebook anzumelden.</ion-label>
+        <button ion-button round  full  (click)="fblogin()"><ion-icon  slot="start" name="logo-facebook"></ion-icon> &nbsp;&nbsp;&nbsp; über Facebook anmelden</button>               
+        <ion-label>Sie sind noch nicht auf AWRI registriert?</ion-label>
+        <button ion-button round  full  (click)="gotoRegister()"><ion-icon  slot="start" name="contact"></ion-icon> &nbsp;&nbsp;&nbsp; Neues Profil Registrieren</button>         
   
     
     <ion-label color="danger"><a ion-link  href="{{this.awri.HOST}}/user/password" target="_BLANK">Passwort vergessen?</a></ion-label>

@@ -29,18 +29,38 @@
 <ion-content padding>
         <div *ngIf="this.awri.help" class="help">
                 <ion-item>
+                        <ion-label text-wrap>
+                                <ion-icon name="share"></ion-icon>Teilen sie den angezeigten Beitrag auf gängigen Platformen
+                            </ion-label>
+                    </ion-item>
+                    <ion-item>
+                            <ion-label text-wrap>
+                                    <ion-icon name="link"></ion-icon>Den Beitrag auf <strong>{{this.awri.HOST}}</strong> ansehen.
+                                </ion-label>
+                        </ion-item>
+
+                    <ion-item>
                     <ion-label text-wrap>
                             <ion-icon name="contact"></ion-icon>Nur auf AWRI angemeldete Benutzer können die Fragesteller sehen.
                         </ion-label>
                 </ion-item>
+
                 <ion-item>
                         <ion-label text-wrap>
-                                <ion-icon name="bookmark"></ion-icon>Nur auf AWRI angemeldete Benutzer können Lesezeichen setzen setzen.
+                                <ion-icon name="logo-facebook"></ion-icon>Mitglieder der Gruppe Rechtsforum Schweiz können direkt zum Originalbeitrag.
+                                <p>Falls der Beitrag noch vorhanden ist.</p>
+                            </ion-label>
+                    </ion-item>
+                <ion-item>
+                        <ion-label text-wrap>
+                                <ion-icon name="bookmark"></ion-icon>Nur auf AWRI angemeldete Benutzer können Lesezeichen setzen. 
+                                <p><ion-icon name="bookmark" color="danger"></ion-icon>=Lesezeichen gesetzt, <ion-icon name="bookmark" color="primary"></ion-icon>=Kein Lesezeichen gesetzt</p>
+                                <p> Die Anzahl aller Benutzer die dieses Lesezeichen gesetzt haben wird anzeigt.</p> 
                             </ion-label>
                     </ion-item>
                         <ion-item>
                         <ion-label text-wrap>
-                               <ion-icon name="logo-facebook"></ion-icon> Nur Mitglieder der Facebook Gruppe Rechtsforum Schweiz können direkt zum Originalbeitrag(falls noch vorhanden) in der Gruppe springen.                                
+                               Nur angemeldete Benutzer können auf Fragen antworten.                                
                                                         </ion-label>
                         </ion-item>
                         </div>

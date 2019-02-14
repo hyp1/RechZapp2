@@ -28,42 +28,62 @@
    
    <ion-content padding>  
         <div *ngIf="auth.isInRole('anonymous user')">
-                <ion-item text-wrap>
-            <ion-label color="danger"><h2>Sie sind nicht angemeldet!</h2>
-                <p>Klicken sie oben Rechts auf <ion-icon name="contact"></ion-icon> um sich auf AWRI zu registrieren oder anzumelden.</p>
-                </ion-label>
-                </ion-item>
-        </div>  
+                <ion-card>
+                        <ion-card-header>
+                                <ion-card-title><ion-icon name="contact"></ion-icon> Sie sind nicht angemeldet</ion-card-title>
+                              </ion-card-header>
+                            
+                              <ion-card-content>
+                      <ion-label text-wrap>Bitte registrieren oder anmelden um Zugriff auf erweiterte Funktionen zu erhalten</ion-label>
+                </ion-card-content>
+                <ion-item><ion-buttons right> 
+                <button ion-button class="submit-btn" round  type="submit"  (click)="this.gotoLogin();">Anmelden/Registrieren
+                </button> 
+                </ion-buttons>
+                </ion-item>   
+                </ion-card>
+            </div>  
         
         <ion-title>Alles was Recht ist!</ion-title>
-        <p>Unsere Community hilft Ihnen kostenlos und unverbindlich bei rechtlichen Fragen.</p>
+        <p>Rechtsberatung mit System - 
+        Unsere Community hilft kostenlos und unverbindlich bei rechtlichen Fragen.</p>
+        <div *ngIf="help" class="help">
+                <ion-item>
+                <ion-label text-wrap><p><ion-icon name="help"></ion-icon>Angemeldete Benutzer können die Hilfe in den Profileinstellungen auschalten</p></ion-label>
+                </ion-item>
+        </div>
+
+
       <div *ngIf="help" class="help">
         <ion-item>
             <ion-label text-wrap>
                     <h2>Sie haben ein rechtliches Problem und benötigen Rat?</h2>
                     <p>Das AWRI System wurde 2015 entwickelt um Personen, die juristischen Rat suchen bestmöglich zu unterstützen.</p>
+                    <p>Wir ersetzen keinen juristischen Beistand, diese Platform ist als erste Hilfestellung für Rechtsfragen gedacht!</p>
                     <p>Schauen sie Antworten auf ähnliche Fragen in einem der folgenden Bereiche an:</p>
                   <ul>
                         <div *ngFor="let bereich of bereiche">                                
                             <li><ion-icon (click)="gotoBereich(bereich)" name="{{bereich.icon}}"></ion-icon> {{bereich.name}}
                         </div>
                   </ul>
+                  <h2>Suchen sie in über {{auth.stats?.nodesc}} Rechtsfragen nach passenden Antwortetn.</h2>
                     <p>Suchen <ion-icon name="search"></ion-icon> sie gezielt mit verknüpften Schlüsselwörtern in unserer Datenbank mit <strong>{{auth.stats?.nodesc}}</strong> Rechtsfragen und <strong>{{auth.stats?.commentsc}}</strong> Antworten.</p>
                    
                     <h2>Sie haben keine passende Lösung gefunden?</h2>
-                    <p>Stellen sie eine neue Rechtsfrage, wir veröffentlichen Sie in der Facebookgruppe <a href="https://www.facebook.com/groups/RechtsberatungSchweiz/" target="_BLANK"><ion-icon name="logo-facebook"></ion-icon> Rechtsforum Schweiz</a>.</p>
-                    <p>Die erfahrenen Mitglieder unserer Facebook Gruppe diskutieren (manchmal auch kontrovers) und die besten Antworten werden hier wieder veröffentlicht.</p>        
-                   
-                    <h2>Sie möchten auch mitmachen und Anderen helfen?</h2>
-                    
-                    <p>Treten sie unserer Facebookgruppe  <a href="https://www.facebook.com/groups/RechtsberatungSchweiz/" target="_BLANK"><ion-icon name="logo-facebook"></ion-icon> Rechtsforum Schweiz</a> bei.
+                    <p>Dann stellen sie eine neue Rechtsfrage in der Facebookgruppe <a href="https://www.facebook.com/groups/RechtsberatungSchweiz/" target="_BLANK"><ion-icon name="logo-facebook"></ion-icon> Rechtsforum Schweiz</a>.</p>
+                    <p>Auf dieser Seite (Frage stellen) können Sie Ihre Frage <strong>anonym</strong> ins Rechtsforum Schweiz stellen lassen.</p>        
+                    <p>Die Mitglieder unserer Facebook Gruppe diskutieren (manchmal auch kontrovers) die Rechtslage und nur die hilfreichsten Antworten werden hier wieder veröffentlicht.</p>        
+                    <p>Wenn ihre Frage hier veröffentlicht wurde können Sie <strong>anonym</strong> Atnworten, indem Sie Ihre Frage hier kommentieren.</p>
+             
+                    <h2>Sie möchten in unserer Community mitmachen und helfen?</h2>   
+                    <p>Dann treten sie einfach unserer Facebookgruppe  <a href="https://www.facebook.com/groups/RechtsberatungSchweiz/" target="_BLANK"><ion-icon name="logo-facebook"></ion-icon> Rechtsforum Schweiz</a> bei.
                     Wir freuen uns immer auf kompetente und erfahrene Mitstreiter. ❤️</p>
                     <p>Oder teilen <ion-icon name="share" (click)="share()"></ion-icon> Sie AWRI einfach auf Ihrer Lieblingsplatform. Vielen Dank!</p>            
                
-                    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;"><tr style=""><td height="28" style="line-height:28px;">&nbsp;</td></tr><tr><td style=""><table border="0" width="280" cellspacing="0" cellpadding="0" style="border-collapse:separate;background-color:#ffffff;border:1px solid #dddfe2;border-radius:3px;font-family:Helvetica, Arial, sans-serif;margin:0px auto;"><tr style="padding-bottom: 8px;"><td style=""><img class="img" src="https://scontent-frt3-2.xx.fbcdn.net/v/t1.0-0/c0.0.568.296a/p526x296/48408412_2235504743146555_6188383390555701248_n.jpg?_nc_cat=109&amp;_nc_ht=scontent-frt3-2.xx&amp;oh=618684cc6dddbbbf4773ecb6e1f812e9&amp;oe=5C90CDD3" width="280" height="146" alt="" /></td></tr><tr><td style="font-size:14px;font-weight:bold;padding:8px 8px 0px 8px;text-align:center;">Rechtsforum Schweiz</td></tr><tr><td style="color:#90949c;font-size:12px;font-weight:normal;text-align:center;">Geschlossen Gruppe · 8.302 Mitglieder</td></tr><tr><td style="padding:8px 12px 12px 12px;"><table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;width:100%;"><tr><td style="background-color:#4267b2;border-radius:3px;text-align:center;"><a style="color:#3b5998;text-decoration:none;cursor:pointer;width:100%;" href="https://www.facebook.com/plugins/group/join/popup/?group_id=353664054816742&amp;source=email_campaign_plugin" target="_blank" rel="noopener"><table border="0" cellspacing="0" cellpadding="3" align="center" style="border-collapse:collapse;"><tr><td style="border-bottom:3px solid #4267b2;border-top:3px solid #4267b2;color:#FFF;font-family:Helvetica, Arial, sans-serif;font-size:12px;font-weight:bold;">Gruppe beitreten</td></tr></table></a></td></tr></table></td></tr><tr><td style="border-top:1px solid #dddfe2;font-size:12px;padding:8px 12px;">Rechtsberatung seit 2015
-                            Auskünfte sind kostenlos und UNVERBINDLICH
-                            Schützt Eure und andere Daten! (Name,Tel.  etc. schwärzen)
-                            Dies ist kein öffentich...</td></tr></table></td></tr><tr style=""><td height="14" style="line-height:14px;">&nbsp;</td></tr></table>
+                    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;"><tr style=""><td height="28" style="line-height:28px;">&nbsp;</td></tr><tr><td style=""><table border="0" width="280" cellspacing="0" cellpadding="0" style="border-collapse:separate;background-color:#ffffff;border:1px solid #dddfe2;border-radius:3px;font-family:Helvetica, Arial, sans-serif;margin:0px auto;"><tr style="padding-bottom: 8px;"><td style=""><img class="img" src="assets/imgs/logo_rechtsforum.jpg" width="280" height="146" alt="" /></td></tr><tr><td style="font-size:14px;font-weight:bold;padding:8px 8px 0px 8px;text-align:center;">Rechtsforum Schweiz</td></tr><tr><td style="color:#90949c;font-size:12px;font-weight:normal;text-align:center;">Geschlossen Gruppe · über 8.000 Mitglieder</td></tr><tr><td style="padding:8px 12px 12px 12px;"><table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;width:100%;"><tr><td style="background-color:#4267b2;border-radius:3px;text-align:center;"><a style="color:#3b5998;text-decoration:none;cursor:pointer;width:100%;" href="https://www.facebook.com/plugins/group/join/popup/?group_id=353664054816742&amp;source=email_campaign_plugin" target="_blank" rel="noopener"><table border="0" cellspacing="0" cellpadding="3" align="center" style="border-collapse:collapse;"><tr><td style="border-bottom:3px solid #4267b2;border-top:3px solid #4267b2;color:#FFF;font-family:Helvetica, Arial, sans-serif;font-size:12px;font-weight:bold;">Gruppe beitreten</td></tr></table></a></td></tr></table></td></tr><tr><td style="border-top:1px solid #dddfe2;font-size:12px;padding:8px 12px;">
+                        <p>Facebook Rechtsberatung seit 2015</p>
+                            <p>Alle Auskünfte sind kostenlos und UNVERBINDLICH</p>                       
+                           </td></tr></table></td></tr><tr style=""><td height="14" style="line-height:14px;">&nbsp;</td></tr></table>
                            </ion-label> 
         </ion-item>    
       </div>
@@ -76,14 +96,35 @@
     <button ion-button item-end (click)="doSearch()" small><ion-icon name="search"></ion-icon></button>
 </ion-item>
 
+<ion-card>
+        <ion-card-header>
+                <ion-card-title>Rechtsfrage vom {{random?.created*1000 | date: 'dd.MM.yyyy H:mm' }} </ion-card-title>
+              </ion-card-header>
+            
+              <ion-card-content (click)="this.frageSelected(random?.nid)">
+    {{random?.title}}
+      
+</ion-card-content>
+<ion-item><ion-buttons end> 
+<button ion-button class="submit-btn" round  type="submit"  (click)="this.getRandom(auth.stats.nodesc);">Zufall
+</button> 
+</ion-buttons>
+</ion-item>   
+</ion-card>
+
 <ion-item>
-      <ion-slides>
+      <ion-slides *ngIf="bereiche && bereiche.length"  pager autoplay="5000" loop="true" speed="500"> 
+          
 <div *ngFor="let bereich of bereiche">
+        <ion-item>  
         <ion-slide (click)="gotoBereich(bereich)">
+     
     <h1><ion-icon name="{{bereich.icon}}"></ion-icon> {{bereich.name}}  <ion-badge>{{bereich.count}}</ion-badge>
     </h1>
-    <img src="{{bereich.image}}">
+    <p><img src="{{bereich.image}}"></p><br>
+
     </ion-slide>
+</ion-item>    
 </div>
       </ion-slides>
     </ion-item>
@@ -124,7 +165,7 @@
     -->
 
   
-    <ion-slides>
+    <ion-slides pager autoplay="5000" loop="true" speed="500">
         <ion-slide>
                 <a href="https://www.facebook.com/groups/RechtsberatungSchweiz/" target="_BLANK">  
                     <img src="assets/imgs/logo_rechtsforum.jpg">
@@ -193,7 +234,7 @@
    <ion-footer>
         <ion-toolbar> 
             <ion-item>            
-           <button ion-fab icon-only (click)="this.share()" item-start><ion-icon name="share"></ion-icon></button><ion-title>(c) 2015 Powered by AWRI </ion-title>
+           <button ion-fab icon-only (click)="this.share()" item-start><ion-icon name="share"></ion-icon></button><ion-title>(c) 2015 by AWRI </ion-title>
         </ion-item>
         </ion-toolbar>           
       </ion-footer>

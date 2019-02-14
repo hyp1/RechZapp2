@@ -31,7 +31,7 @@
     <div *ngIf="help" class="help">   
         <ion-item>
             <ion-label text-wrap>
-                <h2>Rechtsfrage stellen.</h2>
+                <h2><ion-icon name="help"></ion-icon> Rechtsfrage stellen.</h2>
                 <p>Wenn sie Ihre Rechtsfrage nicht anonym stellen wollen, können sie ihre Frage einfach in unserer Facebookgruppe <a href="https://www.facebook.com/groups/RechtsberatungSchweiz/" target="_BLANK"><ion-icon name="logo-facebook"></ion-icon> Rechtsforum Schweiz stellen.</a></p>
               
                <h2>Anonyme Rechtsfrage stellen.</h2>
@@ -43,12 +43,13 @@
 </div>
 
   <ng-template [ngIf]="this.awri.isInRole('authenticated user')" [ngIfElse]="loggedOut">
-    <ion-title>Ihre Rechtsfrage wird anonym gestellt</ion-title>
-    
-      <ion-label text-wrap>Bitte beschreiben Sie den Sachverhalt möglichst genau und wählen Sie falls es um kantonale Angelegenheiten handelt den entsprechenden Kanton aus.</ion-label>
+    <ion-title>Ihre Rechtsfrage wird <strong>anonym</strong> behandelt.</ion-title>
+      <ion-label text-wrap>Bitte beschreiben Sie den Sachverhalt möglichst genau und wählen Sie, falls es um kantonale Behörden oder Rechtsprechung geht, den entsprechenden Kanton aus.</ion-label>
+      <ion-label text-wrap>Wenn Ihre Frage freigeschalten wurde, können Sie hier wieder auf Ihre Frage <strong>anonym</strong> Rückantworten.</ion-label>
+      <ion-label text-wrap>Die Frage wird in unserem Forum diskutiert und die treffendsten Antworten veröffentlicht.(ca. 24h)</ion-label>
       <ion-label text-wrap color="danger">Erwähnen Sie keine persönlichen Daten wie Namen Adressen,Telefonnummern, etc.</ion-label>
       <ion-label text-wrap color="danger">Ihre Frage wird durch einen Admin geprüft und freigeschalten.</ion-label>
-    
+
     <form #createForm="ngForm" (ngSubmit)="sendFrage()">
 
         <ion-input type="hidden" value="{{this.awri.user.name}}" name="username" disabled></ion-input>
@@ -67,7 +68,7 @@
           <ion-textarea required [(ngModel)]="todo.description" name="description"></ion-textarea>
         </ion-item>
         <div *ngIf="error" class="alert alert-danger">{{error}}</div>
-        <button ion-button class="submit-btn" full type="submit"
+        <button ion-button class="submit-btn" round full type="submit"
                 [disabled]="!createForm.form.valid">Frage senden
         </button>        
       </form>
@@ -97,8 +98,8 @@
                 <ion-textarea required [(ngModel)]="todo.description" name="description" disabled></ion-textarea>
               </ion-item>
               <div *ngIf="error" class="alert alert-danger">{{error}}</div>
-              <button ion-button class="submit-btn" full type="submit"
-              disabled>Frage senden
+              <button ion-button class="submit-btn" round full type="submit"
+              disabled shape="round">Frage senden
               </button>        
             </form>
     </ng-template>

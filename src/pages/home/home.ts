@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, Platform, AlertController, ActionSheetController } from 'ionic-angular';
+import { NavController, Platform, AlertController, ActionSheetController,Slides } from 'ionic-angular';
 //import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import "rxjs/add/operator/map";
@@ -38,14 +38,18 @@ export class HomePage {
   bereiche: Array<any>;
   stats:any;
   search:string;
-
+  random: any;
+  private urlParameters: Array<any> = [];
+  mySlideOptions: any;
 
   constructor(public navCtrl: NavController, upload: UploadComponent, private admobFree: AdMobFree,
     private httpClient: HttpClient, private plt: Platform, private alertCtrl: AlertController,
     private actionSheetCtrl: ActionSheetController, auth: AuthProvider) {
     this.auth = auth;
     this.help = false;
-    
+    this.mySlideOptions = {
+      pager:true
+    };    
     auth.getStats().then(s=>{
 let stats=JSON.parse(<any>s); 
     this.bereiche = [
@@ -104,6 +108,8 @@ let stats=JSON.parse(<any>s);
         count:stats.t_wohnen
       },
     ]
+  //alert(stats.nodesc)
+  this.getRandom(stats.nodesc);
   }).catch(err=>{
     console.log(err);
   }) //stats
@@ -128,7 +134,8 @@ let stats=JSON.parse(<any>s);
     this.page = 0;
     this.pages = 10;
 
-    this.getFragen();
+   // this.getFragen();
+
 
     this.admobFree.banner.config(bannerConfig);
 
@@ -142,7 +149,7 @@ let stats=JSON.parse(<any>s);
 
   }
 
-
+/*
   getFragen() {
     this.getFragenIndex(this.page, this.pages).then(dat => {
       let d = <any>dat;
@@ -163,23 +170,6 @@ let stats=JSON.parse(<any>s);
     })
   }
 
-  getFrage(nid) {
-    return new Promise((resolve, reject) => {
-      let headers = new HttpHeaders()
-        .set('X-CSRF-TOKEN', <string>this.auth.token).set('Content-Type', 'application/json')
-
-      let options = {
-        headers: headers,
-        withCredentials: true,
-      };
-      this.httpClient.post(this.auth.HOST + '/' + this.auth.ENDPOINT + '/awri_services_resources/rechtsfrage', { nid: nid }, options).subscribe(data => {
-        resolve(data);
-      }, err => {
-        reject(err);
-      });
-    })
-
-  }
 
   getComments(nid) {
     return new Promise((resolve, reject) => {
@@ -193,14 +183,6 @@ let stats=JSON.parse(<any>s);
   }
 
 
-  frageSelected(n: any): void {
-    //console.log(n)
-    this.getFrage(n.nid).then(res => {
-      let item: any = res;
-      //  console.log(item);
-      this.navCtrl.push(ViewPage, { item: { node: JSON.parse(item) } });
-    });
-  }
 
 
   doInfinite(infiniteScroll) {
@@ -210,7 +192,45 @@ let stats=JSON.parse(<any>s);
       infiniteScroll.complete();
     }, 500);
   }
+*/
 
+
+frageSelected(n: string): void {
+  //console.log(n)
+  this.getFrage(n).then(res => {
+    let item: any = res;
+    //  console.log(item);
+    this.navCtrl.push(ViewPage, { item: { node: JSON.parse(item) } });
+  });
+
+}
+
+getFragenIndex(page, pages) {
+  return new Promise((resolve, reject) => {
+    this.httpClient.get(this.auth.HOST + '/' + this.auth.ENDPOINT + '/node.json?fields=nid,title,created,status&parameters[type]=rechtsfrage&parameters[status]=1&options[orderby][created]=desc&page=' + page + '&pagesize=' + pages).subscribe(data => {
+      resolve(data);
+    }, err => {
+      reject(err);
+    });
+  })
+}
+getFrage(nid) {
+  return new Promise((resolve, reject) => {
+    let headers = new HttpHeaders()
+      .set('X-CSRF-TOKEN', <string>this.auth.token).set('Content-Type', 'application/json')
+
+    let options = {
+      headers: headers,
+      withCredentials: true,
+    };
+    this.httpClient.post(this.auth.HOST + '/' + this.auth.ENDPOINT + '/awri_services_resources/rechtsfrage', { nid: nid }, options).subscribe(data => {
+      resolve(data);
+    }, err => {
+      reject(err);
+    });
+  })
+
+}
   gotoLogin() {
     this.navCtrl.push(LoginPage);
   }
@@ -309,13 +329,9 @@ let stats=JSON.parse(<any>s);
     actionSheet.present();
   }
 
-  gotoBereich(bereich) {
+  gotoBereich(bereich:any) {
     this.navCtrl.push(BereichPage, { bereich: bereich });
   }
-
-onInput(evt){
-  console.log(evt.srcElement.value);
-}
 
 
 doSearch(){
@@ -323,5 +339,65 @@ doSearch(){
   this.navCtrl.push(SearchPage, { text: this.search });
 }
 
+getRandom(pages){
+  //  this.navCtrl.push(SearchPage);
+  let rnd=Math.floor(Math.random()*(pages-1));
+  this.getFragenIndex(rnd, 1).then(n=>{
+    this.random=n[0];
+})
+
+
+   // this.navCtrl.push(SearchPage, { text: this.search });
+  }
+
+
+ionViewDidEnter(){
+ 
+
+  if (document.URL.indexOf("?") > 0) {
+    let splitURL = document.URL.split("?");
+    let splitParams = splitURL[1].split("&");
+    let i: any;
+    for (i in splitParams){
+      let singleURLParam = splitParams[i].split('=');
+      if (singleURLParam[0] == "category"){
+      //  this.category = singleURLParam[1];
+      }
+      if (singleURLParam[0] == "nid"){
+       // alert("LOAD"+singleURLParam[1]);
+     
+        // this.gotoPage(singleURLParam[1]);
+       /*
+        this.getFrage(singleURLParam[1]).then(res => {
+          let item: any = res;
+            console.log(item);
+          this.navCtrl.push(ViewPage, { item: { nodes:[{node: JSON.parse(item) }]} });
+        });
+        */
+      //  this.id = singleURLParam[1];
+      }
+      let urlParameter = {
+      'name': singleURLParam[0],
+      'value': singleURLParam[1]
+    };
+   
+    this.urlParameters.push(urlParameter);
+    this.frageSelected(urlParameter.value);
+    }
+  }
+
+}
+/*
+gotoPage(nid){
+  this.getFrage(nid).then(res => {
+    //  let item: any = res;
+    alert(nid);
+        console.log(res);
+    //  this.navCtrl.push(ViewPage, { item: { node: JSON.parse(item) } });
+    }).catch(err=>{
+      console.log(err);
+    });
+}
+*/
 
 }

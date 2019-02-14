@@ -19,7 +19,7 @@
  }
  
  .menu-container {
-    background-color: color($colors, secondary);
+    background-color: color($colors, dark);
  }
  
  .transparent {
@@ -33,7 +33,7 @@
  }
  
  :hover.list-item {
-    background: #2e8015;
+    background:lighten(color($colors, dark),30);
  }
  
  .scroll-content{
@@ -57,14 +57,24 @@
    unicode-range: U+0000-00FF;
 }
 
-div.help ion-item{
+div.info ion-item{
    background-color:lighten(color($colors, primary),30);
+ //  color: white;
+   border-radius: 5px;
+}
+div.info a{
+   text-decoration: none;
+}
+
+div.help ion-item{
+   background-color:lighten(color($colors, help),30);
  //  color: white;
    border-radius: 5px;
 }
 div.help a{
    text-decoration: none;
 }
+
 ion-icon {
    &[class*="rechzapp-"] {
        // Instead of using the font-based icons

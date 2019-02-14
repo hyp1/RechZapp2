@@ -39,6 +39,7 @@ import { StatsProvider } from '../providers/stats/stats';
 import { BookmarkComponent } from '../components/bookmark/bookmark';
 import { BereichComponent } from '../components/bereich/bereich';
 
+
 @NgModule({
  declarations: [
    MyApp,

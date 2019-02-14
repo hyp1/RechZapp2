@@ -26,14 +26,13 @@
 
 </ion-header>
 
-
 <ion-content padding>
   <ion-item>
     <ion-label>Verbunden mit: {{awri.HOST}}</ion-label>
   </ion-item>
   <ion-item>
     <ion-label>Hilfe ein/aus</ion-label>
-    <ion-toggle [(ngModel)]="help" (ionChange)="helpChanged(this);" [disabled]="this.awri.isInRole('anonymous user')"></ion-toggle>
+    <ion-toggle [(ngModel)]="help" (ionChange)="this.helpChanged(this);" [disabled]="this.awri.isInRole('anonymous user')"></ion-toggle>
   </ion-item>
 <ion-item>
     <ion-label item-start>Ihre Lesezeichen</ion-label>
