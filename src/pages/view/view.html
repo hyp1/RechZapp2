@@ -27,7 +27,7 @@
 </ion-header>
 
 <ion-content padding>
-        <div *ngIf="this.awri.help" class="help">
+        <div *ngIf="this.help" class="help">
                 <ion-item>
                         <ion-label text-wrap>
                                 <ion-icon name="share"></ion-icon>Teilen sie den angezeigten Beitrag auf gängigen Platformen
@@ -101,6 +101,19 @@
                   
             <ion-item text-wrap>
              <h2 innerHTML="{{item.node.body['und'][0].value}}"></h2>
+            </ion-item>
+
+            <ion-item text-wrap>     
+<button title="1 Nicht gelöst" ion-button small (click)="this.setRating(item.node.nid,1);" [color]=" this.bewertung>=20 ? 'secondary' : 'primary'">⭐</button>
+<button title="2 Schlecht gelöst" ion-button small (click)="this.setRating(item.node.nid,2);" [color]=" this.bewertung>=40 ? 'secondary' : 'primary'">⭐</button>
+<button title="3 Gut gelöst" ion-button small  (click)="this.setRating(item.node.nid,3);" [color]=" this.bewertung>=60 ? 'secondary' : 'primary'">⭐</button>
+<button title="4 Sehr gut gelöst" ion-button small (click)="this.setRating(item.node.nid,4);" [color]=" this.bewertung>=80 ? 'secondary' : 'primary'">⭐</button>
+<button title="5 Spitze gelöst" ion-button small (click)="this.setRating(item.node.nid,5);" [color]=" this.bewertung>=100 ? 'secondary' : 'primary'">⭐</button>
+<p><small>Ihre Bewertung: {{ rating?.user?.value ?  rating?.user?.value/20 : 0  }},
+Durchschnitt: {{  rating?.average?.value ? rating?.average?.value:0 }}%,
+Bewertungen: {{  rating?.count?.value ? rating?.count?.value :0 }}</small></p>
+<p><small>1 Nicht gelöst,2 Schlecht gelöst,3 Gut gelöst,4 Sehr gut gelöst,5 Top Lösung!</small></p>
+
             </ion-item>
 
             <ion-row>

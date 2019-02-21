@@ -214,6 +214,45 @@ var is_flagged = {
 });
 }
 
+
+getRating(nid:number){
+  return new Promise((resolve,reject) => {
+   this.http.get(this.HOST+'/drupalgap/fivestar/'+nid+'.json?uid='+this.user.uid)
+      .map(res => res).subscribe(data=>{
+        let arr=<any>data;
+        resolve(arr);
+      },err=>{
+        reject(err);
+       console.log(err);
+      });
+  });
+}
+
+setRating(nid:number,val:number){
+  return new Promise((resolve,reject) => {
+    const headers = new HttpHeaders()
+    .set('X-CSRF-TOKEN',<any>this.token);    
+  const options = {
+    headers: headers,
+    withCredentials: true
+  };
+  var params = {
+    "id" : nid,
+    "rating" : val,
+//    "action":flag, //flag/unflag
+  //  "skip_permission_check":1, 
+    "uid" : this.user.uid,
+  };
+    this.http.post(this.HOST+'/'+this.ENDPOINT+'/fivestar/rate',params,options).subscribe(data => {
+      let arr=<any>data;
+    this.getRating(nid);
+      resolve(arr);
+    },err=>{
+      reject(false);
+    });
+  });
+}
+
 setFlag(nid,flag_name,flag){
   return new Promise((resolve,reject) => {
   const headers = new HttpHeaders()

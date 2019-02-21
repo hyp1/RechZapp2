@@ -31,41 +31,72 @@
         <ion-title>Alles was Recht ist!</ion-title>
         <p>Rechtsberatung mit System - 
         Unsere Community hilft kostenlos und unverbindlich bei rechtlichen Fragen.</p>
-        <p>Unser Engagement dient der faktischen Umsetzung von Art. 8 BV (Rechtsgleichheit). </p>
-            <p>Einer gerechten Sache zu dienen, motiviert uns Tag für Tag für die Interessen der Bedürftigen einzusetzen.</p>
+        <blockquote>Unser Engagement dient der faktischen Umsetzung von Art. 8 BV (Rechtsgleichheit). 
+            Einer gerechten Sache zu dienen, motiviert uns Tag für Tag für die Interessen der Bedürftigen einzusetzen.
+                        <small>(Gründer Abas Kanani ✝️ 2015)</small>
+                    </blockquote>
     </ion-card>
+
+    <div class="help" *ngIf="help">
+        <ion-item>
+                <ion-label text-wrap><ion-icon name="help"></ion-icon> Sie können die angezeigte Hilfe in den Einstellungen ausschalten. <br>
+                    Klicken sie oben auf ihr <ion-icon name="contact"></ion-icon>
+                     Profilbild um die Einstellungen zu öffnen.                            
+                    </ion-label>                                
+    </ion-item>         
+
+    <div class="help" *ngIf="auth.isInRole('anonymous user')">
+
+<ion-item>
+            <ion-label color="danger" text-wrap><h2>Nur auf AWRI angemeldete Benutzer haben Zugriff auf folgende erweiterte Funktionen!</h2></ion-label>
+        </ion-item>
+        <ion-item>         <ion-label>Hilfe ein/ausschalten</ion-label>  </ion-item>
+
+        <ion-item>       <ion-label>Anonyme Rechtsfragen stellen</ion-label>  </ion-item>
+        <ion-item>          <ion-label>Rechtsfragen kommentieren</ion-label>  </ion-item>
+        <ion-item>         <ion-label>Lesezeichen setzen</ion-label>  </ion-item>
+        <ion-item>         <ion-label>Rechtsfragen  bewerten</ion-label>  </ion-item>
+       
+        </div>   
+</div>
 
     <ion-card padding>
         <ion-title>Wie funktioniert dieses System?</ion-title>
         <p>Sie stellen Ihre Rechtsfrage hier auf AWRI, wir posten Ihre Frage für Sie anonym in unser Rechtsforum (Rechtsforum Schweiz)</p>
         <p>Durch Erfahrungs- und Meinungsaustausch versuchen unsere Mitglieder Lösungen auf Ihre Frage zu finden.</p>
-        <ion-label>Wir werten die besten Antworten aus und in der Regel werden die treffendsten Antworten innert 48h hier wieder veröffentlicht..</ion-label>
+        <ion-label text-wrap>Wir werten die besten Antworten aus und in der Regel werden die treffendsten Antworten innert 48h hier wieder veröffentlicht..</ion-label>
         <ion-label color="danger">Wir ersetzen keinen juristischen Beistand!</ion-label>
 </ion-card>
 
-        <div class="help" *ngIf="help">
-                <ion-item>
-                        <ion-label text-wrap><ion-icon name="help"></ion-icon> Sie können die angezeigte Hilfe in den Einstellungen ausschalten. <br>
-                            Klicken sie oben auf ihr <ion-icon name="contact"></ion-icon>
-                             Profilbild um die Einstellungen zu öffnen.                            
-                            </ion-label>                                
-            </ion-item>         
 
-            <div class="help" *ngIf="auth.isInRole('anonymous user')">
-    
-<ion-item>
-                    <ion-label color="danger" text-wrap><h2>Nur auf AWRI angemeldete Benutzer haben Zugriff auf folgende erweiterte Funktionen!</h2></ion-label>
-                </ion-item>
-                <ion-item>         <ion-label>Hilfe ein/ausschalten</ion-label>  </ion-item>
+<ion-card padding>
+    <ion-title>Bewertungen</ion-title>
+    <ion-label text-wrap>Helfen sie uns dabei, unser System zu verbessern indem Sie Rechtsfragen mit 1 - 5 Sternen bewerten</ion-label>
+    <ion-label text-wrap>
+        <button title="1 Nicht gelöst" ion-button small [color]=" this.bewertung>=20 ? 'secondary' : 'primary'">⭐</button>
+        <button title="2 Schlecht gelöst" ion-button small [color]=" this.bewertung>=40 ? 'secondary' : 'primary'">⭐</button>
+        <button title="3 Gut gelöst" ion-button small  [color]=" this.bewertung>=60 ? 'secondary' : 'primary'">⭐</button>
+        <button title="4 Sehr gut gelöst" ion-button small [color]=" this.bewertung>=80 ? 'secondary' : 'primary'">⭐</button>
+        <button title="5 Spitze gelöst" ion-button small  [color]=" this.bewertung>=100 ? 'secondary' : 'primary'">⭐</button>     
+    </ion-label>
+    <p><small>1 = Nicht gelöst; 2 = Schlecht gelöst; 3 = Gut gelöst; 4 = Sehr gut gelöst; 5 = Top Lösung!</small></p>
+    <p>Die durchschnittliche Bewertung wird anhand grün angezeigt <button ion-button small color="secondary">⭐</button></p>
+</ion-card>
+<ion-card padding>
+    <ion-title>Lesezeichen</ion-title>
+    <ion-label text-wrap>Angemeldete Benutzer können Lesezeichen auf Rechtsfragen setzen. 
+        Sie finden den Button zu ihren gesetzten Lesezeichen in Ihren Profil Einstellungen.</ion-label>
+    <ion-label text-wrap>
+Lesezeichen nicht gesetzt <ion-icon name="bookmark" color="primary" title="Lesezeichen setzten/entfernen"></ion-icon>
+    </ion-label>
+<ion-label text-wrap>
+Lesezeichen gesetzt <ion-icon name="bookmark" color="danger" title="Lesezeichen setzten/entfernen"></ion-icon>
+</ion-label>
+<ion-label text-wrap>
+Anzahl Personen die dieses Lesezeichen auch gesetzt haben: <ion-badge color="secondary">5</ion-badge>
+    </ion-label>
+    </ion-card>
 
-                <ion-item>       <ion-label>Anonyme Rechtsfragen stellen</ion-label>  </ion-item>
-                <ion-item>          <ion-label>Rechtsfragen kommentieren</ion-label>  </ion-item>
-                <ion-item>         <ion-label>Lesezeichen setzen</ion-label>  </ion-item>
-                <ion-item>         <ion-label>Rechtsfragen  bewerten</ion-label>  </ion-item>
-               
-                </div>   
-        </div>
-    <br>
 
         <div class="info">   
 

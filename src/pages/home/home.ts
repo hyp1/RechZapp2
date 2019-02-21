@@ -300,6 +300,15 @@ getFrage(nid) {
           }
         },
         {
+          text: 'RSS',
+          role: 'rss',
+          icon: 'logo-rss',
+          handler: () => {
+            window.open('https://stage.awri.ch/rss.xml', '_system');
+          }
+        },
+        /*
+        {
           text: 'Google+',
           role: 'google',
           icon: 'logo-google',
@@ -307,6 +316,7 @@ getFrage(nid) {
             window.open('https://plus.google.com/share?url=https://awri.ch', '_system');
           }
         },
+        */
         {
           text: 'Email',
           role: 'email',

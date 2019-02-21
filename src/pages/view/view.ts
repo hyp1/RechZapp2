@@ -22,37 +22,60 @@ title:string;
 comments:Observable<any>
 //awri:AwriConnectProvider;
 images:Array<any>;
+bewertung:number;
 
+rating:any;
+help:boolean;
   constructor(private httpClient:HttpClient,private actionSheetCtrl:ActionSheetController, public navCtrl: NavController, public navParams: NavParams,public awri:AuthProvider) {
-  //this.awri=awri;
+
   this.item = navParams.get('item');
   this.nid =this.item.node.nid;
   this.title =this.item.node.title;
-  //console.log(this.item.node);
+  this.bewertung =this.item.node.field_bewertung['und']?this.item.node.field_bewertung['und'][0].rating:0;
+
   this.getComments(this.item.node.nid);
+  this.getRating(this.item.node.nid);
   this.images=this.item.node.field_image['und'];
+  this.awri.get('help').then(col=>{
+    this.help=col;
+
+  }).catch(err=>{
+    console.log(err);
+  }); 
   }
   
-getComments(nid){
-  
+getComments(nid:number){
   this.comments =<any> this.httpClient.get(this.awri.HOST+'/drupalgap/comment.json?parameters[nid]='+nid+'&parameters[status]=1&pagesize=150')
       .map(res => res);
 }
 
+getRating(nid:number){
+this.awri.getRating(nid).then(data=>{
+    this.rating=<any>data;
+    this.bewertung=this.rating.average.value;
+  });
+}
 
-replaceString(str){
+setRating(nid:number,val:number){
+  this.awri.setRating(nid,val).then(data=>{
+    this.rating=<any>data;
+    this.bewertung=this.rating.average.value;
+  });
+}
+
+
+//Zeile einfügen
+replaceString(str:string){
   return str.replace('<strong>','<br><strong>')
 }
 
 goBack(){
-  //this.navCtrl.push(SearchPage);
   this.navCtrl.pop();
 }
 
 gotoLogin(){
   this.navCtrl.push(LoginPage);
 }
-
 
 shareLink(){
   if (this.awri.isBrowser()) {
