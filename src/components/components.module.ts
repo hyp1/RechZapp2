@@ -4,6 +4,7 @@ import { UploadComponent } from './upload/upload';
 import { CommentComponent } from './comment/comment';
 import { BookmarkComponent } from './bookmark/bookmark';
 import { BereichComponent } from './bereich/bereich';
+import { BannersComponent } from './banners/banners';
 
 @NgModule({
 	declarations: [
@@ -11,13 +12,15 @@ import { BereichComponent } from './bereich/bereich';
     UploadComponent,
     CommentComponent,
     BookmarkComponent,
-    BereichComponent],
+    BereichComponent,
+    BannersComponent],
 	imports: [],
 	exports: [
     Drupal7LoginComponent,
     UploadComponent,
     CommentComponent,
     BookmarkComponent,
-    BereichComponent]
+    BereichComponent,
+    BannersComponent]
 })
 export class ComponentsModule {}

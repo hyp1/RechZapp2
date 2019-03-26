@@ -33,7 +33,7 @@
                 </ion-label>
                 </ion-item>
         </div>  
-        
+        <banners></banners>
       <div *ngIf="help" class="help">
         <ion-item>
      
@@ -59,7 +59,7 @@
 
     <ion-fab right bottom class="web-fab">
         <button ion-fab icon-only color="primary" (click)="checkPlatform()">
-          <strong>{{this.page}}</strong>
+          <strong>{{this.page*10}}</strong>
         </button>
        </ion-fab>
        

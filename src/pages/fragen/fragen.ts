@@ -11,7 +11,7 @@ import { LoginPage } from '../login/login';
 
 
 import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free';
-
+import { BannersComponent } from '../../components/banners/banners';
 
 const bannerConfig: AdMobFreeBannerConfig = {
   // add your config here

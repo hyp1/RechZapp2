@@ -12,6 +12,9 @@ import { LoginPage } from '../../pages/login/login';
 import { BereichPage } from '../../pages/bereich/bereich';
 import { SearchPage } from '../../pages/search/search';
 
+import { BannersComponent } from '../../components/banners/banners';
+
+
 import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free';
 
 const bannerConfig: AdMobFreeBannerConfig = {

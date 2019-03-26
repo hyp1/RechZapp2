@@ -6,7 +6,7 @@ import "rxjs/add/operator/map";
 
 import { LoginPage } from '../login/login';
 import { AuthProvider } from '../../providers/auth/auth';
-
+import { BannersComponent } from '../../components/banners/banners';
 
 @IonicPage()
 @Component({
@@ -45,7 +45,7 @@ help:boolean;
   }
   
 getComments(nid:number){
-  this.comments =<any> this.httpClient.get(this.awri.HOST+'/drupalgap/comment.json?parameters[nid]='+nid+'&parameters[status]=1&pagesize=150')
+  this.comments =<any> this.httpClient.get(this.awri.HOST+'/'+this.awri.ENDPOINT+'/comment.json?parameters[nid]='+nid+'&parameters[status]=1&pagesize=150')
       .map(res => res);
 }
 

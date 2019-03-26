@@ -38,6 +38,7 @@ import { StatsProvider } from '../providers/stats/stats';
 
 import { BookmarkComponent } from '../components/bookmark/bookmark';
 import { BereichComponent } from '../components/bereich/bereich';
+import { BannersComponent } from '../components/banners/banners';
 
 
 @NgModule({
@@ -61,6 +62,7 @@ import { BereichComponent } from '../components/bereich/bereich';
    CommentComponent,
    BookmarkComponent,
    BereichComponent,
+   BannersComponent
  ],
 
  imports: [
@@ -89,6 +91,7 @@ import { BereichComponent } from '../components/bereich/bereich';
    BookmarkComponent,
    Drupal7LoginComponent,
    BereichComponent,
+   BannersComponent
  ],
 
  providers: [

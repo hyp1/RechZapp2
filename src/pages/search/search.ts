@@ -4,11 +4,13 @@ import "rxjs/add/operator/map";
 import { ViewPage } from '../../pages/view/view';
 import { LoginPage } from '../../pages/login/login';
 import { AuthProvider } from '../../providers/auth/auth';
+import { BannersComponent } from '../../components/banners/banners';
 
 @Component({
   selector: 'page-search',
   templateUrl: 'search.html'
 })
+
 
 export class SearchPage {
   text: string;
@@ -27,7 +29,6 @@ export class SearchPage {
     this.rootPage = <any>SearchPage; 
   this.awri.get('help').then(col=>{
     this.help=col;
-
   }).catch(err=>{
     console.log(err);
   }); 

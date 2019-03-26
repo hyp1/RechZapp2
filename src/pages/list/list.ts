@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { BannersComponent } from '../../components/banners/banners';
 
 @Component({
   selector: 'page-list',

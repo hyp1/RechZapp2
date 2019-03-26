@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { AuthProvider } from '../../providers/auth/auth';
 import { ViewPage } from '../../pages/view/view';
+import { BannersComponent } from '../../components/banners/banners';
+
 /**
  * Generated class for the BereichPage page.
  *
