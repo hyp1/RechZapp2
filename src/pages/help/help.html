@@ -36,7 +36,37 @@
                         <small>(Gründer Abas Kanani ✝️ 2015)</small>
                     </blockquote>
     </ion-card>
+    
+    <banners></banners>
+<ion-grid>
+    <ion-row>
+        <ion-col>
 
+        <ion-item slot="start">         
+            <a href="{{this.auth.HOST}}/paypal" target="_BLANK">   
+                <img src="assets/imgs/paypal-960_720.png" style="width:320px;height:200px;">
+            </a> 
+        </ion-item>
+        <ion-item text-wrap>
+            <ion-title>Bitte helfen auch Sie mit!</ion-title>
+            <p>Die Datenpflege und Datenhaltung kostet Zeit und Geld. Mit ihrer Spende können wir unsere Dienste für alle verbessern und ausbauen.</p>
+        </ion-item>
+
+    </ion-col>
+    <ion-col>
+        <ion-item slot="start">         
+            <a href="{{this.auth.HOST}}/content/werbung" target="_BLANK">   
+                <img src="assets/imgs/logo.png" style="width:200px;height:200px;">
+            </a> 
+        </ion-item>
+        <ion-item text-wrap>
+            <ion-title>Schalten Sie Werbung auf AWRI.</ion-title>
+            <p>Die AWRI Seiten generieren im Monat ca. 30'000 Views.</p>
+            <p><br></p>
+        </ion-item>
+</ion-col>
+</ion-row>
+</ion-grid>
     <div class="help" *ngIf="help">
         <ion-item>
                 <ion-label text-wrap><ion-icon name="help"></ion-icon> Sie können die angezeigte Hilfe in den Einstellungen ausschalten. <br>
@@ -61,7 +91,7 @@
 </div>
 
     <ion-card padding>
-        <ion-title>Wie funktioniert dieses System?</ion-title>
+        <ion-title>Wie funktioniert das?</ion-title>
         <p>Sie stellen Ihre Rechtsfrage hier auf AWRI, wir posten Ihre Frage für Sie anonym in unser Rechtsforum (Rechtsforum Schweiz)</p>
         <p>Durch Erfahrungs- und Meinungsaustausch versuchen unsere Mitglieder Lösungen auf Ihre Frage zu finden.</p>
         <ion-label text-wrap>Wir werten die besten Antworten aus und in der Regel werden die treffendsten Antworten innert 48h hier wieder veröffentlicht..</ion-label>
@@ -133,41 +163,47 @@ Anzahl Personen die dieses Lesezeichen auch gesetzt haben: <ion-badge color="sec
                    </ion-item>  
                    </a>
           </div>
-
-    <ion-card>
-        <ion-card-header><h2>Bereiche</h2></ion-card-header>
-        <ion-card-content>
-             <ion-label><ion-icon name="construct"></ion-icon> Arbeit {{this.auth.stats?.t_arbeit}}</ion-label>
-             <ion-label><ion-icon name="briefcase"></ion-icon> Behörden/Schulen {{this.auth.stats?.t_schule}}</ion-label>
-             <ion-label><ion-icon name="contacts"></ion-icon> Familie {{this.auth.stats?.t_familie}}</ion-label>
-             <ion-label><ion-icon name="medkit"></ion-icon> Gesundheit {{this.auth.stats?.t_gesundheit}}</ion-label>
-             <ion-label><ion-icon name="cart"></ion-icon> Internet/Konsum {{this.auth.stats?.t_konsum}}</ion-label>
-             <ion-label><ion-icon name="bus"></ion-icon> Reisen/Verkehr {{this.auth.stats?.t_verkehr}}</ion-label>
-             <ion-label><ion-icon name="home"></ion-icon> Wohnen {{this.auth.stats?.t_wohnen}}</ion-label>
-            </ion-card-content>
-            <ion-row class="cardfooter">
+<ion-grid><ion-row>
+    <ion-col>    
+        <ion-card>
+                <ion-card-header><h2><ion-icon name="pulse"></ion-icon>  Statistik</h2></ion-card-header>
+                <ion-card-content>
+                        <ion-label>Benutzer {{this.auth.stats?.users}}</ion-label>
+                        <ion-label>Rechtsfragen {{this.auth.stats?.nodesc}}/{{this.auth.stats?.nodes}}</ion-label>
+                        <ion-label>Antworten {{this.auth.stats?.commentsc}}/{{this.auth.stats?.comments}}</ion-label>
+                        <ion-label>Hinweise auf  Art. OR {{this.auth.stats?.ors}}</ion-label>
+                        <ion-label>Hinweise auf ZGB {{this.auth.stats?.zgbs}}</ion-label>
+                         <ion-label>Hinweise auf BGE {{this.auth.stats?.bges}}</ion-label>
+                         <ion-label></ion-label>   
+                         <ion-label></ion-label>                                     
+                    </ion-card-content>
+                <ion-row class="cardfooter">
                     <ion-col>
-                      <small>Kategorisiert {{(this.auth.stats?.t_wohnen*1+this.auth.stats?.t_verkehr*1+this.auth.stats?.t_konsum*1+this.auth.stats?.t_gesundheit*1+this.auth.stats?.t_familie*1+this.auth.stats?.t_schule*1+this.auth.stats?.t_arbeit*1)}}</small>
+                      <small>Letztes update: {{this.auth.stats?.updated}}</small>
                     </ion-col>
                 </ion-row>
-        </ion-card>
-
-      <ion-card>
-            <ion-card-header><h2><ion-icon name="pulse"></ion-icon>  Statistik</h2></ion-card-header>
-            <ion-card-content>
-                    <ion-label>Benutzer {{this.auth.stats?.users}}</ion-label>
-                    <ion-label>Rechtsfragen {{this.auth.stats?.nodesc}}/{{this.auth.stats?.nodes}}</ion-label>
-                    <ion-label>Antworten {{this.auth.stats?.commentsc}}/{{this.auth.stats?.comments}}</ion-label>
-                    <ion-label>Hinweise auf  Art. OR {{this.auth.stats?.ors}}</ion-label>
-                    <ion-label>Hinweise auf ZGB {{this.auth.stats?.zgbs}}</ion-label>
-                     <ion-label>Hinweise auf BGE {{this.auth.stats?.bges}}</ion-label>
-                </ion-card-content>
-            <ion-row class="cardfooter">
-                <ion-col>
-                  <small>Letztes update: {{this.auth.stats?.updated}}</small>
-                </ion-col>
-            </ion-row>
-        </ion-card>
+            </ion-card>
+    </ion-col>
+    <ion-col>
+            <ion-card>
+                    <ion-card-header><h2>Bereiche</h2></ion-card-header>
+                    <ion-card-content>
+                         <ion-label><ion-icon name="construct"></ion-icon> Arbeit {{this.auth.stats?.t_arbeit}}</ion-label>
+                         <ion-label><ion-icon name="briefcase"></ion-icon> Behörden/Schulen {{this.auth.stats?.t_schule}}</ion-label>
+                         <ion-label><ion-icon name="contacts"></ion-icon> Familie {{this.auth.stats?.t_familie}}</ion-label>
+                         <ion-label><ion-icon name="medkit"></ion-icon> Gesundheit {{this.auth.stats?.t_gesundheit}}</ion-label>
+                         <ion-label><ion-icon name="cart"></ion-icon> Internet/Konsum {{this.auth.stats?.t_konsum}}</ion-label>
+                         <ion-label><ion-icon name="bus"></ion-icon> Reisen/Verkehr {{this.auth.stats?.t_verkehr}}</ion-label>
+                         <ion-label><ion-icon name="home"></ion-icon> Wohnen {{this.auth.stats?.t_wohnen}}</ion-label>         
+                        </ion-card-content>
+                        <ion-row class="cardfooter">
+                                <ion-col>
+                                  <small>Kategorisiert {{(this.auth.stats?.t_wohnen*1+this.auth.stats?.t_verkehr*1+this.auth.stats?.t_konsum*1+this.auth.stats?.t_gesundheit*1+this.auth.stats?.t_familie*1+this.auth.stats?.t_schule*1+this.auth.stats?.t_arbeit*1)}}</small>
+                                </ion-col>
+                            </ion-row>
+            </ion-card>
+    </ion-col>
+    </ion-row></ion-grid>
 
       <ion-label color="danger" text-wrap><h3>Wir haben unser System erneuert, die gewohnte AWRI Seite finden Sie nun hier: <a href="https://stage.awri.ch" target="_new">https://stage.awri.ch</a></h3></ion-label>
       <ion-label color="danger" text-wrap><h3>Hinweise zum Datenschutz: <a href="https://stage.awri.ch/agb" target="_new">https://stage.awri.ch/agb</a></h3></ion-label>

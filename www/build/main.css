@@ -28068,6 +28068,19 @@ ion-icon[class*="rechzapp-awri"] {
   }
 }
 
+page-fragen {
+  /*     
+    .roundlist {
+        border-radius: 20px !important;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-bottom: 5px;
+        padding-top: 5px;
+        background-color:#222;
+        }     
+        */
+}
+
 @media (max-width: 576px) {
   page-fragen ion-card-content {
     font-size: 2rem !important;
@@ -28084,6 +28097,11 @@ ion-icon[class*="rechzapp-awri"] {
   page-fragen .web-fab {
     display: none;
   }
+}
+
+page-help img.paypal {
+  width: 320px;
+  height: 150px;
 }
 
 @media (max-width: 576px) {
@@ -28127,5 +28145,9 @@ ion-icon[class*="rechzapp-awri"] {
 }
 
 page-view .answer, page-view strong {
-  color: #003fae;
+  color: #3c3c3c;
+}
+
+page-view .card:hover {
+  cursor: default;
 }

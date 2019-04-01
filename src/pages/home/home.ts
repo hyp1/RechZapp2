@@ -14,7 +14,6 @@ import { SearchPage } from '../../pages/search/search';
 
 import { BannersComponent } from '../../components/banners/banners';
 
-
 import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free';
 
 const bannerConfig: AdMobFreeBannerConfig = {
@@ -302,6 +301,8 @@ getFrage(nid) {
             window.open('https://twitter.com/intent/tweet?status=Alles was Recht ist! Die Schweizer Datenbank für Rechtsfragen. https://awri.ch', '_system');
           }
         },
+        
+        /*
         {
           text: 'RSS',
           role: 'rss',
@@ -310,7 +311,7 @@ getFrage(nid) {
             window.open('https://stage.awri.ch/rss.xml', '_system');
           }
         },
-        /*
+        
         {
           text: 'Google+',
           role: 'google',

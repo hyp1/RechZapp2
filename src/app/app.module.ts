@@ -17,7 +17,7 @@ import { BookmarksPage } from '../pages/bookmarks/bookmarks';
 import { FragenPage } from '../pages/fragen/fragen';
 import { AdminPage } from '../pages/admin/admin';
 import { BereichPage } from '../pages/bereich/bereich';
-
+import { SearchcatPage } from '../pages/searchcat/searchcat';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -40,7 +40,6 @@ import { BookmarkComponent } from '../components/bookmark/bookmark';
 import { BereichComponent } from '../components/bereich/bereich';
 import { BannersComponent } from '../components/banners/banners';
 
-
 @NgModule({
  declarations: [
    MyApp,
@@ -62,7 +61,8 @@ import { BannersComponent } from '../components/banners/banners';
    CommentComponent,
    BookmarkComponent,
    BereichComponent,
-   BannersComponent
+   BannersComponent,
+   SearchcatPage
  ],
 
  imports: [
@@ -91,7 +91,8 @@ import { BannersComponent } from '../components/banners/banners';
    BookmarkComponent,
    Drupal7LoginComponent,
    BereichComponent,
-   BannersComponent
+   BannersComponent,
+   SearchcatPage
  ],
 
  providers: [
@@ -104,7 +105,8 @@ import { BannersComponent } from '../components/banners/banners';
     Camera,
     CommentComponent,
     BookmarkComponent,
-    StatsProvider
+    StatsProvider,
+    BannersComponent
  ]
 })
 

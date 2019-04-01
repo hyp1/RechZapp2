@@ -1,0 +1,128 @@
+<!--
+  Generated template for the SearchcatPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-buttons end>
+            <button ion-button menuToggle>
+              <ion-icon name="menu"></ion-icon>
+            </button>
+            </ion-buttons>
+             
+            <ion-title><ion-icon name="{{bereich?.icon}}"></ion-icon> {{this.bereich?.name}}</ion-title>
+
+      <ion-buttons start>
+  <ng-template [ngIf]="auth.isInRole('authenticated user')" [ngIfElse]="headerOut">
+    <button ion-button (click)="gotoLogin()">
+      <img class="avatar" src="{{auth.user.picture}}"> {{auth.user.name}}        
+    </button>
+  </ng-template>      
+  <ng-template #headerOut>
+              <button ion-button (click)="gotoLogin()">
+              <ion-icon name="contact"></ion-icon>  {{auth.user.name}}
+              </button>
+  </ng-template>
+      </ion-buttons>    
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-toolbar>
+        <ion-item>
+                <ion-label> <ion-icon name="search"></ion-icon></ion-label>
+              <ion-input  placeholder="Rechtsfrage suchen..." clearInput
+              [(ngModel)]="text" (change)="dosearch()" round>
+            </ion-input>
+            <button ion-button item-end (click)="dosearch()" small><ion-icon name="search"></ion-icon></button>
+        </ion-item>
+        </ion-toolbar>
+
+        <ion-grid *ngIf="this.items.length>0"> 
+            <ion-row>
+              <ion-col>
+                <div>
+                 <button *ngIf="this.page>0" ion-button secondary (click)=this.search(this.page-1) float-left outline><ion-icon name="arrow-round-back"></ion-icon></button>
+                </div>
+              </ion-col>
+              <ion-col text-center>
+                  <ion-toolbar>
+                      <ion-title>
+                       Seite {{this.page+1}}
+                      </ion-title>
+                    </ion-toolbar>
+                </ion-col>
+              <ion-col>
+                <div>
+                 <button *ngIf="this.items.length==10" ion-button secondary (click)=this.search(this.page+1) float-right outline><ion-icon name="arrow-round-forward"></ion-icon></button>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+      
+    <ion-grid>
+        <ion-row>
+          <ion-col *ngFor="let item of items" col-12 col-md-4>
+            <ion-card  (click)="this.itemSelected(item)">
+              <ion-item>        
+               <ng-template [ngIf]="auth.isInRole('authenticated user')" [ngIfElse]="loggedOut">
+                <ion-avatar item-start *ngIf="item.node.fbid.length>0">
+                   <img class="avatar" src="https://graph.facebook.com/{{(item.node.fbid?item.node.fbid:0)}}/picture"> 
+                   <h2 text-capitalize>{{item.node?.fbname}}</h2>
+                   <p>{{item.node.created}}</p>
+                 </ion-avatar>
+                 
+               </ng-template>
+               <ng-template #loggedOut>
+                   <ion-avatar item-start>
+                       <img class="avatar" src="assets/imgs/anonymous.png"> 
+                     </ion-avatar>
+                     <h2 text-capitalize>Nicht angezeigt</h2>
+                 </ng-template>
+              </ion-item>
+              <ion-card-content>
+                       <h2 innerHTML={{item.node?.snippet}}></h2>                  
+     
+              </ion-card-content>
+              <ion-item>
+                 <ion-icon name="chatboxes" item-start></ion-icon>
+         
+                 <ion-badge item-end>{{item.node?.comment_count}}</ion-badge>
+               </ion-item>
+              <ion-item>
+                 <ion-icon name="pulse" item-start></ion-icon>
+                 <ion-badge item-end>{{item.node.score | number: '1.2-6'}}</ion-badge>
+               </ion-item>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid *ngIf="this.items.length>0"> 
+          <ion-row>
+            <ion-col>
+              <div>
+               <button *ngIf="this.page>0" ion-button secondary (click)=this.search(this.page-1) float-left outline><ion-icon name="arrow-round-back"></ion-icon></button>
+              </div>
+            </ion-col>
+            <ion-col text-center>
+                <ion-toolbar>
+                    <ion-title>
+                     Seite {{this.page+1}}
+                    </ion-title>
+                  </ion-toolbar>
+              </ion-col>
+            <ion-col>
+              <div>
+               <button *ngIf="this.items.length==10" ion-button secondary (click)=this.search(this.page+1) float-right outline><ion-icon name="arrow-round-forward"></ion-icon></button>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+</ion-content>

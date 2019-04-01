@@ -14,6 +14,8 @@ import { HelpPage } from '../pages/help/help';
 import { SearchPage } from '../pages/search/search';
 //import { ListPage } from '../pages/list/list';
 import { FragenPage } from '../pages/fragen/fragen';
+import { SearchcatPage } from '../pages/searchcat/searchcat';
+
 
 @Component({
   templateUrl: 'app.html'

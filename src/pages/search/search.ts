@@ -20,11 +20,14 @@ export class SearchPage {
   error:String;
   loader:Loading;
   help:boolean;
+  page:number;
   constructor(public navCtrl: NavController,public awri:AuthProvider,public alertCtrl:AlertController,public loadingCtrl: LoadingController,
-    public navParams: NavParams) {    
+    public navParams: NavParams) { 
+    this.items=[]   
     this.error="",
     this.text=navParams.get('text');
-    console.log(this.text);
+    this.page=0;
+   // console.log(this.text);
     if(this.text!==undefined)this.dosearch();
     this.rootPage = <any>SearchPage; 
   this.awri.get('help').then(col=>{
@@ -34,27 +37,30 @@ export class SearchPage {
   }); 
 
 }
-
   dosearch(): void {
-    this.search(this.text);
+    this.search(this.text,this.page);
     }
     
-  search(text): void {
+
+  search(text:string,page:number=0): void {
     this.presentLoading("Suche nach '"+text+"', Bitte warten...");
     this.error="",
     this.text=text;
-      this.awri.search(this.text).then(data=>{
+    //alert(page);
+      this.awri.search(this.text,page).then(data=>{
+        this.page=page;
         this.items=<any>data;
-       // console.log(this.items);
-       this.loader.dismiss();
+     //   console.log(this.items);
+    //  this.dismissLoading();
+       
+
       },err=>{
         if(err.status==404)this.error="Die Suche nach '"+this.text+"' brachte leider keine Ergebnisse.";
        //this.awri.showError());
-       this.loader.dismiss();
+      this.dismissLoading();
 
       });
      }
-
 
   itemSelected(item: any): void {
 
@@ -72,6 +78,10 @@ export class SearchPage {
       duration: 3000
     });
     this.loader.present();
+  }
+
+  dismissLoading() {
+    this.loader.dismiss();
   }
   
 }

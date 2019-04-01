@@ -27,27 +27,32 @@
 </ion-header>
    
    <ion-content padding>  
-        <div *ngIf="auth.isInRole('anonymous user')">
-                <ion-card>
-                        <ion-card-header>
-                                <ion-card-title><ion-icon name="contact"></ion-icon> Sie sind nicht angemeldet</ion-card-title>
-                              </ion-card-header>
-                            
-                              <ion-card-content>
-                      <ion-label text-wrap>Bitte registrieren oder anmelden um Zugriff auf erweiterte Funktionen zu erhalten</ion-label>
-                </ion-card-content>
-                <ion-item><ion-buttons right> 
-                <button ion-button class="submit-btn" round  type="submit"  (click)="this.gotoLogin();">Anmelden/Registrieren
-                </button> 
-                </ion-buttons>
-                </ion-item>   
-                </ion-card>
-            </div>  
-        
+
+            <ion-card padding>
         <ion-title>Alles was Recht ist!</ion-title>
         <p>Rechtsberatung mit System - 
         Unsere Community hilft kostenlos und unverbindlich bei rechtlichen Fragen.</p>
-        <banners></banners>
+        </ion-card>
+
+        <banners name="teststyle"></banners>
+
+        <div *ngIf="auth.isInRole('anonymous user')">
+            <ion-card>
+                    <ion-card-header>
+                            <ion-card-title><ion-icon name="contact"></ion-icon> Sie sind nicht angemeldet</ion-card-title>
+                          </ion-card-header>
+                        
+                          <ion-card-content>
+                  <ion-label text-wrap>Bitte registrieren oder anmelden um Zugriff auf erweiterte Funktionen zu erhalten</ion-label>
+            </ion-card-content>
+            <ion-item><ion-buttons right> 
+            <button ion-button class="submit-btn" round  type="submit"  (click)="this.gotoLogin();">Anmelden/Registrieren
+            </button> 
+            </ion-buttons>
+            </ion-item>   
+            </ion-card>
+        </div>  
+
         <div *ngIf="help" class="help">
                 <ion-item>
                 <ion-label text-wrap><p><ion-icon name="help"></ion-icon>Angemeldete Benutzer können die Hilfe in den Profileinstellungen auschalten</p></ion-label>
@@ -80,15 +85,46 @@
                     <p>Treten sie unserer Facebook Gruppe  <a href="https://www.facebook.com/groups/RechtsberatungSchweiz/" target="_BLANK"><ion-icon name="logo-facebook"></ion-icon> Rechtsforum Schweiz</a> bei.
                     Wir freuen uns immer auf kompetente und erfahrene Mitstreiter. ❤️</p>
                     <p>Oder teilen <ion-icon name="share" (click)="share()"></ion-icon> Sie AWRI einfach auf Ihrer Lieblingsplatform. Vielen Dank!</p>            
-               
+       <!--        
                     <table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;"><tr style=""><td height="28" style="line-height:28px;">&nbsp;</td></tr><tr><td style=""><table border="0" width="280" cellspacing="0" cellpadding="0" style="border-collapse:separate;background-color:#ffffff;border:1px solid #dddfe2;border-radius:3px;font-family:Helvetica, Arial, sans-serif;margin:0px auto;"><tr style="padding-bottom: 8px;"><td style=""><img class="img" src="assets/imgs/logo_rechtsforum.jpg" width="280" height="146" alt="" /></td></tr><tr><td style="font-size:14px;font-weight:bold;padding:8px 8px 0px 8px;text-align:center;">Rechtsforum Schweiz</td></tr><tr><td style="color:#90949c;font-size:12px;font-weight:normal;text-align:center;">Geschlossen Gruppe · über 8.000 Mitglieder</td></tr><tr><td style="padding:8px 12px 12px 12px;"><table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;width:100%;"><tr><td style="background-color:#4267b2;border-radius:3px;text-align:center;"><a style="color:#3b5998;text-decoration:none;cursor:pointer;width:100%;" href="https://www.facebook.com/plugins/group/join/popup/?group_id=353664054816742&amp;source=email_campaign_plugin" target="_blank" rel="noopener"><table border="0" cellspacing="0" cellpadding="3" align="center" style="border-collapse:collapse;"><tr><td style="border-bottom:3px solid #4267b2;border-top:3px solid #4267b2;color:#FFF;font-family:Helvetica, Arial, sans-serif;font-size:12px;font-weight:bold;">Gruppe beitreten</td></tr></table></a></td></tr></table></td></tr><tr><td style="border-top:1px solid #dddfe2;font-size:12px;padding:8px 12px;">
                         <p>Facebook Rechtsberatung seit 2015</p>
                             <p>Alle Auskünfte sind kostenlos und UNVERBINDLICH</p>                       
                            </td></tr></table></td></tr><tr style=""><td height="14" style="line-height:14px;">&nbsp;</td></tr></table>
-                           </ion-label> 
+                        -->   
+                        </ion-label> 
         </ion-item>    
-      </div>
 
+<ion-grid><ion-row>
+    <ion-col>
+    <ion-card>
+        <ion-item slot="start">         
+            <a href="{{this.auth.HOST}}/paypal" target="_BLANK">   
+                <img src="assets/imgs/paypal-960_720.png" style="width:320px;height:200px;">
+            </a> 
+        </ion-item>
+        <ion-item text-wrap>
+            <ion-title>Bitte helfen auch Sie mit!</ion-title>
+            <p>Die Datenpflege und Datenhaltung kostet Zeit und Geld. Mit ihrer Spende können wir unsere Dienste für alle verbessern und ausbauen.</p>
+        </ion-item>
+    </ion-card>
+</ion-col>
+<ion-col>
+    <ion-card>
+        <ion-item slot="start">         
+            <a href="{{this.auth.HOST}}/content/werbung" target="_BLANK">   
+                <img src="assets/imgs/logo.png" style="width:200px;height:200px;">
+            </a> 
+        </ion-item>
+        <ion-item text-wrap>
+            <ion-title>Schalten Sie Werbung auf AWRI.</ion-title>
+            <p>Die AWRI Seiten generieren im Monat ca. 30'000 Views.</p>
+            <p><br></p>
+        </ion-item>
+    </ion-card>
+</ion-col>
+</ion-row></ion-grid>
+      </div>
+<ion-toolbar>
 <ion-item>
         <ion-label> <ion-icon name="search"></ion-icon></ion-label>
       <ion-input  placeholder="Rechtsfrage suchen..." clearInput
@@ -96,7 +132,15 @@
     </ion-input>
     <button ion-button item-end (click)="doSearch()" small><ion-icon name="search"></ion-icon></button>
 </ion-item>
-
+</ion-toolbar>
+<!--
+<ion-toolbar>
+<ion-searchbar [(ngModel)]="search"></ion-searchbar>
+<ion-buttons end>
+<button ion-button (click)="doSearch()" small round color="primary"><ion-icon name="search"></ion-icon></button>
+</ion-buttons>
+</ion-toolbar>
+-->
 <ion-card>
         <ion-card-header>
                 <ion-card-title>Rechtsfrage vom {{random?.created*1000 | date: 'dd.MM.yyyy H:mm' }} </ion-card-title>

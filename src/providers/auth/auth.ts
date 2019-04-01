@@ -88,7 +88,7 @@ export class AuthProvider {
       console.log(err);
     })
 
-      console.log(this.user);
+      //console.log(this.user);
       return observer.next(this.user);  
     },err=>{
       console.log(err);
@@ -117,7 +117,7 @@ constructor(public http: HttpClient,private plt:Platform,private storage:Storage
     };
     
 this.connect.subscribe(data=>{
-  console.log("auth.connect:"+data.name);
+ // console.log("auth.connect:"+data.name);
 });
 
 this.get('help').then(col=>{
@@ -298,8 +298,7 @@ getBookmarks(page:number) {
   });
 }
 
-
-search(text:String) {
+search(text:String,page:number=0,limit:number=2) {
   return new Promise((resolve,reject) => {
  //   this.showLoading("Suche, Bitte warten...");
     const headers = new HttpHeaders()
@@ -308,7 +307,7 @@ search(text:String) {
     headers: headers,
     withCredentials: true
   };
-    this.http.get(this.HOST+'/'+this.ENDPOINT+'/search_node/retrieve.json?keys='+text,options).subscribe(data => {
+    this.http.get(this.HOST+'/'+this.ENDPOINT+'/search_node/retrieve.json?keys='+text+'&page='+page+'&pagesize='+limit,options).subscribe(data => {
     //  this.items=<Array<any>>data;
    //   var view=this.data.view;      
     //  this.page=view.page;
@@ -322,6 +321,27 @@ search(text:String) {
     });
   });
 }
+
+searchCat(text:String,tid:number=93,page:number=0) {
+  return new Promise((resolve,reject) => {
+ //   this.showLoading("Suche, Bitte warten...");
+    const headers = new HttpHeaders()
+    .set('X-CSRF-TOKEN',<any>this.token);    
+  const options = {
+    headers: headers,
+    withCredentials: true
+  };
+    this.http.get(this.HOST+'/search/cat/json/'+tid+'?keys='+text+'&page='+page,options).subscribe(data => {
+
+     resolve(data);
+
+    }, err => {
+  //    this.hideLoading(); 
+      reject(err);
+    });
+  });
+}
+
 
 loadNode(nid){
   return new Promise((resolve,reject) => {
@@ -340,7 +360,6 @@ let options:any = {
    })
   })
   }
-
 
 loadUser(uid){
   return new Promise((resolve,reject) => {
@@ -541,7 +560,7 @@ let options:any = {
         headers: headers,
         withCredentials: true
       };
-        this.http.get(this.HOST+'/'+this.ENDPOINT+'/taxonomy_term?page=0&fields=vid,name&&parameters[vid]=3&pagesize=27&options[orderby][weight]=asc',options).subscribe(data=> {
+        this.http.get(this.HOST+'/'+this.ENDPOINT+'/taxonomy_term?page=0&fields=vid,name&parameters[vid]=3&pagesize=27&options[orderby][weight]=asc',options).subscribe(data=> {
           resolve(data);     
         },err=>{
           reject(err);
@@ -608,7 +627,7 @@ getStats(){
       this.http.get(this.HOST+'/stats.txt?'+Date.now(),{ responseType: 'text'})
       .subscribe(data=>{
         this.stats=<any>JSON.parse(data);
-        console.log(this.stats,"getStatus");
+       // console.log(this.stats,"getStatus");
       resolve(data);
       },err=>{
         reject(err);

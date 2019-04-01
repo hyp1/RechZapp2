@@ -30,12 +30,18 @@ help:boolean;
 
   this.item = navParams.get('item');
   this.nid =this.item.node.nid;
+
+  this.awri.loadNode(this.nid).then(data=>{
+console.log(data);
+  })
+
   this.title =this.item.node.title;
   this.bewertung =this.item.node.field_bewertung['und']?this.item.node.field_bewertung['und'][0].rating:0;
 
   this.getComments(this.item.node.nid);
   this.getRating(this.item.node.nid);
   this.images=this.item.node.field_image['und'];
+  
   this.awri.get('help').then(col=>{
     this.help=col;
 

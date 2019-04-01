@@ -26,7 +26,6 @@ this.count=0;
   //  this.text = 'Hello World'+this._nid;
   }
 
-
   @Input()
  
   set nid(_nid: string) {
@@ -68,7 +67,16 @@ this.auth.setFlag(this._nid,'bookmarks',flag).then(data=>{
   if(this.isBookMark)this.color="danger";
   else this.color="primary";
 
-})
+},err=>{
+  console.log(err);
+  let alert = this.alertCtrl.create({
+    title: 'Bitte melden sie sich an!',
+    subTitle: 'Nur auf AWRI angemeldete Benutzer können Lesezeichen setzen.',
+    buttons: ['Weiter']
+  });
+  alert.present();
+  return;
+});
 
 
   }

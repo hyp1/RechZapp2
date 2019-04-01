@@ -71,11 +71,17 @@ help:boolean;
   this.getFragenIndex(this.page,this.pages).then(dat=>{
     let d=<any>dat;
     for(let i=0;i<d.length;i++){
-      this.nodes.push(d[i]);
+//      console.log(d[i]);
+      this.getFrage(d[i].nid).then(dat=>{
+        let n=<any>dat;
+        //console.log(n);
+        this.nodes.push(JSON.parse(n));
+      });
     }
     this.page++;
   });
 }
+
 
  getFragenIndex(page:number,pages:number){
    return new Promise((resolve,reject)=>{
@@ -86,8 +92,6 @@ help:boolean;
      });
     })
 }
-
-
 getFrage(nid){
   return new Promise((resolve,reject)=>{
    let headers = new HttpHeaders()
@@ -97,8 +101,9 @@ getFrage(nid){
     headers: headers,
     withCredentials	: true,
   };
-     this.httpClient.post(this.auth.HOST+'/'+this.auth.ENDPOINT+'/awri_services_resources/rechtsfrage',{nid:nid}, options).subscribe(data => {
-        resolve(data);    
+     this.httpClient.post(this.auth.HOST+'/'+this.auth.ENDPOINT+'/awri_services_resources/rechtsfrage',{nid:nid}, options).subscribe(data => {   
+     //console.log(JSON.parse(data[0]));
+      resolve(data[0]);    
       },err=>{
         reject(err);
       });    

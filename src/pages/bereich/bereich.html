@@ -14,6 +14,41 @@
 
 
 <ion-content padding>
+
+
+  <ion-toolbar>
+        <ion-item>
+                <ion-label> <ion-icon name="search"></ion-icon></ion-label>
+              <ion-input  placeholder="Rechtsfrage suchen..." clearInput
+              [(ngModel)]="text2">
+            </ion-input>
+            <button ion-button item-end (click)="this.dosearch()" small><ion-icon name="search"></ion-icon></button>
+        </ion-item>
+        </ion-toolbar>
+
+
+        <ion-grid *ngIf="this.nodes?.length>0"> 
+            <ion-row>
+              <ion-col>
+                <div>
+                 <button *ngIf="this.page>0" ion-button secondary (click)=this.prev() float-left outline><ion-icon name="arrow-round-back"></ion-icon></button>
+                </div>
+              </ion-col>
+              <ion-col text-center>
+                  <ion-toolbar>
+                      <ion-title>
+                       Seite {{this.page+1}}/{{this.bereich?.count/10  | number: '1.0-0'}}
+                      </ion-title>
+                    </ion-toolbar>
+                </ion-col>
+              <ion-col>
+                <div>
+                 <button *ngIf="this.nodes?.length==10" ion-button secondary (click)=this.next() float-right outline><ion-icon name="arrow-round-forward"></ion-icon></button>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+<!--
     <ion-navbar>
         <ion-buttons left>
           <button *ngIf="page>0"  ion-button (click)="prev()">
@@ -25,19 +60,50 @@
             <button *ngIf="nodes?.length==10" ion-button  (click)="next()"><ion-icon name="arrow-forward"></ion-icon></button>
           </ion-buttons>
       </ion-navbar>
+-->
+
       <banners></banners>
 <div *ngFor="let node of nodes">
-  <ion-card>
+  <ion-card *ngIf="this.text==undefined">
     <ion-item><p>{{node.created*1000 | date: 'dd.MM.yyyy H:mm' }}</p></ion-item>
   <ion-item text-wrap (click)="gotoDetails(node)">
     <h1>{{node.title}}</h1>
   </ion-item>
 </ion-card>
+
+<ion-card *ngIf="this.text&&this.text.length>2">
+    <ion-item><p>{{node.created}}</p></ion-item>
+  <ion-item text-wrap (click)="gotoDetails(node)">
+    <h1>{{node.snippet}}</h1>
+  </ion-item>
+</ion-card>
+
 </div>
 <!--
 <button *ngIf="page>0" ion-button small (click)="prev()">Zurück</button></ion-buttons> {{1+page}} <button *ngIf="nodes?.length==10" ion-button small (click)="next()">Weiter</button>
 -->
-
+<ion-grid *ngIf="this.nodes?.length>0"> 
+    <ion-row>
+      <ion-col>
+        <div>
+         <button *ngIf="this.page>0" ion-button secondary (click)=this.prev() float-left outline><ion-icon name="arrow-round-back"></ion-icon></button>
+        </div>
+      </ion-col>
+      <ion-col text-center>
+          <ion-toolbar>
+              <ion-title>
+               Seite {{this.page+1}}/{{this.bereich?.count/10  | number: '1.0-0'}}
+              </ion-title>
+            </ion-toolbar>
+        </ion-col>
+      <ion-col>
+        <div>
+         <button *ngIf="this.nodes?.length==10" ion-button secondary (click)=this.next() float-right outline><ion-icon name="arrow-round-forward"></ion-icon></button>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+<!--
 <ion-navbar>
     <ion-buttons left>
       <button *ngIf="page>0"  ion-button (click)="prev()">
@@ -49,5 +115,5 @@
         <button *ngIf="nodes?.length==10" ion-button  (click)="next()"><ion-icon name="arrow-forward"></ion-icon></button>
       </ion-buttons>
   </ion-navbar>
-
+-->
 </ion-content>

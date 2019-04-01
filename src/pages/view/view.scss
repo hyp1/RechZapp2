@@ -1,6 +1,9 @@
 page-view {
 
     .answer , strong{
-        color:darken(color($colors, primary),30)
+        color:lighten(color($colors, dark),10)
+    }
+    .card:hover{
+        cursor: default;
     }
 }

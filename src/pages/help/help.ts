@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
 import { LoginPage } from '../../pages/login/login';
+
+
+import { BannersComponent } from '../../components/banners/banners';
+
 /**
  * Generated class for the HelpPage page.
  *

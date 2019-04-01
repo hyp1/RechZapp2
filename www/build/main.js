@@ -1,4 +1,4 @@
-webpackJsonp([8],{
+webpackJsonp([9],{
 
 /***/ 111:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -6,12 +6,12 @@ webpackJsonp([8],{
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SearchPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_view_view__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_login_login__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_auth_auth__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_auth_auth__ = __webpack_require__(8);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -35,9 +35,11 @@ var SearchPage = /** @class */ (function () {
         this.alertCtrl = alertCtrl;
         this.loadingCtrl = loadingCtrl;
         this.navParams = navParams;
+        this.items = [];
         this.error = "",
             this.text = navParams.get('text');
-        console.log(this.text);
+        this.page = 0;
+        // console.log(this.text);
         if (this.text !== undefined)
             this.dosearch();
         this.rootPage = SearchPage_1;
@@ -49,22 +51,25 @@ var SearchPage = /** @class */ (function () {
     }
     SearchPage_1 = SearchPage;
     SearchPage.prototype.dosearch = function () {
-        this.search(this.text);
+        this.search(this.text, this.page);
     };
-    SearchPage.prototype.search = function (text) {
+    SearchPage.prototype.search = function (text, page) {
         var _this = this;
+        if (page === void 0) { page = 0; }
         this.presentLoading("Suche nach '" + text + "', Bitte warten...");
         this.error = "",
             this.text = text;
-        this.awri.search(this.text).then(function (data) {
+        //alert(page);
+        this.awri.search(this.text, page).then(function (data) {
+            _this.page = page;
             _this.items = data;
-            // console.log(this.items);
-            _this.loader.dismiss();
+            //   console.log(this.items);
+            //  this.dismissLoading();
         }, function (err) {
             if (err.status == 404)
                 _this.error = "Die Suche nach '" + _this.text + "' brachte leider keine Ergebnisse.";
             //this.awri.showError());
-            _this.loader.dismiss();
+            _this.dismissLoading();
         });
     };
     SearchPage.prototype.itemSelected = function (item) {
@@ -80,9 +85,12 @@ var SearchPage = /** @class */ (function () {
         });
         this.loader.present();
     };
+    SearchPage.prototype.dismissLoading = function () {
+        this.loader.dismiss();
+    };
     SearchPage = SearchPage_1 = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-search',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/search/search.html"*/'<ion-header>\n\n    <ion-navbar>\n        <ion-buttons end>\n            <button ion-button menuToggle>\n              <ion-icon name="menu"></ion-icon>\n            </button>\n            </ion-buttons>\n             \n            <ion-title>\n                Suchen \n              </ion-title>\n      <ion-buttons start>\n  <ng-template [ngIf]="this.awri.isInRole(\'authenticated user\')" [ngIfElse]="headerOut">\n    <button ion-button (click)="gotoLogin()">\n      <img class="avatar" src="{{this.awri.user.picture}}"> {{awri.user.name}}        \n    </button>\n  </ng-template>      \n  <ng-template #headerOut>\n              <button ion-button (click)="gotoLogin()">\n              <ion-icon name="contact"></ion-icon>  {{awri.user.name}}\n              </button>\n  </ng-template>\n      </ion-buttons>    \n    </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n\n    <div *ngIf="help" class="help">   \n        <ion-item>\n            <ion-label text-wrap>\n               <h2><ion-icon name="help"></ion-icon> Rechtsfragen und Antworten suchen</h2>\n               <p>Suchen sie nach mit verknüpften Schlüsselwörtern nach Rechtsfragen und Antworten.</p>\n               <p>Es werden nur die 10 relevantesten Ergebnisse auf Ihre Suche angezeigt.</p>\n               <p>Sie können Ihre Suche näher eingrenzen, indem sie Ihre Schlüsselwörter mit AND oder OR (Grossgeschrieben) verknüpfen. Z.B. Haus OR Garage</p>\n               <p>Oder indem Sie Ihre Schlüsselwörter mit + oder - verknüpfen. z.B: Hund -Katze</p>\n               <p>Die besten 10 Suchergebnise werden nach <ion-icon name="pulse"></ion-icon> Relevanz soriert angezeigt. Die Relevanz ergibt sich aus:\n                </p>\n                <ol><li>Anzahl Schlüsselwörtern</li> <li>Aktualität</li> <li>Bewertung</li></ol>\n         \n              </ion-label>\n         </ion-item>\n        <br>\n        </div>\n  <ion-list>\n    <ion-item>\n      <ion-label> <ion-icon name="search"></ion-icon></ion-label>\n      <ion-input round [(ngModel)]="text" placeholder="Rechtsfrage suchen..." clearInput></ion-input>\n    </ion-item>\n    </ion-list>    \n\n    <button ion-button round full (click)="dosearch()" icon-start><ion-icon name="search"  item-left></ion-icon> Suchen</button>\n    <ion-label color="danger" text-wrap><h3>{{error}}</h3></ion-label>\n    <banners></banners>\n  <ion-grid>\n   <ion-row>\n     <ion-col *ngFor="let item of items" col-12 col-md-4>\n       <ion-card  (click)="this.itemSelected(item)">\n         <ion-item>        \n          <ng-template [ngIf]="awri.isInRole(\'authenticated user\')" [ngIfElse]="loggedOut">\n           <ion-avatar item-start *ngIf="item.node.field_fbid?.und?.length>0">\n              <img class="avatar" src="https://graph.facebook.com/{{(item.node.field_fbid.und[0]?item.node.field_fbid.und[0].value:0)}}/picture"> \n              <h2 text-capitalize>{{item.node?.field_fbname.und[0].value}}</h2>\n              <p>{{item.node.created*1000 | date: \'dd.MM.yyyy H:mm\' }}</p>\n            </ion-avatar>\n            \n          </ng-template>\n          <ng-template #loggedOut>\n              <ion-avatar item-start>\n                  <img class="avatar" src="assets/imgs/anonymous.png"> \n                </ion-avatar>\n                <h2 text-capitalize>Nicht angezeigt</h2>\n            </ng-template>\n         </ion-item>\n         <ion-card-content>\n                  <h2 innerHTML={{item.snippet}}></h2>                  \n\n         </ion-card-content>\n         <ion-item>\n            <ion-icon name="chatboxes" item-start></ion-icon>\n    \n            <ion-badge item-end>{{item.node?.comment_count}}</ion-badge>\n          </ion-item>\n         <ion-item>\n            <ion-icon name="pulse" item-start></ion-icon>\n            <ion-badge item-end>{{item.score}}</ion-badge>\n          </ion-item>\n       </ion-card>\n     </ion-col>\n   </ion-row>\n </ion-grid>\n\n</ion-content>'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/search/search.html"*/
+            selector: 'page-search',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/search/search.html"*/'<ion-header>\n\n    <ion-navbar>\n        <ion-buttons end>\n            <button ion-button menuToggle>\n              <ion-icon name="menu"></ion-icon>\n            </button>\n            </ion-buttons>\n             \n            <ion-title>\n                Suchen \n              </ion-title>\n      <ion-buttons start>\n  <ng-template [ngIf]="this.awri.isInRole(\'authenticated user\')" [ngIfElse]="headerOut">\n    <button ion-button (click)="gotoLogin()">\n      <img class="avatar" src="{{this.awri.user.picture}}"> {{awri.user.name}}        \n    </button>\n  </ng-template>      \n  <ng-template #headerOut>\n              <button ion-button (click)="gotoLogin()">\n              <ion-icon name="contact"></ion-icon>  {{awri.user.name}}\n              </button>\n  </ng-template>\n      </ion-buttons>    \n    </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n\n    <div *ngIf="help" class="help">   \n        <ion-item>\n            <ion-label text-wrap>\n               <h2><ion-icon name="help"></ion-icon> Rechtsfragen und Antworten suchen</h2>\n               <p>Suchen sie nach mit verknüpften Schlüsselwörtern nach Rechtsfragen und Antworten.</p>\n               <p>Es werden nur die 10 relevantesten Ergebnisse auf Ihre Suche angezeigt.</p>\n               <p>Sie können Ihre Suche näher eingrenzen, indem sie Ihre Schlüsselwörter mit AND oder OR (Grossgeschrieben) verknüpfen. Z.B. Haus OR Garage</p>\n               <p>Oder indem Sie Ihre Schlüsselwörter mit + oder - verknüpfen. z.B: Hund -Katze</p>\n               <p>Die besten 10 Suchergebnise werden nach <ion-icon name="pulse"></ion-icon> Relevanz soriert angezeigt. Die Relevanz ergibt sich aus:\n                </p>\n                <ol><li>Anzahl Schlüsselwörtern</li> <li>Aktualität</li> <li>Bewertung</li></ol>\n         \n              </ion-label>\n         </ion-item>\n        <br>\n        </div>\n<!-- <ion-list>\n    <ion-item>\n      <ion-label> <ion-icon name="search"></ion-icon></ion-label>\n      <ion-input round [(ngModel)]="text" placeholder="Rechtsfrage suchen..." clearInput></ion-input>\n    </ion-item>\n    </ion-list>    \n\n    <button ion-button round full (click)="dosearch()" icon-start><ion-icon name="search"  item-left></ion-icon> Suchen</button>\n  -->\n  <ion-title>Suchen in {{this.awri.stats.nodesc}} Rechtsfragen</ion-title>\n  <ion-toolbar>\n    <ion-item>\n            <ion-label> <ion-icon name="search"></ion-icon></ion-label>\n          <ion-input  placeholder="Rechtsfrage suchen..." clearInput\n          [(ngModel)]="text" (change)="dosearch()" round>\n        </ion-input>\n        <button ion-button item-end (click)="dosearch()" small><ion-icon name="search"></ion-icon></button>\n    </ion-item>\n    </ion-toolbar>\n\n    <ion-label color="danger" text-wrap><h3>{{error}}</h3></ion-label>\n    <banners></banners>\n<ion-grid *ngIf="this.items.length>0"> \n      <ion-row>\n        <ion-col>\n          <div>\n           <button *ngIf="this.page>0" ion-button secondary (click)=this.search(this.text,this.page-1) float-left outline><ion-icon name="arrow-round-back"></ion-icon></button>\n          </div>\n        </ion-col>\n        <ion-col text-center>\n            <ion-toolbar>\n                <ion-title>\n                 Seite {{this.page+1}}\n                </ion-title>\n              </ion-toolbar>\n          </ion-col>\n        <ion-col>\n          <div>\n           <button *ngIf="this.items.length==10" ion-button secondary (click)=this.search(this.text,this.page+1) float-right outline><ion-icon name="arrow-round-forward"></ion-icon></button>\n          </div>\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n\n  <ion-grid>\n   <ion-row>\n     <ion-col *ngFor="let item of items" col-12 col-md-4>\n       <ion-card  (click)="this.itemSelected(item)">\n         <ion-item>        \n          <ng-template [ngIf]="awri.isInRole(\'authenticated user\')" [ngIfElse]="loggedOut">\n           <ion-avatar item-start *ngIf="item.node.field_fbid?.und?.length>0">\n              <img class="avatar" src="https://graph.facebook.com/{{(item.node.field_fbid.und[0]?item.node.field_fbid.und[0].value:0)}}/picture"> \n              <h2 text-capitalize>{{item.node?.field_fbname.und[0].value}}</h2>\n              <p>{{item.node.created*1000 | date: \'dd.MM.yyyy H:mm\' }}</p>\n            </ion-avatar>\n            \n          </ng-template>\n          <ng-template #loggedOut>\n              <ion-avatar item-start>\n                  <img class="avatar" src="assets/imgs/anonymous.png"> \n                </ion-avatar>\n                <h2 text-capitalize>Nicht angezeigt</h2>\n            </ng-template>\n         </ion-item>\n         <ion-card-content>\n                  <h2 innerHTML={{item.snippet}}></h2>                  \n\n         </ion-card-content>\n         <ion-item>\n            <ion-icon name="chatboxes" item-start></ion-icon>\n    \n            <ion-badge item-end>{{item.node?.comment_count}}</ion-badge>\n          </ion-item>\n         <ion-item>\n            <ion-icon name="pulse" item-start></ion-icon>\n            <ion-badge item-end>{{item.score | number: \'1.2-6\'}}</ion-badge>\n          </ion-item>\n       </ion-card>\n     </ion-col>\n   </ion-row>\n </ion-grid>\n\n <ion-grid *ngIf="this.items.length>0">\n    <ion-row>\n      <ion-col>\n        <div>\n         <button *ngIf="this.page>0" ion-button secondary (click)=this.search(this.text,this.page-1) float-left outline><ion-icon name="arrow-round-back"></ion-icon></button>\n        </div>\n      </ion-col>\n      <ion-col text-center>\n          <ion-toolbar>\n              <ion-title>\n               Seite {{this.page+1}}\n              </ion-title>\n            </ion-toolbar>\n        </ion-col>\n      <ion-col>\n        <div>\n         <button *ngIf="this.items.length==10" ion-button secondary (click)=this.search(this.text,this.page+1) float-right outline><ion-icon name="arrow-round-forward"></ion-icon></button>\n        </div>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n  \n</ion-content>'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/search/search.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_5__providers_auth_auth__["a" /* AuthProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
@@ -101,10 +109,11 @@ var SearchPage = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BereichPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_auth_auth__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_auth_auth__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_view_view__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__searchcat_searchcat__ = __webpack_require__(114);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -114,6 +123,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -149,7 +159,7 @@ var BereichPage = /** @class */ (function () {
                 tid: _this.bereich.tid,
             };
             _this.http.post(_this.auth.HOST + '/' + _this.auth.ENDPOINT + '/taxonomy_term/selectNodes?page=' + _this.page, options).subscribe(function (data) {
-                console.log(data);
+                //  console.log(data);
                 _this.nodes = data;
                 resolve(data);
             }, function (err) {
@@ -169,13 +179,46 @@ var BereichPage = /** @class */ (function () {
         this.page--;
         this.getNodesByTid();
     };
+    BereichPage.prototype.dosearch = function () {
+        //  alert(this.text2);
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_5__searchcat_searchcat__["a" /* SearchcatPage */], { item: { bereich: this.bereich, keys: this.text2 } });
+        /*
+        this.nodes=[];
+      alert(this.bereich.tid+':'+this.text);
+      let headers = new HttpHeaders()
+      .set('X-CSRF-TOKEN',<string>this.auth.token).set('Content-Type', 'application/json')
+      
+      let options = {
+      headers: headers,
+      withCredentials	: true,
+      pager	: true,
+      tid	: this.bereich.tid,
+      };
+      
+      this.http.get(this.auth.HOST+'/search/cat/json/'+ this.bereich.tid+'?keys='+this.text+'&page='+this.page,options).subscribe(data=>{
+        console.log(data);
+        let n=<any>data['nodes'];
+      n.forEach(element => {
+        this.nodes.push(element.node);
+       console.log(element);
+      });
+        console.log(this.nodes);
+         //console.log(data);
+        },err=>{
+          console.log(err);
+        });
+      
+      */
+    };
+    ;
     BereichPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-bereich',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/bereich/bereich.html"*/'<!--\n  Generated template for the BereichPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title><ion-icon name="{{bereich?.icon}}"></ion-icon> {{this.bereich?.name}}</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n    <ion-navbar>\n        <ion-buttons left>\n          <button *ngIf="page>0"  ion-button (click)="prev()">\n            <ion-icon name="arrow-back"></ion-icon>\n          </button>\n        </ion-buttons>\n        <ion-title text-center>{{1+page}}/{{this.bereich?.count/10  | number: \'1.0-0\'}}</ion-title>\n        <ion-buttons right>\n            <button *ngIf="nodes?.length==10" ion-button  (click)="next()"><ion-icon name="arrow-forward"></ion-icon></button>\n          </ion-buttons>\n      </ion-navbar>\n      <banners></banners>\n<div *ngFor="let node of nodes">\n  <ion-card>\n    <ion-item><p>{{node.created*1000 | date: \'dd.MM.yyyy H:mm\' }}</p></ion-item>\n  <ion-item text-wrap (click)="gotoDetails(node)">\n    <h1>{{node.title}}</h1>\n  </ion-item>\n</ion-card>\n</div>\n<!--\n<button *ngIf="page>0" ion-button small (click)="prev()">Zurück</button></ion-buttons> {{1+page}} <button *ngIf="nodes?.length==10" ion-button small (click)="next()">Weiter</button>\n-->\n\n<ion-navbar>\n    <ion-buttons left>\n      <button *ngIf="page>0"  ion-button (click)="prev()">\n        <ion-icon name="arrow-back"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title text-center>{{1+page}}/{{this.bereich?.count/10  | number: \'1.0-0\'}}</ion-title>\n    <ion-buttons right>\n        <button *ngIf="nodes?.length==10" ion-button  (click)="next()"><ion-icon name="arrow-forward"></ion-icon></button>\n      </ion-buttons>\n  </ion-navbar>\n\n</ion-content>\n'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/bereich/bereich.html"*/,
+            selector: 'page-bereich',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/bereich/bereich.html"*/'<!--\n  Generated template for the BereichPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title><ion-icon name="{{bereich?.icon}}"></ion-icon> {{this.bereich?.name}}</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n\n  <ion-toolbar>\n        <ion-item>\n                <ion-label> <ion-icon name="search"></ion-icon></ion-label>\n              <ion-input  placeholder="Rechtsfrage suchen..." clearInput\n              [(ngModel)]="text2">\n            </ion-input>\n            <button ion-button item-end (click)="this.dosearch()" small><ion-icon name="search"></ion-icon></button>\n        </ion-item>\n        </ion-toolbar>\n\n\n        <ion-grid *ngIf="this.nodes?.length>0"> \n            <ion-row>\n              <ion-col>\n                <div>\n                 <button *ngIf="this.page>0" ion-button secondary (click)=this.prev() float-left outline><ion-icon name="arrow-round-back"></ion-icon></button>\n                </div>\n              </ion-col>\n              <ion-col text-center>\n                  <ion-toolbar>\n                      <ion-title>\n                       Seite {{this.page+1}}/{{this.bereich?.count/10  | number: \'1.0-0\'}}\n                      </ion-title>\n                    </ion-toolbar>\n                </ion-col>\n              <ion-col>\n                <div>\n                 <button *ngIf="this.nodes?.length==10" ion-button secondary (click)=this.next() float-right outline><ion-icon name="arrow-round-forward"></ion-icon></button>\n                </div>\n              </ion-col>\n            </ion-row>\n          </ion-grid>\n<!--\n    <ion-navbar>\n        <ion-buttons left>\n          <button *ngIf="page>0"  ion-button (click)="prev()">\n            <ion-icon name="arrow-back"></ion-icon>\n          </button>\n        </ion-buttons>\n        <ion-title text-center>{{1+page}}/{{this.bereich?.count/10  | number: \'1.0-0\'}}</ion-title>\n        <ion-buttons right>\n            <button *ngIf="nodes?.length==10" ion-button  (click)="next()"><ion-icon name="arrow-forward"></ion-icon></button>\n          </ion-buttons>\n      </ion-navbar>\n-->\n\n      <banners></banners>\n<div *ngFor="let node of nodes">\n  <ion-card *ngIf="this.text==undefined">\n    <ion-item><p>{{node.created*1000 | date: \'dd.MM.yyyy H:mm\' }}</p></ion-item>\n  <ion-item text-wrap (click)="gotoDetails(node)">\n    <h1>{{node.title}}</h1>\n  </ion-item>\n</ion-card>\n\n<ion-card *ngIf="this.text&&this.text.length>2">\n    <ion-item><p>{{node.created}}</p></ion-item>\n  <ion-item text-wrap (click)="gotoDetails(node)">\n    <h1>{{node.snippet}}</h1>\n  </ion-item>\n</ion-card>\n\n</div>\n<!--\n<button *ngIf="page>0" ion-button small (click)="prev()">Zurück</button></ion-buttons> {{1+page}} <button *ngIf="nodes?.length==10" ion-button small (click)="next()">Weiter</button>\n-->\n<ion-grid *ngIf="this.nodes?.length>0"> \n    <ion-row>\n      <ion-col>\n        <div>\n         <button *ngIf="this.page>0" ion-button secondary (click)=this.prev() float-left outline><ion-icon name="arrow-round-back"></ion-icon></button>\n        </div>\n      </ion-col>\n      <ion-col text-center>\n          <ion-toolbar>\n              <ion-title>\n               Seite {{this.page+1}}/{{this.bereich?.count/10  | number: \'1.0-0\'}}\n              </ion-title>\n            </ion-toolbar>\n        </ion-col>\n      <ion-col>\n        <div>\n         <button *ngIf="this.nodes?.length==10" ion-button secondary (click)=this.next() float-right outline><ion-icon name="arrow-round-forward"></ion-icon></button>\n        </div>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n<!--\n<ion-navbar>\n    <ion-buttons left>\n      <button *ngIf="page>0"  ion-button (click)="prev()">\n        <ion-icon name="arrow-back"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title text-center>{{1+page}}/{{this.bereich?.count/10  | number: \'1.0-0\'}}</ion-title>\n    <ion-buttons right>\n        <button *ngIf="nodes?.length==10" ion-button  (click)="next()"><ion-icon name="arrow-forward"></ion-icon></button>\n      </ion-buttons>\n  </ion-navbar>\n-->\n</ion-content>\n'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/bereich/bereich.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_3__providers_auth_auth__["a" /* AuthProvider */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__providers_auth_auth__["a" /* AuthProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_auth_auth__["a" /* AuthProvider */]) === "function" && _d || Object])
     ], BereichPage);
     return BereichPage;
+    var _a, _b, _c, _d;
 }());
 
 //# sourceMappingURL=bereich.js.map
@@ -186,10 +229,107 @@ var BereichPage = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SearchcatPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_view_view__ = __webpack_require__(29);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+/**
+ * Generated class for the SearchcatPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var SearchcatPage = /** @class */ (function () {
+    function SearchcatPage(navCtrl, navParams, auth, alertCtrl, loadingCtrl) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.auth = auth;
+        this.alertCtrl = alertCtrl;
+        this.loadingCtrl = loadingCtrl;
+        this.page = 0;
+        this.items = [];
+        this.item = navParams.get('item');
+        this.text = this.item.keys;
+        this.bereich = this.item.bereich;
+        console.log(this.item);
+        this.dosearch();
+    }
+    SearchcatPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad SearchcatPage');
+    };
+    SearchcatPage.prototype.search = function (page) {
+        var _this = this;
+        this.presentLoading("Suche in '" + this.bereich.name + "' nach '" + this.text + "', Bitte warten...");
+        this.auth.searchCat(this.text, this.bereich.tid, page).then(function (data) {
+            _this.page = page;
+            //  console.log(data);
+            _this.items = data['nodes'];
+            console.log(_this.items);
+        }, function (err) {
+            _this.dismissLoading();
+        });
+    };
+    SearchcatPage.prototype.dosearch = function () {
+        this.search(0);
+    };
+    SearchcatPage.prototype.itemSelected = function (item) {
+        var _this = this;
+        console.log(item);
+        this.auth.loadNode(item.node.nid).then(function (data) {
+            _this.node = data;
+            console.log(_this.node);
+            _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__pages_view_view__["a" /* ViewPage */], {
+                item: { node: _this.node }
+            });
+            // console.log(data);
+        });
+    };
+    SearchcatPage.prototype.presentLoading = function (txt) {
+        this.loader = this.loadingCtrl.create({
+            content: txt,
+            duration: 3000
+        });
+        this.loader.present();
+    };
+    SearchcatPage.prototype.dismissLoading = function () {
+        this.loader.dismiss();
+    };
+    SearchcatPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-searchcat',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/searchcat/searchcat.html"*/'<!--\n  Generated template for the SearchcatPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-buttons end>\n            <button ion-button menuToggle>\n              <ion-icon name="menu"></ion-icon>\n            </button>\n            </ion-buttons>\n             \n            <ion-title><ion-icon name="{{bereich?.icon}}"></ion-icon> {{this.bereich?.name}}</ion-title>\n\n      <ion-buttons start>\n  <ng-template [ngIf]="auth.isInRole(\'authenticated user\')" [ngIfElse]="headerOut">\n    <button ion-button (click)="gotoLogin()">\n      <img class="avatar" src="{{auth.user.picture}}"> {{auth.user.name}}        \n    </button>\n  </ng-template>      \n  <ng-template #headerOut>\n              <button ion-button (click)="gotoLogin()">\n              <ion-icon name="contact"></ion-icon>  {{auth.user.name}}\n              </button>\n  </ng-template>\n      </ion-buttons>    \n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n    <ion-toolbar>\n        <ion-item>\n                <ion-label> <ion-icon name="search"></ion-icon></ion-label>\n              <ion-input  placeholder="Rechtsfrage suchen..." clearInput\n              [(ngModel)]="text" (change)="dosearch()" round>\n            </ion-input>\n            <button ion-button item-end (click)="dosearch()" small><ion-icon name="search"></ion-icon></button>\n        </ion-item>\n        </ion-toolbar>\n\n        <ion-grid *ngIf="this.items.length>0"> \n            <ion-row>\n              <ion-col>\n                <div>\n                 <button *ngIf="this.page>0" ion-button secondary (click)=this.search(this.page-1) float-left outline><ion-icon name="arrow-round-back"></ion-icon></button>\n                </div>\n              </ion-col>\n              <ion-col text-center>\n                  <ion-toolbar>\n                      <ion-title>\n                       Seite {{this.page+1}}\n                      </ion-title>\n                    </ion-toolbar>\n                </ion-col>\n              <ion-col>\n                <div>\n                 <button *ngIf="this.items.length==10" ion-button secondary (click)=this.search(this.page+1) float-right outline><ion-icon name="arrow-round-forward"></ion-icon></button>\n                </div>\n              </ion-col>\n            </ion-row>\n          </ion-grid>\n      \n    <ion-grid>\n        <ion-row>\n          <ion-col *ngFor="let item of items" col-12 col-md-4>\n            <ion-card  (click)="this.itemSelected(item)">\n              <ion-item>        \n               <ng-template [ngIf]="auth.isInRole(\'authenticated user\')" [ngIfElse]="loggedOut">\n                <ion-avatar item-start *ngIf="item.node.fbid.length>0">\n                   <img class="avatar" src="https://graph.facebook.com/{{(item.node.fbid?item.node.fbid:0)}}/picture"> \n                   <h2 text-capitalize>{{item.node?.fbname}}</h2>\n                   <p>{{item.node.created}}</p>\n                 </ion-avatar>\n                 \n               </ng-template>\n               <ng-template #loggedOut>\n                   <ion-avatar item-start>\n                       <img class="avatar" src="assets/imgs/anonymous.png"> \n                     </ion-avatar>\n                     <h2 text-capitalize>Nicht angezeigt</h2>\n                 </ng-template>\n              </ion-item>\n              <ion-card-content>\n                       <h2 innerHTML={{item.node?.snippet}}></h2>                  \n     \n              </ion-card-content>\n              <ion-item>\n                 <ion-icon name="chatboxes" item-start></ion-icon>\n         \n                 <ion-badge item-end>{{item.node?.comment_count}}</ion-badge>\n               </ion-item>\n              <ion-item>\n                 <ion-icon name="pulse" item-start></ion-icon>\n                 <ion-badge item-end>{{item.node.score | number: \'1.2-6\'}}</ion-badge>\n               </ion-item>\n            </ion-card>\n          </ion-col>\n        </ion-row>\n      </ion-grid>\n\n      <ion-grid *ngIf="this.items.length>0"> \n          <ion-row>\n            <ion-col>\n              <div>\n               <button *ngIf="this.page>0" ion-button secondary (click)=this.search(this.page-1) float-left outline><ion-icon name="arrow-round-back"></ion-icon></button>\n              </div>\n            </ion-col>\n            <ion-col text-center>\n                <ion-toolbar>\n                    <ion-title>\n                     Seite {{this.page+1}}\n                    </ion-title>\n                  </ion-toolbar>\n              </ion-col>\n            <ion-col>\n              <div>\n               <button *ngIf="this.items.length==10" ion-button secondary (click)=this.search(this.page+1) float-right outline><ion-icon name="arrow-round-forward"></ion-icon></button>\n              </div>\n            </ion-col>\n          </ion-row>\n        </ion-grid>\n\n</ion-content>\n'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/searchcat/searchcat.html"*/,
+        }),
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__["a" /* AuthProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__["a" /* AuthProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */]) === "function" && _e || Object])
+    ], SearchcatPage);
+    return SearchcatPage;
+    var _a, _b, _c, _d, _e;
+}());
+
+//# sourceMappingURL=searchcat.js.map
+
+/***/ }),
+
+/***/ 115:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CreatePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_upload_upload__ = __webpack_require__(88);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_login_login__ = __webpack_require__(21);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -346,14 +486,14 @@ var CreatePage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 115:
+/***/ 116:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HelpPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_login_login__ = __webpack_require__(21);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -392,7 +532,7 @@ var HelpPage = /** @class */ (function () {
     ;
     HelpPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-help',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/help/help.html"*/'<ion-header>\n\n    <ion-navbar>\n        <ion-buttons end>\n            <button ion-button menuToggle>\n              <ion-icon name="menu"></ion-icon>\n            </button>\n            </ion-buttons>\n             \n            <ion-title>\n                Hilfe \n              </ion-title>\n      <ion-buttons start>\n  <ng-template [ngIf]="this.auth.isInRole(\'authenticated user\')" [ngIfElse]="headerOut">\n              <button ion-button (click)="this.gotoLogin()">\n                  <img class="avatar" src="{{this.auth.user.picture}}"> {{auth.user.name}}        \n                </button>\n  </ng-template>      \n  <ng-template #headerOut>\n              <button ion-button (click)="this.gotoLogin()">\n              <ion-icon name="contact"></ion-icon>  {{auth.user.name}}\n              </button>\n  </ng-template>\n      </ion-buttons>    \n    </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n    <ion-card padding>\n        <ion-title>Alles was Recht ist!</ion-title>\n        <p>Rechtsberatung mit System - \n        Unsere Community hilft kostenlos und unverbindlich bei rechtlichen Fragen.</p>\n        <blockquote>Unser Engagement dient der faktischen Umsetzung von Art. 8 BV (Rechtsgleichheit). \n            Einer gerechten Sache zu dienen, motiviert uns Tag für Tag für die Interessen der Bedürftigen einzusetzen.\n                        <small>(Gründer Abas Kanani ✝️ 2015)</small>\n                    </blockquote>\n    </ion-card>\n\n    <div class="help" *ngIf="help">\n        <ion-item>\n                <ion-label text-wrap><ion-icon name="help"></ion-icon> Sie können die angezeigte Hilfe in den Einstellungen ausschalten. <br>\n                    Klicken sie oben auf ihr <ion-icon name="contact"></ion-icon>\n                     Profilbild um die Einstellungen zu öffnen.                            \n                    </ion-label>                                \n    </ion-item>         \n\n    <div class="help" *ngIf="auth.isInRole(\'anonymous user\')">\n\n<ion-item>\n            <ion-label color="danger" text-wrap><h2>Nur auf AWRI angemeldete Benutzer haben Zugriff auf folgende erweiterte Funktionen!</h2></ion-label>\n        </ion-item>\n        <ion-item>         <ion-label>Hilfe ein/ausschalten</ion-label>  </ion-item>\n\n        <ion-item>       <ion-label>Anonyme Rechtsfragen stellen</ion-label>  </ion-item>\n        <ion-item>          <ion-label>Rechtsfragen kommentieren</ion-label>  </ion-item>\n        <ion-item>         <ion-label>Lesezeichen setzen</ion-label>  </ion-item>\n        <ion-item>         <ion-label>Rechtsfragen  bewerten</ion-label>  </ion-item>\n       \n        </div>   \n</div>\n\n    <ion-card padding>\n        <ion-title>Wie funktioniert dieses System?</ion-title>\n        <p>Sie stellen Ihre Rechtsfrage hier auf AWRI, wir posten Ihre Frage für Sie anonym in unser Rechtsforum (Rechtsforum Schweiz)</p>\n        <p>Durch Erfahrungs- und Meinungsaustausch versuchen unsere Mitglieder Lösungen auf Ihre Frage zu finden.</p>\n        <ion-label text-wrap>Wir werten die besten Antworten aus und in der Regel werden die treffendsten Antworten innert 48h hier wieder veröffentlicht..</ion-label>\n        <ion-label color="danger">Wir ersetzen keinen juristischen Beistand!</ion-label>\n</ion-card>\n\n\n<ion-card padding>\n    <ion-title>Bewertungen</ion-title>\n    <ion-label text-wrap>Helfen sie uns dabei, unser System zu verbessern indem Sie Rechtsfragen mit 1 - 5 Sternen bewerten</ion-label>\n    <ion-label text-wrap>\n        <button title="1 Nicht gelöst" ion-button small [color]=" this.bewertung>=20 ? \'secondary\' : \'primary\'">⭐</button>\n        <button title="2 Schlecht gelöst" ion-button small [color]=" this.bewertung>=40 ? \'secondary\' : \'primary\'">⭐</button>\n        <button title="3 Gut gelöst" ion-button small  [color]=" this.bewertung>=60 ? \'secondary\' : \'primary\'">⭐</button>\n        <button title="4 Sehr gut gelöst" ion-button small [color]=" this.bewertung>=80 ? \'secondary\' : \'primary\'">⭐</button>\n        <button title="5 Spitze gelöst" ion-button small  [color]=" this.bewertung>=100 ? \'secondary\' : \'primary\'">⭐</button>     \n    </ion-label>\n    <p><small>1 = Nicht gelöst; 2 = Schlecht gelöst; 3 = Gut gelöst; 4 = Sehr gut gelöst; 5 = Top Lösung!</small></p>\n    <p>Die durchschnittliche Bewertung wird anhand grün angezeigt <button ion-button small color="secondary">⭐</button></p>\n</ion-card>\n<ion-card padding>\n    <ion-title>Lesezeichen</ion-title>\n    <ion-label text-wrap>Angemeldete Benutzer können Lesezeichen auf Rechtsfragen setzen. \n        Sie finden den Button zu ihren gesetzten Lesezeichen in Ihren Profil Einstellungen.</ion-label>\n    <ion-label text-wrap>\nLesezeichen nicht gesetzt <ion-icon name="bookmark" color="primary" title="Lesezeichen setzten/entfernen"></ion-icon>\n    </ion-label>\n<ion-label text-wrap>\nLesezeichen gesetzt <ion-icon name="bookmark" color="danger" title="Lesezeichen setzten/entfernen"></ion-icon>\n</ion-label>\n<ion-label text-wrap>\nAnzahl Personen die dieses Lesezeichen auch gesetzt haben: <ion-badge color="secondary">5</ion-badge>\n    </ion-label>\n    </ion-card>\n\n\n        <div class="info">   \n\n                <a href="https://www.facebook.com/groups/RechtsberatungSchweiz/" target="_BLANK">  \n                <ion-item>\n                      <ion-icon name="logo-facebook" item-start></ion-icon>\n                      <ion-label text-wrap>\n                         <h2>Rechtsforum Schweiz</h2>\n                         <p>Die Facebookgruppe wurde 2015 gegründet um Personen die sich keinen Anwalt leisten können bei juristischen Fragen zu unterstützen.</p>\n                         <p>Alle AWRI Fragen wurden durch die Mitglieder dieser Gruppe gestellt und beantwortet.</p>\n                         <h3>Wir danken allen Mitgliedern des Rechtsforum Schweiz ❤️lich für Ihre Unterstützung!</h3>\n                        </ion-label>\n                   </ion-item>\n                  </a>\n                  <br>\n                  <a href="{{auth.HOST}}" target="_BLANK">  \n                  <ion-item>\n                      <ion-icon name="rechzapp-awri" item-start></ion-icon>\n                      <ion-label text-wrap>\n                         <h2>AWRI (Alles was Recht ist)</h2>\n                         <p>Die AWRI Datenbank für Rechtsfragen wurde 2015 erstellt um die Verwaltung und Administration der gestellten Fragen zu erleichtern.</p>\n                         <p>In dieser Datenbank werden alle Rechtsfragen und Antworten des Rechtsforum Schweiz ausgewertet und freigeschalten.</p>\n                        </ion-label>\n                   </ion-item>\n                   </a>\n                  <br>        \n                  <a href="https://www.facebook.com/Rechtshilfeforum/" target="_BLANK">  \n                  <ion-item>\n                      <ion-icon name="logo-facebook" item-start></ion-icon>\n                      <ion-label text-wrap>\n                         <h2>AWRI Ratgeber</h2>\n                         <p>Facebook Seite, auf der von Zeit zu Zeit die interessantesten und meist gefragten Beiträge aus dem Rechtsforum Schweiz veröffentlicht werden.</p>\n                        </ion-label>\n                   </ion-item>  \n                   </a>\n          </div>\n\n    <ion-card>\n        <ion-card-header><h2>Bereiche</h2></ion-card-header>\n        <ion-card-content>\n             <ion-label><ion-icon name="construct"></ion-icon> Arbeit {{this.auth.stats?.t_arbeit}}</ion-label>\n             <ion-label><ion-icon name="briefcase"></ion-icon> Behörden/Schulen {{this.auth.stats?.t_schule}}</ion-label>\n             <ion-label><ion-icon name="contacts"></ion-icon> Familie {{this.auth.stats?.t_familie}}</ion-label>\n             <ion-label><ion-icon name="medkit"></ion-icon> Gesundheit {{this.auth.stats?.t_gesundheit}}</ion-label>\n             <ion-label><ion-icon name="cart"></ion-icon> Internet/Konsum {{this.auth.stats?.t_konsum}}</ion-label>\n             <ion-label><ion-icon name="bus"></ion-icon> Reisen/Verkehr {{this.auth.stats?.t_verkehr}}</ion-label>\n             <ion-label><ion-icon name="home"></ion-icon> Wohnen {{this.auth.stats?.t_wohnen}}</ion-label>\n            </ion-card-content>\n            <ion-row class="cardfooter">\n                    <ion-col>\n                      <small>Kategorisiert {{(this.auth.stats?.t_wohnen*1+this.auth.stats?.t_verkehr*1+this.auth.stats?.t_konsum*1+this.auth.stats?.t_gesundheit*1+this.auth.stats?.t_familie*1+this.auth.stats?.t_schule*1+this.auth.stats?.t_arbeit*1)}}</small>\n                    </ion-col>\n                </ion-row>\n        </ion-card>\n\n      <ion-card>\n            <ion-card-header><h2><ion-icon name="pulse"></ion-icon>  Statistik</h2></ion-card-header>\n            <ion-card-content>\n                    <ion-label>Benutzer {{this.auth.stats?.users}}</ion-label>\n                    <ion-label>Rechtsfragen {{this.auth.stats?.nodesc}}/{{this.auth.stats?.nodes}}</ion-label>\n                    <ion-label>Antworten {{this.auth.stats?.commentsc}}/{{this.auth.stats?.comments}}</ion-label>\n                    <ion-label>Hinweise auf  Art. OR {{this.auth.stats?.ors}}</ion-label>\n                    <ion-label>Hinweise auf ZGB {{this.auth.stats?.zgbs}}</ion-label>\n                     <ion-label>Hinweise auf BGE {{this.auth.stats?.bges}}</ion-label>\n                </ion-card-content>\n            <ion-row class="cardfooter">\n                <ion-col>\n                  <small>Letztes update: {{this.auth.stats?.updated}}</small>\n                </ion-col>\n            </ion-row>\n        </ion-card>\n\n      <ion-label color="danger" text-wrap><h3>Wir haben unser System erneuert, die gewohnte AWRI Seite finden Sie nun hier: <a href="https://stage.awri.ch" target="_new">https://stage.awri.ch</a></h3></ion-label>\n      <ion-label color="danger" text-wrap><h3>Hinweise zum Datenschutz: <a href="https://stage.awri.ch/agb" target="_new">https://stage.awri.ch/agb</a></h3></ion-label>\n\n      <div class="mobile-fab"><ion-label color="primary" text-wrap>Bitte noch etwas Geduld, weitere Updates folgen in Kürze... </ion-label></div>\n    \n  <!--\n  <ion-card>\n      <ion-card-header class="cardheader">\n          CNC 10\n        </ion-card-header> \n    \n    <ion-card-content>\n      Content\n      </ion-card-content>\n      <ion-row>\n      <ion-segment [(ngModel)]="pet" (click)="test()">\n    <ion-segment-button value="profil">\n      Profil\n    </ion-segment-button>\n    <ion-segment-button value="facebook">\n      Facebook\n    </ion-segment-button>\n    <ion-segment-button value="awri">\n       AWRI\n      </ion-segment-button>\n  </ion-segment>\n</ion-row>\n\n</ion-card>\n-->\n</ion-content>\n'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/help/help.html"*/,
+            selector: 'page-help',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/help/help.html"*/'<ion-header>\n\n    <ion-navbar>\n        <ion-buttons end>\n            <button ion-button menuToggle>\n              <ion-icon name="menu"></ion-icon>\n            </button>\n            </ion-buttons>\n             \n            <ion-title>\n                Hilfe \n              </ion-title>\n      <ion-buttons start>\n  <ng-template [ngIf]="this.auth.isInRole(\'authenticated user\')" [ngIfElse]="headerOut">\n              <button ion-button (click)="this.gotoLogin()">\n                  <img class="avatar" src="{{this.auth.user.picture}}"> {{auth.user.name}}        \n                </button>\n  </ng-template>      \n  <ng-template #headerOut>\n              <button ion-button (click)="this.gotoLogin()">\n              <ion-icon name="contact"></ion-icon>  {{auth.user.name}}\n              </button>\n  </ng-template>\n      </ion-buttons>    \n    </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n    <ion-card padding>\n        <ion-title>Alles was Recht ist!</ion-title>\n        <p>Rechtsberatung mit System - \n        Unsere Community hilft kostenlos und unverbindlich bei rechtlichen Fragen.</p>\n        <blockquote>Unser Engagement dient der faktischen Umsetzung von Art. 8 BV (Rechtsgleichheit). \n            Einer gerechten Sache zu dienen, motiviert uns Tag für Tag für die Interessen der Bedürftigen einzusetzen.\n                        <small>(Gründer Abas Kanani ✝️ 2015)</small>\n                    </blockquote>\n    </ion-card>\n    \n    <banners></banners>\n<ion-grid>\n    <ion-row>\n        <ion-col>\n\n        <ion-item slot="start">         \n            <a href="{{this.auth.HOST}}/paypal" target="_BLANK">   \n                <img src="assets/imgs/paypal-960_720.png" style="width:320px;height:200px;">\n            </a> \n        </ion-item>\n        <ion-item text-wrap>\n            <ion-title>Bitte helfen auch Sie mit!</ion-title>\n            <p>Die Datenpflege und Datenhaltung kostet Zeit und Geld. Mit ihrer Spende können wir unsere Dienste für alle verbessern und ausbauen.</p>\n        </ion-item>\n\n    </ion-col>\n    <ion-col>\n        <ion-item slot="start">         \n            <a href="{{this.auth.HOST}}/content/werbung" target="_BLANK">   \n                <img src="assets/imgs/logo.png" style="width:200px;height:200px;">\n            </a> \n        </ion-item>\n        <ion-item text-wrap>\n            <ion-title>Schalten Sie Werbung auf AWRI.</ion-title>\n            <p>Die AWRI Seiten generieren im Monat ca. 30\'000 Views.</p>\n            <p><br></p>\n        </ion-item>\n</ion-col>\n</ion-row>\n</ion-grid>\n    <div class="help" *ngIf="help">\n        <ion-item>\n                <ion-label text-wrap><ion-icon name="help"></ion-icon> Sie können die angezeigte Hilfe in den Einstellungen ausschalten. <br>\n                    Klicken sie oben auf ihr <ion-icon name="contact"></ion-icon>\n                     Profilbild um die Einstellungen zu öffnen.                            \n                    </ion-label>                                \n    </ion-item>         \n\n    <div class="help" *ngIf="auth.isInRole(\'anonymous user\')">\n\n<ion-item>\n            <ion-label color="danger" text-wrap><h2>Nur auf AWRI angemeldete Benutzer haben Zugriff auf folgende erweiterte Funktionen!</h2></ion-label>\n        </ion-item>\n        <ion-item>         <ion-label>Hilfe ein/ausschalten</ion-label>  </ion-item>\n\n        <ion-item>       <ion-label>Anonyme Rechtsfragen stellen</ion-label>  </ion-item>\n        <ion-item>          <ion-label>Rechtsfragen kommentieren</ion-label>  </ion-item>\n        <ion-item>         <ion-label>Lesezeichen setzen</ion-label>  </ion-item>\n        <ion-item>         <ion-label>Rechtsfragen  bewerten</ion-label>  </ion-item>\n       \n        </div>   \n</div>\n\n    <ion-card padding>\n        <ion-title>Wie funktioniert das?</ion-title>\n        <p>Sie stellen Ihre Rechtsfrage hier auf AWRI, wir posten Ihre Frage für Sie anonym in unser Rechtsforum (Rechtsforum Schweiz)</p>\n        <p>Durch Erfahrungs- und Meinungsaustausch versuchen unsere Mitglieder Lösungen auf Ihre Frage zu finden.</p>\n        <ion-label text-wrap>Wir werten die besten Antworten aus und in der Regel werden die treffendsten Antworten innert 48h hier wieder veröffentlicht..</ion-label>\n        <ion-label color="danger">Wir ersetzen keinen juristischen Beistand!</ion-label>\n</ion-card>\n\n\n<ion-card padding>\n    <ion-title>Bewertungen</ion-title>\n    <ion-label text-wrap>Helfen sie uns dabei, unser System zu verbessern indem Sie Rechtsfragen mit 1 - 5 Sternen bewerten</ion-label>\n    <ion-label text-wrap>\n        <button title="1 Nicht gelöst" ion-button small [color]=" this.bewertung>=20 ? \'secondary\' : \'primary\'">⭐</button>\n        <button title="2 Schlecht gelöst" ion-button small [color]=" this.bewertung>=40 ? \'secondary\' : \'primary\'">⭐</button>\n        <button title="3 Gut gelöst" ion-button small  [color]=" this.bewertung>=60 ? \'secondary\' : \'primary\'">⭐</button>\n        <button title="4 Sehr gut gelöst" ion-button small [color]=" this.bewertung>=80 ? \'secondary\' : \'primary\'">⭐</button>\n        <button title="5 Spitze gelöst" ion-button small  [color]=" this.bewertung>=100 ? \'secondary\' : \'primary\'">⭐</button>     \n    </ion-label>\n    <p><small>1 = Nicht gelöst; 2 = Schlecht gelöst; 3 = Gut gelöst; 4 = Sehr gut gelöst; 5 = Top Lösung!</small></p>\n    <p>Die durchschnittliche Bewertung wird anhand grün angezeigt <button ion-button small color="secondary">⭐</button></p>\n</ion-card>\n<ion-card padding>\n    <ion-title>Lesezeichen</ion-title>\n    <ion-label text-wrap>Angemeldete Benutzer können Lesezeichen auf Rechtsfragen setzen. \n        Sie finden den Button zu ihren gesetzten Lesezeichen in Ihren Profil Einstellungen.</ion-label>\n    <ion-label text-wrap>\nLesezeichen nicht gesetzt <ion-icon name="bookmark" color="primary" title="Lesezeichen setzten/entfernen"></ion-icon>\n    </ion-label>\n<ion-label text-wrap>\nLesezeichen gesetzt <ion-icon name="bookmark" color="danger" title="Lesezeichen setzten/entfernen"></ion-icon>\n</ion-label>\n<ion-label text-wrap>\nAnzahl Personen die dieses Lesezeichen auch gesetzt haben: <ion-badge color="secondary">5</ion-badge>\n    </ion-label>\n    </ion-card>\n\n\n        <div class="info">   \n\n                <a href="https://www.facebook.com/groups/RechtsberatungSchweiz/" target="_BLANK">  \n                <ion-item>\n                      <ion-icon name="logo-facebook" item-start></ion-icon>\n                      <ion-label text-wrap>\n                         <h2>Rechtsforum Schweiz</h2>\n                         <p>Die Facebookgruppe wurde 2015 gegründet um Personen die sich keinen Anwalt leisten können bei juristischen Fragen zu unterstützen.</p>\n                         <p>Alle AWRI Fragen wurden durch die Mitglieder dieser Gruppe gestellt und beantwortet.</p>\n                         <h3>Wir danken allen Mitgliedern des Rechtsforum Schweiz ❤️lich für Ihre Unterstützung!</h3>\n                        </ion-label>\n                   </ion-item>\n                  </a>\n                  <br>\n                  <a href="{{auth.HOST}}" target="_BLANK">  \n                  <ion-item>\n                      <ion-icon name="rechzapp-awri" item-start></ion-icon>\n                      <ion-label text-wrap>\n                         <h2>AWRI (Alles was Recht ist)</h2>\n                         <p>Die AWRI Datenbank für Rechtsfragen wurde 2015 erstellt um die Verwaltung und Administration der gestellten Fragen zu erleichtern.</p>\n                         <p>In dieser Datenbank werden alle Rechtsfragen und Antworten des Rechtsforum Schweiz ausgewertet und freigeschalten.</p>\n                        </ion-label>\n                   </ion-item>\n                   </a>\n                  <br>        \n                  <a href="https://www.facebook.com/Rechtshilfeforum/" target="_BLANK">  \n                  <ion-item>\n                      <ion-icon name="logo-facebook" item-start></ion-icon>\n                      <ion-label text-wrap>\n                         <h2>AWRI Ratgeber</h2>\n                         <p>Facebook Seite, auf der von Zeit zu Zeit die interessantesten und meist gefragten Beiträge aus dem Rechtsforum Schweiz veröffentlicht werden.</p>\n                        </ion-label>\n                   </ion-item>  \n                   </a>\n          </div>\n<ion-grid><ion-row>\n    <ion-col>    \n        <ion-card>\n                <ion-card-header><h2><ion-icon name="pulse"></ion-icon>  Statistik</h2></ion-card-header>\n                <ion-card-content>\n                        <ion-label>Benutzer {{this.auth.stats?.users}}</ion-label>\n                        <ion-label>Rechtsfragen {{this.auth.stats?.nodesc}}/{{this.auth.stats?.nodes}}</ion-label>\n                        <ion-label>Antworten {{this.auth.stats?.commentsc}}/{{this.auth.stats?.comments}}</ion-label>\n                        <ion-label>Hinweise auf  Art. OR {{this.auth.stats?.ors}}</ion-label>\n                        <ion-label>Hinweise auf ZGB {{this.auth.stats?.zgbs}}</ion-label>\n                         <ion-label>Hinweise auf BGE {{this.auth.stats?.bges}}</ion-label>\n                         <ion-label></ion-label>   \n                         <ion-label></ion-label>                                     \n                    </ion-card-content>\n                <ion-row class="cardfooter">\n                    <ion-col>\n                      <small>Letztes update: {{this.auth.stats?.updated}}</small>\n                    </ion-col>\n                </ion-row>\n            </ion-card>\n    </ion-col>\n    <ion-col>\n            <ion-card>\n                    <ion-card-header><h2>Bereiche</h2></ion-card-header>\n                    <ion-card-content>\n                         <ion-label><ion-icon name="construct"></ion-icon> Arbeit {{this.auth.stats?.t_arbeit}}</ion-label>\n                         <ion-label><ion-icon name="briefcase"></ion-icon> Behörden/Schulen {{this.auth.stats?.t_schule}}</ion-label>\n                         <ion-label><ion-icon name="contacts"></ion-icon> Familie {{this.auth.stats?.t_familie}}</ion-label>\n                         <ion-label><ion-icon name="medkit"></ion-icon> Gesundheit {{this.auth.stats?.t_gesundheit}}</ion-label>\n                         <ion-label><ion-icon name="cart"></ion-icon> Internet/Konsum {{this.auth.stats?.t_konsum}}</ion-label>\n                         <ion-label><ion-icon name="bus"></ion-icon> Reisen/Verkehr {{this.auth.stats?.t_verkehr}}</ion-label>\n                         <ion-label><ion-icon name="home"></ion-icon> Wohnen {{this.auth.stats?.t_wohnen}}</ion-label>         \n                        </ion-card-content>\n                        <ion-row class="cardfooter">\n                                <ion-col>\n                                  <small>Kategorisiert {{(this.auth.stats?.t_wohnen*1+this.auth.stats?.t_verkehr*1+this.auth.stats?.t_konsum*1+this.auth.stats?.t_gesundheit*1+this.auth.stats?.t_familie*1+this.auth.stats?.t_schule*1+this.auth.stats?.t_arbeit*1)}}</small>\n                                </ion-col>\n                            </ion-row>\n            </ion-card>\n    </ion-col>\n    </ion-row></ion-grid>\n\n      <ion-label color="danger" text-wrap><h3>Wir haben unser System erneuert, die gewohnte AWRI Seite finden Sie nun hier: <a href="https://stage.awri.ch" target="_new">https://stage.awri.ch</a></h3></ion-label>\n      <ion-label color="danger" text-wrap><h3>Hinweise zum Datenschutz: <a href="https://stage.awri.ch/agb" target="_new">https://stage.awri.ch/agb</a></h3></ion-label>\n\n      <div class="mobile-fab"><ion-label color="primary" text-wrap>Bitte noch etwas Geduld, weitere Updates folgen in Kürze... </ion-label></div>\n    \n  <!--\n  <ion-card>\n      <ion-card-header class="cardheader">\n          CNC 10\n        </ion-card-header> \n    \n    <ion-card-content>\n      Content\n      </ion-card-content>\n      <ion-row>\n      <ion-segment [(ngModel)]="pet" (click)="test()">\n    <ion-segment-button value="profil">\n      Profil\n    </ion-segment-button>\n    <ion-segment-button value="facebook">\n      Facebook\n    </ion-segment-button>\n    <ion-segment-button value="awri">\n       AWRI\n      </ion-segment-button>\n  </ion-segment>\n</ion-row>\n\n</ion-card>\n-->\n</ion-content>\n'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/help/help.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__["a" /* AuthProvider */]])
     ], HelpPage);
@@ -403,7 +543,7 @@ var HelpPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 126:
+/***/ 127:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -416,44 +556,48 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 126;
+webpackEmptyAsyncContext.id = 127;
 
 /***/ }),
 
-/***/ 167:
+/***/ 168:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
 	"../pages/bereich/bereich.module": [
-		300,
-		7
+		301,
+		8
 	],
 	"../pages/bookmarks/bookmarks.module": [
-		301,
-		6
+		302,
+		7
 	],
 	"../pages/create/create.module": [
-		302,
-		5
+		303,
+		6
 	],
 	"../pages/help/help.module": [
-		303,
-		4
+		304,
+		5
 	],
 	"../pages/login/login.module": [
-		304,
-		3
+		305,
+		4
 	],
 	"../pages/register/register.module": [
-		305,
+		306,
+		3
+	],
+	"../pages/searchcat/searchcat.module": [
+		307,
 		2
 	],
 	"../pages/settings/settings.module": [
-		306,
+		308,
 		1
 	],
 	"../pages/view/view.module": [
-		307,
+		309,
 		0
 	]
 };
@@ -468,7 +612,7 @@ function webpackAsyncContext(req) {
 webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 	return Object.keys(map);
 };
-webpackAsyncContext.id = 167;
+webpackAsyncContext.id = 168;
 module.exports = webpackAsyncContext;
 
 /***/ }),
@@ -479,8 +623,8 @@ module.exports = webpackAsyncContext;
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_register_register__ = __webpack_require__(56);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_bookmarks_bookmarks__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_admin_admin__ = __webpack_require__(87);
@@ -571,18 +715,18 @@ var LoginPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 214:
+/***/ 215:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_upload_upload__ = __webpack_require__(88);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_auth_auth__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_auth_auth__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_view_view__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_login_login__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_bereich_bereich__ = __webpack_require__(113);
@@ -857,15 +1001,16 @@ var HomePage = /** @class */ (function () {
                         window.open('https://twitter.com/intent/tweet?status=Alles was Recht ist! Die Schweizer Datenbank für Rechtsfragen. https://awri.ch', '_system');
                     }
                 },
-                {
-                    text: 'RSS',
-                    role: 'rss',
-                    icon: 'logo-rss',
-                    handler: function () {
-                        window.open('https://stage.awri.ch/rss.xml', '_system');
-                    }
-                },
                 /*
+                {
+                  text: 'RSS',
+                  role: 'rss',
+                  icon: 'logo-rss',
+                  handler: () => {
+                    window.open('https://stage.awri.ch/rss.xml', '_system');
+                  }
+                },
+                
                 {
                   text: 'Google+',
                   role: 'google',
@@ -944,7 +1089,7 @@ var HomePage = /** @class */ (function () {
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/home/home.html"*/'<ion-header>\n\n    <ion-navbar>\n        <ion-buttons end>\n            <button ion-button menuToggle>\n              <ion-icon name="menu"></ion-icon>\n            </button>\n            </ion-buttons>\n             \n            <ion-title>\n              <img src="assets/imgs/logo.png" class="avatar">  AWRI\n              </ion-title>\n      <ion-buttons start>\n  <ng-template [ngIf]="this.auth.isInRole(\'authenticated user\')" [ngIfElse]="headerOut">\n              <button ion-button (click)="this.gotoLogin()">\n                  <img class="avatar" src="{{this.auth.user.picture}}"> {{auth.user?.name}}        \n                </button>\n  </ng-template>      \n  <ng-template #headerOut>\n              <button ion-button (click)="this.gotoLogin()">\n              <ion-icon name="contact"></ion-icon>  {{auth.user?.name}}\n              </button>\n  </ng-template>\n      </ion-buttons>    \n    </ion-navbar>\n\n</ion-header>\n   \n   <ion-content padding>  \n        <div *ngIf="auth.isInRole(\'anonymous user\')">\n                <ion-card>\n                        <ion-card-header>\n                                <ion-card-title><ion-icon name="contact"></ion-icon> Sie sind nicht angemeldet</ion-card-title>\n                              </ion-card-header>\n                            \n                              <ion-card-content>\n                      <ion-label text-wrap>Bitte registrieren oder anmelden um Zugriff auf erweiterte Funktionen zu erhalten</ion-label>\n                </ion-card-content>\n                <ion-item><ion-buttons right> \n                <button ion-button class="submit-btn" round  type="submit"  (click)="this.gotoLogin();">Anmelden/Registrieren\n                </button> \n                </ion-buttons>\n                </ion-item>   \n                </ion-card>\n            </div>  \n        \n        <ion-title>Alles was Recht ist!</ion-title>\n        <p>Rechtsberatung mit System - \n        Unsere Community hilft kostenlos und unverbindlich bei rechtlichen Fragen.</p>\n        <banners></banners>\n        <div *ngIf="help" class="help">\n                <ion-item>\n                <ion-label text-wrap><p><ion-icon name="help"></ion-icon>Angemeldete Benutzer können die Hilfe in den Profileinstellungen auschalten</p></ion-label>\n                </ion-item>\n        </div>\n\n\n      <div *ngIf="help" class="help">\n        <ion-item>\n            <ion-label text-wrap>\n                    <h2>Sie haben ein rechtliches Problem und benötigen Rat?</h2>\n                    <p>Das AWRI System wurde 2015 entwickelt um Personen, die juristischen Rat suchen bestmöglich zu unterstützen.</p>\n                    <p>Wir ersetzen keinen juristischen Beistand, diese Platform ist als erste Hilfestellung für Rechtsfragen gedacht!</p>\n                    <p>Schauen sie Antworten auf ähnliche Fragen in einem der folgenden Bereiche an:</p>\n                  <ul>\n                        <div *ngFor="let bereich of bereiche">                                \n                            <li><ion-icon (click)="gotoBereich(bereich)" name="{{bereich.icon}}"></ion-icon> {{bereich.name}}\n                        </div>\n                  </ul>\n                  <h2>Suchen Sie in über {{auth.stats?.nodesc}} Rechtsfragen nach passenden Antworten.</h2>\n                    <p>Suchen <ion-icon name="search"></ion-icon> sie gezielt mit verknüpften Schlagwörtern in unserer Datenbank mit <strong>{{auth.stats?.nodesc}}</strong> Rechtsfragen und <strong>{{auth.stats?.commentsc}}</strong> Antworten.</p>\n                   \n                    <h2>Sie haben keine passende Lösung gefunden?</h2>\n                    <p>Dann stellen sie eine neue Rechtsfrage in der Facebookgruppe <a href="https://www.facebook.com/groups/RechtsberatungSchweiz/" target="_BLANK"><ion-icon name="logo-facebook"></ion-icon> Rechtsforum Schweiz</a>.</p>\n                    <p>Auf dieser Seite (Frage stellen) können Sie Ihre Frage <strong>anonym</strong> ins Rechtsforum Schweiz stellen lassen.</p>        \n                    <p>Die Mitglieder unserer Facebook Gruppe diskutieren (manchmal auch kontrovers) die Rechtslage und nur die hilfreichsten Antworten werden hier wieder veröffentlicht.</p>        \n                    <p>Wenn ihre Frage hier veröffentlicht wurde können Sie <strong>anonym</strong> Atnworten, indem Sie Ihre Frage hier kommentieren.</p>\n             \n                    <h2>Sie möchten in unserer Community mitmachen und helfen?</h2>   \n                    <p>Treten sie unserer Facebook Gruppe  <a href="https://www.facebook.com/groups/RechtsberatungSchweiz/" target="_BLANK"><ion-icon name="logo-facebook"></ion-icon> Rechtsforum Schweiz</a> bei.\n                    Wir freuen uns immer auf kompetente und erfahrene Mitstreiter. ❤️</p>\n                    <p>Oder teilen <ion-icon name="share" (click)="share()"></ion-icon> Sie AWRI einfach auf Ihrer Lieblingsplatform. Vielen Dank!</p>            \n               \n                    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;"><tr style=""><td height="28" style="line-height:28px;">&nbsp;</td></tr><tr><td style=""><table border="0" width="280" cellspacing="0" cellpadding="0" style="border-collapse:separate;background-color:#ffffff;border:1px solid #dddfe2;border-radius:3px;font-family:Helvetica, Arial, sans-serif;margin:0px auto;"><tr style="padding-bottom: 8px;"><td style=""><img class="img" src="assets/imgs/logo_rechtsforum.jpg" width="280" height="146" alt="" /></td></tr><tr><td style="font-size:14px;font-weight:bold;padding:8px 8px 0px 8px;text-align:center;">Rechtsforum Schweiz</td></tr><tr><td style="color:#90949c;font-size:12px;font-weight:normal;text-align:center;">Geschlossen Gruppe · über 8.000 Mitglieder</td></tr><tr><td style="padding:8px 12px 12px 12px;"><table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;width:100%;"><tr><td style="background-color:#4267b2;border-radius:3px;text-align:center;"><a style="color:#3b5998;text-decoration:none;cursor:pointer;width:100%;" href="https://www.facebook.com/plugins/group/join/popup/?group_id=353664054816742&amp;source=email_campaign_plugin" target="_blank" rel="noopener"><table border="0" cellspacing="0" cellpadding="3" align="center" style="border-collapse:collapse;"><tr><td style="border-bottom:3px solid #4267b2;border-top:3px solid #4267b2;color:#FFF;font-family:Helvetica, Arial, sans-serif;font-size:12px;font-weight:bold;">Gruppe beitreten</td></tr></table></a></td></tr></table></td></tr><tr><td style="border-top:1px solid #dddfe2;font-size:12px;padding:8px 12px;">\n                        <p>Facebook Rechtsberatung seit 2015</p>\n                            <p>Alle Auskünfte sind kostenlos und UNVERBINDLICH</p>                       \n                           </td></tr></table></td></tr><tr style=""><td height="14" style="line-height:14px;">&nbsp;</td></tr></table>\n                           </ion-label> \n        </ion-item>    \n      </div>\n\n<ion-item>\n        <ion-label> <ion-icon name="search"></ion-icon></ion-label>\n      <ion-input  placeholder="Rechtsfrage suchen..." clearInput\n      [(ngModel)]="search" (change)="doSearch()">\n    </ion-input>\n    <button ion-button item-end (click)="doSearch()" small><ion-icon name="search"></ion-icon></button>\n</ion-item>\n\n<ion-card>\n        <ion-card-header>\n                <ion-card-title>Rechtsfrage vom {{random?.created*1000 | date: \'dd.MM.yyyy H:mm\' }} </ion-card-title>\n              </ion-card-header>\n            \n              <ion-card-content (click)="this.frageSelected(random?.nid)">\n    {{random?.title}}\n      \n</ion-card-content>\n<ion-item><ion-buttons end> \n<button ion-button class="submit-btn" small  type="submit"  (click)="this.getRandom(auth.stats.nodesc);"><ion-icon name="refresh"></ion-icon> \n</button> \n</ion-buttons>\n</ion-item>   \n</ion-card>\n\n<ion-item>\n      <ion-slides *ngIf="bereiche && bereiche.length"  pager autoplay="5000" loop="true" speed="500"> \n          \n<div *ngFor="let bereich of bereiche">\n        <ion-item>  \n        <ion-slide (click)="gotoBereich(bereich)">\n     \n    <h1><ion-icon name="{{bereich.icon}}"></ion-icon> {{bereich.name}}  <ion-badge>{{bereich.count}}</ion-badge>\n    </h1>\n    <p><img src="{{bereich.image}}"></p><br>\n\n    </ion-slide>\n</ion-item>    \n</div>\n      </ion-slides>\n    </ion-item>\n\n      <ion-item>\n            <ion-navbar  text-center>\n            <ion-title><ion-icon name="arrow-round-back"></ion-icon> Kategorien <ion-icon name="arrow-round-forward"></ion-icon></ion-title>\n            </ion-navbar>\n          </ion-item>\n<!--\n      <ion-slides>\n            <ion-slide (click)="gotoBereich(93)">\n                <h1><ion-icon name="construct"></ion-icon>Arbeit</h1>\n                <p>Rechtsfragen aus dem Bereich Arbeitrecht</p>\n            </ion-slide>\n            <ion-slide (click)="gotoBereich(99)">\n                <h1><ion-icon name="briefcase"></ion-icon>Behörden/Schulen</h1>\n            </ion-slide>\n \n            <ion-slide (click)="gotoBereich(98)">\n                    <h1><ion-icon name="contacts"></ion-icon>Familie</h1>\n                </ion-slide>\n                <ion-slide (click)="gotoBereich(97)">\n                    <h1><ion-icon name="medkit"></ion-icon>Gesundheit</h1>\n                </ion-slide>\n                <ion-slide (click)="gotoBereich(96)">\n                        <h1><ion-icon name="cart"></ion-icon> Internet/Konsum</h1>\n                    </ion-slide>\n                    <ion-slide (click)="gotoBereich(95)">\n                        \n                        <h1><ion-icon name="bus"></ion-icon> Reisen/Verkehr</h1>\n                    </ion-slide>\n                    <ion-slide (click)="gotoBereich(94)">\n                            <h1><ion-icon name="home"></ion-icon>Wohnen</h1>\n                    </ion-slide>                 \n             \n      </ion-slides>    \n    -->\n\n  \n    <ion-slides pager autoplay="5000" loop="true" speed="500">\n        <ion-slide>\n                <a href="https://www.facebook.com/groups/RechtsberatungSchweiz/" target="_BLANK">  \n                    <img src="assets/imgs/logo_rechtsforum.jpg">\n                </a>\n            \n                      <ion-item>                          \n                          <ion-icon name="logo-facebook" item-start></ion-icon>\n                          <ion-label text-wrap>\n                             <h2>Rechtsforum Schweiz</h2>\n                             <p>Facebookgruppe mit über 8000 Mitgliedern</p>\n                             <p>Alle Fragen wurden durch die Mitglieder dieser Gruppe beantwortet</p>\n                            </ion-label>                                          \n                       </ion-item>\n                  \n        </ion-slide>\n        <ion-slide>          \n                <a href="{{auth.HOST}}" target="_BLANK">  \n                        <img src="assets/imgs/logo_awri.png?43234">\n                    </a>  \n                        <ion-item>\n                            <ion-icon name="rechzapp-awri" item-start></ion-icon>\n                            <ion-label text-wrap>\n                               <h2>AWRI (Alles was Recht ist)</h2>\n                               <p>Datenbank für Rechtsfragen</p>\n                               <p>In dieser Datenbank werden Rechtsfragen und Antworten ausgewertet und freigeschalten.</p>\n                              </ion-label>\n                         </ion-item>\n                           \n        </ion-slide>\n        <ion-slide>\n                <a href="https://www.facebook.com/Rechtshilfeforum/" target="_BLANK">  \n                    <img src="assets/imgs/logo_ratgeber.jpg">\n                </a>        \n                    <ion-item>\n                        <ion-icon name="logo-facebook" item-start></ion-icon>\n                        <ion-label text-wrap>\n                           <h2>AWRI Ratgeber</h2>\n                           <p>Facebook Seite, auf der von Zeit zu Zeit die interessantesten und meist gefragten Beiträge aus dem Rechtsforum Schweiz veröffentlicht werden.</p>\n                          </ion-label>\n                     </ion-item>          \n        </ion-slide>        \n      </ion-slides>\n\n\n      <ion-item>\n            <ion-navbar text-center>\n        <ion-title><ion-icon name="arrow-round-back"></ion-icon> Systeme <ion-icon name="arrow-round-forward"></ion-icon></ion-title>\n        </ion-navbar>\n        </ion-item>\n        \n      <!--\n    <ion-fab right bottom class="web-fab">\n        <button ion-fab icon-only color="primary" (click)="checkPlatform()">\n          <ion-icon name="help"></ion-icon>\n        </button>\n       </ion-fab>\n       \n       <ion-fab right top edge class="mobile-fab">\n        <button ion-fab icon-only color="primary" (click)="checkPlatform()">\n          <ion-icon name="help"></ion-icon>\n        </button>\n       </ion-fab>\n-->\n\n   </ion-content>\n   <ion-footer>\n        <ion-toolbar> \n            <ion-item>            \n           <button ion-fab icon-only (click)="this.share()" item-start><ion-icon name="share"></ion-icon></button><ion-title>(c) 2015 by AWRI </ion-title>\n        </ion-item>\n        </ion-toolbar>           \n      </ion-footer>\n\n'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/home/home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/home/home.html"*/'<ion-header>\n\n    <ion-navbar>\n        <ion-buttons end>\n            <button ion-button menuToggle>\n              <ion-icon name="menu"></ion-icon>\n            </button>\n            </ion-buttons>\n             \n            <ion-title>\n              <img src="assets/imgs/logo.png" class="avatar">  AWRI\n              </ion-title>\n      <ion-buttons start>\n  <ng-template [ngIf]="this.auth.isInRole(\'authenticated user\')" [ngIfElse]="headerOut">\n              <button ion-button (click)="this.gotoLogin()">\n                  <img class="avatar" src="{{this.auth.user.picture}}"> {{auth.user?.name}}        \n                </button>\n  </ng-template>      \n  <ng-template #headerOut>\n              <button ion-button (click)="this.gotoLogin()">\n              <ion-icon name="contact"></ion-icon>  {{auth.user?.name}}\n              </button>\n  </ng-template>\n      </ion-buttons>    \n    </ion-navbar>\n\n</ion-header>\n   \n   <ion-content padding>  \n\n            <ion-card padding>\n        <ion-title>Alles was Recht ist!</ion-title>\n        <p>Rechtsberatung mit System - \n        Unsere Community hilft kostenlos und unverbindlich bei rechtlichen Fragen.</p>\n        </ion-card>\n\n        <banners name="teststyle"></banners>\n\n        <div *ngIf="auth.isInRole(\'anonymous user\')">\n            <ion-card>\n                    <ion-card-header>\n                            <ion-card-title><ion-icon name="contact"></ion-icon> Sie sind nicht angemeldet</ion-card-title>\n                          </ion-card-header>\n                        \n                          <ion-card-content>\n                  <ion-label text-wrap>Bitte registrieren oder anmelden um Zugriff auf erweiterte Funktionen zu erhalten</ion-label>\n            </ion-card-content>\n            <ion-item><ion-buttons right> \n            <button ion-button class="submit-btn" round  type="submit"  (click)="this.gotoLogin();">Anmelden/Registrieren\n            </button> \n            </ion-buttons>\n            </ion-item>   \n            </ion-card>\n        </div>  \n\n        <div *ngIf="help" class="help">\n                <ion-item>\n                <ion-label text-wrap><p><ion-icon name="help"></ion-icon>Angemeldete Benutzer können die Hilfe in den Profileinstellungen auschalten</p></ion-label>\n                </ion-item>\n        </div>\n\n\n      <div *ngIf="help" class="help">\n        <ion-item>\n            <ion-label text-wrap>\n                    <h2>Sie haben ein rechtliches Problem und benötigen Rat?</h2>\n                    <p>Das AWRI System wurde 2015 entwickelt um Personen, die juristischen Rat suchen bestmöglich zu unterstützen.</p>\n                    <p>Wir ersetzen keinen juristischen Beistand, diese Platform ist als erste Hilfestellung für Rechtsfragen gedacht!</p>\n                    <p>Schauen sie Antworten auf ähnliche Fragen in einem der folgenden Bereiche an:</p>\n                  <ul>\n                        <div *ngFor="let bereich of bereiche">                                \n                            <li><ion-icon (click)="gotoBereich(bereich)" name="{{bereich.icon}}"></ion-icon> {{bereich.name}}\n                        </div>\n                  </ul>\n                  <h2>Suchen Sie in über {{auth.stats?.nodesc}} Rechtsfragen nach passenden Antworten.</h2>\n                    <p>Suchen <ion-icon name="search"></ion-icon> sie gezielt mit verknüpften Schlagwörtern in unserer Datenbank mit <strong>{{auth.stats?.nodesc}}</strong> Rechtsfragen und <strong>{{auth.stats?.commentsc}}</strong> Antworten.</p>\n                   \n                    <h2>Sie haben keine passende Lösung gefunden?</h2>\n                    <p>Dann stellen sie eine neue Rechtsfrage in der Facebookgruppe <a href="https://www.facebook.com/groups/RechtsberatungSchweiz/" target="_BLANK"><ion-icon name="logo-facebook"></ion-icon> Rechtsforum Schweiz</a>.</p>\n                    <p>Auf dieser Seite (Frage stellen) können Sie Ihre Frage <strong>anonym</strong> ins Rechtsforum Schweiz stellen lassen.</p>        \n                    <p>Die Mitglieder unserer Facebook Gruppe diskutieren (manchmal auch kontrovers) die Rechtslage und nur die hilfreichsten Antworten werden hier wieder veröffentlicht.</p>        \n                    <p>Wenn ihre Frage hier veröffentlicht wurde können Sie <strong>anonym</strong> Atnworten, indem Sie Ihre Frage hier kommentieren.</p>\n             \n                    <h2>Sie möchten in unserer Community mitmachen und helfen?</h2>   \n                    <p>Treten sie unserer Facebook Gruppe  <a href="https://www.facebook.com/groups/RechtsberatungSchweiz/" target="_BLANK"><ion-icon name="logo-facebook"></ion-icon> Rechtsforum Schweiz</a> bei.\n                    Wir freuen uns immer auf kompetente und erfahrene Mitstreiter. ❤️</p>\n                    <p>Oder teilen <ion-icon name="share" (click)="share()"></ion-icon> Sie AWRI einfach auf Ihrer Lieblingsplatform. Vielen Dank!</p>            \n       <!--        \n                    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;"><tr style=""><td height="28" style="line-height:28px;">&nbsp;</td></tr><tr><td style=""><table border="0" width="280" cellspacing="0" cellpadding="0" style="border-collapse:separate;background-color:#ffffff;border:1px solid #dddfe2;border-radius:3px;font-family:Helvetica, Arial, sans-serif;margin:0px auto;"><tr style="padding-bottom: 8px;"><td style=""><img class="img" src="assets/imgs/logo_rechtsforum.jpg" width="280" height="146" alt="" /></td></tr><tr><td style="font-size:14px;font-weight:bold;padding:8px 8px 0px 8px;text-align:center;">Rechtsforum Schweiz</td></tr><tr><td style="color:#90949c;font-size:12px;font-weight:normal;text-align:center;">Geschlossen Gruppe · über 8.000 Mitglieder</td></tr><tr><td style="padding:8px 12px 12px 12px;"><table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;width:100%;"><tr><td style="background-color:#4267b2;border-radius:3px;text-align:center;"><a style="color:#3b5998;text-decoration:none;cursor:pointer;width:100%;" href="https://www.facebook.com/plugins/group/join/popup/?group_id=353664054816742&amp;source=email_campaign_plugin" target="_blank" rel="noopener"><table border="0" cellspacing="0" cellpadding="3" align="center" style="border-collapse:collapse;"><tr><td style="border-bottom:3px solid #4267b2;border-top:3px solid #4267b2;color:#FFF;font-family:Helvetica, Arial, sans-serif;font-size:12px;font-weight:bold;">Gruppe beitreten</td></tr></table></a></td></tr></table></td></tr><tr><td style="border-top:1px solid #dddfe2;font-size:12px;padding:8px 12px;">\n                        <p>Facebook Rechtsberatung seit 2015</p>\n                            <p>Alle Auskünfte sind kostenlos und UNVERBINDLICH</p>                       \n                           </td></tr></table></td></tr><tr style=""><td height="14" style="line-height:14px;">&nbsp;</td></tr></table>\n                        -->   \n                        </ion-label> \n        </ion-item>    \n\n<ion-grid><ion-row>\n    <ion-col>\n    <ion-card>\n        <ion-item slot="start">         \n            <a href="{{this.auth.HOST}}/paypal" target="_BLANK">   \n                <img src="assets/imgs/paypal-960_720.png" style="width:320px;height:200px;">\n            </a> \n        </ion-item>\n        <ion-item text-wrap>\n            <ion-title>Bitte helfen auch Sie mit!</ion-title>\n            <p>Die Datenpflege und Datenhaltung kostet Zeit und Geld. Mit ihrer Spende können wir unsere Dienste für alle verbessern und ausbauen.</p>\n        </ion-item>\n    </ion-card>\n</ion-col>\n<ion-col>\n    <ion-card>\n        <ion-item slot="start">         \n            <a href="{{this.auth.HOST}}/content/werbung" target="_BLANK">   \n                <img src="assets/imgs/logo.png" style="width:200px;height:200px;">\n            </a> \n        </ion-item>\n        <ion-item text-wrap>\n            <ion-title>Schalten Sie Werbung auf AWRI.</ion-title>\n            <p>Die AWRI Seiten generieren im Monat ca. 30\'000 Views.</p>\n            <p><br></p>\n        </ion-item>\n    </ion-card>\n</ion-col>\n</ion-row></ion-grid>\n      </div>\n<ion-toolbar>\n<ion-item>\n        <ion-label> <ion-icon name="search"></ion-icon></ion-label>\n      <ion-input  placeholder="Rechtsfrage suchen..." clearInput\n      [(ngModel)]="search" (change)="doSearch()">\n    </ion-input>\n    <button ion-button item-end (click)="doSearch()" small><ion-icon name="search"></ion-icon></button>\n</ion-item>\n</ion-toolbar>\n<!--\n<ion-toolbar>\n<ion-searchbar [(ngModel)]="search"></ion-searchbar>\n<ion-buttons end>\n<button ion-button (click)="doSearch()" small round color="primary"><ion-icon name="search"></ion-icon></button>\n</ion-buttons>\n</ion-toolbar>\n-->\n<ion-card>\n        <ion-card-header>\n                <ion-card-title>Rechtsfrage vom {{random?.created*1000 | date: \'dd.MM.yyyy H:mm\' }} </ion-card-title>\n              </ion-card-header>\n            \n              <ion-card-content (click)="this.frageSelected(random?.nid)">\n    {{random?.title}}\n      \n</ion-card-content>\n<ion-item><ion-buttons end> \n<button ion-button class="submit-btn" small  type="submit"  (click)="this.getRandom(auth.stats.nodesc);"><ion-icon name="refresh"></ion-icon> \n</button> \n</ion-buttons>\n</ion-item>   \n</ion-card>\n\n<ion-item>\n      <ion-slides *ngIf="bereiche && bereiche.length"  pager autoplay="5000" loop="true" speed="500"> \n          \n<div *ngFor="let bereich of bereiche">\n        <ion-item>  \n        <ion-slide (click)="gotoBereich(bereich)">\n     \n    <h1><ion-icon name="{{bereich.icon}}"></ion-icon> {{bereich.name}}  <ion-badge>{{bereich.count}}</ion-badge>\n    </h1>\n    <p><img src="{{bereich.image}}"></p><br>\n\n    </ion-slide>\n</ion-item>    \n</div>\n      </ion-slides>\n    </ion-item>\n\n      <ion-item>\n            <ion-navbar  text-center>\n            <ion-title><ion-icon name="arrow-round-back"></ion-icon> Kategorien <ion-icon name="arrow-round-forward"></ion-icon></ion-title>\n            </ion-navbar>\n          </ion-item>\n<!--\n      <ion-slides>\n            <ion-slide (click)="gotoBereich(93)">\n                <h1><ion-icon name="construct"></ion-icon>Arbeit</h1>\n                <p>Rechtsfragen aus dem Bereich Arbeitrecht</p>\n            </ion-slide>\n            <ion-slide (click)="gotoBereich(99)">\n                <h1><ion-icon name="briefcase"></ion-icon>Behörden/Schulen</h1>\n            </ion-slide>\n \n            <ion-slide (click)="gotoBereich(98)">\n                    <h1><ion-icon name="contacts"></ion-icon>Familie</h1>\n                </ion-slide>\n                <ion-slide (click)="gotoBereich(97)">\n                    <h1><ion-icon name="medkit"></ion-icon>Gesundheit</h1>\n                </ion-slide>\n                <ion-slide (click)="gotoBereich(96)">\n                        <h1><ion-icon name="cart"></ion-icon> Internet/Konsum</h1>\n                    </ion-slide>\n                    <ion-slide (click)="gotoBereich(95)">\n                        \n                        <h1><ion-icon name="bus"></ion-icon> Reisen/Verkehr</h1>\n                    </ion-slide>\n                    <ion-slide (click)="gotoBereich(94)">\n                            <h1><ion-icon name="home"></ion-icon>Wohnen</h1>\n                    </ion-slide>                 \n             \n      </ion-slides>    \n    -->\n\n  \n    <ion-slides pager autoplay="5000" loop="true" speed="500">\n        <ion-slide>\n                <a href="https://www.facebook.com/groups/RechtsberatungSchweiz/" target="_BLANK">  \n                    <img src="assets/imgs/logo_rechtsforum.jpg">\n                </a>\n            \n                      <ion-item>                          \n                          <ion-icon name="logo-facebook" item-start></ion-icon>\n                          <ion-label text-wrap>\n                             <h2>Rechtsforum Schweiz</h2>\n                             <p>Facebookgruppe mit über 8000 Mitgliedern</p>\n                             <p>Alle Fragen wurden durch die Mitglieder dieser Gruppe beantwortet</p>\n                            </ion-label>                                          \n                       </ion-item>\n                  \n        </ion-slide>\n        <ion-slide>          \n                <a href="{{auth.HOST}}" target="_BLANK">  \n                        <img src="assets/imgs/logo_awri.png?43234">\n                    </a>  \n                        <ion-item>\n                            <ion-icon name="rechzapp-awri" item-start></ion-icon>\n                            <ion-label text-wrap>\n                               <h2>AWRI (Alles was Recht ist)</h2>\n                               <p>Datenbank für Rechtsfragen</p>\n                               <p>In dieser Datenbank werden Rechtsfragen und Antworten ausgewertet und freigeschalten.</p>\n                              </ion-label>\n                         </ion-item>\n                           \n        </ion-slide>\n        <ion-slide>\n                <a href="https://www.facebook.com/Rechtshilfeforum/" target="_BLANK">  \n                    <img src="assets/imgs/logo_ratgeber.jpg">\n                </a>        \n                    <ion-item>\n                        <ion-icon name="logo-facebook" item-start></ion-icon>\n                        <ion-label text-wrap>\n                           <h2>AWRI Ratgeber</h2>\n                           <p>Facebook Seite, auf der von Zeit zu Zeit die interessantesten und meist gefragten Beiträge aus dem Rechtsforum Schweiz veröffentlicht werden.</p>\n                          </ion-label>\n                     </ion-item>          \n        </ion-slide>        \n      </ion-slides>\n\n\n      <ion-item>\n            <ion-navbar text-center>\n        <ion-title><ion-icon name="arrow-round-back"></ion-icon> Systeme <ion-icon name="arrow-round-forward"></ion-icon></ion-title>\n        </ion-navbar>\n        </ion-item>\n        \n      <!--\n    <ion-fab right bottom class="web-fab">\n        <button ion-fab icon-only color="primary" (click)="checkPlatform()">\n          <ion-icon name="help"></ion-icon>\n        </button>\n       </ion-fab>\n       \n       <ion-fab right top edge class="mobile-fab">\n        <button ion-fab icon-only color="primary" (click)="checkPlatform()">\n          <ion-icon name="help"></ion-icon>\n        </button>\n       </ion-fab>\n-->\n\n   </ion-content>\n   <ion-footer>\n        <ion-toolbar> \n            <ion-item>            \n           <button ion-fab icon-only (click)="this.share()" item-start><ion-icon name="share"></ion-icon></button><ion-title>(c) 2015 by AWRI </ion-title>\n        </ion-item>\n        </ion-toolbar>           \n      </ion-footer>\n\n'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/home/home.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_4__components_upload_upload__["a" /* UploadComponent */], __WEBPACK_IMPORTED_MODULE_10__ionic_native_admob_free__["a" /* AdMobFree */],
             __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* Platform */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */],
@@ -957,17 +1102,17 @@ var HomePage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 215:
+/***/ 216:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FragenPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__view_view__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__login_login__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_admob_free__ = __webpack_require__(112);
@@ -1034,7 +1179,12 @@ var FragenPage = /** @class */ (function () {
         this.getFragenIndex(this.page, this.pages).then(function (dat) {
             var d = dat;
             for (var i = 0; i < d.length; i++) {
-                _this.nodes.push(d[i]);
+                //      console.log(d[i]);
+                _this.getFrage(d[i].nid).then(function (dat) {
+                    var n = dat;
+                    //console.log(n);
+                    _this.nodes.push(JSON.parse(n));
+                });
             }
             _this.page++;
         });
@@ -1059,7 +1209,8 @@ var FragenPage = /** @class */ (function () {
                 withCredentials: true,
             };
             _this.httpClient.post(_this.auth.HOST + '/' + _this.auth.ENDPOINT + '/awri_services_resources/rechtsfrage', { nid: nid }, options).subscribe(function (data) {
-                resolve(data);
+                //console.log(JSON.parse(data[0]));
+                resolve(data[0]);
             }, function (err) {
                 reject(err);
             });
@@ -1111,7 +1262,7 @@ var FragenPage = /** @class */ (function () {
     };
     FragenPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-fragen',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/fragen/fragen.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-buttons end>\n            <button ion-button menuToggle>\n              <ion-icon name="menu"></ion-icon>\n            </button>\n            </ion-buttons>\n             \n            <ion-title>\n              Rechtsfragen\n              </ion-title>\n      <ion-buttons start>\n  <ng-template [ngIf]="this.auth.isInRole(\'authenticated user\')" [ngIfElse]="headerOut">\n              <button ion-button (click)="this.gotoLogin()">\n                  <img class="avatar" src="{{this.auth.user.picture}}"> {{auth.user?.name}}        \n                </button>\n  </ng-template>      \n  <ng-template #headerOut>\n              <button ion-button (click)="this.gotoLogin()">\n              <ion-icon name="contact"></ion-icon>  {{auth.user?.name}}\n              </button>\n  </ng-template>\n      </ion-buttons>    \n    </ion-navbar>\n</ion-header>\n   \n   <ion-content padding>  \n\n        <div *ngIf="auth.isInRole(\'anonymous user\')">\n                <ion-item text-wrap>\n            <ion-label color="danger"><h2>Sie sind nicht angemeldet!</h2>\n                <p>Klicken sie oben Rechts auf <ion-icon name="contact"></ion-icon> um sich auf AWRI zu registrieren oder anzumelden.</p>\n                </ion-label>\n                </ion-item>\n        </div>  \n        <banners></banners>\n      <div *ngIf="help" class="help">\n        <ion-item>\n     \n          <ion-label text-wrap>\n              <h2><ion-icon name="help"></ion-icon> Chronologische Liste</h2>\n                    <p>Scrollen sie durch chronologisch absteigende Liste aller Rechtsfragen.</p>\n                    <p>Es werden die gekürzten Titel der Fragen angezeigt.</p>\n                    <p><strong>{{auth.stats?.nodesc}}</strong> Rechtsfragen vom <strong>23.Feb.15</strong> bis <strong>{{auth.stats?.updated}}</strong></p>\n                </ion-label> \n        </ion-item>    \n      </div>\n<br>\n   \n    <ion-list *ngFor="let n of this.nodes">\n      <ion-card>  \n        <ion-item><p>{{n.created*1000 | date: \'dd.MM.yyyy H:mm\' }} </p></ion-item>\n        <ion-card-content text-wrap (click)="this.frageSelected(n)"><h2>{{n.title}}</h2></ion-card-content>\n      </ion-card>\n      </ion-list>\n      <ion-infinite-scroll (ionInfinite)="doInfinite($event)">\n          <ion-infinite-scroll-content></ion-infinite-scroll-content>\n        </ion-infinite-scroll>\n\n    <ion-fab right bottom class="web-fab">\n        <button ion-fab icon-only color="primary" (click)="checkPlatform()">\n          <strong>{{this.page*10}}</strong>\n        </button>\n       </ion-fab>\n       \n       <ion-fab right top edge class="mobile-fab">\n        <button ion-fab icon-only color="primary" (click)="checkPlatform()">\n          <strong>{{this.page*10}}</strong>\n          </button>\n       </ion-fab>\n   </ion-content>\n\n\n'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/fragen/fragen.html"*/
+            selector: 'page-fragen',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/fragen/fragen.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-buttons end>\n            <button ion-button menuToggle>\n              <ion-icon name="menu"></ion-icon>\n            </button>\n            </ion-buttons>\n             \n            <ion-title>\n              Rechtsfragen\n              </ion-title>\n      <ion-buttons start>\n  <ng-template [ngIf]="this.auth.isInRole(\'authenticated user\')" [ngIfElse]="headerOut">\n              <button ion-button (click)="this.gotoLogin()">\n                  <img class="avatar" src="{{this.auth.user.picture}}"> {{auth.user?.name}}        \n                </button>\n  </ng-template>      \n  <ng-template #headerOut>\n              <button ion-button (click)="this.gotoLogin()">\n              <ion-icon name="contact"></ion-icon>  {{auth.user?.name}}\n              </button>\n  </ng-template>\n      </ion-buttons>    \n    </ion-navbar>\n</ion-header>\n   \n   <ion-content padding>  \n\n        <div *ngIf="auth.isInRole(\'anonymous user\')">\n                <ion-item text-wrap>\n            <ion-label color="danger"><h2>Sie sind nicht angemeldet!</h2>\n                <p>Klicken sie oben Rechts auf <ion-icon name="contact"></ion-icon> um sich auf AWRI zu registrieren oder anzumelden.</p>\n                </ion-label>\n                </ion-item>\n        </div>  \n        <banners></banners>\n      <div *ngIf="help" class="help">\n        <ion-item>\n     \n          <ion-label text-wrap>\n              <h2><ion-icon name="help"></ion-icon> Chronologische Liste</h2>\n                    <p>Scrollen sie durch chronologisch absteigende Liste aller Rechtsfragen.</p>\n                    <p>Es werden die gekürzten Titel der Fragen angezeigt.</p>\n                    <p><strong>{{auth.stats?.nodesc}}</strong> Rechtsfragen vom <strong>23.Feb.15</strong> bis <strong>{{auth.stats?.updated}}</strong></p>\n                </ion-label> \n        </ion-item>    \n      </div>\n<br>\n   \n    <ion-list class="roundlist" *ngFor="let n of this.nodes">\n      <ion-card>  \n        <ion-item><p>{{n.created*1000 | date: \'dd.MM.yyyy H:mm\' }} </p></ion-item>\n        <ion-card-content text-wrap (click)="this.frageSelected(n)"><h2>{{n.title}}</h2></ion-card-content>\n        <ion-item>\n        <ion-icon name="chatboxes" title="Kommentare" item-start></ion-icon>    \n        <ion-badge item-end>{{n?.comment_count}}</ion-badge>\n      </ion-item>\n        <bereich nid="{{n.nid}}" tid="{{n.field_bereiche[\'und\'] ? n.field_bereiche[\'und\'][0].tid:\'\'}}"></bereich>\n      </ion-card>\n      </ion-list>\n      <ion-infinite-scroll (ionInfinite)="doInfinite($event)">\n          <ion-infinite-scroll-content></ion-infinite-scroll-content>\n        </ion-infinite-scroll>\n\n    <ion-fab right bottom class="web-fab">\n        <button ion-fab icon-only color="primary" (click)="checkPlatform()">\n          <strong>{{this.page*10}}</strong>\n        </button>\n       </ion-fab>\n       \n       <ion-fab right top edge class="mobile-fab">\n        <button ion-fab icon-only color="primary" (click)="checkPlatform()">\n          <strong>{{this.page*10}}</strong>\n          </button>\n       </ion-fab>\n   </ion-content>\n\n\n'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/pages/fragen/fragen.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_7__ionic_native_admob_free__["a" /* AdMobFree */],
             __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* Platform */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */], __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth__["a" /* AuthProvider */]])
@@ -1123,14 +1274,14 @@ var FragenPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 216:
+/***/ 217:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SettingsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_login_login__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_bookmarks_bookmarks__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_admin_admin__ = __webpack_require__(87);
@@ -1203,14 +1354,14 @@ var SettingsPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 217:
+/***/ 218:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CommentComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__ = __webpack_require__(8);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1288,14 +1439,14 @@ var CommentComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 218:
+/***/ 219:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BookmarkComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_auth_auth__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_auth_auth__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(7);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1366,6 +1517,15 @@ var BookmarkComponent = /** @class */ (function () {
                 _this.color = "danger";
             else
                 _this.color = "primary";
+        }, function (err) {
+            console.log(err);
+            var alert = _this.alertCtrl.create({
+                title: 'Bitte melden sie sich an!',
+                subTitle: 'Nur auf AWRI angemeldete Benutzer können Lesezeichen setzen.',
+                buttons: ['Weiter']
+            });
+            alert.present();
+            return;
         });
     };
     __decorate([
@@ -1390,13 +1550,13 @@ var BookmarkComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 219:
+/***/ 220:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(220);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(240);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(221);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(241);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -1404,48 +1564,50 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 240:
+/***/ 241:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(294);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(214);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_list_list__ = __webpack_require__(295);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_settings_settings__ = __webpack_require__(216);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_create_create__ = __webpack_require__(114);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(295);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(215);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_list_list__ = __webpack_require__(296);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_settings_settings__ = __webpack_require__(217);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_create_create__ = __webpack_require__(115);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_register_register__ = __webpack_require__(56);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_login_login__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_help_help__ = __webpack_require__(115);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_help_help__ = __webpack_require__(116);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_view_view__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_search_search__ = __webpack_require__(111);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_bookmarks_bookmarks__ = __webpack_require__(57);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_fragen_fragen__ = __webpack_require__(215);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_fragen_fragen__ = __webpack_require__(216);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_admin_admin__ = __webpack_require__(87);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_bereich_bereich__ = __webpack_require__(113);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__ionic_native_status_bar__ = __webpack_require__(212);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ionic_native_splash_screen__ = __webpack_require__(213);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__angular_common_http__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__providers_auth_auth__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_drupal7_login_drupal7_login__ = __webpack_require__(296);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__ionic_native_admob_free__ = __webpack_require__(112);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__ionic_native_camera__ = __webpack_require__(170);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__components_upload_upload__ = __webpack_require__(88);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__ionic_storage__ = __webpack_require__(168);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__components_comment_comment__ = __webpack_require__(217);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__providers_stats_stats__ = __webpack_require__(297);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__components_bookmark_bookmark__ = __webpack_require__(218);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__components_bereich_bereich__ = __webpack_require__(298);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__components_banners_banners__ = __webpack_require__(299);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_searchcat_searchcat__ = __webpack_require__(114);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ionic_native_status_bar__ = __webpack_require__(213);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__ionic_native_splash_screen__ = __webpack_require__(214);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__angular_common_http__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__providers_auth_auth__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_drupal7_login_drupal7_login__ = __webpack_require__(297);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__ionic_native_admob_free__ = __webpack_require__(112);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__ionic_native_camera__ = __webpack_require__(171);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_upload_upload__ = __webpack_require__(88);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__ionic_storage__ = __webpack_require__(169);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__components_comment_comment__ = __webpack_require__(218);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__providers_stats_stats__ = __webpack_require__(298);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__components_bookmark_bookmark__ = __webpack_require__(219);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__components_bereich_bereich__ = __webpack_require__(299);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__components_banners_banners__ = __webpack_require__(300);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -1497,12 +1659,13 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_14__pages_fragen_fragen__["a" /* FragenPage */],
                 __WEBPACK_IMPORTED_MODULE_15__pages_admin_admin__["a" /* AdminPage */],
                 __WEBPACK_IMPORTED_MODULE_16__pages_bereich_bereich__["a" /* BereichPage */],
-                __WEBPACK_IMPORTED_MODULE_21__components_drupal7_login_drupal7_login__["a" /* Drupal7LoginComponent */],
-                __WEBPACK_IMPORTED_MODULE_24__components_upload_upload__["a" /* UploadComponent */],
-                __WEBPACK_IMPORTED_MODULE_26__components_comment_comment__["a" /* CommentComponent */],
-                __WEBPACK_IMPORTED_MODULE_28__components_bookmark_bookmark__["a" /* BookmarkComponent */],
-                __WEBPACK_IMPORTED_MODULE_29__components_bereich_bereich__["a" /* BereichComponent */],
-                __WEBPACK_IMPORTED_MODULE_30__components_banners_banners__["a" /* BannersComponent */]
+                __WEBPACK_IMPORTED_MODULE_22__components_drupal7_login_drupal7_login__["a" /* Drupal7LoginComponent */],
+                __WEBPACK_IMPORTED_MODULE_25__components_upload_upload__["a" /* UploadComponent */],
+                __WEBPACK_IMPORTED_MODULE_27__components_comment_comment__["a" /* CommentComponent */],
+                __WEBPACK_IMPORTED_MODULE_29__components_bookmark_bookmark__["a" /* BookmarkComponent */],
+                __WEBPACK_IMPORTED_MODULE_30__components_bereich_bereich__["a" /* BereichComponent */],
+                __WEBPACK_IMPORTED_MODULE_31__components_banners_banners__["a" /* BannersComponent */],
+                __WEBPACK_IMPORTED_MODULE_17__pages_searchcat_searchcat__["a" /* SearchcatPage */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -1514,12 +1677,13 @@ var AppModule = /** @class */ (function () {
                         { loadChildren: '../pages/help/help.module#HelpPageModule', name: 'HelpPage', segment: 'help', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/register/register.module#RegisterPageModule', name: 'RegisterPage', segment: 'register', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/searchcat/searchcat.module#SearchcatPageModule', name: 'SearchcatPage', segment: 'searchcat', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/settings/settings.module#SettingsPageModule', name: 'SettingsPage', segment: 'settings', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/view/view.module#ViewPageModule', name: 'ViewPage', segment: 'view', priority: 'low', defaultHistory: [] }
                     ]
                 }),
-                __WEBPACK_IMPORTED_MODULE_25__ionic_storage__["a" /* IonicStorageModule */].forRoot(),
-                __WEBPACK_IMPORTED_MODULE_19__angular_common_http__["b" /* HttpClientModule */]
+                __WEBPACK_IMPORTED_MODULE_26__ionic_storage__["a" /* IonicStorageModule */].forRoot(),
+                __WEBPACK_IMPORTED_MODULE_20__angular_common_http__["b" /* HttpClientModule */]
             ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicApp */]],
             entryComponents: [
@@ -1537,22 +1701,24 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_14__pages_fragen_fragen__["a" /* FragenPage */],
                 __WEBPACK_IMPORTED_MODULE_15__pages_admin_admin__["a" /* AdminPage */],
                 __WEBPACK_IMPORTED_MODULE_16__pages_bereich_bereich__["a" /* BereichPage */],
-                __WEBPACK_IMPORTED_MODULE_28__components_bookmark_bookmark__["a" /* BookmarkComponent */],
-                __WEBPACK_IMPORTED_MODULE_21__components_drupal7_login_drupal7_login__["a" /* Drupal7LoginComponent */],
-                __WEBPACK_IMPORTED_MODULE_29__components_bereich_bereich__["a" /* BereichComponent */],
-                __WEBPACK_IMPORTED_MODULE_30__components_banners_banners__["a" /* BannersComponent */]
+                __WEBPACK_IMPORTED_MODULE_29__components_bookmark_bookmark__["a" /* BookmarkComponent */],
+                __WEBPACK_IMPORTED_MODULE_22__components_drupal7_login_drupal7_login__["a" /* Drupal7LoginComponent */],
+                __WEBPACK_IMPORTED_MODULE_30__components_bereich_bereich__["a" /* BereichComponent */],
+                __WEBPACK_IMPORTED_MODULE_31__components_banners_banners__["a" /* BannersComponent */],
+                __WEBPACK_IMPORTED_MODULE_17__pages_searchcat_searchcat__["a" /* SearchcatPage */]
             ],
             providers: [
-                __WEBPACK_IMPORTED_MODULE_17__ionic_native_status_bar__["a" /* StatusBar */],
-                __WEBPACK_IMPORTED_MODULE_18__ionic_native_splash_screen__["a" /* SplashScreen */],
+                __WEBPACK_IMPORTED_MODULE_18__ionic_native_status_bar__["a" /* StatusBar */],
+                __WEBPACK_IMPORTED_MODULE_19__ionic_native_splash_screen__["a" /* SplashScreen */],
                 { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["u" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* IonicErrorHandler */] },
-                __WEBPACK_IMPORTED_MODULE_20__providers_auth_auth__["a" /* AuthProvider */],
-                __WEBPACK_IMPORTED_MODULE_22__ionic_native_admob_free__["a" /* AdMobFree */],
-                __WEBPACK_IMPORTED_MODULE_24__components_upload_upload__["a" /* UploadComponent */],
-                __WEBPACK_IMPORTED_MODULE_23__ionic_native_camera__["a" /* Camera */],
-                __WEBPACK_IMPORTED_MODULE_26__components_comment_comment__["a" /* CommentComponent */],
-                __WEBPACK_IMPORTED_MODULE_28__components_bookmark_bookmark__["a" /* BookmarkComponent */],
-                __WEBPACK_IMPORTED_MODULE_27__providers_stats_stats__["a" /* StatsProvider */]
+                __WEBPACK_IMPORTED_MODULE_21__providers_auth_auth__["a" /* AuthProvider */],
+                __WEBPACK_IMPORTED_MODULE_23__ionic_native_admob_free__["a" /* AdMobFree */],
+                __WEBPACK_IMPORTED_MODULE_25__components_upload_upload__["a" /* UploadComponent */],
+                __WEBPACK_IMPORTED_MODULE_24__ionic_native_camera__["a" /* Camera */],
+                __WEBPACK_IMPORTED_MODULE_27__components_comment_comment__["a" /* CommentComponent */],
+                __WEBPACK_IMPORTED_MODULE_29__components_bookmark_bookmark__["a" /* BookmarkComponent */],
+                __WEBPACK_IMPORTED_MODULE_28__providers_stats_stats__["a" /* StatsProvider */],
+                __WEBPACK_IMPORTED_MODULE_31__components_banners_banners__["a" /* BannersComponent */]
             ]
         })
     ], AppModule);
@@ -1569,12 +1735,12 @@ var AppModule = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ViewPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__login_login__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_auth_auth__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_auth_auth__ = __webpack_require__(8);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1600,6 +1766,9 @@ var ViewPage = /** @class */ (function () {
         this.awri = awri;
         this.item = navParams.get('item');
         this.nid = this.item.node.nid;
+        this.awri.loadNode(this.nid).then(function (data) {
+            console.log(data);
+        });
         this.title = this.item.node.title;
         this.bewertung = this.item.node.field_bewertung['und'] ? this.item.node.field_bewertung['und'][0].rating : 0;
         this.getComments(this.item.node.nid);
@@ -1724,21 +1893,21 @@ var ViewPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 294:
+/***/ 295:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(212);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(213);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_home_home__ = __webpack_require__(214);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_create_create__ = __webpack_require__(114);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_help_help__ = __webpack_require__(115);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(213);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(214);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_home_home__ = __webpack_require__(215);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_create_create__ = __webpack_require__(115);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_help_help__ = __webpack_require__(116);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_search_search__ = __webpack_require__(111);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_fragen_fragen__ = __webpack_require__(215);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_fragen_fragen__ = __webpack_require__(216);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1808,13 +1977,13 @@ var MyApp = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 295:
+/***/ 296:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ListPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1865,14 +2034,14 @@ var ListPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 296:
+/***/ 297:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Drupal7LoginComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_auth_auth__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_auth_auth__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_register_register__ = __webpack_require__(56);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1952,7 +2121,7 @@ var Drupal7LoginComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 297:
+/***/ 298:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1992,14 +2161,14 @@ var StatsProvider = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 298:
+/***/ 299:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BereichComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__ = __webpack_require__(8);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2094,7 +2263,7 @@ var BereichComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 299:
+/***/ 300:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2120,19 +2289,39 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  */
 var BannersComponent = /** @class */ (function () {
     function BannersComponent(httpClient) {
+        //alert(this.name);
+        // console.log('Hello BannersComponent Component:'+this.name);
         var _this = this;
         this.httpClient = httpClient;
-        console.log('Hello BannersComponent Component');
         this.httpClient.get('https://stage.awri.ch/banner/json').map(function (res) { return res; }).subscribe(function (data) {
             var dat = data;
             // console.log(data);
             _this.link = dat['link'];
             _this.image = dat['image'];
+            //alert(this.image);
         });
     }
+    BannersComponent.prototype.getBanner = function (style) {
+        var _this = this;
+        this.httpClient.get('https://stage.awri.ch/banner/json/' + style).map(function (res) { return res; }).subscribe(function (data) {
+            var dat = data;
+            // console.log(data);
+            _this.link = dat['link'];
+            _this.image = dat['image'];
+            //alert(this.image);
+        });
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        __metadata("design:type", String)
+    ], BannersComponent.prototype, "name", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        __metadata("design:type", String)
+    ], BannersComponent.prototype, "my", void 0);
     BannersComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'banners',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/components/banners/banners.html"*/'<!-- Generated template for the BannersComponent component -->\n<ion-grid>\n    <ion-row justify-content-center align-items-center style="flex-direction: column">\n\n  <a href="{{link}}" target="_BLANK"><span innerHTML={{image}}></span></a>\n    </ion-row>\n </ion-grid>'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/components/banners/banners.html"*/
+            selector: 'banners',template:/*ion-inline-start:"/media/robert/Volume1/www/2018/RechZapp2/src/components/banners/banners.html"*/'<!-- Generated template for the BannersComponent component -->\n<!--\n<ion-input type="text" value="{{this.name}}"></ion-input>\n-->\n\n<ion-grid>\n    <ion-row justify-content-center align-items-center style="flex-direction: column">\n  <a href="{{link}}" target="_BLANK"><span innerHTML={{image}}></span></a>\n    </ion-row>\n </ion-grid>'/*ion-inline-end:"/media/robert/Volume1/www/2018/RechZapp2/src/components/banners/banners.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]])
     ], BannersComponent);
@@ -2149,8 +2338,8 @@ var BannersComponent = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RegisterPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__ = __webpack_require__(8);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2234,8 +2423,8 @@ var RegisterPage = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BookmarksPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_view_view__ = __webpack_require__(29);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2299,17 +2488,674 @@ var BookmarksPage = /** @class */ (function () {
 
 /***/ }),
 
+/***/ 8:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthProvider; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular_platform_platform__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(169);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [0, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+
+
+
+
+
+var AuthProvider = /** @class */ (function () {
+    function AuthProvider(http, plt, storage) {
+        var _this = this;
+        this.http = http;
+        this.plt = plt;
+        this.storage = storage;
+        //  public  HOST='http://kimo2007.dnshome.de:8888/stage.awri.ch';
+        //  public  ENDPOINT='drupalgap';
+        //  public  HOST='http://localhost/stage.awri.ch';
+        //  public  ENDPOINT='drupalgap';
+        this.HOST = 'https://stage.awri.ch';
+        this.ENDPOINT = 'drupalgap';
+        this.loggedIn = false;
+        this.help = true;
+        /*
+        token = new Observable<string>((observer: Observer<string>) => {
+          this.http.get(this.HOST+'/?q=services/session/token', { responseType: 'text', withCredentials:true }).subscribe(token=>{
+            console.log(token);
+        return observer.next(token);
+          })
+      
+        });
+      */
+        this.connect = new __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["Observable"](function (observer) {
+            _this.http.get(_this.HOST + '/?q=services/session/token', { responseType: 'text', withCredentials: true }).subscribe(function (token) {
+                _this.token = token;
+                var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]()
+                    .set('Content-Type', 'application/json')
+                    .set('X-CSRF-TOKEN', token);
+                var options = {
+                    headers: headers,
+                    withCredentials: true
+                };
+                _this.http.post(_this.HOST + '/' + _this.ENDPOINT + '/system/connect.json', null, options).map(function (res) { return res; }).subscribe(function (data) {
+                    var dat = data;
+                    _this.user.uid = dat.user.uid;
+                    _this.user.roles = dat.user.roles;
+                    // this.set('session_name',dat.session_name);
+                    // this.set('sessid',dat.sessid);      
+                    // this.session=dat.session_name+'='+dat.sessid;
+                    if (_this.user.uid > 0)
+                        _this.loadUser(_this.user.uid).then(function (u) {
+                            var vars = u;
+                            _this.user.name = vars.name;
+                            _this.user.uid = vars.uid;
+                            _this.user.roles = vars.roles;
+                            if (_this.user.uid > 0) {
+                                _this.user.email = vars.mail;
+                                _this.user.created = vars.created;
+                                _this.loggedIn = true;
+                                if (vars.field_fbid['und'])
+                                    _this.user.fbid = vars.field_fbid['und'][0].value;
+                                if (_this.user.fbid)
+                                    _this.user.picture = "https://graph.facebook.com/" + _this.user.fbid + "/picture";
+                                if (vars.picture)
+                                    _this.user.picture = vars.picture.url;
+                            }
+                        }, function (err) {
+                            console.log(err);
+                        });
+                    //console.log(this.user);
+                    return observer.next(_this.user);
+                }, function (err) {
+                    console.log(err);
+                    return observer.next(_this.user);
+                });
+            }, function (err) {
+                console.log(err);
+            });
+            //openFB.init({appId:'126766317359254',scope:'email'});
+            //console.log(openFB);
+        });
+        this.help = true;
+        this.user = {
+            uid: 0,
+            name: 'Unbekannt',
+            email: '',
+            picture: 'assets/imgs/anonymous.png',
+            roles: [{ 0: 'anonymous user' }],
+            fbid: -1,
+            created: Date.now(),
+        };
+        this.connect.subscribe(function (data) {
+            // console.log("auth.connect:"+data.name);
+        });
+        this.get('help').then(function (col) {
+            _this.help = col;
+        }).catch(function (err) {
+            _this.help = true;
+            _this.set('help', _this.help);
+            //console.log(err);
+        });
+        this.getStats();
+    }
+    AuthProvider.prototype.set = function (settingName, value) {
+        return this.storage.set('setting:${ settingName }', value);
+    };
+    AuthProvider.prototype.get = function (settingName) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.storage.get('setting:${ settingName }')];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    AuthProvider.prototype.remove = function (settingName) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.storage.remove('setting:${ settingName }')];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    AuthProvider.prototype.setHelp = function (help) {
+        var _this = this;
+        this.set('help', help).then(function (res) {
+            _this.help = res;
+            return _this.help;
+        }).catch(function (err) {
+            console.log(err);
+        });
+    };
+    AuthProvider.prototype.addComment = function (comment) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]()
+                .set('X-CSRF-TOKEN', _this.token);
+            var options = {
+                headers: headers,
+                withCredentials: true
+            };
+            _this.http.post(_this.HOST + '/' + _this.ENDPOINT + '/comment.json', comment, options).map(function (res) { return res; }).subscribe(function (data) {
+                resolve(data);
+            }, function (err) {
+                reject(err);
+                console.log(err);
+            });
+        });
+    };
+    AuthProvider.prototype.isFlagged = function (nid, flag) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]()
+                .set('X-CSRF-TOKEN', _this.token);
+            var options = {
+                headers: headers,
+                withCredentials: true
+            };
+            var is_flagged = {
+                "flag_name": flag,
+                "entity_id": nid,
+                "uid": _this.user.uid,
+            };
+            _this.http.post(_this.HOST + '/' + _this.ENDPOINT + '/flag/is_flagged.json', is_flagged, options).subscribe(function (data) {
+                var arr = data;
+                console.log(arr[0]);
+                resolve(arr[0]);
+            }, function (err) {
+                reject(false);
+            });
+        });
+    };
+    AuthProvider.prototype.getFlagCount = function (nid, flag_name) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]()
+                .set('X-CSRF-TOKEN', _this.token);
+            var options = {
+                headers: headers,
+                withCredentials: true
+            };
+            var is_flagged = {
+                "flag_name": flag_name,
+                "entity_id": nid,
+            };
+            _this.http.post(_this.HOST + '/' + _this.ENDPOINT + '/flag/countall.json', is_flagged, options).subscribe(function (data) {
+                var arr = data;
+                resolve(arr.count);
+            }, function (err) {
+                reject(0);
+            });
+        });
+    };
+    AuthProvider.prototype.getRating = function (nid) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            _this.http.get(_this.HOST + '/drupalgap/fivestar/' + nid + '.json?uid=' + _this.user.uid)
+                .map(function (res) { return res; }).subscribe(function (data) {
+                var arr = data;
+                resolve(arr);
+            }, function (err) {
+                reject(err);
+                console.log(err);
+            });
+        });
+    };
+    AuthProvider.prototype.setRating = function (nid, val) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]()
+                .set('X-CSRF-TOKEN', _this.token);
+            var options = {
+                headers: headers,
+                withCredentials: true
+            };
+            var params = {
+                "id": nid,
+                "rating": val,
+                //    "action":flag, //flag/unflag
+                //  "skip_permission_check":1, 
+                "uid": _this.user.uid,
+            };
+            _this.http.post(_this.HOST + '/' + _this.ENDPOINT + '/fivestar/rate', params, options).subscribe(function (data) {
+                var arr = data;
+                _this.getRating(nid);
+                resolve(arr);
+            }, function (err) {
+                reject(false);
+            });
+        });
+    };
+    AuthProvider.prototype.setFlag = function (nid, flag_name, flag) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]()
+                .set('X-CSRF-TOKEN', _this.token);
+            var options = {
+                headers: headers,
+                withCredentials: true
+            };
+            var is_flagged = {
+                "flag_name": flag_name,
+                "entity_id": nid,
+                "action": flag,
+                //  "skip_permission_check":1, 
+                "uid": _this.user.uid,
+            };
+            _this.http.post(_this.HOST + '/' + _this.ENDPOINT + '/flag/flag.json', is_flagged, options).subscribe(function (data) {
+                var arr = data;
+                console.log("SETFLAG");
+                console.log(arr[0]);
+                resolve(flag == "flag" ? true : false);
+            }, function (err) {
+                reject(false);
+            });
+        });
+    };
+    AuthProvider.prototype.getBookmarks = function (page) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            //   this.showLoading("Suche, Bitte warten...");
+            var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]()
+                .set('X-CSRF-TOKEN', _this.token);
+            var options = {
+                headers: headers,
+                withCredentials: true
+            };
+            _this.http.get(_this.HOST + '/user/bookmarks?page=' + page, options).subscribe(function (data) {
+                resolve(data);
+            }, function (err) {
+                reject(err);
+            });
+        });
+    };
+    AuthProvider.prototype.search = function (text, page, limit) {
+        var _this = this;
+        if (page === void 0) { page = 0; }
+        if (limit === void 0) { limit = 2; }
+        return new Promise(function (resolve, reject) {
+            //   this.showLoading("Suche, Bitte warten...");
+            var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]()
+                .set('X-CSRF-TOKEN', _this.token);
+            var options = {
+                headers: headers,
+                withCredentials: true
+            };
+            _this.http.get(_this.HOST + '/' + _this.ENDPOINT + '/search_node/retrieve.json?keys=' + text + '&page=' + page + '&pagesize=' + limit, options).subscribe(function (data) {
+                //  this.items=<Array<any>>data;
+                //   var view=this.data.view;      
+                //  this.page=view.page;
+                //  this.pages=view.pages; 
+                //  this.hideLoading(); 
+                resolve(data);
+            }, function (err) {
+                //    this.hideLoading(); 
+                reject(err);
+            });
+        });
+    };
+    AuthProvider.prototype.searchCat = function (text, tid, page) {
+        var _this = this;
+        if (tid === void 0) { tid = 93; }
+        if (page === void 0) { page = 0; }
+        return new Promise(function (resolve, reject) {
+            //   this.showLoading("Suche, Bitte warten...");
+            var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]()
+                .set('X-CSRF-TOKEN', _this.token);
+            var options = {
+                headers: headers,
+                withCredentials: true
+            };
+            _this.http.get(_this.HOST + '/search/cat/json/' + tid + '?keys=' + text + '&page=' + page, options).subscribe(function (data) {
+                resolve(data);
+            }, function (err) {
+                //    this.hideLoading(); 
+                reject(err);
+            });
+        });
+    };
+    AuthProvider.prototype.loadNode = function (nid) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]()
+                .set('X-CSRF-TOKEN', _this.token).set('Content-Type', 'application/json');
+            //.set('Authentication', <string>this.session);
+            var options = {
+                headers: headers,
+                withCredentials: true,
+            };
+            _this.http.get(_this.HOST + '/' + _this.ENDPOINT + '/node/' + nid + '.json', options).subscribe(function (data) {
+                resolve(data);
+            }, function (err) {
+                reject(err);
+            });
+        });
+    };
+    AuthProvider.prototype.loadUser = function (uid) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]()
+                .set('X-CSRF-TOKEN', _this.token).set('Content-Type', 'application/json');
+            //.set('Authentication', <string>this.session);
+            var options = {
+                headers: headers,
+                withCredentials: true,
+            };
+            _this.http.get(_this.HOST + '/' + _this.ENDPOINT + '/user/' + uid + '.json', options).subscribe(function (data) {
+                resolve(data);
+            }, function (err) {
+                reject(err);
+            });
+        });
+    };
+    AuthProvider.prototype.login = function (username, password) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]()
+                .set('Content-Type', 'application/json')
+                .set('X-CSRF-TOKEN', _this.token);
+            var options = {
+                headers: headers,
+                withCredentials: true
+            };
+            var user = {
+                username: username,
+                password: password
+            };
+            _this.http.post(_this.HOST + '/' + _this.ENDPOINT + '/user/login', user, options).map(function (res) { return res; }).subscribe(function (data) {
+                var vars = data;
+                _this.token = vars.token;
+                //  this.session=vars.session_name+'='+vars.sessid;
+                //    this.user=vars.user;
+                //  this.set('session_name',vars.session_name);
+                //        this.set('sessid',vars.token);
+                _this.user.uid = vars.user.uid;
+                _this.user.roles = vars.user.roles;
+                if (_this.user.uid > 0) {
+                    _this.loadUser(_this.user.uid).then(function (u) {
+                        var vars = u;
+                        _this.user.name = vars.name;
+                        _this.user.uid = vars.uid;
+                        _this.user.roles = vars.roles;
+                        if (_this.user.uid > 0) {
+                            // this.username=vars.user.name;
+                            if (vars.field_fbid['und'])
+                                _this.user.fbid = vars.field_fbid['und'][0].value;
+                            if (_this.user.fbid)
+                                _this.user.picture = "https://graph.facebook.com/" + _this.user.fbid + "/picture";
+                            if (vars.picture)
+                                _this.user.picture = vars.picture.url;
+                        }
+                    });
+                }
+                //   console.log(this.session);
+                console.log(_this.user);
+                resolve(_this.user);
+            }, function (err) {
+                //     if(err.status==401)this.showError("Falscher Benutzername oder falsches Passwort!");
+                //     else this.showError("Anmeldung fehlgeschlagen:"+err.status);
+                reject(err);
+            });
+        });
+    };
+    AuthProvider.prototype.logout = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]()
+                .set('X-CSRF-TOKEN', _this.token).set('Content-Type', 'application/json');
+            var options = {
+                headers: headers,
+                withCredentials: true,
+            };
+            _this.http.post(_this.HOST + '/' + _this.ENDPOINT + '/user/logout.json', null, options).subscribe(function (data) {
+                //    console.log(data);
+                // let res:any=data;
+                _this.user = {
+                    uid: 0,
+                    name: 'Unbekannt',
+                    email: '',
+                    picture: 'assets/imgs/anonymous.png',
+                    roles: [{ 0: 'anonymous user' }],
+                    fbid: -1,
+                    created: Date.now(),
+                };
+                _this.loggedIn = false;
+                console.log(data);
+                resolve(data);
+            }, function (err) {
+                console.log(err);
+                reject(err);
+            });
+        });
+    };
+    AuthProvider.prototype.register = function (username, password, email) {
+        var _this = this;
+        //  console.log('USER REGISTER'+username);
+        return new Promise(function (resolve, reject) {
+            var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]()
+                .set('Content-Type', 'application/json')
+                .set('X-CSRF-TOKEN', _this.token);
+            var options = {
+                headers: headers,
+                withCredentials: true
+            };
+            var user = {
+                mail: email,
+                name: username,
+                pass: password
+            };
+            _this.http.post(_this.HOST + '/' + _this.ENDPOINT + '/user/register', user, options).map(function (res) { return res; }).subscribe(function (data) {
+                //    console.log(data);
+                var vars = data;
+                _this.user.uid = vars.uid;
+                //   console.log(vars.uri);
+                //    console.log(this.user.uid);      
+                resolve(_this.user);
+            }, function (err) {
+                reject(err);
+            });
+        });
+    };
+    AuthProvider.prototype.fblogin = function () {
+        return new Promise(function (resolve, reject) {
+            openFB.login(function (response) {
+                if (response.status === 'connected') {
+                    resolve(response);
+                }
+                else if (response.error) {
+                    reject(response.error);
+                }
+            }, { scope: "email" });
+        });
+    };
+    AuthProvider.prototype.fboauth = function (token) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]()
+                .set('X-CSRF-TOKEN', _this.token);
+            var options = {
+                headers: headers,
+                withCredentials: true
+            };
+            var params = {
+                access_token: token,
+            };
+            //console.log(headers);
+            _this.http.post(_this.HOST + '/' + _this.ENDPOINT + '/fboauth/connect.json', params, options).map(function (res) { return res; }).subscribe(function (data) {
+                console.log(data);
+                var vars = data;
+                _this.token = vars.token;
+                // this.session=vars.session_name+'='+vars.sessid;
+                //  this.user=vars.user;
+                _this.user.uid = vars.user.uid;
+                _this.user.roles = vars.user.roles;
+                _this.user.name = vars.user.name;
+                if (vars.user.picture)
+                    _this.user.picture = vars.user.picture.url;
+                _this.loggedIn = true;
+                //      if(vars.user.field_fbid['und'])this.user.fbid=vars.user.field_fbid['und'][0].value;
+                // if(this.user.fbid)this.user.picture="https://graph.facebook.com/"+this.user.fbid+"/picture"
+                //  console.log(this.user.fbid,"FBID");
+                //   console.log(data.session_name+''+data.sessid);
+                //   console.log(this);
+                resolve(data);
+            }, function (err) {
+                //      console.log(err);
+                reject(err);
+            });
+            //     console.log(this.token);
+        });
+    };
+    AuthProvider.prototype.getKantons = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]().set('X-CSRF-TOKEN', _this.token);
+            var options = {
+                headers: headers,
+                withCredentials: true
+            };
+            _this.http.get(_this.HOST + '/' + _this.ENDPOINT + '/taxonomy_term?page=0&fields=vid,name&parameters[vid]=3&pagesize=27&options[orderby][weight]=asc', options).subscribe(function (data) {
+                resolve(data);
+            }, function (err) {
+                reject(err);
+            });
+        });
+    };
+    AuthProvider.prototype.createFrage = function (data) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]()
+                .set('X-CSRF-TOKEN', _this.token).set('Content-Type', 'application/json');
+            var options = {
+                headers: headers,
+                withCredentials: true
+            };
+            //console.log(JSON.stringify(data));
+            _this.http.post(_this.HOST + '/connect/awri_fragen', JSON.stringify(data), options).subscribe(function (data) {
+                resolve(data);
+            }, function (err) {
+                reject(err);
+            });
+        });
+    };
+    AuthProvider.prototype.isInRole = function (role) {
+        var ret = false;
+        var obj = this.user.roles;
+        Object.keys(obj).forEach(function (key) {
+            if (obj[key] === role)
+                ret = true;
+        });
+        return ret;
+    };
+    AuthProvider.prototype.isBrowser = function () {
+        if (this.plt.is('core') || this.plt.is('mobileweb'))
+            return true;
+        else
+            return false;
+    };
+    AuthProvider.prototype.uploadFile = function (filedata) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]()
+                .set('X-CSRF-TOKEN', _this.token).set('Content-Type', 'application/json');
+            var options = {
+                headers: headers,
+                withCredentials: true,
+            };
+            _this.http.post(_this.HOST + '/' + _this.ENDPOINT + '/file.json', filedata, options).subscribe(function (data) {
+                resolve(data);
+            }, function (err) {
+                reject(err);
+            });
+        });
+    };
+    AuthProvider.prototype.getImagePath = function (uri) {
+        return uri.replace('public://attachments/', this.HOST + '/sites/default/files/attachments/');
+    };
+    ;
+    AuthProvider.prototype.getStats = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            _this.http.get(_this.HOST + '/stats.txt?' + Date.now(), { responseType: 'text' })
+                .subscribe(function (data) {
+                _this.stats = JSON.parse(data);
+                // console.log(this.stats,"getStatus");
+                resolve(data);
+            }, function (err) {
+                reject(err);
+            });
+        });
+    };
+    AuthProvider = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */])(),
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3_ionic_angular_platform_platform__["a" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_ionic_angular_platform_platform__["a" /* Platform */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */]) === "function" && _c || Object])
+    ], AuthProvider);
+    return AuthProvider;
+    var _a, _b, _c;
+}());
+
+//# sourceMappingURL=auth.js.map
+
+/***/ }),
+
 /***/ 87:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AdminPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__view_view__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__login_login__ = __webpack_require__(21);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -2455,9 +3301,9 @@ var AdminPage = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UploadComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_auth_auth__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_camera__ = __webpack_require__(170);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_auth_auth__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_camera__ = __webpack_require__(171);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(7);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2695,641 +3541,7 @@ var UploadComponent = /** @class */ (function () {
 
 //# sourceMappingURL=upload.js.map
 
-/***/ }),
-
-/***/ 9:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthProvider; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular_platform_platform__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(168);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [0, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-
-
-
-
-
-var AuthProvider = /** @class */ (function () {
-    function AuthProvider(http, plt, storage) {
-        var _this = this;
-        this.http = http;
-        this.plt = plt;
-        this.storage = storage;
-        //  public  HOST='http://kimo2007.dnshome.de:8888/stage.awri.ch';
-        //  public  ENDPOINT='drupalgap';
-        //  public  HOST='http://localhost/stage.awri.ch';
-        //  public  ENDPOINT='drupalgap';
-        this.HOST = 'https://stage.awri.ch';
-        this.ENDPOINT = 'drupalgap';
-        this.loggedIn = false;
-        this.help = true;
-        /*
-        token = new Observable<string>((observer: Observer<string>) => {
-          this.http.get(this.HOST+'/?q=services/session/token', { responseType: 'text', withCredentials:true }).subscribe(token=>{
-            console.log(token);
-        return observer.next(token);
-          })
-      
-        });
-      */
-        this.connect = new __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["Observable"](function (observer) {
-            _this.http.get(_this.HOST + '/?q=services/session/token', { responseType: 'text', withCredentials: true }).subscribe(function (token) {
-                _this.token = token;
-                var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]()
-                    .set('Content-Type', 'application/json')
-                    .set('X-CSRF-TOKEN', token);
-                var options = {
-                    headers: headers,
-                    withCredentials: true
-                };
-                _this.http.post(_this.HOST + '/' + _this.ENDPOINT + '/system/connect.json', null, options).map(function (res) { return res; }).subscribe(function (data) {
-                    var dat = data;
-                    _this.user.uid = dat.user.uid;
-                    _this.user.roles = dat.user.roles;
-                    // this.set('session_name',dat.session_name);
-                    // this.set('sessid',dat.sessid);      
-                    // this.session=dat.session_name+'='+dat.sessid;
-                    if (_this.user.uid > 0)
-                        _this.loadUser(_this.user.uid).then(function (u) {
-                            var vars = u;
-                            _this.user.name = vars.name;
-                            _this.user.uid = vars.uid;
-                            _this.user.roles = vars.roles;
-                            if (_this.user.uid > 0) {
-                                _this.user.email = vars.mail;
-                                _this.user.created = vars.created;
-                                _this.loggedIn = true;
-                                if (vars.field_fbid['und'])
-                                    _this.user.fbid = vars.field_fbid['und'][0].value;
-                                if (_this.user.fbid)
-                                    _this.user.picture = "https://graph.facebook.com/" + _this.user.fbid + "/picture";
-                                if (vars.picture)
-                                    _this.user.picture = vars.picture.url;
-                            }
-                        }, function (err) {
-                            console.log(err);
-                        });
-                    console.log(_this.user);
-                    return observer.next(_this.user);
-                }, function (err) {
-                    console.log(err);
-                    return observer.next(_this.user);
-                });
-            }, function (err) {
-                console.log(err);
-            });
-            //openFB.init({appId:'126766317359254',scope:'email'});
-            //console.log(openFB);
-        });
-        this.help = true;
-        this.user = {
-            uid: 0,
-            name: 'Unbekannt',
-            email: '',
-            picture: 'assets/imgs/anonymous.png',
-            roles: [{ 0: 'anonymous user' }],
-            fbid: -1,
-            created: Date.now(),
-        };
-        this.connect.subscribe(function (data) {
-            console.log("auth.connect:" + data.name);
-        });
-        this.get('help').then(function (col) {
-            _this.help = col;
-        }).catch(function (err) {
-            _this.help = true;
-            _this.set('help', _this.help);
-            //console.log(err);
-        });
-        this.getStats();
-    }
-    AuthProvider.prototype.set = function (settingName, value) {
-        return this.storage.set('setting:${ settingName }', value);
-    };
-    AuthProvider.prototype.get = function (settingName) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.storage.get('setting:${ settingName }')];
-                    case 1: return [2 /*return*/, _a.sent()];
-                }
-            });
-        });
-    };
-    AuthProvider.prototype.remove = function (settingName) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.storage.remove('setting:${ settingName }')];
-                    case 1: return [2 /*return*/, _a.sent()];
-                }
-            });
-        });
-    };
-    AuthProvider.prototype.setHelp = function (help) {
-        var _this = this;
-        this.set('help', help).then(function (res) {
-            _this.help = res;
-            return _this.help;
-        }).catch(function (err) {
-            console.log(err);
-        });
-    };
-    AuthProvider.prototype.addComment = function (comment) {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]()
-                .set('X-CSRF-TOKEN', _this.token);
-            var options = {
-                headers: headers,
-                withCredentials: true
-            };
-            _this.http.post(_this.HOST + '/' + _this.ENDPOINT + '/comment.json', comment, options).map(function (res) { return res; }).subscribe(function (data) {
-                resolve(data);
-            }, function (err) {
-                reject(err);
-                console.log(err);
-            });
-        });
-    };
-    AuthProvider.prototype.isFlagged = function (nid, flag) {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]()
-                .set('X-CSRF-TOKEN', _this.token);
-            var options = {
-                headers: headers,
-                withCredentials: true
-            };
-            var is_flagged = {
-                "flag_name": flag,
-                "entity_id": nid,
-                "uid": _this.user.uid,
-            };
-            _this.http.post(_this.HOST + '/' + _this.ENDPOINT + '/flag/is_flagged.json', is_flagged, options).subscribe(function (data) {
-                var arr = data;
-                console.log(arr[0]);
-                resolve(arr[0]);
-            }, function (err) {
-                reject(false);
-            });
-        });
-    };
-    AuthProvider.prototype.getFlagCount = function (nid, flag_name) {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]()
-                .set('X-CSRF-TOKEN', _this.token);
-            var options = {
-                headers: headers,
-                withCredentials: true
-            };
-            var is_flagged = {
-                "flag_name": flag_name,
-                "entity_id": nid,
-            };
-            _this.http.post(_this.HOST + '/' + _this.ENDPOINT + '/flag/countall.json', is_flagged, options).subscribe(function (data) {
-                var arr = data;
-                resolve(arr.count);
-            }, function (err) {
-                reject(0);
-            });
-        });
-    };
-    AuthProvider.prototype.getRating = function (nid) {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            _this.http.get(_this.HOST + '/drupalgap/fivestar/' + nid + '.json?uid=' + _this.user.uid)
-                .map(function (res) { return res; }).subscribe(function (data) {
-                var arr = data;
-                resolve(arr);
-            }, function (err) {
-                reject(err);
-                console.log(err);
-            });
-        });
-    };
-    AuthProvider.prototype.setRating = function (nid, val) {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]()
-                .set('X-CSRF-TOKEN', _this.token);
-            var options = {
-                headers: headers,
-                withCredentials: true
-            };
-            var params = {
-                "id": nid,
-                "rating": val,
-                //    "action":flag, //flag/unflag
-                //  "skip_permission_check":1, 
-                "uid": _this.user.uid,
-            };
-            _this.http.post(_this.HOST + '/' + _this.ENDPOINT + '/fivestar/rate', params, options).subscribe(function (data) {
-                var arr = data;
-                _this.getRating(nid);
-                resolve(arr);
-            }, function (err) {
-                reject(false);
-            });
-        });
-    };
-    AuthProvider.prototype.setFlag = function (nid, flag_name, flag) {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]()
-                .set('X-CSRF-TOKEN', _this.token);
-            var options = {
-                headers: headers,
-                withCredentials: true
-            };
-            var is_flagged = {
-                "flag_name": flag_name,
-                "entity_id": nid,
-                "action": flag,
-                //  "skip_permission_check":1, 
-                "uid": _this.user.uid,
-            };
-            _this.http.post(_this.HOST + '/' + _this.ENDPOINT + '/flag/flag.json', is_flagged, options).subscribe(function (data) {
-                var arr = data;
-                console.log("SETFLAG");
-                console.log(arr[0]);
-                resolve(flag == "flag" ? true : false);
-            }, function (err) {
-                reject(false);
-            });
-        });
-    };
-    AuthProvider.prototype.getBookmarks = function (page) {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            //   this.showLoading("Suche, Bitte warten...");
-            var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]()
-                .set('X-CSRF-TOKEN', _this.token);
-            var options = {
-                headers: headers,
-                withCredentials: true
-            };
-            _this.http.get(_this.HOST + '/user/bookmarks?page=' + page, options).subscribe(function (data) {
-                resolve(data);
-            }, function (err) {
-                reject(err);
-            });
-        });
-    };
-    AuthProvider.prototype.search = function (text) {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            //   this.showLoading("Suche, Bitte warten...");
-            var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]()
-                .set('X-CSRF-TOKEN', _this.token);
-            var options = {
-                headers: headers,
-                withCredentials: true
-            };
-            _this.http.get(_this.HOST + '/' + _this.ENDPOINT + '/search_node/retrieve.json?keys=' + text, options).subscribe(function (data) {
-                //  this.items=<Array<any>>data;
-                //   var view=this.data.view;      
-                //  this.page=view.page;
-                //  this.pages=view.pages; 
-                //  this.hideLoading(); 
-                resolve(data);
-            }, function (err) {
-                //    this.hideLoading(); 
-                reject(err);
-            });
-        });
-    };
-    AuthProvider.prototype.loadNode = function (nid) {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]()
-                .set('X-CSRF-TOKEN', _this.token).set('Content-Type', 'application/json');
-            //.set('Authentication', <string>this.session);
-            var options = {
-                headers: headers,
-                withCredentials: true,
-            };
-            _this.http.get(_this.HOST + '/' + _this.ENDPOINT + '/node/' + nid + '.json', options).subscribe(function (data) {
-                resolve(data);
-            }, function (err) {
-                reject(err);
-            });
-        });
-    };
-    AuthProvider.prototype.loadUser = function (uid) {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]()
-                .set('X-CSRF-TOKEN', _this.token).set('Content-Type', 'application/json');
-            //.set('Authentication', <string>this.session);
-            var options = {
-                headers: headers,
-                withCredentials: true,
-            };
-            _this.http.get(_this.HOST + '/' + _this.ENDPOINT + '/user/' + uid + '.json', options).subscribe(function (data) {
-                resolve(data);
-            }, function (err) {
-                reject(err);
-            });
-        });
-    };
-    AuthProvider.prototype.login = function (username, password) {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]()
-                .set('Content-Type', 'application/json')
-                .set('X-CSRF-TOKEN', _this.token);
-            var options = {
-                headers: headers,
-                withCredentials: true
-            };
-            var user = {
-                username: username,
-                password: password
-            };
-            _this.http.post(_this.HOST + '/' + _this.ENDPOINT + '/user/login', user, options).map(function (res) { return res; }).subscribe(function (data) {
-                var vars = data;
-                _this.token = vars.token;
-                //  this.session=vars.session_name+'='+vars.sessid;
-                //    this.user=vars.user;
-                //  this.set('session_name',vars.session_name);
-                //        this.set('sessid',vars.token);
-                _this.user.uid = vars.user.uid;
-                _this.user.roles = vars.user.roles;
-                if (_this.user.uid > 0) {
-                    _this.loadUser(_this.user.uid).then(function (u) {
-                        var vars = u;
-                        _this.user.name = vars.name;
-                        _this.user.uid = vars.uid;
-                        _this.user.roles = vars.roles;
-                        if (_this.user.uid > 0) {
-                            // this.username=vars.user.name;
-                            if (vars.field_fbid['und'])
-                                _this.user.fbid = vars.field_fbid['und'][0].value;
-                            if (_this.user.fbid)
-                                _this.user.picture = "https://graph.facebook.com/" + _this.user.fbid + "/picture";
-                            if (vars.picture)
-                                _this.user.picture = vars.picture.url;
-                        }
-                    });
-                }
-                //   console.log(this.session);
-                console.log(_this.user);
-                resolve(_this.user);
-            }, function (err) {
-                //     if(err.status==401)this.showError("Falscher Benutzername oder falsches Passwort!");
-                //     else this.showError("Anmeldung fehlgeschlagen:"+err.status);
-                reject(err);
-            });
-        });
-    };
-    AuthProvider.prototype.logout = function () {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]()
-                .set('X-CSRF-TOKEN', _this.token).set('Content-Type', 'application/json');
-            var options = {
-                headers: headers,
-                withCredentials: true,
-            };
-            _this.http.post(_this.HOST + '/' + _this.ENDPOINT + '/user/logout.json', null, options).subscribe(function (data) {
-                //    console.log(data);
-                // let res:any=data;
-                _this.user = {
-                    uid: 0,
-                    name: 'Unbekannt',
-                    email: '',
-                    picture: 'assets/imgs/anonymous.png',
-                    roles: [{ 0: 'anonymous user' }],
-                    fbid: -1,
-                    created: Date.now(),
-                };
-                _this.loggedIn = false;
-                console.log(data);
-                resolve(data);
-            }, function (err) {
-                console.log(err);
-                reject(err);
-            });
-        });
-    };
-    AuthProvider.prototype.register = function (username, password, email) {
-        var _this = this;
-        //  console.log('USER REGISTER'+username);
-        return new Promise(function (resolve, reject) {
-            var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]()
-                .set('Content-Type', 'application/json')
-                .set('X-CSRF-TOKEN', _this.token);
-            var options = {
-                headers: headers,
-                withCredentials: true
-            };
-            var user = {
-                mail: email,
-                name: username,
-                pass: password
-            };
-            _this.http.post(_this.HOST + '/' + _this.ENDPOINT + '/user/register', user, options).map(function (res) { return res; }).subscribe(function (data) {
-                //    console.log(data);
-                var vars = data;
-                _this.user.uid = vars.uid;
-                //   console.log(vars.uri);
-                //    console.log(this.user.uid);      
-                resolve(_this.user);
-            }, function (err) {
-                reject(err);
-            });
-        });
-    };
-    AuthProvider.prototype.fblogin = function () {
-        return new Promise(function (resolve, reject) {
-            openFB.login(function (response) {
-                if (response.status === 'connected') {
-                    resolve(response);
-                }
-                else if (response.error) {
-                    reject(response.error);
-                }
-            }, { scope: "email" });
-        });
-    };
-    AuthProvider.prototype.fboauth = function (token) {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]()
-                .set('X-CSRF-TOKEN', _this.token);
-            var options = {
-                headers: headers,
-                withCredentials: true
-            };
-            var params = {
-                access_token: token,
-            };
-            //console.log(headers);
-            _this.http.post(_this.HOST + '/' + _this.ENDPOINT + '/fboauth/connect.json', params, options).map(function (res) { return res; }).subscribe(function (data) {
-                console.log(data);
-                var vars = data;
-                _this.token = vars.token;
-                // this.session=vars.session_name+'='+vars.sessid;
-                //  this.user=vars.user;
-                _this.user.uid = vars.user.uid;
-                _this.user.roles = vars.user.roles;
-                _this.user.name = vars.user.name;
-                if (vars.user.picture)
-                    _this.user.picture = vars.user.picture.url;
-                _this.loggedIn = true;
-                //      if(vars.user.field_fbid['und'])this.user.fbid=vars.user.field_fbid['und'][0].value;
-                // if(this.user.fbid)this.user.picture="https://graph.facebook.com/"+this.user.fbid+"/picture"
-                //  console.log(this.user.fbid,"FBID");
-                //   console.log(data.session_name+''+data.sessid);
-                //   console.log(this);
-                resolve(data);
-            }, function (err) {
-                //      console.log(err);
-                reject(err);
-            });
-            //     console.log(this.token);
-        });
-    };
-    AuthProvider.prototype.getKantons = function () {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]().set('X-CSRF-TOKEN', _this.token);
-            var options = {
-                headers: headers,
-                withCredentials: true
-            };
-            _this.http.get(_this.HOST + '/' + _this.ENDPOINT + '/taxonomy_term?page=0&fields=vid,name&&parameters[vid]=3&pagesize=27&options[orderby][weight]=asc', options).subscribe(function (data) {
-                resolve(data);
-            }, function (err) {
-                reject(err);
-            });
-        });
-    };
-    AuthProvider.prototype.createFrage = function (data) {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]()
-                .set('X-CSRF-TOKEN', _this.token).set('Content-Type', 'application/json');
-            var options = {
-                headers: headers,
-                withCredentials: true
-            };
-            //console.log(JSON.stringify(data));
-            _this.http.post(_this.HOST + '/connect/awri_fragen', JSON.stringify(data), options).subscribe(function (data) {
-                resolve(data);
-            }, function (err) {
-                reject(err);
-            });
-        });
-    };
-    AuthProvider.prototype.isInRole = function (role) {
-        var ret = false;
-        var obj = this.user.roles;
-        Object.keys(obj).forEach(function (key) {
-            if (obj[key] === role)
-                ret = true;
-        });
-        return ret;
-    };
-    AuthProvider.prototype.isBrowser = function () {
-        if (this.plt.is('core') || this.plt.is('mobileweb'))
-            return true;
-        else
-            return false;
-    };
-    AuthProvider.prototype.uploadFile = function (filedata) {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]()
-                .set('X-CSRF-TOKEN', _this.token).set('Content-Type', 'application/json');
-            var options = {
-                headers: headers,
-                withCredentials: true,
-            };
-            _this.http.post(_this.HOST + '/' + _this.ENDPOINT + '/file.json', filedata, options).subscribe(function (data) {
-                resolve(data);
-            }, function (err) {
-                reject(err);
-            });
-        });
-    };
-    AuthProvider.prototype.getImagePath = function (uri) {
-        return uri.replace('public://attachments/', this.HOST + '/sites/default/files/attachments/');
-    };
-    ;
-    AuthProvider.prototype.getStats = function () {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            _this.http.get(_this.HOST + '/stats.txt?' + Date.now(), { responseType: 'text' })
-                .subscribe(function (data) {
-                _this.stats = JSON.parse(data);
-                console.log(_this.stats, "getStatus");
-                resolve(data);
-            }, function (err) {
-                reject(err);
-            });
-        });
-    };
-    AuthProvider = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_3_ionic_angular_platform_platform__["a" /* Platform */], __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */]])
-    ], AuthProvider);
-    return AuthProvider;
-}());
-
-//# sourceMappingURL=auth.js.map
-
 /***/ })
 
-},[219]);
+},[220]);
 //# sourceMappingURL=main.js.map

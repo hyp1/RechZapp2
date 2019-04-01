@@ -47,10 +47,15 @@
       </div>
 <br>
    
-    <ion-list *ngFor="let n of this.nodes">
+    <ion-list class="roundlist" *ngFor="let n of this.nodes">
       <ion-card>  
         <ion-item><p>{{n.created*1000 | date: 'dd.MM.yyyy H:mm' }} </p></ion-item>
         <ion-card-content text-wrap (click)="this.frageSelected(n)"><h2>{{n.title}}</h2></ion-card-content>
+        <ion-item>
+        <ion-icon name="chatboxes" title="Kommentare" item-start></ion-icon>    
+        <ion-badge item-end>{{n?.comment_count}}</ion-badge>
+      </ion-item>
+        <bereich nid="{{n.nid}}" tid="{{n.field_bereiche['und'] ? n.field_bereiche['und'][0].tid:''}}"></bereich>
       </ion-card>
       </ion-list>
       <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
