@@ -1,5 +1,6 @@
 import { Component,Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { AuthProvider } from '../../providers/auth/auth';
 /**
  * Generated class for the BannersComponent component.
  *
@@ -15,11 +16,12 @@ export class BannersComponent {
   @Input() my: string;
   image:string;
   link:string;
-  constructor(private httpClient:HttpClient) {
+banners:boolean=true;
+  constructor(private httpClient:HttpClient, public awri:AuthProvider) {
 //alert(this.name);
    // console.log('Hello BannersComponent Component:'+this.name);
 
-    
+    /*
     this.httpClient.get('https://stage.awri.ch/banner/json').map(res => res).subscribe(data => {
       let dat=<any>data;
       // console.log(data);
@@ -27,6 +29,20 @@ export class BannersComponent {
        this.image=<any>dat['image'];
        //alert(this.image);
    });
+   */
+
+
+  this.awri.get('banners').then(data=>{   
+this.banners=(data!=null)?data:true;
+if(this.banners==true)this.getBanner('banner');
+  //alert(this.banners);
+  //  console.log(data);
+  }).catch(err=>{
+    this.banners=true;
+  });
+
+
+
 
   }
 

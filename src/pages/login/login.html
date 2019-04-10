@@ -38,8 +38,11 @@
         <ion-label><ion-icon name="help"></ion-icon> Hilfe an/aus</ion-label>
         <ion-toggle [(ngModel)]="help" (ionChange)="helpChanged(this);" [disabled]="this.awri.isInRole('anonymous user')"></ion-toggle>
       </ion-item>
-
     </div>
+    <ion-item>
+      <ion-label>Werbebanner an/aus</ion-label>
+      <ion-toggle [(ngModel)]="banners" (ionChange)="bannersChanged(this);" [disabled]="!this.awri.isInRole('sponsor')"></ion-toggle>
+    </ion-item>
       <ion-item>
           <ion-label item-start>Ihre Lesezeichen</ion-label>
         <button ion-button (click)="this.gotoBookmarks()" item-end>Ansehen</button>

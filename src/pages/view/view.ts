@@ -24,6 +24,7 @@ comments:Observable<any>
 images:Array<any>;
 bewertung:number;
 
+node:Observable<any>
 rating:any;
 help:boolean;
   constructor(private httpClient:HttpClient,private actionSheetCtrl:ActionSheetController, public navCtrl: NavController, public navParams: NavParams,public awri:AuthProvider) {
@@ -32,9 +33,11 @@ help:boolean;
   this.nid =this.item.node.nid;
 
   this.awri.loadNode(this.nid).then(data=>{
-console.log(data);
-  })
+    this.node=<any>data;
+    console.log(this.node['statistics']);
+//console.log(data);
 
+  });
   this.title =this.item.node.title;
   this.bewertung =this.item.node.field_bewertung['und']?this.item.node.field_bewertung['und'][0].rating:0;
 

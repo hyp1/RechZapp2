@@ -20,6 +20,7 @@ import { AdminPage } from '../../pages/admin/admin';
 })
 export class SettingsPage {
 public help:boolean;
+public banners:boolean=true;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public awri:AuthProvider) {
     alert("Constr")
@@ -28,6 +29,7 @@ public help:boolean;
     this.help=data;
     console.log("HELP"+this.help);
   });
+
 
   }
   
@@ -45,6 +47,18 @@ ionViewDidLoad() {
   });
 }
 
+
+public bannersChanged(evt:any){
+  console.log(evt);
+  this.awri.set('banners',evt.banners).then(h=>{
+    this.banners=h;
+    alert(h)
+  });
+}
+
+checkRole() {
+ alert(this.awri.isInRole('sponsor'));
+}
 
 gotoLogin(){
   this.navCtrl.push(LoginPage);

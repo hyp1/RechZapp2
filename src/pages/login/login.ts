@@ -14,15 +14,18 @@ export class LoginPage {
   private username:string;
   private password:string;
 help:boolean;
+banners:boolean=true;
   constructor(public navCtrl: NavController, public navParams: NavParams,public awri:AuthProvider) {
     this.awri.get('help').then(data=>{   
       this.help=data;
     });
+    this.awri.get('banners').then(data=>{   
+      this.banners=data;
+    });
   }
   
-  
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+  // console.log('ionViewDidLoad LoginPage');
   }
 
   login(){
@@ -71,6 +74,13 @@ gotoAdmin(){
 helpChanged(evt){
   this.awri.set('help',evt.help).then(h=>{
     this.help=h;
+  });
+}
+
+
+bannersChanged(evt){
+  this.awri.set('banners',evt.banners).then(h=>{
+    this.banners=h;
   });
 }
 

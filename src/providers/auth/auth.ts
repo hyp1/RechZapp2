@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 import { Platform } from 'ionic-angular/platform/platform';
 import { Storage } from '@ionic/storage';
+import { ComponentsModule } from '../../components/components.module';
 //import { Loading } from 'ionic-angular';
 
 /*
@@ -70,6 +71,8 @@ export class AuthProvider {
      // this.set('sessid',dat.sessid);      
      // this.session=dat.session_name+'='+dat.sessid;
 
+  
+
    if(this.user.uid>0)  this.loadUser(this.user.uid).then(u=>{
       let vars:any=u;  
       this.user.name=vars.name;
@@ -121,11 +124,10 @@ this.connect.subscribe(data=>{
 });
 
 this.get('help').then(col=>{
-  this.help=col;
-}).catch(err=>{
-  this.help=true;
+  this.help=(col==null)?true:col;
+  //console.log(this.help);
   this.set('help',this.help);
-  //console.log(err);
+ 
 });
 
 this.getStats();
@@ -342,7 +344,6 @@ searchCat(text:String,tid:number=93,page:number=0) {
   });
 }
 
-
 loadNode(nid){
   return new Promise((resolve,reject) => {
   let headers = new HttpHeaders()
@@ -354,6 +355,7 @@ let options:any = {
   withCredentials	: true,
 };
   this.http.get(this.HOST+'/'+this.ENDPOINT+'/node/'+nid+'.json', options).subscribe(data => {
+
     resolve(data);
    },err=>{
      reject(err);

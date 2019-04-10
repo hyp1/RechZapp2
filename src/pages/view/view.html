@@ -99,7 +99,9 @@
 
                   
           </ion-item>
-                  
+          <ion-item item-end><ion-badge color="secondary"><ion-icon name="eye"></ion-icon> {{this.node?.statistics?.totalcount}}</ion-badge></ion-item>
+
+          
             <ion-item text-wrap>
              <h2 innerHTML="{{item.node.body['und'][0].value}}"></h2>
             </ion-item>
@@ -117,6 +119,7 @@ Bewertungen: {{  rating?.count?.value ? rating?.count?.value :0 }}</small></p>
 
             </ion-item>
 
+       
             <ion-row>
                     <ion-segment [(ngModel)]="pet">
                             <ng-template [ngIf]="awri.isInRole('administrator')">
