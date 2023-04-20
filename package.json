@@ -20,30 +20,54 @@
     "@angular/platform-browser": "5.2.11",
     "@angular/platform-browser-dynamic": "5.2.11",
     "@ionic-native/admob-free": "^4.17.0",
+<<<<<<< HEAD
     "cordova-sqlite-evcore-extbuild-free": "^0.9.9",
     "@ionic-native/camera": "^4.17.0",
+=======
+    "@ionic-native/camera": "^4.20.0",
+>>>>>>> 7fcd870f640e073fe0c2944911b9e17daed1289f
     "@ionic-native/core": "4.20.0",
     "@ionic-native/splash-screen": "4.20.0",
     "@ionic-native/status-bar": "4.20.0",
     "@ionic/storage": "2.2.0",
     "cordova-android": "10.1.2",
+<<<<<<< HEAD
+=======
+    "cordova-browser": "6.0.0",
+    "cordova-plugin-camera": "6.0.0",
+>>>>>>> 7fcd870f640e073fe0c2944911b9e17daed1289f
     "ionic-angular": "3.9.9",
     "ionicons": "3.0.0",
     "rxjs": "5.5.11",
     "sw-toolbox": "3.6.0",
+<<<<<<< HEAD
+=======
+    "whitelist": "1.0.2",
+>>>>>>> 7fcd870f640e073fe0c2944911b9e17daed1289f
     "zone.js": "0.8.29"
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.2.4",
     "cordova-plugin-device": "^2.0.2",
+<<<<<<< HEAD
+=======
+    "cordova-plugin-inappbrowser": "^3.0.0",
+>>>>>>> 7fcd870f640e073fe0c2944911b9e17daed1289f
     "cordova-plugin-ionic-keyboard": "^2.2.0",
     "cordova-plugin-ionic-webview": "^5.0.0",
     "cordova-plugin-splashscreen": "^5.0.2",
     "cordova-plugin-statusbar": "^2.4.2",
+<<<<<<< HEAD
     "typescript": "2.6.2"
   },
   "cordova-plugin-admob-free": {
     "ADMOB_APP_ID": "ca-app-pub-7681642173883266~6820035049"
+=======
+    "cordova-plugin-x-socialsharing": "^5.4.3",
+    "cordova-sqlite-evcore-extbuild-free": "^0.9.9",
+    "es6-promise-plugin": "^4.2.2",
+    "typescript": "2.6.2"
+>>>>>>> 7fcd870f640e073fe0c2944911b9e17daed1289f
   },
   "description": "An Ionic project",
   "cordova": {
@@ -51,8 +75,23 @@
       "cordova-plugin-statusbar": {},
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
+<<<<<<< HEAD
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-ionic-keyboard": {}
+=======
+      "cordova-plugin-ionic-webview": {
+        "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
+      },
+      "cordova-plugin-ionic-keyboard": {},
+      "cordova-plugin-inappbrowser": {},
+      "cordova-sqlite-evcore-extbuild-free": {},
+      "cordova-plugin-camera": {
+        "ANDROIDX_CORE_VERSION": "1.6.+"
+      },
+      "cordova-plugin-x-socialsharing": {
+        "ANDROID_SUPPORT_V4_VERSION": "24.1.1+"
+      }
+>>>>>>> 7fcd870f640e073fe0c2944911b9e17daed1289f
     },
     "platforms": [
       "android"
